@@ -172,6 +172,8 @@ class MetricsAndFeedbackSlide extends StatefulWidget {
 class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _repsController = TextEditingController();
+  final FocusNode _weightFocusNode = FocusNode();
+  final FocusNode _repsFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -184,12 +186,21 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
     if (state.reps > 0 || state.editingLogId != null) {
       _repsController.text = state.reps.toString();
     }
+
+    // Auto-focus weight input if this slide is active on initialization
+    if (state.currentSlideIndex == 2) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _weightFocusNode.requestFocus();
+      });
+    }
   }
 
   @override
   void dispose() {
     _weightController.dispose();
     _repsController.dispose();
+    _weightFocusNode.dispose();
+    _repsFocusNode.dispose();
     super.dispose();
   }
 
@@ -203,10 +214,16 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
   Widget build(BuildContext context) {
     return BlocListener<LogExerciseBloc, LogExerciseState>(
       listenWhen: (previous, current) => 
+          previous.currentSlideIndex != current.currentSlideIndex || 
           (previous.weight != current.weight && previous.weight == 0) || 
           (previous.reps != current.reps && previous.reps == 0) ||
           (previous.editingLogId != current.editingLogId),
       listener: (context, state) {
+        // Auto-focus weight when moving to metrics slide
+        if (state.currentSlideIndex == 2) {
+          _weightFocusNode.requestFocus();
+        }
+
         // Only update if the field is currently empty or we just switched to edit mode
         if ((state.weight > 0 || state.editingLogId != null) && _weightController.text.isEmpty) {
           _weightController.text = state.weight.toStringAsFixed(1);
@@ -233,6 +250,8 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
                 child: _MetricInput(
                   label: 'WEIGHT (LBS)',
                   controller: _weightController,
+                  focusNode: _weightFocusNode,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                   onChanged: (_) => _update(),
                 ),
               ),
@@ -241,6 +260,8 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
                 child: _MetricInput(
                   label: 'REPS',
                   controller: _repsController,
+                  focusNode: _repsFocusNode,
+                  keyboardType: TextInputType.number,
                   onChanged: (_) => _update(),
                 ),
               ),
@@ -290,10 +311,14 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: state.isSaving ? null : () => context.read<LogExerciseBloc>().add(const SaveLog()),
+                  onPressed: (state.isSaving || state.weight <= 0 || state.reps <= 0) 
+                      ? null 
+                      : () => context.read<LogExerciseBloc>().add(const SaveLog()),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFAFAFA),
                     foregroundColor: const Color(0xFF09090B),
+                    disabledBackgroundColor: const Color(0xFF27272A),
+                    disabledForegroundColor: const Color(0xFF52525B),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   ),
                   child: state.isSaving
@@ -316,9 +341,17 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
 class _MetricInput extends StatelessWidget {
   final String label;
   final TextEditingController controller;
+  final FocusNode? focusNode;
+  final TextInputType keyboardType;
   final Function(String) onChanged;
 
-  const _MetricInput({required this.label, required this.controller, required this.onChanged});
+  const _MetricInput({
+    required this.label,
+    required this.controller,
+    this.focusNode,
+    this.keyboardType = const TextInputType.numberWithOptions(decimal: true),
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -328,7 +361,8 @@ class _MetricInput extends StatelessWidget {
         Text(label, style: const TextStyle(color: Color(0xFFA1A1AA), fontSize: 12, fontWeight: FontWeight.bold)),
         TextField(
           controller: controller,
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          focusNode: focusNode,
+          keyboardType: keyboardType,
           onChanged: onChanged,
           textAlign: TextAlign.center,
           style: GoogleFonts.robotoMono(fontSize: 32, fontWeight: FontWeight.bold, color: const Color(0xFFFAFAFA)),
