@@ -143,4 +143,37 @@ class MovementRepository {
     );
     return maps.map((map) => Variation.fromMap(map)).toList();
   }
+
+  Future<Variation> createVariationForMovement(int movementId, String name) async {
+    // Check if variation exists globally
+    final List<Map<String, dynamic>> results = await _db.query(
+      'variations',
+      where: 'LOWER(name) = ?',
+      whereArgs: [name.toLowerCase()],
+      limit: 1,
+    );
+
+    int variationId;
+    if (results.isEmpty) {
+      variationId = await _db.insert('variations', {'name': name});
+    } else {
+      variationId = results.first['id'] as int;
+    }
+
+    // Link it to the movement if not already linked
+    final List<Map<String, dynamic>> linkResults = await _db.query(
+      'movement_variations',
+      where: 'movement_id = ? AND variation_id = ?',
+      whereArgs: [movementId, variationId],
+    );
+
+    if (linkResults.isEmpty) {
+      await _db.insert('movement_variations', {
+        'movement_id': movementId,
+        'variation_id': variationId,
+      });
+    }
+
+    return Variation(id: variationId, name: name);
+  }
 }

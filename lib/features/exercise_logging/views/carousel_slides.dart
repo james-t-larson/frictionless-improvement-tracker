@@ -109,8 +109,11 @@ class VariationSelectionSlide extends StatelessWidget {
                       crossAxisSpacing: 12,
                       childAspectRatio: 2.5,
                     ),
-                    itemCount: variations.length,
+                    itemCount: variations.length + 1,
                     itemBuilder: (context, index) {
+                      if (index == variations.length) {
+                        return const _AddVariationButton();
+                      }
                       final vr = variations[index];
                       // Check if variation is in selectedVariations
                       final isSelected = state.selectedVariations.any((v) => v.id == vr.id && v.name == vr.name);
@@ -347,6 +350,101 @@ class _PainToggleButton extends StatelessWidget {
             letterSpacing: 1,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _AddVariationButton extends StatelessWidget {
+  const _AddVariationButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => _showAddVariationDialog(context),
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: const Color(0xFF27272A),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: const Color(0xFF3F3F46),
+            width: 1,
+            style: BorderStyle.solid,
+          ),
+        ),
+        child: const Icon(
+          Icons.add_rounded,
+          color: Color(0xFFA1A1AA),
+          size: 32,
+        ),
+      ),
+    );
+  }
+
+  void _showAddVariationDialog(BuildContext context) {
+    final controller = TextEditingController();
+    final bloc = context.read<LogExerciseBloc>();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF18181B),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        title: const Text(
+          'NEW VARIATION',
+          style: TextStyle(
+            color: Color(0xFFFAFAFA),
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.5,
+          ),
+        ),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          style: const TextStyle(color: Color(0xFFFAFAFA)),
+          cursorColor: const Color(0xFFFAFAFA),
+          decoration: const InputDecoration(
+            hintText: 'e.g. Incline, Wide Grip...',
+            hintStyle: TextStyle(color: Color(0xFF52525B)),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFF3F3F46)),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFFFAFAFA)),
+            ),
+          ),
+          onSubmitted: (val) {
+            if (val.trim().isNotEmpty) {
+              bloc.add(CreateAndSelectVariation(val.trim()));
+              Navigator.pop(context);
+            }
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'CANCEL',
+              style: TextStyle(color: Color(0xFFA1A1AA), fontWeight: FontWeight.bold),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (controller.text.trim().isNotEmpty) {
+                bloc.add(CreateAndSelectVariation(controller.text.trim()));
+                Navigator.pop(context);
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFFAFAFA),
+              foregroundColor: const Color(0xFF09090B),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            ),
+            child: const Text('ADD'),
+          ),
+        ],
       ),
     );
   }

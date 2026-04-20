@@ -45,6 +45,13 @@ class ToggleVariation extends LogExerciseEvent {
   List<Object?> get props => [variation];
 }
 
+class CreateAndSelectVariation extends LogExerciseEvent {
+  final String name;
+  const CreateAndSelectVariation(this.name);
+  @override
+  List<Object?> get props => [name];
+}
+
 class AdvanceFromVariations extends LogExerciseEvent {
   const AdvanceFromVariations();
 }
@@ -166,6 +173,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     on<SelectMovement>(_onSelectMovement);
     on<CreateAndSelectMovement>(_onCreateAndSelectMovement);
     on<ToggleVariation>(_onToggleVariation);
+    on<CreateAndSelectVariation>(_onCreateAndSelectVariation);
     on<AdvanceFromVariations>(_onAdvanceFromVariations);
     on<UpdateMetrics>(_onUpdateMetrics);
     on<AdvanceSlide>(_onAdvanceSlide);
@@ -288,6 +296,31 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
       updated.add(event.variation);
     }
     emit(state.copyWith(selectedVariations: updated));
+  }
+
+  Future<void> _onCreateAndSelectVariation(
+    CreateAndSelectVariation event,
+    Emitter<LogExerciseState> emit,
+  ) async {
+    if (state.selectedMovement == null || state.selectedMovement!.id == null) return;
+
+    final variation = await _movementRepository.createVariationForMovement(
+      state.selectedMovement!.id!,
+      event.name,
+    );
+
+    // Refresh available variations
+    final variations = await _movementRepository.getVariationsForMovement(
+      state.selectedMovement!.id!,
+    );
+
+    // Update state: add to available and auto-select it
+    final updatedSelected = List<Variation>.from(state.selectedVariations)..add(variation);
+
+    emit(state.copyWith(
+      availableVariations: variations,
+      selectedVariations: updatedSelected,
+    ));
   }
 
   void _onAdvanceFromVariations(
