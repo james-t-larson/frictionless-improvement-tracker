@@ -134,15 +134,15 @@ class EquipmentSelectionSlide extends StatelessWidget {
   }
 }
 
-// --- Slide 3: Metrics Entry ---
-class MetricsEntrySlide extends StatefulWidget {
-  const MetricsEntrySlide({super.key});
+// --- Slide 3: Metrics & Feedback ---
+class MetricsAndFeedbackSlide extends StatefulWidget {
+  const MetricsAndFeedbackSlide({super.key});
 
   @override
-  State<MetricsEntrySlide> createState() => _MetricsEntrySlideState();
+  State<MetricsAndFeedbackSlide> createState() => _MetricsAndFeedbackSlideState();
 }
 
-class _MetricsEntrySlideState extends State<MetricsEntrySlide> {
+class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _repsController = TextEditingController();
 
@@ -164,7 +164,6 @@ class _MetricsEntrySlideState extends State<MetricsEntrySlide> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 8),
         BlocBuilder<LogExerciseBloc, LogExerciseState>(
           builder: (context, state) {
             return Text(
@@ -173,7 +172,7 @@ class _MetricsEntrySlideState extends State<MetricsEntrySlide> {
             );
           },
         ),
-        const SizedBox(height: 32),
+        const SizedBox(height: 20),
         Row(
           children: [
             Expanded(
@@ -193,19 +192,58 @@ class _MetricsEntrySlideState extends State<MetricsEntrySlide> {
             ),
           ],
         ),
+        const SizedBox(height: 32),
+        const Text(
+          'Was there pain?',
+          style: TextStyle(color: Color(0xFFFAFAFA), fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+        ),
+        const SizedBox(height: 12),
+        BlocBuilder<LogExerciseBloc, LogExerciseState>(
+          builder: (context, state) {
+            return Row(
+              children: [
+                Expanded(
+                  child: _PainToggle(
+                    label: 'YES',
+                    isSelected: state.hasPain,
+                    onTap: () => context.read<LogExerciseBloc>().add(const UpdatePain(true)),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _PainToggle(
+                    label: 'NO',
+                    isSelected: !state.hasPain,
+                    onTap: () => context.read<LogExerciseBloc>().add(const UpdatePain(false)),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
         const Spacer(),
-        SizedBox(
-          width: double.infinity,
-          height: 56,
-          child: ElevatedButton(
-            onPressed: () => context.read<LogExerciseBloc>().add(AdvanceSlide()),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFFAFAFA),
-              foregroundColor: const Color(0xFF09090B),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            ),
-            child: const Text('NEXT', style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1)),
-          ),
+        BlocBuilder<LogExerciseBloc, LogExerciseState>(
+          builder: (context, state) {
+            return SizedBox(
+              width: double.infinity,
+              height: 56,
+              child: ElevatedButton(
+                onPressed: state.isSaving ? null : () => context.read<LogExerciseBloc>().add(const SaveLog()),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFFAFAFA),
+                  foregroundColor: const Color(0xFF09090B),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                ),
+                child: state.isSaving
+                    ? const SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(color: Color(0xFF09090B), strokeWidth: 2),
+                      )
+                    : const Text('SAVE SET', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 1)),
+              ),
+            );
+          },
         ),
       ],
     );
@@ -241,73 +279,6 @@ class _MetricInput extends StatelessWidget {
   }
 }
 
-// --- Slide 4: Feedback & Save ---
-class FeedbackAndSaveSlide extends StatelessWidget {
-  const FeedbackAndSaveSlide({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 8),
-        const Text(
-          'Did you feel any abnormal pain during this set?',
-          style: TextStyle(color: Color(0xFFFAFAFA), fontSize: 16),
-        ),
-        const SizedBox(height: 24),
-        BlocBuilder<LogExerciseBloc, LogExerciseState>(
-          builder: (context, state) {
-            return Row(
-              children: [
-                Expanded(
-                  child: _PainToggle(
-                    label: 'YES',
-                    isSelected: state.hasPain,
-                    onTap: () => context.read<LogExerciseBloc>().add(const UpdatePain(true)),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: _PainToggle(
-                    label: 'NO',
-                    isSelected: !state.hasPain, // Note: Logic might need refinement if null
-                    onTap: () => context.read<LogExerciseBloc>().add(const UpdatePain(false)),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-        const Spacer(),
-        BlocBuilder<LogExerciseBloc, LogExerciseState>(
-          builder: (context, state) {
-            return SizedBox(
-              width: double.infinity,
-              height: 56,
-              child: ElevatedButton(
-                onPressed: state.isSaving ? null : () => context.read<LogExerciseBloc>().add(SaveLog()),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFAFAFA),
-                  foregroundColor: const Color(0xFF09090B),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                ),
-                child: state.isSaving
-                    ? const SizedBox(
-                        height: 24,
-                        width: 24,
-                        child: CircularProgressIndicator(color: Color(0xFF09090B), strokeWidth: 2),
-                      )
-                    : const Text('SAVE SET', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 1)),
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
 class _PainToggle extends StatelessWidget {
   final String label;
   final bool isSelected;
@@ -320,7 +291,7 @@ class _PainToggle extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 60,
+        height: 48,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: isSelected ? (label == 'YES' ? const Color(0xFFEF4444).withAlpha(51) : const Color(0xFF52525B)) : const Color(0xFF27272A),
@@ -332,7 +303,7 @@ class _PainToggle extends StatelessWidget {
           style: TextStyle(
             color: isSelected ? const Color(0xFFFAFAFA) : const Color(0xFFA1A1AA),
             fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontSize: 14,
           ),
         ),
       ),

@@ -71,9 +71,6 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                       case 2:
                         title = 'METRICS';
                         break;
-                      case 3:
-                        title = 'FEEDBACK';
-                        break;
                     }
 
                     return Column(
@@ -119,8 +116,7 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                     children: const [
                       MovementSelectionSlide(),
                       EquipmentSelectionSlide(),
-                      MetricsEntrySlide(),
-                      FeedbackAndSaveSlide(),
+                      MetricsAndFeedbackSlide(),
                     ],
                   ),
                 ),
