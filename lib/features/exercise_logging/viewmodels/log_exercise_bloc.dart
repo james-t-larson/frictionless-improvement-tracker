@@ -68,6 +68,10 @@ class SaveLog extends LogExerciseEvent {
   const SaveLog();
 }
 
+class ReturnToPreviousSlide extends LogExerciseEvent {
+  const ReturnToPreviousSlide();
+}
+
 // State
 class LogExerciseState extends Equatable {
   final int currentSlideIndex;
@@ -156,6 +160,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     on<UpdateMetrics>(_onUpdateMetrics);
     on<UpdatePain>(_onUpdatePain);
     on<AdvanceSlide>(_onAdvanceSlide);
+    on<ReturnToPreviousSlide>(_onReturnToPreviousSlide);
     on<SaveLog>(_onSaveLog);
   }
 
@@ -165,6 +170,12 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
 
   void _onAdvanceSlide(AdvanceSlide event, Emitter<LogExerciseState> emit) {
     emit(state.copyWith(currentSlideIndex: state.currentSlideIndex + 1));
+  }
+
+  void _onReturnToPreviousSlide(ReturnToPreviousSlide event, Emitter<LogExerciseState> emit) {
+    if (state.currentSlideIndex > 0) {
+      emit(state.copyWith(currentSlideIndex: state.currentSlideIndex - 1));
+    }
   }
 
   Future<void> _onSearchMovement(SearchMovement event, Emitter<LogExerciseState> emit) async {

@@ -25,8 +25,7 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('CHOOSE MOVEMENT', style: Theme.of(context).textTheme.titleLarge),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
         TextField(
           controller: _controller,
           autofocus: true,
@@ -79,8 +78,7 @@ class EquipmentSelectionSlide extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('EQUIPMENT', style: Theme.of(context).textTheme.titleLarge),
-        const SizedBox(height: 24),
+        const SizedBox(height: 8),
         Expanded(
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -153,7 +151,6 @@ class _MetricsEntrySlideState extends State<MetricsEntrySlide> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('METRICS', style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 8),
         BlocBuilder<LogExerciseBloc, LogExerciseState>(
           builder: (context, state) {
@@ -240,8 +237,7 @@ class FeedbackAndSaveSlide extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('FEEDBACK', style: Theme.of(context).textTheme.titleLarge),
-        const SizedBox(height: 24),
+        const SizedBox(height: 8),
         const Text(
           'Did you feel any abnormal pain during this set?',
           style: TextStyle(color: Color(0xFFFAFAFA), fontSize: 16),
@@ -275,7 +271,7 @@ class FeedbackAndSaveSlide extends StatelessWidget {
           builder: (context, state) {
             return SizedBox(
               width: double.infinity,
-              height: 64,
+              height: 56,
               child: ElevatedButton(
                 onPressed: state.isSaving ? null : () => context.read<LogExerciseBloc>().add(SaveLog()),
                 style: ElevatedButton.styleFrom(
@@ -284,8 +280,12 @@ class FeedbackAndSaveSlide extends StatelessWidget {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
                 child: state.isSaving
-                    ? const CircularProgressIndicator(color: Color(0xFF09090B))
-                    : const Text('SAVE SET', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                    ? const SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(color: Color(0xFF09090B), strokeWidth: 2),
+                      )
+                    : const Text('SAVE SET', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 1)),
               ),
             );
           },

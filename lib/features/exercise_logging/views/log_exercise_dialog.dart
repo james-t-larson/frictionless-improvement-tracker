@@ -53,16 +53,77 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: Container(
             width: double.infinity,
-            constraints: const BoxConstraints(maxHeight: 600),
-            padding: const EdgeInsets.all(24),
-            child: PageView(
-              controller: _pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              children: const [
-                MovementSelectionSlide(),
-                EquipmentSelectionSlide(),
-                MetricsEntrySlide(),
-                FeedbackAndSaveSlide(),
+            constraints: const BoxConstraints(maxHeight: 450),
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                BlocBuilder<LogExerciseBloc, LogExerciseState>(
+                  builder: (context, state) {
+                    String title = '';
+                    switch (state.currentSlideIndex) {
+                      case 0:
+                        title = 'MOVEMENT';
+                        break;
+                      case 1:
+                        title = 'EQUIPMENT';
+                        break;
+                      case 2:
+                        title = 'METRICS';
+                        break;
+                      case 3:
+                        title = 'FEEDBACK';
+                        break;
+                    }
+
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            if (state.currentSlideIndex > 0)
+                              IconButton(
+                                icon: const Icon(Icons.chevron_left, color: Color(0xFFA1A1AA), size: 28),
+                                onPressed: () => context.read<LogExerciseBloc>().add(const ReturnToPreviousSlide()),
+                              )
+                            else
+                              const SizedBox(width: 48),
+                            const Spacer(),
+                            Text(
+                              title,
+                              style: const TextStyle(
+                                color: Color(0xFFFAFAFA),
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 2,
+                              ),
+                            ),
+                            const Spacer(),
+                            IconButton(
+                              icon: const Icon(Icons.close, color: Color(0xFFA1A1AA), size: 24),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Divider(color: const Color(0xFFFAFAFA).withAlpha(25), height: 1),
+                        const SizedBox(height: 16),
+                      ],
+                    );
+                  },
+                ),
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: const [
+                      MovementSelectionSlide(),
+                      EquipmentSelectionSlide(),
+                      MetricsEntrySlide(),
+                      FeedbackAndSaveSlide(),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
