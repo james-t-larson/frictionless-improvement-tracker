@@ -6,14 +6,27 @@ import '../viewmodels/log_exercise_bloc.dart';
 import 'carousel_slides.dart';
 
 class LogExerciseDialog extends StatefulWidget {
-  const LogExerciseDialog({super.key});
+  final int initialPage;
+  final LogExerciseEvent? initialEvent;
+
+  const LogExerciseDialog({
+    super.key,
+    this.initialPage = 0,
+    this.initialEvent,
+  });
 
   @override
   State<LogExerciseDialog> createState() => _LogExerciseDialogState();
 }
 
 class _LogExerciseDialogState extends State<LogExerciseDialog> {
-  final PageController _pageController = PageController();
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: widget.initialPage);
+  }
 
   @override
   void dispose() {
@@ -24,7 +37,7 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<LogExerciseBloc>()..add(InitializeFlow()),
+      create: (context) => getIt<LogExerciseBloc>()..add(widget.initialEvent ?? const InitializeFlow()),
       child: BlocListener<LogExerciseBloc, LogExerciseState>(
         listenWhen: (previous, current) =>
             previous.currentSlideIndex != current.currentSlideIndex || current.isSuccess,

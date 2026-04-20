@@ -33,31 +33,6 @@ class SearchAndActionBar extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 12),
-        GestureDetector(
-          onTap: () async {
-            await showDialog(
-              context: context,
-              builder: (context) => const LogExerciseDialog(),
-            );
-          },
-          child: Container(
-            height: 48,
-            width: 48,
-            decoration: BoxDecoration(
-              color: const Color(0xFFFAFAFA),
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.5),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: const Icon(Icons.add, color: Color(0xFF09090B), size: 28),
-          ),
-        ),
       ],
     );
   }

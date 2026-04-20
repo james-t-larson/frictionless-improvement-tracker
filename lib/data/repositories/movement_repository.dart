@@ -131,6 +131,17 @@ class MovementRepository {
     return Movement(id: id, name: name);
   }
 
+  Future<Movement?> getMovementById(int id) async {
+    final List<Map<String, dynamic>> maps = await _db.query(
+      'movements',
+      where: 'id = ?',
+      whereArgs: [id],
+      limit: 1,
+    );
+    if (maps.isEmpty) return null;
+    return await _withMuscles(Movement.fromMap(maps.first));
+  }
+
   Future<List<Variation>> getVariationsForMovement(int movementId) async {
     final List<Map<String, dynamic>> maps = await _db.rawQuery(
       '''

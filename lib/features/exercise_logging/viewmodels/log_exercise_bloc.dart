@@ -83,6 +83,19 @@ class ReturnToPreviousSlide extends LogExerciseEvent {
   const ReturnToPreviousSlide();
 }
 
+class InitializeWithPreviousLog extends LogExerciseEvent {
+  final Movement movement;
+  final List<Variation> selectedVariations;
+
+  const InitializeWithPreviousLog({
+    required this.movement,
+    required this.selectedVariations,
+  });
+
+  @override
+  List<Object?> get props => [movement, selectedVariations];
+}
+
 // State
 class LogExerciseState extends Equatable {
   final int currentSlideIndex;
@@ -180,6 +193,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     on<ReturnToPreviousSlide>(_onReturnToPreviousSlide);
     on<TogglePain>(_onTogglePain);
     on<SaveLog>(_onSaveLog);
+    on<InitializeWithPreviousLog>(_onInitializeWithPreviousLog);
   }
 
   Future<void> _onInitialize(
@@ -189,6 +203,29 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     emit(const LogExerciseState());
     final common = await _movementRepository.getTopMovements();
     emit(state.copyWith(movementSearchResults: common));
+  }
+
+  Future<void> _onInitializeWithPreviousLog(
+    InitializeWithPreviousLog event,
+    Emitter<LogExerciseState> emit,
+  ) async {
+    emit(const LogExerciseState());
+    
+    List<Variation> variations = [];
+    if (event.movement.id != null) {
+      variations = await _movementRepository.getVariationsForMovement(event.movement.id!);
+    }
+
+    emit(state.copyWith(
+      selectedMovement: event.movement,
+      selectedVariations: event.selectedVariations,
+      availableVariations: variations,
+      currentSlideIndex: 2, // Go straight to metrics
+    ));
+
+    if (event.movement.id != null) {
+      _fetchLastPerformance(event.movement.id!, emit);
+    }
   }
 
   void _onAdvanceSlide(AdvanceSlide event, Emitter<LogExerciseState> emit) {
