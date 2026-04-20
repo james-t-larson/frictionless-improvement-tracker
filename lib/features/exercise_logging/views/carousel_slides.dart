@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/di/service_locator.dart';
+import '../../../data/models/variation.dart';
+import '../../../data/repositories/movement_repository.dart';
 import '../viewmodels/log_exercise_bloc.dart';
 
 // --- Slide 1: Movement Selection ---
@@ -78,58 +81,86 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
   }
 }
 
-// --- Slide 2: Equipment Selection ---
-class EquipmentSelectionSlide extends StatelessWidget {
-  const EquipmentSelectionSlide({super.key});
-
-  static const equipments = [
-    'Dumbbell', 'Barbell', 'Cables', 'Machine', 'Bodyweight', 'Kettlebell', 'Assisted'
-  ];
+// --- Slide 2: Variation Selection ---
+class VariationSelectionSlide extends StatelessWidget {
+  const VariationSelectionSlide({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 8),
-        Expanded(
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 2.5,
-            ),
-            itemCount: equipments.length,
-            itemBuilder: (context, index) {
-              final eq = equipments[index];
-              return BlocBuilder<LogExerciseBloc, LogExerciseState>(
-                builder: (context, state) {
-                  final isSelected = state.selectedEquipment == eq;
-                  return GestureDetector(
-                    onTap: () => context.read<LogExerciseBloc>().add(SelectEquipment(eq)),
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: isSelected ? const Color(0xFF52525B) : const Color(0xFF27272A),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        eq.toUpperCase(),
-                        style: TextStyle(
-                          color: isSelected ? const Color(0xFFFAFAFA) : const Color(0xFFA1A1AA),
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1,
-                        ),
-                      ),
+    return BlocBuilder<LogExerciseBloc, LogExerciseState>(
+      builder: (context, state) {
+        if (state.selectedMovement == null || state.selectedMovement!.id == null) {
+          return const SizedBox.shrink();
+        }
+        
+        return Column(
+          children: [
+            Expanded(
+              child: FutureBuilder<List<Variation>>(
+                future: getIt<MovementRepository>().getVariationsForMovement(state.selectedMovement!.id!),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  final variations = snapshot.data ?? [];
+                  if (variations.isEmpty) {
+                    return const Center(
+                      child: Text('No variations available.', style: TextStyle(color: Color(0xFFA1A1AA))),
+                    );
+                  }
+
+                  return GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 12,
+                      crossAxisSpacing: 12,
+                      childAspectRatio: 2.5,
                     ),
+                    itemCount: variations.length,
+                    itemBuilder: (context, index) {
+                      final vr = variations[index];
+                      // Check if variation is in selectedVariations
+                      final isSelected = state.selectedVariations.any((v) => v.id == vr.id && v.name == vr.name);
+                      return GestureDetector(
+                        onTap: () => context.read<LogExerciseBloc>().add(ToggleVariation(vr)),
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: isSelected ? const Color(0xFF52525B) : const Color(0xFF27272A),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            vr.name.toUpperCase(),
+                            style: TextStyle(
+                              color: isSelected ? const Color(0xFFFAFAFA) : const Color(0xFFA1A1AA),
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
-              );
-            },
-          ),
-        ),
-      ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              height: 56,
+              child: ElevatedButton(
+                onPressed: () => context.read<LogExerciseBloc>().add(const AdvanceFromVariations()),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFFAFAFA),
+                  foregroundColor: const Color(0xFF09090B),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                ),
+                child: const Text('NEXT', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 1)),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -193,34 +224,6 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
           ],
         ),
         const SizedBox(height: 32),
-        const Text(
-          'Was there pain?',
-          style: TextStyle(color: Color(0xFFFAFAFA), fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 0.5),
-        ),
-        const SizedBox(height: 12),
-        BlocBuilder<LogExerciseBloc, LogExerciseState>(
-          builder: (context, state) {
-            return Row(
-              children: [
-                Expanded(
-                  child: _PainToggle(
-                    label: 'YES',
-                    isSelected: state.hasPain,
-                    onTap: () => context.read<LogExerciseBloc>().add(const UpdatePain(true)),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: _PainToggle(
-                    label: 'NO',
-                    isSelected: !state.hasPain,
-                    onTap: () => context.read<LogExerciseBloc>().add(const UpdatePain(false)),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
         const Spacer(),
         BlocBuilder<LogExerciseBloc, LogExerciseState>(
           builder: (context, state) {
@@ -279,34 +282,3 @@ class _MetricInput extends StatelessWidget {
   }
 }
 
-class _PainToggle extends StatelessWidget {
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  const _PainToggle({required this.label, required this.isSelected, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 48,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: isSelected ? (label == 'YES' ? const Color(0xFFEF4444).withAlpha(51) : const Color(0xFF52525B)) : const Color(0xFF27272A),
-          borderRadius: BorderRadius.circular(8),
-          border: isSelected ? Border.all(color: label == 'YES' ? const Color(0xFFEF4444) : const Color(0xFFFAFAFA)) : null,
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: isSelected ? const Color(0xFFFAFAFA) : const Color(0xFFA1A1AA),
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
-        ),
-      ),
-    );
-  }
-}

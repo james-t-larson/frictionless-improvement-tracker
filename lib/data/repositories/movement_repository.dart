@@ -1,27 +1,68 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:uuid/uuid.dart';
 import '../models/movement.dart';
-import '../sources/remote_source.dart';
+import '../models/variation.dart';
+import '../sources/exercise_data_source.dart';
 
 class MovementRepository {
   final Database _db;
-  final RemoteSource _remoteSource;
-  final _uuid = const Uuid();
+  final ExerciseDataSource _dataSource;
 
-  MovementRepository(this._db, this._remoteSource);
+  MovementRepository(this._db, this._dataSource);
 
   Future<void> seedMovementsIfEmpty() async {
     final count = Sqflite.firstIntValue(
       await _db.rawQuery('SELECT COUNT(*) FROM movements'),
     );
 
-    if (count == 0) {
-      final movements = await _remoteSource.fetchExercises();
-      final batch = _db.batch();
-      for (var movement in movements) {
-        batch.insert('movements', movement.toMap());
-      }
-      await batch.commit(noResult: true);
+    if (count == 0 || count == null) {
+      final List<dynamic> data = await _dataSource.getExercises();
+      Map<String, int> variationCache = {};
+      Map<String, int> muscleCache = {};
+
+      await _db.transaction((txn) async {
+        for (var json in data) {
+          final movement = Movement.fromJson(json);
+          final movementId = await txn.insert('movements', movement.toMap());
+
+          // Handle Variations
+          List<String> variations = List<String>.from(json['variations'] ?? []).toSet().toList();
+          for (var vName in variations) {
+            int variationId;
+            if (variationCache.containsKey(vName)) {
+              variationId = variationCache[vName]!;
+            } else {
+              variationId = await txn.insert('variations', {'name': vName});
+              variationCache[vName] = variationId;
+            }
+            await txn.insert('movement_variations', {
+              'movement_id': movementId,
+              'variation_id': variationId,
+            });
+          }
+
+          // Handle Muscle Groups
+          Future<void> linkMuscles(List<String> muscles, int isPrimary) async {
+            final uniqueMuscles = muscles.toSet().toList();
+            for (var mName in uniqueMuscles) {
+              int muscleId;
+              if (muscleCache.containsKey(mName)) {
+                muscleId = muscleCache[mName]!;
+              } else {
+                muscleId = await txn.insert('muscle_groups', {'name': mName});
+                muscleCache[mName] = muscleId;
+              }
+              await txn.insert('movement_muscles', {
+                'movement_id': movementId,
+                'muscle_id': muscleId,
+                'is_primary': isPrimary,
+              });
+            }
+          }
+
+          await linkMuscles(movement.primaryMuscles, 1);
+          await linkMuscles(movement.secondaryMuscles, 0);
+        }
+      });
     }
   }
 
@@ -32,7 +73,12 @@ class MovementRepository {
       whereArgs: ['%$query%'],
       limit: 20,
     );
-    return maps.map((map) => Movement.fromMap(map)).toList();
+    
+    List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
+    for (var i = 0; i < movements.length; i++) {
+        movements[i] = await _withMuscles(movements[i]);
+    }
+    return movements;
   }
 
   Future<List<Movement>> getTopMovements() async {
@@ -44,15 +90,57 @@ class MovementRepository {
       ORDER BY usage_count DESC, m.name ASC
       LIMIT 10
     ''');
-    return maps.map((map) => Movement.fromMap(map)).toList();
+    
+    List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
+    for (var i = 0; i < movements.length; i++) {
+        movements[i] = await _withMuscles(movements[i]);
+    }
+    return movements;
+  }
+
+  Future<Movement> _withMuscles(Movement movement) async {
+    if (movement.id == null) return movement;
+
+    final muscles = await _db.rawQuery('''
+      SELECT mg.name, mm.is_primary
+      FROM muscle_groups mg
+      JOIN movement_muscles mm ON mg.id = mm.muscle_id
+      WHERE mm.movement_id = ?
+    ''', [movement.id]);
+
+    final primary = muscles
+        .where((m) => m['is_primary'] == 1)
+        .map((m) => m['name'] as String)
+        .toList();
+    final secondary = muscles
+        .where((m) => m['is_primary'] == 0)
+        .map((m) => m['name'] as String)
+        .toList();
+
+    return Movement(
+      id: movement.id,
+      name: movement.name,
+      primaryMuscles: primary,
+      secondaryMuscles: secondary,
+    );
   }
 
   Future<Movement> createMovement(String name) async {
-    final movement = Movement(
-      id: _uuid.v4(),
-      name: name,
+    final movement = Movement(name: name);
+    final id = await _db.insert('movements', movement.toMap());
+    return Movement(id: id, name: name);
+  }
+
+  Future<List<Variation>> getVariationsForMovement(int movementId) async {
+    final List<Map<String, dynamic>> maps = await _db.rawQuery(
+      '''
+      SELECT v.* 
+      FROM variations v
+      JOIN movement_variations mv ON v.id = mv.variation_id
+      WHERE mv.movement_id = ?
+    ''',
+      [movementId],
     );
-    await _db.insert('movements', movement.toMap());
-    return movement;
+    return maps.map((map) => Variation.fromMap(map)).toList();
   }
 }

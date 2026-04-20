@@ -9,7 +9,7 @@ const String staticExerciseJson = r'''[
       "forearm - inner",
       "rotator cuff - back",
       "shoulder - back"
-    ],
+    ]
   },
   {
     "pk": "dc033c10-988c-4558-bf74-3ab5be6c59fc",
@@ -72,7 +72,7 @@ const String staticExerciseJson = r'''[
   {
     "pk": "2b9085c4-ad46-466b-acc9-f863a93dbaa9",
     "name": "Curl",
-    "variations": ["body-weight", "preacher", "cross-body", "single-arm" "barbell", "dumbbell", "incline", "decline", "close-grip", "wide-grip", "rope"],
+    "variations": ["body-weight", "preacher", "cross-body", "single-arm", "barbell", "dumbbell", "incline", "decline", "close-grip", "wide-grip", "rope"],
     "primaryMuscles": ["bicep"],
     "secondaryMuscles": ["forearm - inner"]
   },

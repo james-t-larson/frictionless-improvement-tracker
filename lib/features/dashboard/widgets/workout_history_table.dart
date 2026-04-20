@@ -82,23 +82,17 @@ class _WorkoutLogRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      log.movementName ?? 'Unknown',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    if (log.painFelt) ...[
-                      const SizedBox(width: 8),
-                      const Icon(Icons.warning_amber_rounded, color: Color(0xFFEF4444), size: 16),
-                    ],
-                  ],
-                ),
-                const SizedBox(height: 4),
                 Text(
-                  log.equipment.toUpperCase(),
-                  style: Theme.of(context).textTheme.labelSmall,
+                  log.movementName ?? 'Unknown',
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
+                if (log.variations.isNotEmpty) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    log.variations.map((v) => v.name).join(', ').toUpperCase(),
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ],
               ],
             ),
           ),

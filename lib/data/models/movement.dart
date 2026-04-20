@@ -1,52 +1,41 @@
-import 'dart:convert';
-
 class Movement {
-  final String id;
+  final int? id;
   final String name;
   final List<String> primaryMuscles;
   final List<String> secondaryMuscles;
-  final List<String> steps;
-  final String? notes;
 
   Movement({
-    required this.id,
+    this.id,
     required this.name,
     this.primaryMuscles = const [],
     this.secondaryMuscles = const [],
-    this.steps = const [],
-    this.notes,
   });
+
+  // Getter for backward compatibility or simple display
+  String? get muscleGroup => primaryMuscles.isNotEmpty ? primaryMuscles.first : null;
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      if (id != null) 'id': id,
       'name': name,
-      'primary_muscles': jsonEncode(primaryMuscles),
-      'secondary_muscles': jsonEncode(secondaryMuscles),
-      'steps': jsonEncode(steps),
-      'notes': notes,
     };
   }
 
   factory Movement.fromMap(Map<String, dynamic> map) {
     return Movement(
-      id: map['id'] as String,
+      id: map['id'] as int?,
       name: map['name'] as String,
-      primaryMuscles: List<String>.from(jsonDecode(map['primary_muscles'] ?? '[]')),
-      secondaryMuscles: List<String>.from(jsonDecode(map['secondary_muscles'] ?? '[]')),
-      steps: List<String>.from(jsonDecode(map['steps'] ?? '[]')),
-      notes: map['notes'] as String?,
+      // Note: muscle groups are typically loaded via joins in the repository
+      primaryMuscles: [],
+      secondaryMuscles: [],
     );
   }
 
   factory Movement.fromJson(Map<String, dynamic> json) {
     return Movement(
-      id: json['pk'] ?? '',
       name: json['name'] ?? '',
       primaryMuscles: List<String>.from(json['primaryMuscles'] ?? []),
       secondaryMuscles: List<String>.from(json['secondaryMuscles'] ?? []),
-      steps: List<String>.from(json['steps'] ?? []),
-      notes: json['notes'],
     );
   }
 }

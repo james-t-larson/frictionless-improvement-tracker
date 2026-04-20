@@ -66,7 +66,7 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                         title = 'MOVEMENT';
                         break;
                       case 1:
-                        title = 'EQUIPMENT';
+                        title = 'VARIATION';
                         break;
                       case 2:
                         title = 'METRICS';
@@ -115,7 +115,7 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                     physics: const NeverScrollableScrollPhysics(),
                     children: const [
                       MovementSelectionSlide(),
-                      EquipmentSelectionSlide(),
+                      VariationSelectionSlide(),
                       MetricsAndFeedbackSlide(),
                     ],
                   ),
