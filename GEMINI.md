@@ -1,109 +1,204 @@
-## **1\. App Overview**
+## **1\. High-Level App Architecture**
 
-This is a mobile-friendly, single-page application designed for high-speed, frictionless logging of gym exercises. The core philosophy is to minimize the time between completing a set and recording the data. It tracks individual movements, specific variations (equipment, angles, grips), associated metrics (weight, reps), and qualitative feedback (pain), keeping all historical data stored locally on the user's device for immediate access and privacy.
+The app follows a standard layered architecture using BLoC for state management, Repositories for data abstraction, and SQLite for local persistence.  
+graph TD  
+    subgraph Presentation Layer  
+        UI\[Flutter UI Widgets\]  
+        UI\_Log\[Log Exercise Dialog\]  
+        UI\_Dash\[Main Dashboard Screen\]  
+    end
 
-## **2\. Core User Interface**
+    subgraph State Management Layer  
+        DashBloc\[DashboardBloc\]  
+        LogBloc\[LogExerciseBloc\]  
+    end
 
-The primary interface is a single scrolling page comprising three main sections:
+    subgraph Domain Layer  
+        Models\[Data Models\]  
+        WorkoutRepo\[WorkoutRepository\]  
+        MoveRepo\[MovementRepository\]  
+    end
 
-### **Top App Bar**
+    subgraph Data Layer  
+        DBHelper\[DatabaseHelper / sqflite\]  
+        StaticData\[StaticExerciseData\]  
+    end
 
-* Displays the application title.
-
-### **Search & Action Bar**
-
-* **Sticky Search:** A persistent search bar used to instantly filter the workout history. Typing an exercise name (e.g., "Bench") filters the timeline to show only that movement while maintaining the chronological grouping. This allows users to quickly scan their recent performances.  
-* **Quick Add Action:** A prominent **\[+\]** button positioned to the right of the search bar to initiate a new log entry.
-
-### **Workout History Table**
-
-* **Chronological Grouping:** Data is organized into chunks by date (e.g., "Today", "Yesterday", "Oct 24, 2023").  
-* **Entry Rows:** Each row represents a single completed set, displaying:  
-  * Movement Name & Variation (e.g., "Bench Press \- Dumbbell")  
-  * Weight and Reps  
-  * Pain Indicator (A visual warning icon if pain was recorded during the set).
-
-## **3\. The "Log Exercise" Flow**
-
-To keep the interface uncluttered, adding a new entry opens a modal carousel window. Navigation through this window is step-by-step and strictly guided.  
-stateDiagram-v2  
-    \[\*\] \--\> Dashboard  
+    %% Connections  
+    UI\_Dash \--\>|Events| DashBloc  
+    UI\_Log \--\>|Events| LogBloc  
+    DashBloc \--\>|States| UI\_Dash  
+    LogBloc \--\>|States| UI\_Log  
       
-    state "Log Exercise Carousel" as LogFlow {  
-        MovementSelection \--\> VariationSelection : Select/Create Movement  
-        VariationSelection \--\> MetricsEntry : Choose Variation  
-        MetricsEntry \--\> Feedback : Input Weight & Reps  
-        Feedback \--\> Save : Toggle Pain Feedback  
-    }  
+    DashBloc \--\>|Fetch Logs| WorkoutRepo  
+    LogBloc \--\>|Save Log| WorkoutRepo  
+    LogBloc \--\>|Fetch Movements| MoveRepo  
       
-    Dashboard \--\> MovementSelection : Tap \[+\] Button  
-    Save \--\> Dashboard : Update History & Close Modal
-
-### **Step 1: Movement Selection**
-
-* **Search Interface:** A large auto-focused text field sits above a list of recently performed movements.  
-* **Frictionless Inline Creation:** If a user searches for a movement that does not exist in their library, a dynamic button appears at the bottom of the list (e.g., \[+\] Add "Bulgarian Split Squat" as a new movement). Tapping this instantly saves the new movement and advances to the next step without breaking the user's flow.
-
-### **Step 2: Variation Selection**
-
-* **Contextual Options:** Instead of a generic equipment list, the app displays a grid of tappable chips representing specific *Variations* tied to the chosen movement (e.g., "Barbell", "Dumbbell", "Incline", "Machine").  
-* **Quick Selection:** A single tap locks in the specific variation and automatically advances the screen.
-
-### **Step 3: Metrics (Weight & Reps)**
-
-* **Data Entry:** Two large, mobile-optimized number input fields for Weight and Reps.  
-* **Contextual Hint:** A small text hint appears (e.g., *"Last time: 135 lbs x 8 reps"*) based on the user's most recent performance of the selected *Movement \+ Variation* combination. This allows users to make informed progression decisions without leaving the screen.
-
-### **Step 4: Feedback & Save**
-
-* **Pain Tracking:** A simple prompt asks about abnormal pain, featuring two large "Yes/No" toggle buttons.  
-* **Completion:** Selecting an option activates the "Save Set" button. Saving commits the entry to the daily log and returns the user to the main dashboard.
-
-## **4\. Application Initialization & Data Loading**
-
-To ensure users have immediate utility upon their first launch, the app features an automatic onboarding data sync.  
-flowchart TD  
-    A\[Launch Application\] \--\> B{Is Local Library Empty?}  
+    WorkoutRepo \--\>|SQL Queries| DBHelper  
+    MoveRepo \--\>|SQL Queries| DBHelper  
+    MoveRepo \-.-\>|Initial Seed| StaticData  
       
-    B \-- Yes \--\> C\[Fetch Master Exercise List from Static Source\]  
-    C \--\> D\[Populate Local Device Storage\]  
-    D \--\> E\[Load Main Dashboard\]  
-      
-    B \-- No \--\> E
+    DBHelper \--\>|Raw Data| WorkoutRepo  
+    WorkoutRepo \--\>|Models| DashBloc
 
-## **5\. Data Architecture (Conceptual)**
+## **2\. Database Entity-Relationship (ER) Diagram**
 
-The application relies on interconnected data structures to cleanly separate the definition of a movement from the specific way it was performed (its variation) and the muscles it targets.  
+The SQLite database is structured relationally to link exercises to their specific muscle groups, alongside the actual workout logs.  
 erDiagram  
-    MOVEMENT ||--o{ VARIATION : "has"  
-    MOVEMENT ||--o{ MUSCLE\_GROUP : "targets"  
-    MOVEMENT ||--o{ WORKOUT\_LOG : "recorded in"  
-    VARIATION ||--o{ WORKOUT\_LOG : "recorded in"  
-      
+    MUSCLE\_GROUP ||--o{ MOVEMENT : contains  
+    MOVEMENT ||--o{ VARIATION : has  
+    MOVEMENT ||--o{ WORKOUT\_LOG : recorded\_in  
+    VARIATION ||--o{ WORKOUT\_LOG : optionally\_recorded\_in
+
     MUSCLE\_GROUP {  
-        string id PK  
-        string name "e.g., Chest, Triceps"  
-        boolean is\_primary  
-    }  
-      
+        int id PK  
+        string name "e.g., Chest, Back, Legs"  
+    }
+
     MOVEMENT {  
-        string id PK  
+        int id PK  
+        int muscle\_group\_id FK  
         string name "e.g., Bench Press"  
-        string notes  
-    }  
-      
+    }
+
     VARIATION {  
-        string id PK  
-        string movement\_id FK  
-        string name "e.g., Dumbbell, Barbell, Incline"  
-    }  
-      
+        int id PK  
+        int movement\_id FK  
+        string name "e.g., Incline, Dumbbell"  
+    }
+
     WORKOUT\_LOG {  
-        string log\_id PK  
-        timestamp completed\_at  
-        string movement\_id FK  
-        string variation\_id FK  
-        float weight  
+        int id PK  
+        int movement\_id FK  
+        int variation\_id FK "nullable"  
+        real weight  
         int reps  
-        boolean pain\_felt  
-    }  
+        int sets  
+        string notes  
+        datetime created\_at  
+    }
+
+## **3\. Sequence Flow: Logging a New Exercise**
+
+This sequence diagram illustrates the lifecycle of a user interacting with the app to log a new workout.  
+sequenceDiagram  
+    actor User  
+    participant UI as Dashboard Screen  
+    participant Dialog as LogExerciseDialog (Carousel)  
+    participant LogBloc as LogExerciseBloc  
+    participant Repo as WorkoutRepository  
+    participant DB as SQLite DB  
+    participant DashBloc as DashboardBloc
+
+    User-\>\>UI: Tap (+) FAB to Log Exercise  
+    UI-\>\>Dialog: Open Carousel Dialog  
+    Dialog-\>\>LogBloc: Event: LoadMuscleGroups  
+    LogBloc--\>\>Dialog: State: MuscleGroupsLoaded  
+    User-\>\>Dialog: Select Muscle Group & Swipe Next  
+    Dialog-\>\>LogBloc: Event: LoadMovements(muscleGroupId)  
+    LogBloc--\>\>Dialog: State: MovementsLoaded  
+    User-\>\>Dialog: Select Movement & Enter Weight/Reps  
+    User-\>\>Dialog: Tap "Save Workout"  
+    Dialog-\>\>LogBloc: Event: SaveWorkout(workoutLog)  
+    LogBloc-\>\>Repo: insertLog(workoutLog)  
+    Repo-\>\>DB: INSERT INTO workout\_logs...  
+    DB--\>\>Repo: success (row id)  
+    Repo--\>\>LogBloc: success  
+    LogBloc--\>\>Dialog: State: SaveSuccess  
+    Dialog--\>\>UI: Close Dialog & Show Toast  
+      
+    %% Dashboard Refresh Trigger  
+    UI-\>\>DashBloc: Event: FetchRecentWorkouts  
+    DashBloc-\>\>Repo: getRecentWorkouts()  
+    Repo--\>\>DashBloc: List\<WorkoutLog\>  
+    DashBloc--\>\>UI: State: DashboardLoaded(logs)  
+    UI--\>\>User: Updated UI with new log
+
+## **4\. State Management (BLoC) Lifecycles**
+
+### **Dashboard BLoC State Machine**
+
+stateDiagram-v2  
+    \[\*\] \--\> DashboardInitial  
+    DashboardInitial \--\> DashboardLoading : FetchDashboardData Event  
+    DashboardLoading \--\> DashboardLoaded : Data fetched successfully  
+    DashboardLoading \--\> DashboardError : Exception thrown during fetch  
+    DashboardLoaded \--\> DashboardLoading : Pull to refresh / Log added  
+    DashboardError \--\> DashboardLoading : Retry
+
+### **Log Exercise BLoC State Machine (Carousel Flow)**
+
+stateDiagram-v2  
+    \[\*\] \--\> LogExerciseInitial  
+    LogExerciseInitial \--\> LoadingMuscleGroups : Open Dialog  
+    LoadingMuscleGroups \--\> MuscleGroupsLoaded : Display Step 1  
+    MuscleGroupsLoaded \--\> LoadingMovements : User selects Muscle Group  
+    LoadingMovements \--\> MovementsLoaded : Display Step 2  
+    MovementsLoaded \--\> ReadyToLog : User selects Movement  
+    ReadyToLog \--\> SavingWorkout : User taps Save  
+    SavingWorkout \--\> SaveSuccess : DB Insert Success  
+    SavingWorkout \--\> SaveError : DB Insert Failed  
+    SaveSuccess \--\> \[\*\] : Close Dialog
+
+## **5\. Directory Structure Mapping**
+
+To better understand how these flows translate to the codebase:  
+mindmap  
+  root((Simple Gym Tracker))  
+    lib/  
+      core/  
+        database/  
+            (DatabaseHelper)  
+        di/  
+            (ServiceLocator \- GetIt)  
+      data/  
+        models/  
+            (WorkoutLog, MuscleGroup, etc.)  
+        repositories/  
+            (WorkoutRepository, MovementRepository)  
+        sources/  
+            (StaticExerciseData)  
+      features/  
+        dashboard/  
+            views/  
+            viewmodels/ (DashboardBloc)  
+            widgets/  
+        exercise\_logging/  
+            views/ (LogExerciseDialog, CarouselSlides)  
+            viewmodels/ (LogExerciseBloc)
+
+## **6\. Architecture Guidelines: MVVM & BLoC Pattern**
+
+To maintain a clean, scalable, and testable codebase, all new features and modifications must strictly adhere to the **MVVM (Model-View-ViewModel)** architecture, utilizing the **BLoC (Business Logic Component)** pattern as the ViewModel layer.
+
+### **Core Maintenance Principles:**
+
+1. **View (UI Layer / Presentation)**:  
+   * **Scope:** Consists of Flutter Widgets (found in views/ and widgets/ directories).  
+   * **Constraint:** Must remain completely "dumb". Views should solely be responsible for listening to BLoC states to render UI and dispatching user events back to the BLoC.  
+   * **Rule:** Absolutely no business logic, data formatting, or direct repository access should occur in the UI layer.  
+2. **ViewModel (BLoC Layer)**:  
+   * **Scope:** Consists of BLoC classes (found in viewmodels/ directories).  
+   * **Constraint:** Acts as the strict intermediary. It processes events from the View, communicates with Repositories/Services, and emits immutable states back to the View.  
+   * **Rule:** BLoCs must remain platform-agnostic and should *never* depend on Flutter UI elements (e.g., BuildContext, TextEditingController).  
+3. **Model (Data & Domain Layer)**:  
+   * **Scope:** Consists of Data Models, Repositories, and underlying Data Sources (found in the data/ directory).  
+   * **Constraint:** Handles all data retrieval, storage (SQLite via DatabaseHelper), and business rules.  
+   * **Rule:** Completely independent of BLoC and UI layers. Changes here should propagate upwards via Repository interfaces.
+
+### **Strict Unidirectional Data Flow**
+
+Any changes to state or data must follow this unidirectional loop. Do not bypass the BLoC to read directly from or write directly to a repository from a Widget.  
+graph LR  
+    A\[View Widget\] \-- Dispatches Event \--\> B(BLoC / ViewModel)  
+    B \-- Requests/Mutates Data \--\> C{Repository}  
+    C \-- Returns Result \--\> B  
+    B \-- Emits Immutable State \--\> A  
+      
+    classDef view fill:\#bbdefb,stroke:\#1565c0,stroke-width:2px;  
+    classDef bloc fill:\#c8e6c9,stroke:\#2e7d32,stroke-width:2px;  
+    classDef repo fill:\#ffe0b2,stroke:\#ef6c00,stroke-width:2px;  
+      
+    class A view;  
+    class B bloc;  
+    class C repo;  
