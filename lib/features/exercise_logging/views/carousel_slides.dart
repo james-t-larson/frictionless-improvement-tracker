@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../core/di/service_locator.dart';
-import '../../../data/models/variation.dart';
-import '../../../data/repositories/movement_repository.dart';
 import '../viewmodels/log_exercise_bloc.dart';
 
 // --- Slide 1: Movement Selection ---
@@ -96,13 +93,9 @@ class VariationSelectionSlide extends StatelessWidget {
         return Column(
           children: [
             Expanded(
-              child: FutureBuilder<List<Variation>>(
-                future: getIt<MovementRepository>().getVariationsForMovement(state.selectedMovement!.id!),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  final variations = snapshot.data ?? [];
+              child: Builder(
+                builder: (context) {
+                  final variations = state.availableVariations;
                   if (variations.isEmpty) {
                     return const Center(
                       child: Text('No variations available.', style: TextStyle(color: Color(0xFFA1A1AA))),
@@ -224,6 +217,42 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
           ],
         ),
         const SizedBox(height: 32),
+        const Text(
+          'WAS THERE PAIN?',
+          style: TextStyle(
+            color: Color(0xFFA1A1AA),
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+          ),
+        ),
+        const SizedBox(height: 16),
+        BlocBuilder<LogExerciseBloc, LogExerciseState>(
+          builder: (context, state) {
+            return Row(
+              children: [
+                Expanded(
+                  child: _PainToggleButton(
+                    label: 'YES',
+                    isSelected: state.painFelt,
+                    onTap: () => context.read<LogExerciseBloc>().add(const TogglePain(true)),
+                    activeColor: const Color(0xFFEF4444), // Red for pain
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _PainToggleButton(
+                    label: 'NO',
+                    isSelected: !state.painFelt,
+                    onTap: () => context.read<LogExerciseBloc>().add(const TogglePain(false)),
+                    activeColor: const Color(0xFF22C55E), // Green for no pain
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+        const SizedBox(height: 32),
         const Spacer(),
         BlocBuilder<LogExerciseBloc, LogExerciseState>(
           builder: (context, state) {
@@ -278,6 +307,47 @@ class _MetricInput extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _PainToggleButton extends StatelessWidget {
+  final String label;
+  final bool isSelected;
+  final VoidCallback onTap;
+  final Color activeColor;
+
+  const _PainToggleButton({
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+    required this.activeColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 48,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: isSelected ? activeColor.withOpacity(0.2) : const Color(0xFF27272A),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: isSelected ? activeColor : Colors.transparent,
+            width: 1.5,
+          ),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: isSelected ? activeColor : const Color(0xFFA1A1AA),
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+          ),
+        ),
+      ),
     );
   }
 }
