@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../viewmodels/dashboard_bloc.dart';
-import '../../exercise_logging/views/log_exercise_dialog.dart';
 
 class SearchAndActionBar extends StatelessWidget {
   const SearchAndActionBar({super.key});

@@ -4,9 +4,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_gym_tracker/features/dashboard/views/main_dashboard_screen.dart';
 import 'package:simple_gym_tracker/features/dashboard/viewmodels/dashboard_bloc.dart';
-import 'package:simple_gym_tracker/data/models/workout_log.dart';
-import 'package:simple_gym_tracker/core/di/service_locator.dart';
-import 'package:get_it/get_it.dart';
 
 class MockDashboardBloc extends Mock implements DashboardBloc {}
 
