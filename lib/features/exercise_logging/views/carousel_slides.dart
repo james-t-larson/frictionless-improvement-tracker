@@ -219,8 +219,8 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
           (previous.reps != current.reps && previous.reps == 0) ||
           (previous.editingLogId != current.editingLogId),
       listener: (context, state) {
-        // Auto-focus weight when moving to metrics slide
-        if (state.currentSlideIndex == 2) {
+        // Auto-focus weight when moving to metrics slide, but only if focus isn't already set
+        if (state.currentSlideIndex == 2 && !_weightFocusNode.hasFocus && !_repsFocusNode.hasFocus) {
           _weightFocusNode.requestFocus();
         }
 
