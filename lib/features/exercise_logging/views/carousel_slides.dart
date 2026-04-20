@@ -174,6 +174,19 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
   final TextEditingController _repsController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    final state = context.read<LogExerciseBloc>().state;
+    // Pre-fill if we have data or we are in edit mode
+    if (state.weight > 0 || state.editingLogId != null) {
+      _weightController.text = state.weight.toStringAsFixed(1);
+    }
+    if (state.reps > 0 || state.editingLogId != null) {
+      _repsController.text = state.reps.toString();
+    }
+  }
+
+  @override
   void dispose() {
     _weightController.dispose();
     _repsController.dispose();
@@ -188,99 +201,114 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        BlocBuilder<LogExerciseBloc, LogExerciseState>(
-          builder: (context, state) {
-            return Text(
-              state.lastPerformanceHint ?? '',
-              style: const TextStyle(color: Color(0xFFA1A1AA), fontSize: 13),
-            );
-          },
-        ),
-        const SizedBox(height: 20),
-        Row(
-          children: [
-            Expanded(
-              child: _MetricInput(
-                label: 'WEIGHT (LBS)',
-                controller: _weightController,
-                onChanged: (_) => _update(),
-              ),
-            ),
-            const SizedBox(width: 24),
-            Expanded(
-              child: _MetricInput(
-                label: 'REPS',
-                controller: _repsController,
-                onChanged: (_) => _update(),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 32),
-        const Text(
-          'WAS THERE PAIN?',
-          style: TextStyle(
-            color: Color(0xFFA1A1AA),
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1,
+    return BlocListener<LogExerciseBloc, LogExerciseState>(
+      listenWhen: (previous, current) => 
+          (previous.weight != current.weight && previous.weight == 0) || 
+          (previous.reps != current.reps && previous.reps == 0) ||
+          (previous.editingLogId != current.editingLogId),
+      listener: (context, state) {
+        // Only update if the field is currently empty or we just switched to edit mode
+        if ((state.weight > 0 || state.editingLogId != null) && _weightController.text.isEmpty) {
+          _weightController.text = state.weight.toStringAsFixed(1);
+        }
+        if ((state.reps > 0 || state.editingLogId != null) && _repsController.text.isEmpty) {
+          _repsController.text = state.reps.toString();
+        }
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BlocBuilder<LogExerciseBloc, LogExerciseState>(
+            builder: (context, state) {
+              return Text(
+                state.lastPerformanceHint ?? '',
+                style: const TextStyle(color: Color(0xFFA1A1AA), fontSize: 13),
+              );
+            },
           ),
-        ),
-        const SizedBox(height: 16),
-        BlocBuilder<LogExerciseBloc, LogExerciseState>(
-          builder: (context, state) {
-            return Row(
-              children: [
-                Expanded(
-                  child: _PainToggleButton(
-                    label: 'YES',
-                    isSelected: state.painFelt,
-                    onTap: () => context.read<LogExerciseBloc>().add(const TogglePain(true)),
-                    activeColor: const Color(0xFFEF4444), // Red for pain
-                  ),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(
+                child: _MetricInput(
+                  label: 'WEIGHT (LBS)',
+                  controller: _weightController,
+                  onChanged: (_) => _update(),
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: _PainToggleButton(
-                    label: 'NO',
-                    isSelected: !state.painFelt,
-                    onTap: () => context.read<LogExerciseBloc>().add(const TogglePain(false)),
-                    activeColor: const Color(0xFF22C55E), // Green for no pain
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-        const SizedBox(height: 32),
-        const Spacer(),
-        BlocBuilder<LogExerciseBloc, LogExerciseState>(
-          builder: (context, state) {
-            return SizedBox(
-              width: double.infinity,
-              height: 56,
-              child: ElevatedButton(
-                onPressed: state.isSaving ? null : () => context.read<LogExerciseBloc>().add(const SaveLog()),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFAFAFA),
-                  foregroundColor: const Color(0xFF09090B),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                ),
-                child: state.isSaving
-                    ? const SizedBox(
-                        height: 24,
-                        width: 24,
-                        child: CircularProgressIndicator(color: Color(0xFF09090B), strokeWidth: 2),
-                      )
-                    : const Text('SAVE SET', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 1)),
               ),
-            );
-          },
-        ),
-      ],
+              const SizedBox(width: 24),
+              Expanded(
+                child: _MetricInput(
+                  label: 'REPS',
+                  controller: _repsController,
+                  onChanged: (_) => _update(),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 32),
+          const Text(
+            'WAS THERE PAIN?',
+            style: TextStyle(
+              color: Color(0xFFA1A1AA),
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1,
+            ),
+          ),
+          const SizedBox(height: 16),
+          BlocBuilder<LogExerciseBloc, LogExerciseState>(
+            builder: (context, state) {
+              return Row(
+                children: [
+                  Expanded(
+                    child: _PainToggleButton(
+                      label: 'YES',
+                      isSelected: state.painFelt,
+                      onTap: () => context.read<LogExerciseBloc>().add(const TogglePain(true)),
+                      activeColor: const Color(0xFFEF4444), // Red for pain
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _PainToggleButton(
+                      label: 'NO',
+                      isSelected: !state.painFelt,
+                      onTap: () => context.read<LogExerciseBloc>().add(const TogglePain(false)),
+                      activeColor: const Color(0xFF22C55E), // Green for no pain
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+          const SizedBox(height: 32),
+          const Spacer(),
+          BlocBuilder<LogExerciseBloc, LogExerciseState>(
+            builder: (context, state) {
+              return SizedBox(
+                width: double.infinity,
+                height: 56,
+                child: ElevatedButton(
+                  onPressed: state.isSaving ? null : () => context.read<LogExerciseBloc>().add(const SaveLog()),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFFAFAFA),
+                    foregroundColor: const Color(0xFF09090B),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  ),
+                  child: state.isSaving
+                      ? const SizedBox(
+                          height: 24,
+                          width: 24,
+                          child: CircularProgressIndicator(color: Color(0xFF09090B), strokeWidth: 2),
+                        )
+                      : const Text('SAVE SET', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 1)),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

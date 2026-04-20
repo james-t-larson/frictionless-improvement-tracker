@@ -66,4 +66,41 @@ class WorkoutRepository {
     }
     return null;
   }
+
+  Future<void> deleteWorkoutLog(int id) async {
+    await _db.delete(
+      'workouts',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<void> updateWorkoutLog(WorkoutLog log) async {
+    if (log.id == null) return;
+
+    await _db.transaction((txn) async {
+      await txn.update(
+        'workouts',
+        log.toMap(),
+        where: 'id = ?',
+        whereArgs: [log.id],
+      );
+
+      // Update variations: delete old and insert new
+      await txn.delete(
+        'workout_variations',
+        where: 'workout_id = ?',
+        whereArgs: [log.id],
+      );
+
+      for (var variation in log.variations) {
+        if (variation.id != null) {
+          await txn.insert('workout_variations', {
+            'workout_id': log.id,
+            'variation_id': variation.id,
+          });
+        }
+      }
+    });
+  }
 }

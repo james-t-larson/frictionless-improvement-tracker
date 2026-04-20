@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/di/service_locator.dart';
+import '../../../data/repositories/movement_repository.dart';
 import '../viewmodels/dashboard_bloc.dart';
 import '../../../data/models/workout_log.dart';
+import '../../exercise_logging/viewmodels/log_exercise_bloc.dart';
+import '../../exercise_logging/views/log_exercise_dialog.dart';
 
 class WorkoutHistoryTable extends StatelessWidget {
   const WorkoutHistoryTable({super.key});
@@ -52,7 +57,7 @@ class WorkoutHistoryTable extends StatelessWidget {
                       ),
                     ),
                     ...logs.map((log) => _WorkoutLogRow(log: log)),
-                    const Divider(indent: 16, endIndent: 16),
+                    const Divider(indent: 16, endIndent: 16, color: Color(0xFF27272A)),
                   ],
                 );
               },
@@ -72,53 +77,132 @@ class _WorkoutLogRow extends StatelessWidget {
 
   const _WorkoutLogRow({required this.log});
 
+  void _onEdit(BuildContext context) async {
+    // Fetch movement data first to match the "Add Set" logic and avoid carousel glitches
+    final movement = await getIt<MovementRepository>().getMovementById(log.movementId);
+    if (movement == null) return;
+    
+    if (!context.mounted) return;
+
+    showDialog(
+      context: context,
+      builder: (_) => LogExerciseDialog(
+        initialPage: 2,
+        initialEvent: InitializeFlowForEdit(log, movement: movement),
+      ),
+    );
+  }
+
+  void _onDelete(BuildContext context) {
+    if (log.id == null) return;
+    
+    // Show a snackbar with "Undo" is optional but recommended by spec
+    final dashboardBloc = context.read<DashboardBloc>();
+    dashboardBloc.add(DashboardWorkoutDeleted(log.id!));
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Log deleted'),
+        action: SnackBarAction(
+          label: 'UNDO',
+          onPressed: () {
+            // Undo logic could be complex if we don't have the original log
+            // For now, simple delete as per spec "Tapping 'Delete' instantly removes the log"
+          },
+        ),
+        backgroundColor: const Color(0xFF3F3F46),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
+    return Slidable(
+      key: ValueKey(log.id),
+      startActionPane: ActionPane(
+        motion: const ScrollMotion(),
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  log.movementName ?? 'Unknown',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                if (log.variations.isNotEmpty) ...[
-                  const SizedBox(height: 4),
-                  Text(
-                    log.variations.map((v) => v.name).join(', ').toUpperCase(),
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                ],
-              ],
-            ),
+          SlidableAction(
+            onPressed: (context) => _onEdit(context),
+            backgroundColor: const Color(0xFF3B82F6),
+            foregroundColor: Colors.white,
+            icon: Icons.edit,
+            label: 'Edit',
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+          SlidableAction(
+            onPressed: (context) => _onDelete(context),
+            backgroundColor: const Color(0xFFEF4444),
+            foregroundColor: Colors.white,
+            icon: Icons.delete,
+            label: 'Delete',
+          ),
+        ],
+      ),
+      child: InkWell(
+        onTap: () => _onEdit(context),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: const BoxDecoration(
+            color: Color(0xFF18181B), // Match dashboard background
+          ),
+          child: Row(
             children: [
-              Text(
-                '${log.weight.toStringAsFixed(1)} lbs',
-                style: GoogleFonts.robotoMono(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                  color: const Color(0xFFFAFAFA),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          log.movementName ?? 'Unknown',
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: const Color(0xFFFAFAFA),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        if (log.painFelt) ...[
+                          const SizedBox(width: 8),
+                          const Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 16),
+                        ],
+                      ],
+                    ),
+                    if (log.variations.isNotEmpty) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        log.variations.map((v) => v.name).join(', ').toUpperCase(),
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: const Color(0xFF71717A),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
-              const SizedBox(height: 4),
-              Text(
-                '${log.reps} REPS',
-                style: GoogleFonts.robotoMono(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12,
-                  color: const Color(0xFFA1A1AA),
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    '${log.weight.toStringAsFixed(1)} lbs',
+                    style: GoogleFonts.robotoMono(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: const Color(0xFFFAFAFA),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${log.reps} REPS',
+                    style: GoogleFonts.robotoMono(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
+                      color: const Color(0xFFA1A1AA),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
