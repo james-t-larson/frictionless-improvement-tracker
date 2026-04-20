@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/di/service_locator.dart';
 import '../../../data/models/workout_log.dart';
 import '../../../data/repositories/movement_repository.dart';
+import '../../../core/widgets/app_toast.dart';
 import '../../exercise_logging/viewmodels/log_exercise_bloc.dart';
 import '../../exercise_logging/views/log_exercise_dialog.dart';
 import '../viewmodels/dashboard_bloc.dart';
@@ -15,8 +16,15 @@ class MainDashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: RefreshIndicator(
+      body: BlocListener<DashboardBloc, DashboardState>(
+        listener: (context, state) {
+          if (state is DashboardError) {
+            AppToast.show(context, 'Something went wrong', isError: true);
+          }
+        },
+        child: SafeArea(
+          child: RefreshIndicator(
+
           onRefresh: () async {
             context.read<DashboardBloc>().add(const LoadDashboardLogs());
           },
@@ -44,6 +52,7 @@ class MainDashboardScreen extends StatelessWidget {
           ),
         ),
       ),
+    ),
       bottomNavigationBar: SafeArea(
         child: BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, state) {

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/di/service_locator.dart';
+import '../../../core/widgets/app_toast.dart';
 import '../../../data/repositories/movement_repository.dart';
 import '../viewmodels/dashboard_bloc.dart';
 import '../../../data/models/workout_log.dart';
@@ -100,19 +101,8 @@ class _WorkoutLogRow extends StatelessWidget {
     final dashboardBloc = context.read<DashboardBloc>();
     dashboardBloc.add(DashboardWorkoutDeleted(log.id!));
     
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Log deleted'),
-        action: SnackBarAction(
-          label: 'UNDO',
-          onPressed: () {
-            // Undo logic could be complex if we don't have the original log
-            // For now, simple delete as per spec "Tapping 'Delete' instantly removes the log"
-          },
-        ),
-        backgroundColor: const Color(0xFF3F3F46),
-      ),
-    );
+    AppToast.show(context, 'Log deleted');
+
   }
 
   @override

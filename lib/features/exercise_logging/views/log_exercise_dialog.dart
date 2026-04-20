@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/di/service_locator.dart';
+import '../../../core/widgets/app_toast.dart';
 import '../../dashboard/viewmodels/dashboard_bloc.dart';
 import '../viewmodels/log_exercise_bloc.dart';
 import 'carousel_slides.dart';
@@ -44,14 +45,9 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
         listener: (context, state) {
           if (state.isSuccess) {
             context.read<DashboardBloc>().add(LoadDashboardLogs());
+            AppToast.show(context, 'Log saved successfully');
             Navigator.pop(context);
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Log saved successfully'),
-                backgroundColor: Color(0xFF10B981),
-                duration: Duration(seconds: 1),
-              ),
-            );
+
           } else {
             _pageController.animateToPage(
               state.currentSlideIndex,
