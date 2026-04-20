@@ -35,6 +35,18 @@ class MovementRepository {
     return maps.map((map) => Movement.fromMap(map)).toList();
   }
 
+  Future<List<Movement>> getTopMovements() async {
+    final List<Map<String, dynamic>> maps = await _db.rawQuery('''
+      SELECT m.*, COUNT(w.id) as usage_count
+      FROM movements m
+      LEFT JOIN workouts w ON m.id = w.movement_id
+      GROUP BY m.id
+      ORDER BY usage_count DESC, m.name ASC
+      LIMIT 10
+    ''');
+    return maps.map((map) => Movement.fromMap(map)).toList();
+  }
+
   Future<Movement> createMovement(String name) async {
     final movement = Movement(
       id: _uuid.v4(),

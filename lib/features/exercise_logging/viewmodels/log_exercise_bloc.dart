@@ -164,8 +164,10 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     on<SaveLog>(_onSaveLog);
   }
 
-  void _onInitialize(InitializeFlow event, Emitter<LogExerciseState> emit) {
+  Future<void> _onInitialize(InitializeFlow event, Emitter<LogExerciseState> emit) async {
     emit(const LogExerciseState());
+    final common = await _movementRepository.getTopMovements();
+    emit(state.copyWith(movementSearchResults: common));
   }
 
   void _onAdvanceSlide(AdvanceSlide event, Emitter<LogExerciseState> emit) {
@@ -180,7 +182,8 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
 
   Future<void> _onSearchMovement(SearchMovement event, Emitter<LogExerciseState> emit) async {
     if (event.query.isEmpty) {
-      emit(state.copyWith(movementQuery: '', movementSearchResults: []));
+      final common = await _movementRepository.getTopMovements();
+      emit(state.copyWith(movementQuery: '', movementSearchResults: common));
       return;
     }
     final results = await _movementRepository.searchMovements(event.query);

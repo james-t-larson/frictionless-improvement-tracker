@@ -45,6 +45,19 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
 
               return ListView(
                 children: [
+                  if (state.movementQuery.isEmpty && state.movementSearchResults.isNotEmpty)
+                    const Padding(
+                      padding: EdgeInsets.only(left: 16, top: 8, bottom: 8),
+                      child: Text(
+                        'SUGGESTED',
+                        style: TextStyle(
+                          color: Color(0xFFA1A1AA),
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                    ),
                   ...state.movementSearchResults.map((m) => ListTile(
                     title: Text(m.name, style: const TextStyle(color: Color(0xFFFAFAFA))),
                     onTap: () => context.read<LogExerciseBloc>().add(SelectMovement(m)),
