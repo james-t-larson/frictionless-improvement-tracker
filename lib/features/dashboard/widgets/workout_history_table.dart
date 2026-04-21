@@ -88,7 +88,7 @@ class _WorkoutLogRow extends StatelessWidget {
     showDialog(
       context: context,
       builder: (_) => LogExerciseDialog(
-        initialPage: 2,
+        initialPage: 3,
         initialEvent: InitializeFlowForEdit(log, movement: movement),
       ),
     );

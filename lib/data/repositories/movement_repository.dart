@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import '../models/movement.dart';
 import '../models/variation.dart';
+import '../models/muscle_group.dart';
 import '../sources/exercise_data_source.dart';
 
 class MovementRepository {
@@ -186,5 +187,26 @@ class MovementRepository {
     }
 
     return Variation(id: variationId, name: name);
+  }
+
+  Future<List<MuscleGroup>> getMuscleGroups() async {
+    final List<Map<String, dynamic>> maps = await _db.query('muscle_groups', orderBy: 'name ASC');
+    return maps.map((map) => MuscleGroup.fromMap(map)).toList();
+  }
+
+  Future<List<Movement>> getMovementsByMuscleGroup(int muscleGroupId) async {
+    final List<Map<String, dynamic>> maps = await _db.rawQuery('''
+      SELECT m.*
+      FROM movements m
+      JOIN movement_muscles mm ON m.id = mm.movement_id
+      WHERE mm.muscle_id = ?
+      ORDER BY m.name ASC
+    ''', [muscleGroupId]);
+    
+    List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
+    for (var i = 0; i < movements.length; i++) {
+        movements[i] = await _withMuscles(movements[i]);
+    }
+    return movements;
   }
 }

@@ -1,193 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
 import '../../../data/models/movement.dart';
 import '../../../data/models/workout_log.dart';
 import '../../../data/models/variation.dart';
 import '../../../data/repositories/movement_repository.dart';
 import '../../../data/repositories/workout_repository.dart';
+import 'log_exercise_event.dart';
+import 'log_exercise_state.dart';
 
-// Events
-abstract class LogExerciseEvent extends Equatable {
-  const LogExerciseEvent();
-  @override
-  List<Object?> get props => [];
-}
+export 'log_exercise_event.dart';
+export 'log_exercise_state.dart';
 
-class InitializeFlow extends LogExerciseEvent {
-  const InitializeFlow();
-}
-
-class SearchMovement extends LogExerciseEvent {
-  final String query;
-  const SearchMovement(this.query);
-  @override
-  List<Object?> get props => [query];
-}
-
-class SelectMovement extends LogExerciseEvent {
-  final Movement movement;
-  const SelectMovement(this.movement);
-  @override
-  List<Object?> get props => [movement];
-}
-
-class CreateAndSelectMovement extends LogExerciseEvent {
-  final String name;
-  const CreateAndSelectMovement(this.name);
-  @override
-  List<Object?> get props => [name];
-}
-
-class ToggleVariation extends LogExerciseEvent {
-  final Variation variation;
-  const ToggleVariation(this.variation);
-  @override
-  List<Object?> get props => [variation];
-}
-
-class CreateAndSelectVariation extends LogExerciseEvent {
-  final String name;
-  const CreateAndSelectVariation(this.name);
-  @override
-  List<Object?> get props => [name];
-}
-
-class AdvanceFromVariations extends LogExerciseEvent {
-  const AdvanceFromVariations();
-}
-
-class UpdateMetrics extends LogExerciseEvent {
-  final double weight;
-  final int reps;
-  const UpdateMetrics(this.weight, this.reps);
-  @override
-  List<Object?> get props => [weight, reps];
-}
-
-class AdvanceSlide extends LogExerciseEvent {
-  const AdvanceSlide();
-}
-
-class SaveLog extends LogExerciseEvent {
-  const SaveLog();
-}
-
-class TogglePain extends LogExerciseEvent {
-  final bool painFelt;
-  const TogglePain(this.painFelt);
-  @override
-  List<Object?> get props => [painFelt];
-}
-
-class ReturnToPreviousSlide extends LogExerciseEvent {
-  const ReturnToPreviousSlide();
-}
-
-class InitializeWithPreviousLog extends LogExerciseEvent {
-  final Movement movement;
-  final List<Variation> selectedVariations;
-
-  const InitializeWithPreviousLog({
-    required this.movement,
-    required this.selectedVariations,
-  });
-
-  @override
-  List<Object?> get props => [movement, selectedVariations];
-}
-
-class InitializeFlowForEdit extends LogExerciseEvent {
-  final WorkoutLog log;
-  final Movement? movement;
-  const InitializeFlowForEdit(this.log, {this.movement});
-  @override
-  List<Object?> get props => [log, movement];
-}
-
-// State
-class LogExerciseState extends Equatable {
-  final int currentSlideIndex;
-  final String movementQuery;
-  final List<Movement> movementSearchResults;
-  final Movement? selectedMovement;
-  final String? lastPerformanceHint;
-  final List<Variation> selectedVariations;
-  final List<Variation> availableVariations;
-  final double weight;
-  final int reps;
-  final bool isSaving;
-  final bool isSuccess;
-  final bool painFelt;
-  final int? editingLogId;
-
-  const LogExerciseState({
-    this.currentSlideIndex = 0,
-    this.movementQuery = '',
-    this.movementSearchResults = const [],
-    this.selectedMovement,
-    this.lastPerformanceHint,
-    this.selectedVariations = const [],
-    this.availableVariations = const [],
-    this.weight = 0.0,
-    this.reps = 0,
-    this.isSaving = false,
-    this.isSuccess = false,
-    this.painFelt = false,
-    this.editingLogId,
-  });
-
-  LogExerciseState copyWith({
-    int? currentSlideIndex,
-    String? movementQuery,
-    List<Movement>? movementSearchResults,
-    Movement? selectedMovement,
-    String? lastPerformanceHint,
-    List<Variation>? selectedVariations,
-    List<Variation>? availableVariations,
-    double? weight,
-    int? reps,
-    bool? isSaving,
-    bool? isSuccess,
-    bool? painFelt,
-    int? editingLogId,
-  }) {
-    return LogExerciseState(
-      currentSlideIndex: currentSlideIndex ?? this.currentSlideIndex,
-      movementQuery: movementQuery ?? this.movementQuery,
-      movementSearchResults:
-          movementSearchResults ?? this.movementSearchResults,
-      selectedMovement: selectedMovement ?? this.selectedMovement,
-      lastPerformanceHint: lastPerformanceHint ?? this.lastPerformanceHint,
-      selectedVariations: selectedVariations ?? this.selectedVariations,
-      availableVariations: availableVariations ?? this.availableVariations,
-      weight: weight ?? this.weight,
-      reps: reps ?? this.reps,
-      isSaving: isSaving ?? this.isSaving,
-      isSuccess: isSuccess ?? this.isSuccess,
-      painFelt: painFelt ?? this.painFelt,
-      editingLogId: editingLogId ?? this.editingLogId,
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-    currentSlideIndex,
-    movementQuery,
-    movementSearchResults,
-    selectedMovement,
-    lastPerformanceHint,
-    selectedVariations,
-    availableVariations,
-    weight,
-    reps,
-    isSaving,
-    isSuccess,
-    painFelt,
-    editingLogId,
-  ];
-}
-
-// Bloc
 class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
   final MovementRepository _movementRepository;
   final WorkoutRepository _workoutRepository;
@@ -195,6 +17,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
   LogExerciseBloc(this._movementRepository, this._workoutRepository)
     : super(const LogExerciseState()) {
     on<InitializeFlow>(_onInitialize);
+    on<MuscleGroupSelected>(_onMuscleGroupSelected);
     on<SearchMovement>(_onSearchMovement);
     on<SelectMovement>(_onSelectMovement);
     on<CreateAndSelectMovement>(_onCreateAndSelectMovement);
@@ -202,10 +25,10 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     on<CreateAndSelectVariation>(_onCreateAndSelectVariation);
     on<AdvanceFromVariations>(_onAdvanceFromVariations);
     on<UpdateMetrics>(_onUpdateMetrics);
-    on<AdvanceSlide>(_onAdvanceSlide);
-    on<ReturnToPreviousSlide>(_onReturnToPreviousSlide);
     on<TogglePain>(_onTogglePain);
     on<SaveLog>(_onSaveLog);
+    on<PreviousStepRequested>(_onPreviousStepRequested);
+    on<ManualSlideChanged>(_onManualSlideChanged);
     on<InitializeWithPreviousLog>(_onInitializeWithPreviousLog);
     on<InitializeFlowForEdit>(_onInitializeFlowForEdit);
   }
@@ -215,8 +38,32 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     Emitter<LogExerciseState> emit,
   ) async {
     emit(const LogExerciseState());
-    final common = await _movementRepository.getTopMovements();
-    emit(state.copyWith(movementSearchResults: common));
+    final muscleGroups = await _movementRepository.getMuscleGroups();
+    emit(state.copyWith(
+      muscleGroups: muscleGroups,
+      currentStep: ExerciseLogStep.muscleGroup,
+    ));
+    
+    // Also pre-fetch top movements in case user goes to movement screen
+    final topMovements = await _movementRepository.getTopMovements();
+    emit(state.copyWith(movementSearchResults: topMovements));
+  }
+
+  Future<void> _onMuscleGroupSelected(
+    MuscleGroupSelected event,
+    Emitter<LogExerciseState> emit,
+  ) async {
+    final movements = await _movementRepository.getMovementsByMuscleGroup(event.group.id!);
+    emit(state.copyWith(
+      selectedMuscleGroup: event.group,
+      movementSearchResults: movements,
+      currentStep: ExerciseLogStep.movement,
+      // Clear forward progress
+      selectedMovement: null,
+      selectedVariations: [],
+      availableVariations: [],
+      lastPerformanceHint: null,
+    ));
   }
 
   Future<void> _onInitializeFlowForEdit(
@@ -236,7 +83,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
       weight: event.log.weight,
       reps: event.log.reps,
       painFelt: event.log.painFelt,
-      currentSlideIndex: 2, // Go straight to metrics
+      currentStep: ExerciseLogStep.details, // Go straight to metrics
     ));
     
     _fetchLastPerformance(movement.id!, emit);
@@ -257,7 +104,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
       selectedMovement: event.movement,
       selectedVariations: event.selectedVariations,
       availableVariations: variations,
-      currentSlideIndex: 2, // Go straight to metrics
+      currentStep: ExerciseLogStep.details, // Go straight to metrics
     ));
 
     if (event.movement.id != null) {
@@ -265,17 +112,35 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     }
   }
 
-  void _onAdvanceSlide(AdvanceSlide event, Emitter<LogExerciseState> emit) {
-    emit(state.copyWith(currentSlideIndex: state.currentSlideIndex + 1));
-  }
-
-  void _onReturnToPreviousSlide(
-    ReturnToPreviousSlide event,
+  void _onPreviousStepRequested(
+    PreviousStepRequested event,
     Emitter<LogExerciseState> emit,
   ) {
-    if (state.currentSlideIndex > 0) {
-      emit(state.copyWith(currentSlideIndex: state.currentSlideIndex - 1));
+    switch (state.currentStep) {
+      case ExerciseLogStep.details:
+        emit(state.copyWith(currentStep: ExerciseLogStep.variation));
+        break;
+      case ExerciseLogStep.variation:
+        emit(state.copyWith(currentStep: ExerciseLogStep.movement));
+        break;
+      case ExerciseLogStep.movement:
+        emit(state.copyWith(currentStep: ExerciseLogStep.muscleGroup));
+        break;
+      case ExerciseLogStep.muscleGroup:
+        // Already at start
+        break;
     }
+  }
+
+  void _onManualSlideChanged(
+    ManualSlideChanged event,
+    Emitter<LogExerciseState> emit,
+  ) {
+    final newStep = ExerciseLogStep.values.firstWhere(
+      (e) => e.slideIndex == event.newIndex,
+      orElse: () => state.currentStep,
+    );
+    emit(state.copyWith(currentStep: newStep));
   }
 
   Future<void> _onSearchMovement(
@@ -283,8 +148,14 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     Emitter<LogExerciseState> emit,
   ) async {
     if (event.query.isEmpty) {
-      final common = await _movementRepository.getTopMovements();
-      emit(state.copyWith(movementQuery: '', movementSearchResults: common));
+      // If we have a selected muscle group, show those movements again
+      if (state.selectedMuscleGroup != null) {
+        final movements = await _movementRepository.getMovementsByMuscleGroup(state.selectedMuscleGroup!.id!);
+        emit(state.copyWith(movementQuery: '', movementSearchResults: movements));
+      } else {
+        final common = await _movementRepository.getTopMovements();
+        emit(state.copyWith(movementQuery: '', movementSearchResults: common));
+      }
       return;
     }
     final results = await _movementRepository.searchMovements(event.query);
@@ -308,7 +179,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     emit(
       state.copyWith(
         selectedMovement: event.movement, 
-        currentSlideIndex: 1,
+        currentStep: ExerciseLogStep.variation,
         availableVariations: variations,
       ),
     );
@@ -329,7 +200,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
 
     emit(state.copyWith(
       selectedMovement: movement, 
-      currentSlideIndex: 1,
+      currentStep: ExerciseLogStep.variation,
       availableVariations: variations,
     ));
     if (movement.id != null) {
@@ -401,7 +272,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     AdvanceFromVariations event,
     Emitter<LogExerciseState> emit,
   ) {
-    emit(state.copyWith(currentSlideIndex: 2));
+    emit(state.copyWith(currentStep: ExerciseLogStep.details));
   }
 
   void _onUpdateMetrics(UpdateMetrics event, Emitter<LogExerciseState> emit) {

@@ -117,7 +117,7 @@ class MainDashboardScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => LogExerciseDialog(
-        initialPage: 2,
+        initialPage: 3,
         initialEvent: InitializeWithPreviousLog(
           movement: movement,
           selectedVariations: lastLog.variations,

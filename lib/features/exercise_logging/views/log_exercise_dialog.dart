@@ -41,7 +41,7 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
       create: (context) => getIt<LogExerciseBloc>()..add(widget.initialEvent ?? const InitializeFlow()),
       child: BlocListener<LogExerciseBloc, LogExerciseState>(
         listenWhen: (previous, current) =>
-            previous.currentSlideIndex != current.currentSlideIndex || current.isSuccess,
+            previous.currentStep != current.currentStep || current.isSuccess,
         listener: (context, state) {
           if (state.isSuccess) {
             context.read<DashboardBloc>().add(LoadDashboardLogs());
@@ -50,7 +50,7 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
 
           } else {
             _pageController.animateToPage(
-              state.currentSlideIndex,
+              state.currentStep.slideIndex,
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
             );
@@ -70,14 +70,17 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                 BlocBuilder<LogExerciseBloc, LogExerciseState>(
                   builder: (context, state) {
                     String title = '';
-                    switch (state.currentSlideIndex) {
-                      case 0:
+                    switch (state.currentStep) {
+                      case ExerciseLogStep.muscleGroup:
+                        title = 'MUSCLE GROUP';
+                        break;
+                      case ExerciseLogStep.movement:
                         title = 'MOVEMENT';
                         break;
-                      case 1:
+                      case ExerciseLogStep.variation:
                         title = 'VARIATION';
                         break;
-                      case 2:
+                      case ExerciseLogStep.details:
                         title = 'METRICS';
                         break;
                     }
@@ -87,10 +90,10 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                       children: [
                         Row(
                           children: [
-                            if (state.currentSlideIndex > 0)
+                            if (state.currentStep.slideIndex > 0)
                               IconButton(
                                 icon: const Icon(Icons.chevron_left, color: Color(0xFFA1A1AA), size: 28),
-                                onPressed: () => context.read<LogExerciseBloc>().add(const ReturnToPreviousSlide()),
+                                onPressed: () => context.read<LogExerciseBloc>().add(PreviousStepRequested()),
                               )
                             else
                               const SizedBox(width: 48),
@@ -123,6 +126,7 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                     controller: _pageController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: const [
+                      MuscleGroupSelectionSlide(),
                       MovementSelectionSlide(),
                       VariationSelectionSlide(),
                       MetricsAndFeedbackSlide(),
