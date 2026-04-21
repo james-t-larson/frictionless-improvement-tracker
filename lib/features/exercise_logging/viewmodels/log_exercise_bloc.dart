@@ -188,10 +188,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     Emitter<LogExerciseState> emit,
   ) async {
     final movement = await _movementRepository.createMovement(event.name);
-    List<Variation> variations = [];
-    if (movement.id != null) {
-      variations = await _movementRepository.getVariationsForMovement(movement.id!);
-    }
+    List<Variation> variations = await _movementRepository.getAllVariations();
 
     emit(state.copyWith(
       selectedMovement: movement, 
@@ -249,16 +246,18 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
       event.name,
     );
 
-    // Refresh available variations
-    final variations = await _movementRepository.getVariationsForMovement(
-      state.selectedMovement!.id!,
-    );
+    // Append to existing available variations to avoid losing other global variations
+    // if this is a newly created movement
+    final updatedAvailable = List<Variation>.from(state.availableVariations);
+    if (!updatedAvailable.any((v) => v.id == variation.id)) {
+      updatedAvailable.add(variation);
+    }
 
     // Update state: add to available and auto-select it
     final updatedSelected = List<Variation>.from(state.selectedVariations)..add(variation);
 
     emit(state.copyWith(
-      availableVariations: variations,
+      availableVariations: updatedAvailable,
       selectedVariations: updatedSelected,
     ));
   }

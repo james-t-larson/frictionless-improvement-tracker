@@ -156,6 +156,11 @@ class MovementRepository {
     return maps.map((map) => Variation.fromMap(map)).toList();
   }
 
+  Future<List<Variation>> getAllVariations() async {
+    final List<Map<String, dynamic>> maps = await _db.query('variations', orderBy: 'name ASC');
+    return maps.map((map) => Variation.fromMap(map)).toList();
+  }
+
   Future<Variation> createVariationForMovement(int movementId, String name) async {
     // Check if variation exists globally
     final List<Map<String, dynamic>> results = await _db.query(
