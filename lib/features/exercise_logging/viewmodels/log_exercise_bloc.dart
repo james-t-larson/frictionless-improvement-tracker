@@ -38,15 +38,13 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     Emitter<LogExerciseState> emit,
   ) async {
     emit(const LogExerciseState());
-    final muscleGroups = await _movementRepository.getMuscleGroups();
-    emit(state.copyWith(
-      muscleGroups: muscleGroups,
-      currentStep: ExerciseLogStep.muscleGroup,
-    ));
     
-    // Also pre-fetch top movements in case user goes to movement screen
+    // Pre-fetch top movements
     final topMovements = await _movementRepository.getTopMovements();
-    emit(state.copyWith(movementSearchResults: topMovements));
+    emit(state.copyWith(
+      movementSearchResults: topMovements,
+      currentStep: ExerciseLogStep.movement,
+    ));
   }
 
   Future<void> _onMuscleGroupSelected(
@@ -124,9 +122,6 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
         emit(state.copyWith(currentStep: ExerciseLogStep.movement));
         break;
       case ExerciseLogStep.movement:
-        emit(state.copyWith(currentStep: ExerciseLogStep.muscleGroup));
-        break;
-      case ExerciseLogStep.muscleGroup:
         // Already at start
         break;
     }

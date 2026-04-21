@@ -94,7 +94,7 @@ class _AppToastState extends State<AppToast> with SingleTickerProviderStateMixin
             width: isLargeScreen ? 400 : screenWidth,
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             decoration: BoxDecoration(
-              color: const Color(0xFF18181B).withOpacity(0.95),
+              color: const Color(0xFF18181B).withValues(alpha: 0.95),
               border: Border(
                 left: BorderSide(color: color, width: 4),
                 bottom: BorderSide(color: const Color(0xFF27272A), width: 1),
@@ -103,7 +103,7 @@ class _AppToastState extends State<AppToast> with SingleTickerProviderStateMixin
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.4),
+                  color: Colors.black.withValues(alpha: 0.4),
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 ),

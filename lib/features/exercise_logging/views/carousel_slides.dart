@@ -3,52 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../viewmodels/log_exercise_bloc.dart';
 
-import '../viewmodels/log_exercise_bloc.dart';
-import '../../../data/models/muscle_group.dart';
-
-// --- Slide 1: Muscle Group Selection ---
-class MuscleGroupSelectionSlide extends StatelessWidget {
-  const MuscleGroupSelectionSlide({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LogExerciseBloc, LogExerciseState>(
-      buildWhen: (previous, current) => 
-          previous.muscleGroups != current.muscleGroups || 
-          previous.selectedMuscleGroup != current.selectedMuscleGroup,
-      builder: (context, state) {
-        if (state.muscleGroups.isEmpty) {
-          return const Center(child: CircularProgressIndicator(color: Color(0xFFFAFAFA)));
-        }
-
-        return ListView.builder(
-          itemCount: state.muscleGroups.length,
-          itemBuilder: (context, index) {
-            final group = state.muscleGroups[index];
-            final isSelected = state.selectedMuscleGroup?.id == group.id;
-
-            return ListTile(
-              title: Text(
-                group.name.toUpperCase(),
-                style: TextStyle(
-                  color: isSelected ? const Color(0xFFFAFAFA) : const Color(0xFFA1A1AA),
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                  letterSpacing: 1,
-                ),
-              ),
-              trailing: isSelected 
-                  ? const Icon(Icons.check_rounded, color: Color(0xFFFAFAFA)) 
-                  : null,
-              onTap: () => context.read<LogExerciseBloc>().add(MuscleGroupSelected(group)),
-            );
-          },
-        );
-      },
-    );
-  }
-}
-
-// --- Slide 2: Movement Selection ---
+// --- Slide 1: Movement Selection ---
 class MovementSelectionSlide extends StatefulWidget {
   const MovementSelectionSlide({super.key});
 
@@ -206,7 +161,7 @@ class VariationSelectionSlide extends StatelessWidget {
   }
 }
 
-// --- Slide 4: Metrics & Feedback ---
+// --- Slide 3: Metrics & Feedback ---
 class MetricsAndFeedbackSlide extends StatefulWidget {
   const MetricsAndFeedbackSlide({super.key});
 
@@ -442,7 +397,7 @@ class _PainToggleButton extends StatelessWidget {
         height: 48,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: isSelected ? activeColor.withOpacity(0.2) : const Color(0xFF27272A),
+          color: isSelected ? activeColor.withValues(alpha: 0.2) : const Color(0xFF27272A),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: isSelected ? activeColor : Colors.transparent,

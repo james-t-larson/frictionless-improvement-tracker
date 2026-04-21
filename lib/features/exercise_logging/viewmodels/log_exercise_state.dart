@@ -4,10 +4,9 @@ import '../../../data/models/muscle_group.dart';
 import '../../../data/models/variation.dart';
 
 enum ExerciseLogStep {
-  muscleGroup(0),
-  movement(1),
-  variation(2),
-  details(3);
+  movement(0),
+  variation(1),
+  details(2);
 
   final int slideIndex;
   const ExerciseLogStep(this.slideIndex);
@@ -34,7 +33,7 @@ class LogExerciseState extends Equatable {
   final int? editingLogId;
 
   const LogExerciseState({
-    this.currentStep = ExerciseLogStep.muscleGroup,
+    this.currentStep = ExerciseLogStep.movement,
     this.muscleGroups = const [],
     this.selectedMuscleGroup,
     this.movementQuery = '',
@@ -92,14 +91,6 @@ class LogExerciseState extends Equatable {
   // Helper to clear forward state when a previous step change occurs
   LogExerciseState clearFrom(ExerciseLogStep step) {
     switch (step) {
-      case ExerciseLogStep.muscleGroup:
-        return copyWith(
-          selectedMuscleGroup: null,
-          selectedMovement: null,
-          selectedVariations: [],
-          availableVariations: [],
-          movementSearchResults: [],
-        );
       case ExerciseLogStep.movement:
         return copyWith(
           selectedMovement: null,

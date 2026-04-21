@@ -71,9 +71,6 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                   builder: (context, state) {
                     String title = '';
                     switch (state.currentStep) {
-                      case ExerciseLogStep.muscleGroup:
-                        title = 'MUSCLE GROUP';
-                        break;
                       case ExerciseLogStep.movement:
                         title = 'MOVEMENT';
                         break;
@@ -115,7 +112,7 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                           ],
                         ),
                         const SizedBox(height: 8),
-                        Divider(color: const Color(0xFFFAFAFA).withAlpha(25), height: 1),
+                        Divider(color: const Color(0xFFFAFAFA).withValues(alpha: 0.1), height: 1),
                         const SizedBox(height: 16),
                       ],
                     );
@@ -126,7 +123,6 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                     controller: _pageController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: const [
-                      MuscleGroupSelectionSlide(),
                       MovementSelectionSlide(),
                       VariationSelectionSlide(),
                       MetricsAndFeedbackSlide(),
