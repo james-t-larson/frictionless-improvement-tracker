@@ -109,7 +109,7 @@ class _WorkoutLogRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       key: ValueKey(log.id),
-      startActionPane: ActionPane(
+      endActionPane: ActionPane(
         motion: const ScrollMotion(),
         children: [
           SlidableAction(
