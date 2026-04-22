@@ -194,6 +194,28 @@ class MovementRepository {
     return Variation(id: variationId, name: name);
   }
 
+  Future<void> syncVariationsToMovement(int movementId, List<Variation> variations) async {
+    await _db.transaction((txn) async {
+      for (var variation in variations) {
+        if (variation.id == null) continue;
+        
+        // Link it to the movement if not already linked
+        final List<Map<String, dynamic>> linkResults = await txn.query(
+          'movement_variations',
+          where: 'movement_id = ? AND variation_id = ?',
+          whereArgs: [movementId, variation.id],
+        );
+
+        if (linkResults.isEmpty) {
+          await txn.insert('movement_variations', {
+            'movement_id': movementId,
+            'variation_id': variation.id,
+          });
+        }
+      }
+    });
+  }
+
   Future<List<MuscleGroup>> getMuscleGroups() async {
     final List<Map<String, dynamic>> maps = await _db.query('muscle_groups', orderBy: 'name ASC');
     return maps.map((map) => MuscleGroup.fromMap(map)).toList();

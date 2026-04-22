@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../data/models/movement.dart';
 import '../../../data/models/workout_log.dart';
 import '../../../data/models/variation.dart';
 import '../../../data/repositories/movement_repository.dart';
@@ -71,7 +70,10 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     final movement = event.movement ?? await _movementRepository.getMovementById(event.log.movementId);
     if (movement == null) return;
 
-    final variations = await _movementRepository.getVariationsForMovement(movement.id!);
+    List<Variation> variations = await _movementRepository.getVariationsForMovement(movement.id!);
+    if (variations.isEmpty) {
+      variations = await _movementRepository.getAllVariations();
+    }
 
     emit(state.copyWith(
       editingLogId: event.log.id,
@@ -96,6 +98,9 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     List<Variation> variations = [];
     if (event.movement.id != null) {
       variations = await _movementRepository.getVariationsForMovement(event.movement.id!);
+      if (variations.isEmpty) {
+        variations = await _movementRepository.getAllVariations();
+      }
     }
 
     emit(state.copyWith(
@@ -169,6 +174,9 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     List<Variation> variations = [];
     if (event.movement.id != null) {
       variations = await _movementRepository.getVariationsForMovement(event.movement.id!);
+      if (variations.isEmpty) {
+        variations = await _movementRepository.getAllVariations();
+      }
     }
     
     emit(
@@ -299,6 +307,12 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     } else {
       await _workoutRepository.saveWorkoutLog(log);
     }
+
+    // Ensure selected variations are linked to the movement for future use
+    await _movementRepository.syncVariationsToMovement(
+      state.selectedMovement!.id!,
+      state.selectedVariations,
+    );
 
     emit(state.copyWith(isSaving: false, isSuccess: true));
   }
