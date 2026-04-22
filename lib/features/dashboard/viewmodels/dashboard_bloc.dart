@@ -1,61 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
 import '../../../data/models/workout_log.dart';
 import '../../../data/repositories/workout_repository.dart';
 import '../../../core/utils/date_formatters.dart';
+import 'dashboard_event.dart';
+import 'dashboard_state.dart';
 
-// Events
-abstract class DashboardEvent extends Equatable {
-  const DashboardEvent();
-  @override
-  List<Object?> get props => [];
-}
+export 'dashboard_event.dart';
+export 'dashboard_state.dart';
 
-class LoadDashboardLogs extends DashboardEvent {
-  const LoadDashboardLogs();
-}
-
-class SearchDashboardLogs extends DashboardEvent {
-  final String query;
-  const SearchDashboardLogs(this.query);
-  @override
-  List<Object?> get props => [query];
-}
-
-class DashboardWorkoutDeleted extends DashboardEvent {
-  final int logId;
-  const DashboardWorkoutDeleted(this.logId);
-  @override
-  List<Object?> get props => [logId];
-}
-
-class DashboardWorkoutUpdated extends DashboardEvent {
-  final WorkoutLog updatedLog;
-  const DashboardWorkoutUpdated(this.updatedLog);
-  @override
-  List<Object?> get props => [updatedLog];
-}
-
-// States
-abstract class DashboardState extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
-
-class DashboardLoading extends DashboardState {}
-class DashboardLoaded extends DashboardState {
-  final Map<String, List<WorkoutLog>> groupedLogs;
-  final List<WorkoutLog> allLogs;
-  final String query;
-
-  DashboardLoaded(this.groupedLogs, this.allLogs, {this.query = ''});
-
-  @override
-  List<Object?> get props => [groupedLogs, allLogs, query];
-}
-class DashboardError extends DashboardState {}
-
-// Bloc
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final WorkoutRepository _repository;
 
@@ -108,8 +60,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   Future<void> _onWorkoutUpdated(DashboardWorkoutUpdated event, Emitter<DashboardState> emit) async {
     try {
       await _repository.updateWorkoutLog(event.updatedLog);
-      // Re-fetch all logs to be sure we have the latest state (including joined names if any changed, though they shouldn't)
-      // Alternatively, we could update the list in memory. Re-fetching is safer.
       final logs = await _repository.getAllLogs();
       if (state is DashboardLoaded) {
         final currentState = state as DashboardLoaded;
@@ -127,15 +77,55 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     }
   }
 
-  Map<String, List<WorkoutLog>> _groupLogs(List<WorkoutLog> logs) {
-    final Map<String, List<WorkoutLog>> grouped = {};
+  Map<String, List<WorkoutHistoryItem>> _groupLogs(List<WorkoutLog> logs) {
+    final Map<String, List<WorkoutLog>> groupedByDate = {};
     for (var log in logs) {
       final dateKey = DateFormatters.formatTimestamp(log.timestamp);
-      if (!grouped.containsKey(dateKey)) {
-        grouped[dateKey] = [];
+      if (!groupedByDate.containsKey(dateKey)) {
+        groupedByDate[dateKey] = [];
       }
-      grouped[dateKey]!.add(log);
+      groupedByDate[dateKey]!.add(log);
     }
-    return grouped;
+
+    final Map<String, List<WorkoutHistoryItem>> result = {};
+    for (var dateKey in groupedByDate.keys) {
+      result[dateKey] = _stackLogs(groupedByDate[dateKey]!);
+    }
+    return result;
+  }
+
+  List<WorkoutHistoryItem> _stackLogs(List<WorkoutLog> logs) {
+    if (logs.isEmpty) return [];
+    List<WorkoutHistoryItem> items = [];
+
+    int i = 0;
+    while (i < logs.length) {
+      final currentLog = logs[i];
+      int j = i + 1;
+      while (j < logs.length && _isSameExercise(currentLog, logs[j])) {
+        j++;
+      }
+
+      if (j - i > 1) {
+        items.add(GroupedLogsItem(logs.sublist(i, j)));
+      } else {
+        items.add(SingleLogItem(currentLog));
+      }
+      i = j;
+    }
+    return items;
+  }
+
+  bool _isSameExercise(WorkoutLog a, WorkoutLog b) {
+    if (a.movementId != b.movementId) return false;
+    if (a.variations.length != b.variations.length) return false;
+
+    final aVars = a.variations.map((e) => e.id).toList()..sort();
+    final bVars = b.variations.map((e) => e.id).toList()..sort();
+    for (int k = 0; k < aVars.length; k++) {
+      if (aVars[k] != bVars[k]) return false;
+    }
+    return true;
   }
 }
+

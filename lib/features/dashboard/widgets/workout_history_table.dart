@@ -57,7 +57,14 @@ class WorkoutHistoryTable extends StatelessWidget {
                             ),
                       ),
                     ),
-                    ...logs.map((log) => _WorkoutLogRow(log: log)),
+                    ...logs.map((item) {
+                      if (item is SingleLogItem) {
+                        return _WorkoutLogRow(log: item.log);
+                      } else if (item is GroupedLogsItem) {
+                        return _GroupedWorkoutLogRow(group: item);
+                      }
+                      return const SizedBox.shrink();
+                    }),
                     const Divider(indent: 16, endIndent: 16, color: Color(0xFF27272A)),
                   ],
                 );
@@ -69,6 +76,182 @@ class WorkoutHistoryTable extends StatelessWidget {
 
         return const SliverToBoxAdapter(child: SizedBox.shrink());
       },
+    );
+  }
+}
+
+class _GroupedWorkoutLogRow extends StatefulWidget {
+  final GroupedLogsItem group;
+
+  const _GroupedWorkoutLogRow({required this.group});
+
+  @override
+  State<_GroupedWorkoutLogRow> createState() => _GroupedWorkoutLogRowState();
+}
+
+class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _heightFactor;
+  bool _isExpanded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    _heightFactor = _controller.drive(CurveTween(curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _toggleExpansion() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+      if (_isExpanded) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: _toggleExpansion,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: const BoxDecoration(
+              color: Color(0xFF18181B),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            widget.group.movementName,
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: const Color(0xFFFAFAFA),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF27272A),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              '${widget.group.totalSets} SETS',
+                              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                color: const Color(0xFFA1A1AA),
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          if (widget.group.painFelt) ...[
+                            const SizedBox(width: 8),
+                            const Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 16),
+                          ],
+                        ],
+                      ),
+                      if (widget.group.variations.isNotEmpty) ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          widget.group.variations.map((v) => v.name).join(', ').toUpperCase(),
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: const Color(0xFF71717A),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '${widget.group.maxWeight.toStringAsFixed(1)} lbs',
+                      style: GoogleFonts.robotoMono(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        color: const Color(0xFFFAFAFA),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Text(
+                          'MAX WEIGHT',
+                          style: GoogleFonts.robotoMono(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 10,
+                            color: const Color(0xFF71717A),
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        AnimatedRotation(
+                          turns: _isExpanded ? 0.5 : 0,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          child: const Icon(
+                            Icons.expand_more,
+                            size: 14,
+                            color: Color(0xFF71717A),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizeTransition(
+          sizeFactor: _heightFactor,
+          axisAlignment: -1.0, // Top aligned
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFF18181B),
+            ),
+            child: IntrinsicHeight(
+              child: Row(
+                children: [
+                  const SizedBox(width: 16),
+                  Container(
+                    width: 2,
+                    margin: const EdgeInsets.symmetric(vertical: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFAFAFA).withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(1),
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: widget.group.logs.map((log) => _WorkoutLogRow(log: log)).toList(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
