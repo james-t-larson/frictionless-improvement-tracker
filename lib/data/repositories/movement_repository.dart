@@ -72,7 +72,6 @@ class MovementRepository {
       'movements',
       where: 'name LIKE ?',
       whereArgs: ['%$query%'],
-      limit: 20,
     );
     
     List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
@@ -89,7 +88,6 @@ class MovementRepository {
       LEFT JOIN workouts w ON m.id = w.movement_id
       GROUP BY m.id
       ORDER BY usage_count DESC, m.name ASC
-      LIMIT 10
     ''');
     
     List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();

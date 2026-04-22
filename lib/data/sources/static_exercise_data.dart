@@ -55,14 +55,6 @@ const String staticExerciseJson = r'''[
     ]
   },
   {
-    "pk": "60576989-d045-492b-82b0-743bb4a3ce62",
-    "name": "Plank",
-    "slug": "plank",
-    "variations": ["side", "weighted"],
-    "primaryMuscles": ["abdominal", "lower back"],
-    "secondaryMuscles": ["oblique", "shoulder - front"]
-  },
-  {
     "pk": "859b2211-9bb0-462b-987c-620a3e37d688",
     "name": "Leg Press",
     "variations": ["machine", "hack squat", "single-leg", "banded", "paused", "heel-elevated", "toe-elevated", "wide-stance", "narrow-stance", "high-foot", "low-foot"],
@@ -92,7 +84,7 @@ const String staticExerciseJson = r'''[
   },
   {
     "pk": "102850fa-8459-4cd0-81b5-88cc982d5de4",
-    "name": "Dip \u2013 Bar",
+    "name": "Dip",
     "variations": ["weighted", "single-leg", "assisted"],
     "primaryMuscles": ["chest", "tricep"],
     "secondaryMuscles": ["rotator cuff - front", "shoulder - front"]
@@ -139,30 +131,11 @@ const String staticExerciseJson = r'''[
     "secondaryMuscles": ["abdominal", "trap"]
   },
   {
-    "pk": "f954e30f-cb89-488b-99da-4358244fd815",
-    "name": "Shoulder Press",
-    "variations": ["machine", "dumbbell", "barbell", "seated", "standing", "single-arm"],
-    "primaryMuscles": ["shoulder - front"],
-    "secondaryMuscles": ["shoulder - side", "tricep"]
-  },
-  {
     "pk": "47d61f40-0743-47af-95a5-545a6a9a4824",
     "name": "Leg Extension",
     "variations": ["machine", "single-leg"],
     "primaryMuscles": ["quad"],
     "secondaryMuscles": []
-  },
-  {
-    "pk": "a02747d9-7ee8-41d5-aade-d3c7c8556c3a",
-    "name": "Rear Delt Row \u2013 Barbell",
-    "slug": "rear-delt-row-barbell",
-    "primaryMuscles": ["shoulder - back", "trap"],
-    "secondaryMuscles": [
-      "forearm - inner",
-      "rotator cuff - back",
-      "shoulder - side",
-      "lat"
-    ]
   },
   {
     "pk": "7e95b8b5-a6eb-41b6-a3c9-ae06a9ba7ac4",
@@ -225,6 +198,57 @@ const String staticExerciseJson = r'''[
     "variations": ["barbell", "dumbbell", "cable"],
     "primaryMuscles": ["shoulder - side"],
     "secondaryMuscles": ["bicep", "shoulder - front", "trap"]
+  },
+  {
+    "pk": "162433b9-39f3-4e3e-aad6-81736d44c1cf",
+    "name": "Lateral Raise",
+    "alternativeNames": ["Lateral Delt Fly", "Lateral Fly", "Lateral Delt Raise"],
+    "variations": ["dumbbell", "cable", "machine", "single-arm"],
+    "primaryMuscles": ["shoulder - back", "trap"],
+    "secondaryMuscles": [
+      "forearm - inner",
+      "rotator cuff - back",
+      "shoulder - side",
+      "lat"
+    ]
+  },
+  {
+    "pk": "162433b9-39f3-4e3e-aad6-81736d44c1cf",
+    "name": "Rear Delt Fly",
+    "alternativeNames": ["Rear Delt Raise"],
+    "variations": ["dumbbell", "cable", "machine", "single-arm"],
+    "primaryMuscles": ["shoulder - back", "trap"],
+    "secondaryMuscles": [
+      "forearm - inner",
+      "rotator cuff - back",
+      "shoulder - side",
+      "lat"
+    ]
+  },
+  {
+    "pk": "e8dc87a4-79e1-4114-90a4-418a4b67359f",
+    "name": "Shrugs",
+    "variations": ["dumbbell", "barbell", "single-arm"],
+    "primaryMuscles": ["shoulder - back", "trap"],
+    "secondaryMuscles": [
+      "forearm - inner",
+      "rotator cuff - back",
+      "shoulder - side",
+      "lat"
+    ]
+  },
+  {
+    "pk": "e8dc87a4-79e1-4114-90a4-418a4b67359f",
+    "name": "Front Delt Raise",
+    "alternativeNames": ["Front Delt Fly"],
+    "variations": ["dumbbell", "cable", "machine", "single-arm"],
+    "primaryMuscles": ["shoulder - back", "trap"],
+    "secondaryMuscles": [
+      "forearm - inner",
+      "rotator cuff - back",
+      "shoulder - side",
+      "lat"
+    ]
   },
   {
     "pk": "e8dc87a4-79e1-4114-90a4-418a4b67359f",
