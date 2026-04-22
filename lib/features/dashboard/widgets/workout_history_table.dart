@@ -61,7 +61,10 @@ class WorkoutHistoryTable extends StatelessWidget {
                       if (item is SingleLogItem) {
                         return _WorkoutLogRow(log: item.log);
                       } else if (item is GroupedLogsItem) {
-                        return _GroupedWorkoutLogRow(group: item);
+                        return _GroupedWorkoutLogRow(
+                          group: item,
+                          query: state.query,
+                        );
                       }
                       return const SizedBox.shrink();
                     }),
@@ -82,8 +85,12 @@ class WorkoutHistoryTable extends StatelessWidget {
 
 class _GroupedWorkoutLogRow extends StatefulWidget {
   final GroupedLogsItem group;
+  final String query;
 
-  const _GroupedWorkoutLogRow({required this.group});
+  const _GroupedWorkoutLogRow({
+    required this.group,
+    required this.query,
+  });
 
   @override
   State<_GroupedWorkoutLogRow> createState() => _GroupedWorkoutLogRowState();
@@ -102,6 +109,27 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
       vsync: this,
     );
     _heightFactor = _controller.drive(CurveTween(curve: Curves.easeInOut));
+    
+    // Auto-expand if search query is present on init
+    if (widget.query.isNotEmpty) {
+      _isExpanded = true;
+      _controller.value = 1.0;
+    }
+  }
+
+  @override
+  void didUpdateWidget(_GroupedWorkoutLogRow oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    
+    // If query changed and is now non-empty, auto-expand
+    if (widget.query != oldWidget.query && widget.query.isNotEmpty) {
+      if (!_isExpanded) {
+        setState(() {
+          _isExpanded = true;
+          _controller.forward();
+        });
+      }
+    }
   }
 
   @override
