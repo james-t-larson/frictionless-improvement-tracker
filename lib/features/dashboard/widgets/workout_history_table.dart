@@ -225,6 +225,39 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Ticke
       ),
       child: _BouncingSwipeIndicator(
         enabled: widget.shouldBounce,
+        background: Row(
+          children: [
+            const Spacer(flex: 40),
+            Expanded(
+              flex: 30,
+              child: Container(
+                color: const Color(0xFF3B82F6),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.copy_rounded, color: Colors.white, size: 18),
+                    SizedBox(height: 4),
+                    Text('Copy Last', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 30,
+              child: Container(
+                color: const Color(0xFFEF4444),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.delete_sweep_rounded, color: Colors.white, size: 18),
+                    SizedBox(height: 4),
+                    Text('Delete all', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
         child: Column(
           children: [
             InkWell(
@@ -446,6 +479,39 @@ class _WorkoutLogRowState extends State<_WorkoutLogRow> with SingleTickerProvide
       ),
       child: _BouncingSwipeIndicator(
         enabled: widget.shouldBounce,
+        background: Row(
+          children: [
+            const Spacer(flex: 40),
+            Expanded(
+              flex: 30,
+              child: Container(
+                color: const Color(0xFF3B82F6),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.edit, color: Colors.white, size: 18),
+                    SizedBox(height: 4),
+                    Text('Edit', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 30,
+              child: Container(
+                color: const Color(0xFFEF4444),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.delete, color: Colors.white, size: 18),
+                    SizedBox(height: 4),
+                    Text('Delete', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
         child: InkWell(
         onTap: () => _onEdit(context),
         child: Container(
@@ -519,10 +585,12 @@ class _WorkoutLogRowState extends State<_WorkoutLogRow> with SingleTickerProvide
 
 class _BouncingSwipeIndicator extends StatefulWidget {
   final Widget child;
+  final Widget background;
   final bool enabled;
 
   const _BouncingSwipeIndicator({
     required this.child,
+    required this.background,
     required this.enabled,
   });
 
@@ -586,18 +654,8 @@ class _BouncingSwipeIndicatorState extends State<_BouncingSwipeIndicator>
     if (!widget.enabled) return widget.child;
     return Stack(
       children: [
-        // Reveal the "delete" action color behind the bouncing row
-        Positioned.fill(
-          child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 0.5), // Small margin to not bleed
-            decoration: BoxDecoration(
-              color: const Color(0xFFEF4444).withValues(alpha: 0.7),
-            ),
-            alignment: Alignment.centerRight,
-            padding: const EdgeInsets.only(right: 20),
-            child: const Icon(Icons.delete_rounded, color: Colors.white, size: 24),
-          ),
-        ),
+        // Reveal the provided background behind the bouncing row
+        Positioned.fill(child: widget.background),
         AnimatedBuilder(
           animation: _animation,
           builder: (context, child) {
