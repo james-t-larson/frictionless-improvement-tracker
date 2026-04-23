@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/di/service_locator.dart';
@@ -16,6 +17,7 @@ class MainDashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: BlocListener<DashboardBloc, DashboardState>(
         listener: (context, state) {
           if (state is DashboardError) {
@@ -23,6 +25,7 @@ class MainDashboardScreen extends StatelessWidget {
           }
         },
         child: SafeArea(
+          bottom: false,
           child: RefreshIndicator(
 
           onRefresh: () async {
@@ -47,55 +50,75 @@ class MainDashboardScreen extends StatelessWidget {
                 delegate: _SearchHeaderDelegate(),
               ),
               const WorkoutHistoryTable(),
-              const SliverPadding(padding: EdgeInsets.only(bottom: 24)),
+              const SliverPadding(padding: EdgeInsets.only(bottom: 120)),
             ],
           ),
         ),
       ),
     ),
-      bottomNavigationBar: SafeArea(
-        child: BlocBuilder<DashboardBloc, DashboardState>(
-          builder: (context, state) {
-            WorkoutLog? lastLog;
-            if (state is DashboardLoaded && state.allLogs.isNotEmpty) {
-              lastLog = state.allLogs.first;
-            }
+      bottomNavigationBar: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(
+            color: const Color(0xFF09090B).withValues(alpha: 0.8),
+            child: SafeArea(
+              child: BlocBuilder<DashboardBloc, DashboardState>(
+                builder: (context, state) {
+                  WorkoutLog? lastLog;
+                  if (state is DashboardLoaded && state.allLogs.isNotEmpty) {
+                    lastLog = state.allLogs.first;
+                  }
 
-            final screenWidth = MediaQuery.of(context).size.width;
-            final isTablet = screenWidth > 600;
+                  final screenWidth = MediaQuery.of(context).size.width;
+                  final isTablet = screenWidth > 600;
 
-            return Container(
-              color: Colors.transparent, // Maintain background
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 12), // Small space below (12px)
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: isTablet ? 500 : double.infinity),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (lastLog != null) ...[
-                      Expanded(
-                        child: _ActionButton(
-                          onPressed: () => _openAddSetDialog(context, lastLog!),
-                          icon: Icons.add_rounded,
-                          label: 'ADD SET',
-                          isPrimary: false,
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Divider(
+                          color: const Color(0xFFFAFAFA).withValues(alpha: 0.1),
+                          height: 1,
                         ),
                       ),
-                      const SizedBox(width: 12),
-                    ],
-                    Expanded(
-                      child: _ActionButton(
-                        onPressed: () => _openNewLiftDialog(context),
-                        icon: Icons.fitness_center_rounded,
-                        label: 'NEW LIFT',
-                        isPrimary: true,
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: isTablet ? 500 : double.infinity),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (lastLog != null) ...[
+                                Expanded(
+                                  child: _ActionButton(
+                                    onPressed: () => _openAddSetDialog(context, lastLog!),
+                                    icon: Icons.add_rounded,
+                                    label: 'ADD SET',
+                                    isPrimary: false,
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                              ],
+                              Expanded(
+                                child: _ActionButton(
+                                  onPressed: () => _openNewLiftDialog(context),
+                                  icon: Icons.fitness_center_rounded,
+                                  label: 'NEW LIFT',
+                                  isPrimary: true,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  );
+                },
               ),
-            );
-          },
+            ),
+          ),
         ),
       ),
     );
