@@ -45,3 +45,7 @@ class DashboardDuplicateLastSet extends DashboardEvent {
   @override
   List<Object?> get props => [lastLog];
 }
+
+class RecordSwipeAction extends DashboardEvent {
+  const RecordSwipeAction();
+}

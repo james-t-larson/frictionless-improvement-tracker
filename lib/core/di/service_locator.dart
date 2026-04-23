@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:sqflite/sqflite.dart';
 import '../../data/repositories/movement_repository.dart';
 import '../../data/repositories/workout_repository.dart';
+import '../../data/repositories/settings_repository.dart';
 import '../../data/sources/exercise_data_source.dart';
 import '../database/database_helper.dart';
 import '../../features/dashboard/viewmodels/dashboard_bloc.dart';
@@ -24,10 +25,13 @@ Future<void> setupLocator() async {
   getIt.registerLazySingleton<WorkoutRepository>(
     () => WorkoutRepository(getIt<Database>()),
   );
+  getIt.registerLazySingleton<SettingsRepository>(
+    () => SettingsRepository(getIt<Database>()),
+  );
 
   // BLoCs
   getIt.registerFactory<DashboardBloc>(
-    () => DashboardBloc(getIt<WorkoutRepository>()),
+    () => DashboardBloc(getIt<WorkoutRepository>(), getIt<SettingsRepository>()),
   );
   getIt.registerFactory<LogExerciseBloc>(
     () => LogExerciseBloc(

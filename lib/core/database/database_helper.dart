@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
   static const _databaseName = "gym_tracker.db";
-  static const _databaseVersion = 2;
+  static const _databaseVersion = 3;
 
   static Future<Database> initDb() async {
     final documentsDirectory = await getApplicationDocumentsDirectory();
@@ -15,7 +15,7 @@ class DatabaseHelper {
       version: _databaseVersion,
       onCreate: onCreate,
       onUpgrade: (db, oldVersion, newVersion) async {
-        if (oldVersion < 2) {
+        if (oldVersion < 3) {
           // Simplest upgrade: Drop all and recreate for now
           // In a production app, we would write migrations.
           await db.execute("DROP TABLE IF EXISTS workout_variations");
@@ -103,5 +103,14 @@ class DatabaseHelper {
         FOREIGN KEY (variation_id) REFERENCES variations (id) ON DELETE CASCADE
       )
     ''');
+
+    await db.execute('''
+      CREATE TABLE settings (
+        key TEXT PRIMARY KEY,
+        value TEXT NOT NULL
+      )
+    ''');
+
+    await db.insert('settings', {'key': 'has_swiped', 'value': '0'});
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/models/workout_log.dart';
 import '../../../data/repositories/workout_repository.dart';
+import '../../../data/repositories/settings_repository.dart';
 import '../../../core/utils/date_formatters.dart';
 import 'dashboard_event.dart';
 import 'dashboard_state.dart';
@@ -10,22 +11,25 @@ export 'dashboard_state.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final WorkoutRepository _repository;
+  final SettingsRepository _settingsRepository;
 
-  DashboardBloc(this._repository) : super(DashboardLoading()) {
+  DashboardBloc(this._repository, this._settingsRepository) : super(DashboardLoading()) {
     on<LoadDashboardLogs>(_onLoadLogs);
     on<SearchDashboardLogs>(_onSearchLogs);
     on<DashboardWorkoutDeleted>(_onWorkoutDeleted);
     on<DashboardWorkoutUpdated>(_onWorkoutUpdated);
     on<DashboardWorkoutGroupDeleted>(_onWorkoutGroupDeleted);
     on<DashboardDuplicateLastSet>(_onDuplicateLastSet);
+    on<RecordSwipeAction>(_onRecordSwipeAction);
   }
 
   Future<void> _onLoadLogs(LoadDashboardLogs event, Emitter<DashboardState> emit) async {
     emit(DashboardLoading());
     try {
       final logs = await _repository.getAllLogs();
+      final hasSwiped = await _settingsRepository.getHasSwiped();
       final grouped = _groupLogs(logs);
-      emit(DashboardLoaded(grouped, logs));
+      emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped));
     } catch (e) {
       emit(DashboardError());
     }
@@ -38,7 +42,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         return log.movementName?.toLowerCase().contains(event.query.toLowerCase()) ?? false;
       }).toList();
       final grouped = _groupLogs(filtered);
-      emit(DashboardLoaded(grouped, currentState.allLogs, query: event.query));
+      emit(DashboardLoaded(
+        grouped,
+        currentState.allLogs,
+        query: event.query,
+        hasSwipedBefore: currentState.hasSwipedBefore,
+      ));
     }
   }
 
@@ -52,7 +61,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
         }).toList();
         final grouped = _groupLogs(filtered);
-        emit(DashboardLoaded(grouped, updatedLogs, query: currentState.query));
+        emit(DashboardLoaded(
+          grouped,
+          updatedLogs,
+          query: currentState.query,
+          hasSwipedBefore: currentState.hasSwipedBefore,
+        ));
       }
     } catch (e) {
       emit(DashboardError());
@@ -69,10 +83,16 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
         }).toList();
         final grouped = _groupLogs(filtered);
-        emit(DashboardLoaded(grouped, logs, query: currentState.query));
+        emit(DashboardLoaded(
+          grouped,
+          logs,
+          query: currentState.query,
+          hasSwipedBefore: currentState.hasSwipedBefore,
+        ));
       } else {
         final grouped = _groupLogs(logs);
-        emit(DashboardLoaded(grouped, logs));
+        final hasSwiped = await _settingsRepository.getHasSwiped();
+        emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped));
       }
     } catch (e) {
       emit(DashboardError());
@@ -91,7 +111,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
         }).toList();
         final grouped = _groupLogs(filtered);
-        emit(DashboardLoaded(grouped, logs, query: currentState.query));
+        emit(DashboardLoaded(
+          grouped,
+          logs,
+          query: currentState.query,
+          hasSwipedBefore: currentState.hasSwipedBefore,
+        ));
       }
     } catch (e) {
       emit(DashboardError());
@@ -119,10 +144,25 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
         }).toList();
         final grouped = _groupLogs(filtered);
-        emit(DashboardLoaded(grouped, logs, query: currentState.query));
+        emit(DashboardLoaded(
+          grouped,
+          logs,
+          query: currentState.query,
+          hasSwipedBefore: currentState.hasSwipedBefore,
+        ));
       }
     } catch (e) {
       emit(DashboardError());
+    }
+  }
+
+  Future<void> _onRecordSwipeAction(RecordSwipeAction event, Emitter<DashboardState> emit) async {
+    if (state is DashboardLoaded) {
+      final currentState = state as DashboardLoaded;
+      if (!currentState.hasSwipedBefore) {
+        await _settingsRepository.setHasSwiped(true);
+        emit(currentState.copyWith(hasSwipedBefore: true));
+      }
     }
   }
 

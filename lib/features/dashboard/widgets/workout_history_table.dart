@@ -57,13 +57,19 @@ class WorkoutHistoryTable extends StatelessWidget {
                             ),
                       ),
                     ),
-                    ...logs.map((item) {
+                    ...logs.asMap().entries.map((entry) {
+                      final itemIndex = entry.key;
+                      final item = entry.value;
+                      // Only bounce the very first item of the very first date
+                      final shouldBounce = !state.hasSwipedBefore && index == 0 && itemIndex == 0;
+                      
                       if (item is SingleLogItem) {
-                        return _WorkoutLogRow(log: item.log);
+                        return _WorkoutLogRow(log: item.log, shouldBounce: shouldBounce);
                       } else if (item is GroupedLogsItem) {
                         return _GroupedWorkoutLogRow(
                           group: item,
                           query: state.query,
+                          shouldBounce: shouldBounce,
                         );
                       }
                       return const SizedBox.shrink();
@@ -86,10 +92,12 @@ class WorkoutHistoryTable extends StatelessWidget {
 class _GroupedWorkoutLogRow extends StatefulWidget {
   final GroupedLogsItem group;
   final String query;
+  final bool shouldBounce;
 
   const _GroupedWorkoutLogRow({
     required this.group,
     required this.query,
+    this.shouldBounce = false,
   });
 
   @override
@@ -162,6 +170,7 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
 
   void _onDeleteAll(BuildContext context) {
     final dashboardBloc = context.read<DashboardBloc>();
+    dashboardBloc.add(RecordSwipeAction());
     final logIds = widget.group.logs.map((log) => log.id!).toList();
     dashboardBloc.add(DashboardWorkoutGroupDeleted(logIds));
     AppToast.show(context, 'Group deleted');
@@ -170,6 +179,7 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
   void _onCopyLast(BuildContext context) {
     if (widget.group.logs.isNotEmpty) {
       final dashboardBloc = context.read<DashboardBloc>();
+      dashboardBloc.add(RecordSwipeAction());
       dashboardBloc.add(DashboardDuplicateLastSet(widget.group.logs.last));
       AppToast.show(context, 'Set duplicated');
     }
@@ -199,9 +209,11 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
           ),
         ],
       ),
-      child: Column(
-        children: [
-          InkWell(
+      child: _BouncingSwipeIndicator(
+        enabled: widget.shouldBounce,
+        child: Column(
+          children: [
+            InkWell(
             onTap: _toggleExpansion,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -323,7 +335,8 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
             ),
           ),
         ),
-      ],
+        ],
+      ),
     ),
   );
 }
@@ -331,8 +344,9 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
 
 class _WorkoutLogRow extends StatelessWidget {
   final WorkoutLog log;
+  final bool shouldBounce;
 
-  const _WorkoutLogRow({required this.log});
+  const _WorkoutLogRow({required this.log, this.shouldBounce = false});
 
   void _onEdit(BuildContext context) async {
     // Fetch movement data first to match the "Add Set" logic and avoid carousel glitches
@@ -340,6 +354,8 @@ class _WorkoutLogRow extends StatelessWidget {
     if (movement == null) return;
     
     if (!context.mounted) return;
+
+    context.read<DashboardBloc>().add(RecordSwipeAction());
 
     showDialog(
       context: context,
@@ -355,6 +371,7 @@ class _WorkoutLogRow extends StatelessWidget {
     
     // Show a snackbar with "Undo" is optional but recommended by spec
     final dashboardBloc = context.read<DashboardBloc>();
+    dashboardBloc.add(RecordSwipeAction());
     dashboardBloc.add(DashboardWorkoutDeleted(log.id!));
     
     AppToast.show(context, 'Log deleted');
@@ -385,7 +402,9 @@ class _WorkoutLogRow extends StatelessWidget {
           ),
         ],
       ),
-      child: InkWell(
+      child: _BouncingSwipeIndicator(
+        enabled: shouldBounce,
+        child: InkWell(
         onTap: () => _onEdit(context),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -450,7 +469,104 @@ class _WorkoutLogRow extends StatelessWidget {
             ],
           ),
         ),
+        ),
       ),
+    );
+  }
+}
+
+class _BouncingSwipeIndicator extends StatefulWidget {
+  final Widget child;
+  final bool enabled;
+
+  const _BouncingSwipeIndicator({
+    required this.child,
+    required this.enabled,
+  });
+
+  @override
+  State<_BouncingSwipeIndicator> createState() => _BouncingSwipeIndicatorState();
+}
+
+class _BouncingSwipeIndicatorState extends State<_BouncingSwipeIndicator>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+       // Slower duration for a more premium feel
+      duration: const Duration(milliseconds: 3000),
+      vsync: this,
+    );
+    _animation = TweenSequence<double>([
+      TweenSequenceItem(
+        // Larger bounce to show there's an action underneath
+        tween: Tween(begin: 0.0, end: -40.0).chain(CurveTween(curve: Curves.easeInOutExpo)),
+        weight: 20,
+      ),
+      TweenSequenceItem(
+        tween: Tween(begin: -40.0, end: 0.0).chain(CurveTween(curve: Curves.bounceIn)),
+        weight: 15,
+      ),
+      TweenSequenceItem(
+        tween: ConstantTween<double>(0.0),
+        weight: 65,
+      ),
+    ]).animate(_controller);
+
+    if (widget.enabled) {
+      _controller.repeat();
+    }
+  }
+
+  @override
+  void didUpdateWidget(_BouncingSwipeIndicator oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.enabled && !_controller.isAnimating) {
+      _controller.repeat();
+    } else if (!widget.enabled && _controller.isAnimating) {
+      _controller.stop();
+      _controller.value = 0;
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.enabled) return widget.child;
+    return Stack(
+      children: [
+        // Reveal the "delete" action color behind the bouncing row
+        Positioned.fill(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 0.5), // Small margin to not bleed
+            decoration: BoxDecoration(
+              color: const Color(0xFFEF4444).withValues(alpha: 0.7),
+            ),
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: 20),
+            child: const Icon(Icons.delete_rounded, color: Colors.white, size: 24),
+          ),
+        ),
+        AnimatedBuilder(
+          animation: _animation,
+          builder: (context, child) {
+            return Transform.translate(
+              offset: Offset(_animation.value, 0),
+              child: child,
+            );
+          },
+          child: widget.child,
+        ),
+      ],
     );
   }
 }
