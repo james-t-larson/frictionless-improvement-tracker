@@ -202,6 +202,17 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
                               ),
                             ),
                           ),
+                          const SizedBox(width: 4),
+                          AnimatedRotation(
+                            turns: _isExpanded ? 0.5 : 0,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                            child: Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              size: 22,
+                              color: const Color(0xFFFAFAFA).withValues(alpha: 0.4),
+                            ),
+                          ),
                           if (widget.group.painFelt) ...[
                             const SizedBox(width: 8),
                             const Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 16),
@@ -232,28 +243,13 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        Text(
-                          'MAX WEIGHT',
-                          style: GoogleFonts.robotoMono(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 10,
-                            color: const Color(0xFF71717A),
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-                        AnimatedRotation(
-                          turns: _isExpanded ? 0.5 : 0,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                          child: const Icon(
-                            Icons.expand_more,
-                            size: 14,
-                            color: Color(0xFF71717A),
-                          ),
-                        ),
-                      ],
+                    Text(
+                      'MAX WEIGHT',
+                      style: GoogleFonts.robotoMono(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 10,
+                        color: const Color(0xFF71717A),
+                      ),
                     ),
                   ],
                 ),
