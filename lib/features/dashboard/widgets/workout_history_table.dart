@@ -276,6 +276,12 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Ticke
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: const BoxDecoration(
                   color: Color(0xFF18181B),
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Color(0xFF27272A),
+                      width: 0.5,
+                    ),
+                  ),
                 ),
                 child: Row(
                   children: [
@@ -528,6 +534,12 @@ class _WorkoutLogRowState extends State<_WorkoutLogRow> with SingleTickerProvide
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           decoration: const BoxDecoration(
             color: Color(0xFF18181B), // Match dashboard background
+            border: Border(
+              bottom: BorderSide(
+                color: Color(0xFF27272A),
+                width: 0.5,
+              ),
+            ),
           ),
           child: Row(
             children: [
