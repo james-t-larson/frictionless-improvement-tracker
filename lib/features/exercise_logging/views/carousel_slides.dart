@@ -311,7 +311,7 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: (state.isSaving || state.weight <= 0 || state.reps <= 0) 
+                  onPressed: (state.isSaving || state.weight < 0 || state.reps <= 0) 
                       ? null 
                       : () => context.read<LogExerciseBloc>().add(const SaveLog()),
                   style: ElevatedButton.styleFrom(
