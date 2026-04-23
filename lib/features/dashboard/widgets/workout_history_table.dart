@@ -528,8 +528,6 @@ class _WorkoutLogRowState extends State<_WorkoutLogRow> with SingleTickerProvide
             ),
           ],
         ),
-        child: InkWell(
-        onTap: () => _onEdit(context),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           decoration: const BoxDecoration(
@@ -598,7 +596,6 @@ class _WorkoutLogRowState extends State<_WorkoutLogRow> with SingleTickerProvide
               ),
             ],
           ),
-        ),
         ),
       ),
     );
