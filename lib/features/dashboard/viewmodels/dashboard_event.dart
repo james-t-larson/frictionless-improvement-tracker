@@ -31,3 +31,17 @@ class DashboardWorkoutUpdated extends DashboardEvent {
   @override
   List<Object?> get props => [updatedLog];
 }
+
+class DashboardWorkoutGroupDeleted extends DashboardEvent {
+  final List<int> logIds;
+  const DashboardWorkoutGroupDeleted(this.logIds);
+  @override
+  List<Object?> get props => [logIds];
+}
+
+class DashboardDuplicateLastSet extends DashboardEvent {
+  final WorkoutLog lastLog;
+  const DashboardDuplicateLastSet(this.lastLog);
+  @override
+  List<Object?> get props => [lastLog];
+}

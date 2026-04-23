@@ -46,4 +46,26 @@ class WorkoutLog {
       variations: variations,
     );
   }
+
+  WorkoutLog copyWith({
+    int? id,
+    int? movementId,
+    double? weight,
+    int? reps,
+    DateTime? timestamp,
+    bool? painFelt,
+    List<Variation>? variations,
+    String? movementName,
+  }) {
+    return WorkoutLog(
+      id: id ?? this.id,
+      movementId: movementId ?? this.movementId,
+      weight: weight ?? this.weight,
+      reps: reps ?? this.reps,
+      timestamp: timestamp != null ? timestamp.millisecondsSinceEpoch : this.timestamp,
+      painFelt: painFelt ?? this.painFelt,
+      variations: variations ?? this.variations,
+      movementName: movementName ?? this.movementName,
+    );
+  }
 }

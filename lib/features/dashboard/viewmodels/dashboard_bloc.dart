@@ -16,6 +16,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     on<SearchDashboardLogs>(_onSearchLogs);
     on<DashboardWorkoutDeleted>(_onWorkoutDeleted);
     on<DashboardWorkoutUpdated>(_onWorkoutUpdated);
+    on<DashboardWorkoutGroupDeleted>(_onWorkoutGroupDeleted);
+    on<DashboardDuplicateLastSet>(_onDuplicateLastSet);
   }
 
   Future<void> _onLoadLogs(LoadDashboardLogs event, Emitter<DashboardState> emit) async {
@@ -71,6 +73,53 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       } else {
         final grouped = _groupLogs(logs);
         emit(DashboardLoaded(grouped, logs));
+      }
+    } catch (e) {
+      emit(DashboardError());
+    }
+  }
+
+  Future<void> _onWorkoutGroupDeleted(DashboardWorkoutGroupDeleted event, Emitter<DashboardState> emit) async {
+    try {
+      for (final id in event.logIds) {
+        await _repository.deleteWorkoutLog(id);
+      }
+      final logs = await _repository.getAllLogs();
+      if (state is DashboardLoaded) {
+        final currentState = state as DashboardLoaded;
+        final filtered = logs.where((log) {
+          return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
+        }).toList();
+        final grouped = _groupLogs(filtered);
+        emit(DashboardLoaded(grouped, logs, query: currentState.query));
+      }
+    } catch (e) {
+      emit(DashboardError());
+    }
+  }
+
+  Future<void> _onDuplicateLastSet(DashboardDuplicateLastSet event, Emitter<DashboardState> emit) async {
+    try {
+      final lastLog = event.lastLog;
+      final newLog = WorkoutLog(
+        id: null,
+        movementId: lastLog.movementId,
+        weight: lastLog.weight,
+        reps: lastLog.reps,
+        timestamp: DateTime.now().millisecondsSinceEpoch,
+        painFelt: lastLog.painFelt,
+        variations: lastLog.variations,
+        movementName: lastLog.movementName,
+      );
+      await _repository.saveWorkoutLog(newLog);
+      final logs = await _repository.getAllLogs();
+      if (state is DashboardLoaded) {
+        final currentState = state as DashboardLoaded;
+        final filtered = logs.where((log) {
+          return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
+        }).toList();
+        final grouped = _groupLogs(filtered);
+        emit(DashboardLoaded(grouped, logs, query: currentState.query));
       }
     } catch (e) {
       emit(DashboardError());

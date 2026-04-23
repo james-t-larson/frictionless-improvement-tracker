@@ -160,14 +160,51 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
     });
   }
 
+  void _onDeleteAll(BuildContext context) {
+    final dashboardBloc = context.read<DashboardBloc>();
+    final logIds = widget.group.logs.map((log) => log.id!).toList();
+    dashboardBloc.add(DashboardWorkoutGroupDeleted(logIds));
+    AppToast.show(context, 'Group deleted');
+  }
+
+  void _onCopyLast(BuildContext context) {
+    if (widget.group.logs.isNotEmpty) {
+      final dashboardBloc = context.read<DashboardBloc>();
+      dashboardBloc.add(DashboardDuplicateLastSet(widget.group.logs.last));
+      AppToast.show(context, 'Set duplicated');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        InkWell(
-          onTap: _toggleExpansion,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    return Slidable(
+      key: ValueKey('group_${widget.group.logs.first.id}'),
+      endActionPane: ActionPane(
+        extentRatio: 0.6,
+        motion: const ScrollMotion(),
+        children: [
+          SlidableAction(
+            onPressed: (context) => _onCopyLast(context),
+            backgroundColor: const Color(0xFF3B82F6),
+            foregroundColor: Colors.white,
+            icon: Icons.copy_rounded,
+            label: 'Copy Last',
+          ),
+          SlidableAction(
+            onPressed: (context) => _onDeleteAll(context),
+            backgroundColor: const Color(0xFFEF4444),
+            foregroundColor: Colors.white,
+            icon: Icons.delete_sweep_rounded,
+            label: 'Delete all',
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          InkWell(
+            onTap: _toggleExpansion,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             decoration: const BoxDecoration(
               color: Color(0xFF18181B),
             ),
@@ -287,8 +324,9 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
           ),
         ),
       ],
-    );
-  }
+    ),
+  );
+}
 }
 
 class _WorkoutLogRow extends StatelessWidget {
@@ -328,6 +366,7 @@ class _WorkoutLogRow extends StatelessWidget {
     return Slidable(
       key: ValueKey(log.id),
       endActionPane: ActionPane(
+        extentRatio: 0.6,
         motion: const ScrollMotion(),
         children: [
           SlidableAction(
@@ -349,7 +388,7 @@ class _WorkoutLogRow extends StatelessWidget {
       child: InkWell(
         onTap: () => _onEdit(context),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           decoration: const BoxDecoration(
             color: Color(0xFF18181B), // Match dashboard background
           ),
