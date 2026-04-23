@@ -104,8 +104,9 @@ class _GroupedWorkoutLogRow extends StatefulWidget {
   State<_GroupedWorkoutLogRow> createState() => _GroupedWorkoutLogRowState();
 }
 
-class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with SingleTickerProviderStateMixin {
+class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with TickerProviderStateMixin {
   late AnimationController _controller;
+  late SlidableController _slidableController;
   late Animation<double> _heightFactor;
   bool _isExpanded = false;
 
@@ -117,6 +118,9 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
       vsync: this,
     );
     _heightFactor = _controller.drive(CurveTween(curve: Curves.easeInOut));
+
+    _slidableController = SlidableController(this);
+    _slidableController.animation.addListener(_onSlidableAnimationChanged);
     
     // Auto-expand if search query is present on init
     if (widget.query.isNotEmpty) {
@@ -151,8 +155,17 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
     }
   }
 
+  void _onSlidableAnimationChanged() {
+    if (_slidableController.ratio != 0) {
+      context.read<DashboardBloc>().add(RecordSwipeAction());
+      _slidableController.animation.removeListener(_onSlidableAnimationChanged);
+    }
+  }
+
   @override
   void dispose() {
+    _slidableController.animation.removeListener(_onSlidableAnimationChanged);
+    _slidableController.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -189,6 +202,7 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
   Widget build(BuildContext context) {
     return Slidable(
       key: ValueKey('group_${widget.group.logs.first.id}'),
+      controller: _slidableController,
       endActionPane: ActionPane(
         extentRatio: 0.6,
         motion: const ScrollMotion(),
@@ -342,15 +356,43 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
 }
 }
 
-class _WorkoutLogRow extends StatelessWidget {
+class _WorkoutLogRow extends StatefulWidget {
   final WorkoutLog log;
   final bool shouldBounce;
 
   const _WorkoutLogRow({required this.log, this.shouldBounce = false});
 
+  @override
+  State<_WorkoutLogRow> createState() => _WorkoutLogRowState();
+}
+
+class _WorkoutLogRowState extends State<_WorkoutLogRow> with SingleTickerProviderStateMixin {
+  late SlidableController _slidableController;
+
+  @override
+  void initState() {
+    super.initState();
+    _slidableController = SlidableController(this);
+    _slidableController.animation.addListener(_onSlidableAnimationChanged);
+  }
+
+  void _onSlidableAnimationChanged() {
+    if (_slidableController.ratio != 0) {
+      context.read<DashboardBloc>().add(RecordSwipeAction());
+      _slidableController.animation.removeListener(_onSlidableAnimationChanged);
+    }
+  }
+
+  @override
+  void dispose() {
+    _slidableController.animation.removeListener(_onSlidableAnimationChanged);
+    _slidableController.dispose();
+    super.dispose();
+  }
+
   void _onEdit(BuildContext context) async {
     // Fetch movement data first to match the "Add Set" logic and avoid carousel glitches
-    final movement = await getIt<MovementRepository>().getMovementById(log.movementId);
+    final movement = await getIt<MovementRepository>().getMovementById(widget.log.movementId);
     if (movement == null) return;
     
     if (!context.mounted) return;
@@ -361,27 +403,27 @@ class _WorkoutLogRow extends StatelessWidget {
       context: context,
       builder: (_) => LogExerciseDialog(
         initialPage: 2,
-        initialEvent: InitializeFlowForEdit(log, movement: movement),
+        initialEvent: InitializeFlowForEdit(widget.log, movement: movement),
       ),
     );
   }
 
   void _onDelete(BuildContext context) {
-    if (log.id == null) return;
+    if (widget.log.id == null) return;
     
     // Show a snackbar with "Undo" is optional but recommended by spec
     final dashboardBloc = context.read<DashboardBloc>();
     dashboardBloc.add(RecordSwipeAction());
-    dashboardBloc.add(DashboardWorkoutDeleted(log.id!));
+    dashboardBloc.add(DashboardWorkoutDeleted(widget.log.id!));
     
     AppToast.show(context, 'Log deleted');
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      key: ValueKey(log.id),
+      key: ValueKey(widget.log.id),
+      controller: _slidableController,
       endActionPane: ActionPane(
         extentRatio: 0.6,
         motion: const ScrollMotion(),
@@ -403,7 +445,7 @@ class _WorkoutLogRow extends StatelessWidget {
         ],
       ),
       child: _BouncingSwipeIndicator(
-        enabled: shouldBounce,
+        enabled: widget.shouldBounce,
         child: InkWell(
         onTap: () => _onEdit(context),
         child: Container(
@@ -420,22 +462,22 @@ class _WorkoutLogRow extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          log.movementName ?? 'Unknown',
+                          widget.log.movementName ?? 'Unknown',
                           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: const Color(0xFFFAFAFA),
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        if (log.painFelt) ...[
+                        if (widget.log.painFelt) ...[
                           const SizedBox(width: 8),
                           const Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 16),
                         ],
                       ],
                     ),
-                    if (log.variations.isNotEmpty) ...[
+                    if (widget.log.variations.isNotEmpty) ...[
                       const SizedBox(height: 4),
                       Text(
-                        log.variations.map((v) => v.name).join(', ').toUpperCase(),
+                        widget.log.variations.map((v) => v.name).join(', ').toUpperCase(),
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: const Color(0xFF71717A),
                         ),
@@ -447,8 +489,8 @@ class _WorkoutLogRow extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    '${log.weight.toStringAsFixed(1)} lbs',
+                   Text(
+                    '${widget.log.weight.toStringAsFixed(1)} lbs',
                     style: GoogleFonts.robotoMono(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
@@ -457,7 +499,7 @@ class _WorkoutLogRow extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '${log.reps} REPS',
+                    '${widget.log.reps} REPS',
                     style: GoogleFonts.robotoMono(
                       fontWeight: FontWeight.w500,
                       fontSize: 12,
