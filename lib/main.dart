@@ -15,18 +15,18 @@ void main() async {
   // Seed movements if empty
   await getIt<MovementRepository>().seedMovementsIfEmpty();
 
-  runApp(const GymTrackerApp());
+  runApp(const FrictionlessApp());
 }
 
-class GymTrackerApp extends StatelessWidget {
-  const GymTrackerApp({super.key});
+class FrictionlessApp extends StatelessWidget {
+  const FrictionlessApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<DashboardBloc>()..add(LoadDashboardLogs()),
       child: MaterialApp(
-        title: 'Frictionless Fitness',
+        title: 'Frictionless Improvement Tracker',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: Brightness.dark,

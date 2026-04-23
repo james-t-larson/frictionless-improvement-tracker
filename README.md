@@ -1,4 +1,4 @@
-# simple_gym_tracker
+# Frictionless Improvement Tracker
 
 A new Flutter project.
 

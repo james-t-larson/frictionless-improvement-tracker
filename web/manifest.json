@@ -1,6 +1,6 @@
 {
-    "name": "simple_gym_tracker",
-    "short_name": "simple_gym_tracker",
+    "name": "Frictionless Improvement Tracker",
+    "short_name": "Frictionless",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

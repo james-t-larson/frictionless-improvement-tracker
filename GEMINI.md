@@ -144,7 +144,7 @@ stateDiagram-v2
 
 To better understand how these flows translate to the codebase:  
 mindmap  
-  root((Simple Gym Tracker))  
+  root((Frictionless Improvement Tracker))  
     lib/  
       core/  
         database/  
