@@ -121,13 +121,24 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Singl
   void didUpdateWidget(_GroupedWorkoutLogRow oldWidget) {
     super.didUpdateWidget(oldWidget);
     
-    // If query changed and is now non-empty, auto-expand
-    if (widget.query != oldWidget.query && widget.query.isNotEmpty) {
-      if (!_isExpanded) {
-        setState(() {
-          _isExpanded = true;
-          _controller.forward();
-        });
+    // If query changed
+    if (widget.query != oldWidget.query) {
+      if (widget.query.isNotEmpty) {
+        // Auto-expand if search query is now present
+        if (!_isExpanded) {
+          setState(() {
+            _isExpanded = true;
+            _controller.forward();
+          });
+        }
+      } else {
+        // Auto-collapse when search is cleared
+        if (_isExpanded) {
+          setState(() {
+            _isExpanded = false;
+            _controller.reverse();
+          });
+        }
       }
     }
   }
