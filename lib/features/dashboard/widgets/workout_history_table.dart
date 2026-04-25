@@ -173,7 +173,7 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Ticke
     if (widget.group.logs.isNotEmpty) {
       final dashboardBloc = context.read<DashboardBloc>();
       dashboardBloc.add(RecordSwipeAction());
-      dashboardBloc.add(DashboardDuplicateLastSet(widget.group.logs.last));
+      dashboardBloc.add(DashboardDuplicateLastSet(widget.group.logs.first));
       AppToast.show(context, 'Set duplicated');
     }
   }
