@@ -64,7 +64,11 @@ class WorkoutHistoryTable extends StatelessWidget {
                       final shouldBounce = !state.hasSwipedBefore && index == 0 && itemIndex == 0;
                       
                       if (item is SingleLogItem) {
-                        return _WorkoutLogRow(log: item.log, shouldBounce: shouldBounce);
+                        return _WorkoutLogRow(
+                          log: item.log,
+                          shouldBounce: shouldBounce,
+                          showCopyAction: true,
+                        );
                       } else if (item is GroupedLogsItem) {
                         return _GroupedWorkoutLogRow(
                           group: item,
@@ -378,8 +382,13 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Ticke
 class _WorkoutLogRow extends StatefulWidget {
   final WorkoutLog log;
   final bool shouldBounce;
+  final bool showCopyAction;
 
-  const _WorkoutLogRow({required this.log, this.shouldBounce = false});
+  const _WorkoutLogRow({
+    required this.log,
+    this.shouldBounce = false,
+    this.showCopyAction = false,
+  });
 
   @override
   State<_WorkoutLogRow> createState() => _WorkoutLogRowState();
@@ -438,18 +447,33 @@ class _WorkoutLogRowState extends State<_WorkoutLogRow> with SingleTickerProvide
     AppToast.show(context, 'Log deleted');
   }
 
+  void _onCopy(BuildContext context) {
+    final dashboardBloc = context.read<DashboardBloc>();
+    dashboardBloc.add(RecordSwipeAction());
+    dashboardBloc.add(DashboardDuplicateLastSet(widget.log));
+    AppToast.show(context, 'Set duplicated');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Slidable(
       key: ValueKey(widget.log.id),
       controller: _slidableController,
       endActionPane: ActionPane(
-        extentRatio: 0.6,
+        extentRatio: widget.showCopyAction ? 0.75 : 0.6,
         motion: const ScrollMotion(),
         children: [
+          if (widget.showCopyAction)
+            SlidableAction(
+              onPressed: (context) => _onCopy(context),
+              backgroundColor: const Color(0xFF3B82F6),
+              foregroundColor: Colors.white,
+              icon: Icons.copy_rounded,
+              label: 'Copy',
+            ),
           SlidableAction(
             onPressed: (context) => _onEdit(context),
-            backgroundColor: const Color(0xFF3B82F6),
+            backgroundColor: widget.showCopyAction ? const Color(0xFF6366F1) : const Color(0xFF3B82F6),
             foregroundColor: Colors.white,
             icon: Icons.edit,
             label: 'Edit',
@@ -467,11 +491,26 @@ class _WorkoutLogRowState extends State<_WorkoutLogRow> with SingleTickerProvide
         enabled: widget.shouldBounce,
         background: Row(
           children: [
-            const Spacer(flex: 40),
+            const Spacer(flex: 30),
+            if (widget.showCopyAction)
+              Expanded(
+                flex: 23,
+                child: Container(
+                  color: const Color(0xFF3B82F6),
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.copy_rounded, color: Colors.white, size: 18),
+                      SizedBox(height: 4),
+                      Text('Copy', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
             Expanded(
-              flex: 30,
+              flex: 23,
               child: Container(
-                color: const Color(0xFF3B82F6),
+                color: widget.showCopyAction ? const Color(0xFF6366F1) : const Color(0xFF3B82F6),
                 child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -483,7 +522,7 @@ class _WorkoutLogRowState extends State<_WorkoutLogRow> with SingleTickerProvide
               ),
             ),
             Expanded(
-              flex: 30,
+              flex: 23,
               child: Container(
                 color: const Color(0xFFEF4444),
                 child: const Column(
