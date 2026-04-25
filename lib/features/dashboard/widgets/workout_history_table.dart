@@ -68,7 +68,6 @@ class WorkoutHistoryTable extends StatelessWidget {
                       } else if (item is GroupedLogsItem) {
                         return _GroupedWorkoutLogRow(
                           group: item,
-                          query: state.query,
                           shouldBounce: shouldBounce,
                         );
                       }
@@ -91,12 +90,10 @@ class WorkoutHistoryTable extends StatelessWidget {
 
 class _GroupedWorkoutLogRow extends StatefulWidget {
   final GroupedLogsItem group;
-  final String query;
   final bool shouldBounce;
 
   const _GroupedWorkoutLogRow({
     required this.group,
-    required this.query,
     this.shouldBounce = false,
   });
 
@@ -131,38 +128,11 @@ class _GroupedWorkoutLogRowState extends State<_GroupedWorkoutLogRow> with Ticke
 
     _slidableController = SlidableController(this);
     _slidableController.animation.addListener(_onSlidableAnimationChanged);
-    
-    // Auto-expand if search query is present on init
-    if (widget.query.isNotEmpty) {
-      _isExpanded = true;
-      _controller.value = 1.0;
-    }
   }
 
   @override
   void didUpdateWidget(_GroupedWorkoutLogRow oldWidget) {
     super.didUpdateWidget(oldWidget);
-    
-    // If query changed
-    if (widget.query != oldWidget.query) {
-      if (widget.query.isNotEmpty) {
-        // Auto-expand if search query is now present
-        if (!_isExpanded) {
-          setState(() {
-            _isExpanded = true;
-            _controller.forward();
-          });
-        }
-      } else {
-        // Auto-collapse when search is cleared
-        if (_isExpanded) {
-          setState(() {
-            _isExpanded = false;
-            _controller.reverse();
-          });
-        }
-      }
-    }
   }
 
   void _onSlidableAnimationChanged() {
