@@ -18,6 +18,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     on<InitializeFlow>(_onInitialize);
     on<MuscleGroupSelected>(_onMuscleGroupSelected);
     on<SearchMovement>(_onSearchMovement);
+    on<SearchVariation>(_onSearchVariation);
     on<SelectMovement>(_onSelectMovement);
     on<CreateAndSelectMovement>(_onCreateAndSelectMovement);
     on<ToggleVariation>(_onToggleVariation);
@@ -165,6 +166,13 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
         movementSearchResults: results,
       ),
     );
+  }
+
+  void _onSearchVariation(
+    SearchVariation event,
+    Emitter<LogExerciseState> emit,
+  ) {
+    emit(state.copyWith(variationQuery: event.query));
   }
 
   Future<void> _onSelectMovement(

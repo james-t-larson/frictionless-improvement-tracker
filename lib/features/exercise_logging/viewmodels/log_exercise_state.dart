@@ -22,6 +22,7 @@ class LogExerciseState extends Equatable {
   final Movement? selectedMovement;
   final String? lastPerformanceHint;
   
+  final String variationQuery;
   final List<Variation> selectedVariations;
   final List<Variation> availableVariations;
   
@@ -40,6 +41,7 @@ class LogExerciseState extends Equatable {
     this.movementSearchResults = const [],
     this.selectedMovement,
     this.lastPerformanceHint,
+    this.variationQuery = '',
     this.selectedVariations = const [],
     this.availableVariations = const [],
     this.weight = 0.0,
@@ -58,6 +60,7 @@ class LogExerciseState extends Equatable {
     List<Movement>? movementSearchResults,
     Movement? selectedMovement,
     String? lastPerformanceHint,
+    String? variationQuery,
     List<Variation>? selectedVariations,
     List<Variation>? availableVariations,
     double? weight,
@@ -77,6 +80,7 @@ class LogExerciseState extends Equatable {
       movementSearchResults: movementSearchResults ?? this.movementSearchResults,
       selectedMovement: selectedMovement ?? this.selectedMovement,
       lastPerformanceHint: lastPerformanceHint ?? this.lastPerformanceHint,
+      variationQuery: variationQuery ?? this.variationQuery,
       selectedVariations: selectedVariations ?? this.selectedVariations,
       availableVariations: availableVariations ?? this.availableVariations,
       weight: weight ?? this.weight,
@@ -100,6 +104,7 @@ class LogExerciseState extends Equatable {
       case ExerciseLogStep.variation:
         return copyWith(
           selectedVariations: [],
+          variationQuery: '',
         );
       case ExerciseLogStep.details:
         return this;
@@ -115,6 +120,7 @@ class LogExerciseState extends Equatable {
         movementSearchResults,
         selectedMovement,
         lastPerformanceHint,
+        variationQuery,
         selectedVariations,
         availableVariations,
         weight,

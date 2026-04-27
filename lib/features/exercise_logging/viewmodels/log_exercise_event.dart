@@ -31,6 +31,14 @@ class SearchMovement extends LogExerciseEvent {
   List<Object?> get props => [query];
 }
 
+class SearchVariation extends LogExerciseEvent {
+  final String query;
+  const SearchVariation(this.query);
+
+  @override
+  List<Object?> get props => [query];
+}
+
 class SelectMovement extends LogExerciseEvent {
   final Movement movement;
   const SelectMovement(this.movement);

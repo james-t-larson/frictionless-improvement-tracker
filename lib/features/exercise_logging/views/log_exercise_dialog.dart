@@ -57,12 +57,13 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
           }
         },
         child: Dialog(
+          alignment: Alignment.topCenter,
           backgroundColor: const Color(0xFF18181B),
           insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: Container(
             width: double.infinity,
-            constraints: const BoxConstraints(maxHeight: 450),
+            constraints: const BoxConstraints(maxHeight: 650),
             padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
