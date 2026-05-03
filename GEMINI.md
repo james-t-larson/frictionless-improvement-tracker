@@ -43,39 +43,60 @@ graph TD
 
 ## **2\. Database Entity-Relationship (ER) Diagram**
 
-The SQLite database is structured relationally to link exercises to their specific muscle groups, alongside the actual workout logs.  
-erDiagram  
-    MUSCLE\_GROUP ||--o{ MOVEMENT : contains  
-    MOVEMENT ||--o{ VARIATION : has  
-    MOVEMENT ||--o{ WORKOUT\_LOG : recorded\_in  
-    VARIATION ||--o{ WORKOUT\_LOG : optionally\_recorded\_in
+The SQLite database is structured relationally to link exercises to their specific muscle groups, alongside the actual workout logs, utilizing many-to-many relationships for flexibility.
 
-    MUSCLE\_GROUP {  
-        int id PK  
-        string name "e.g., Chest, Back, Legs"  
+erDiagram
+    MOVEMENT ||--o{ MOVEMENT_MUSCLES : has
+    MUSCLE_GROUP ||--o{ MOVEMENT_MUSCLES : associated_with
+    MOVEMENT ||--o{ MOVEMENT_VARIATIONS : supports
+    VARIATIONS ||--o{ MOVEMENT_VARIATIONS : linked_to
+    WORKOUTS ||--o{ WORKOUT_VARIATIONS : records
+    VARIATIONS ||--o{ WORKOUT_VARIATIONS : applied_to
+    MOVEMENT ||--o{ WORKOUTS : performed
+
+    MUSCLE_GROUP {
+        int id PK
+        string name "e.g., Chest, Back, Legs"
     }
 
-    MOVEMENT {  
-        int id PK  
-        int muscle\_group\_id FK  
-        string name "e.g., Bench Press"  
+    MOVEMENT {
+        int id PK
+        string name "e.g., Bench Press"
     }
 
-    VARIATION {  
-        int id PK  
-        int movement\_id FK  
-        string name "e.g., Incline, Dumbbell"  
+    MOVEMENT_MUSCLES {
+        int movement_id FK
+        int muscle_id FK
+        int is_primary "Boolean"
     }
 
-    WORKOUT\_LOG {  
-        int id PK  
-        int movement\_id FK  
-        int variation\_id FK "nullable"  
-        real weight  
-        int reps  
-        int sets  
-        string notes  
-        datetime created\_at  
+    VARIATIONS {
+        int id PK
+        string name "e.g., Incline, Dumbbell"
+    }
+
+    MOVEMENT_VARIATIONS {
+        int movement_id FK
+        int variation_id FK
+    }
+
+    WORKOUTS {
+        int id PK
+        int timestamp "Unix Epoch"
+        int movement_id FK
+        real weight
+        int reps
+        int pain_felt "Boolean"
+    }
+
+    WORKOUT_VARIATIONS {
+        int workout_id FK
+        int variation_id FK
+    }
+
+    SETTINGS {
+        string key PK
+        string value
     }
 
 ## **3\. Sequence Flow: Logging a New Exercise**

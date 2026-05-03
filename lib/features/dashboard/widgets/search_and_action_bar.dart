@@ -32,6 +32,22 @@ class SearchAndActionBar extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(width: 8),
+        Container(
+          height: 48,
+          width: 48,
+          decoration: BoxDecoration(
+            color: const Color(0xFF18181B),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: const Color(0xFF27272A)),
+          ),
+          child: IconButton(
+            icon: const Icon(Icons.menu_rounded, color: Color(0xFFFAFAFA), size: 20),
+            onPressed: () {
+              Scaffold.of(context).openEndDrawer();
+            },
+          ),
+        ),
       ],
     );
   }

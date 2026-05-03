@@ -8,114 +8,121 @@ import '../../../core/widgets/app_toast.dart';
 import '../../exercise_logging/viewmodels/log_exercise_bloc.dart';
 import '../../exercise_logging/views/log_exercise_dialog.dart';
 import '../viewmodels/dashboard_bloc.dart';
+import '../viewmodels/data_management_bloc.dart';
 import '../widgets/workout_history_table.dart';
 import '../widgets/search_and_action_bar.dart';
+import '../widgets/app_sidebar.dart';
 
 class MainDashboardScreen extends StatelessWidget {
   const MainDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      body: BlocListener<DashboardBloc, DashboardState>(
-        listener: (context, state) {
-          if (state is DashboardError) {
-            AppToast.show(context, 'Something went wrong', isError: true);
-          }
-        },
-        child: SafeArea(
-          bottom: false,
-          child: RefreshIndicator(
-
-          onRefresh: () async {
-            context.read<DashboardBloc>().add(const LoadDashboardLogs());
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<DataManagementBloc>()),
+      ],
+      child: Scaffold(
+        extendBody: true,
+        endDrawer: const AppSidebar(),
+        body: BlocListener<DashboardBloc, DashboardState>(
+          listener: (context, state) {
+            if (state is DashboardError) {
+              AppToast.show(context, 'Something went wrong', isError: true);
+            }
           },
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                floating: true,
-                backgroundColor: const Color(0xFF09090B),
-                title: Text(
-                  'FRICTIONLESS',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    letterSpacing: 2,
-                    fontWeight: FontWeight.w900,
+          child: SafeArea(
+            bottom: false,
+            child: RefreshIndicator(
+              onRefresh: () async {
+                context.read<DashboardBloc>().add(const LoadDashboardLogs());
+              },
+              child: CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    floating: true,
+                    backgroundColor: const Color(0xFF09090B),
+                    title: Text(
+                      'FRICTIONLESS',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            letterSpacing: 2,
+                            fontWeight: FontWeight.w900,
+                          ),
+                    ),
+                    centerTitle: false,
                   ),
-                ),
-                centerTitle: false,
+                  const SliverPersistentHeader(
+                    pinned: true,
+                    delegate: _SearchHeaderDelegate(),
+                  ),
+                  const WorkoutHistoryTable(),
+                  const SliverPadding(padding: EdgeInsets.only(bottom: 120)),
+                ],
               ),
-              const SliverPersistentHeader(
-                pinned: true,
-                delegate: _SearchHeaderDelegate(),
-              ),
-              const WorkoutHistoryTable(),
-              const SliverPadding(padding: EdgeInsets.only(bottom: 120)),
-            ],
+            ),
           ),
         ),
-      ),
-    ),
-      bottomNavigationBar: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Container(
-            color: const Color(0xFF09090B).withValues(alpha: 0.8),
-            child: SafeArea(
-              child: BlocBuilder<DashboardBloc, DashboardState>(
-                builder: (context, state) {
-                  WorkoutLog? lastLog;
-                  if (state is DashboardLoaded && state.allLogs.isNotEmpty) {
-                    lastLog = state.allLogs.first;
-                  }
+        bottomNavigationBar: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              color: const Color(0xFF09090B).withValues(alpha: 0.8),
+              child: SafeArea(
+                child: BlocBuilder<DashboardBloc, DashboardState>(
+                  builder: (context, state) {
+                    WorkoutLog? lastLog;
+                    if (state is DashboardLoaded && state.allLogs.isNotEmpty) {
+                      lastLog = state.allLogs.first;
+                    }
 
-                  final screenWidth = MediaQuery.of(context).size.width;
-                  final isTablet = screenWidth > 600;
+                    final screenWidth = MediaQuery.of(context).size.width;
+                    final isTablet = screenWidth > 600;
 
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(height: 12),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Divider(
-                          color: const Color(0xFFFAFAFA).withValues(alpha: 0.1),
-                          height: 1,
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(maxWidth: isTablet ? 500 : double.infinity),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (lastLog != null) ...[
-                                Expanded(
-                                  child: _ActionButton(
-                                    onPressed: () => _openAddSetDialog(context, lastLog!),
-                                    icon: Icons.add_rounded,
-                                    label: 'ADD SET',
-                                    isPrimary: false,
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                              ],
-                              Expanded(
-                                child: _ActionButton(
-                                  onPressed: () => _openNewLiftDialog(context),
-                                  icon: Icons.fitness_center_rounded,
-                                  label: 'NEW LIFT',
-                                  isPrimary: true,
-                                ),
-                              ),
-                            ],
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(height: 12),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Divider(
+                            color: const Color(0xFFFAFAFA).withValues(alpha: 0.1),
+                            height: 1,
                           ),
                         ),
-                      ),
-                    ],
-                  );
-                },
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(maxWidth: isTablet ? 500 : double.infinity),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (lastLog != null) ...[
+                                  Expanded(
+                                    child: _ActionButton(
+                                      onPressed: () => _openAddSetDialog(context, lastLog!),
+                                      icon: Icons.add_rounded,
+                                      label: 'ADD SET',
+                                      isPrimary: false,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                ],
+                                Expanded(
+                                  child: _ActionButton(
+                                    onPressed: () => _openNewLiftDialog(context),
+                                    icon: Icons.fitness_center_rounded,
+                                    label: 'NEW LIFT',
+                                    isPrimary: true,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ),
