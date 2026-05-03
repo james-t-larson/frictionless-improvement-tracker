@@ -87,9 +87,16 @@ class DataManagementBloc extends Bloc<DataManagementEvent, DataManagementState> 
       if (result != null && result.files.single.path != null) {
         emit(DataOperationInProgress());
         final path = result.files.single.path!;
+        final fileName = result.files.single.name;
         String? extension = result.files.single.extension?.toLowerCase();
         
-        extension ??= path.split('.').last.toLowerCase();
+        // Comprehensive extension detection
+        if (extension == null || extension.isEmpty) {
+          final parts = fileName.split('.');
+          if (parts.length > 1) {
+            extension = parts.last.toLowerCase();
+          }
+        }
 
         if (extension == 'csv') {
           final count = await _repository.importCsv(path);
@@ -98,7 +105,7 @@ class DataManagementBloc extends Bloc<DataManagementEvent, DataManagementState> 
           await _repository.importSql(path);
           emit(const DataOperationSuccess('Full database restore complete'));
         } else {
-          emit(DataOperationFailure('Unsupported file format: .$extension'));
+          emit(DataOperationFailure('Unsupported file: "$fileName". Expected .csv or .sql, got: .${extension ?? 'none'}'));
         }
       }
     } catch (e) {
