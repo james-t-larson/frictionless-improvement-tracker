@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 import 'package:csv/csv.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
@@ -56,7 +57,15 @@ class DataRepository {
     final file = File(join(directory.path, 'gym_logs_${DateTime.now().millisecondsSinceEpoch}.csv'));
     await file.writeAsString(csvString);
 
-    await Share.shareXFiles([XFile(file.path)], text: 'My Gym Logs Export');
+    if (await file.exists()) {
+      await Share.shareXFiles(
+        [XFile(file.path)], 
+        text: 'My Gym Logs Export',
+        sharePositionOrigin: const Rect.fromLTWH(0, 0, 10, 10), // Required for iPad/Tablets
+      );
+    } else {
+      throw Exception('Failed to create CSV file at ${file.path}');
+    }
   }
 
   Future<void> exportToSql() async {
@@ -98,7 +107,15 @@ class DataRepository {
     final file = File(join(directory.path, 'gym_backup_${DateTime.now().millisecondsSinceEpoch}.sql'));
     await file.writeAsString(sqlBuffer.toString());
 
-    await Share.shareXFiles([XFile(file.path)], text: 'Gym Tracker SQL Backup');
+    if (await file.exists()) {
+      await Share.shareXFiles(
+        [XFile(file.path)], 
+        text: 'Gym Tracker SQL Backup',
+        sharePositionOrigin: const Rect.fromLTWH(0, 0, 10, 10),
+      );
+    } else {
+      throw Exception('Failed to create SQL backup file at ${file.path}');
+    }
   }
 
   // --- IMPORT LOGIC ---
