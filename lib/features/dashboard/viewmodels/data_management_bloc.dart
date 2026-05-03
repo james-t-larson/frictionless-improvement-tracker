@@ -64,7 +64,7 @@ class DataManagementBloc extends Bloc<DataManagementEvent, DataManagementState> 
       await _repository.exportToCsv();
       emit(const DataOperationSuccess('CSV exported successfully'));
     } catch (e) {
-      emit(DataOperationFailure('Failed to export CSV: $e'));
+      emit(DataOperationFailure('Export failed: $e'));
     }
   }
 
@@ -74,21 +74,22 @@ class DataManagementBloc extends Bloc<DataManagementEvent, DataManagementState> 
       await _repository.exportToSql();
       emit(const DataOperationSuccess('SQL backup exported successfully'));
     } catch (e) {
-      emit(DataOperationFailure('Failed to export SQL: $e'));
+      emit(DataOperationFailure('Export failed: $e'));
     }
   }
 
   Future<void> _onImportRequested(ImportRequested event, Emitter<DataManagementState> emit) async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['csv', 'sql'],
+        type: FileType.any,
       );
 
       if (result != null && result.files.single.path != null) {
         emit(DataOperationInProgress());
         final path = result.files.single.path!;
-        final extension = result.files.single.extension?.toLowerCase();
+        String? extension = result.files.single.extension?.toLowerCase();
+        
+        extension ??= path.split('.').last.toLowerCase();
 
         if (extension == 'csv') {
           final count = await _repository.importCsv(path);
@@ -97,11 +98,11 @@ class DataManagementBloc extends Bloc<DataManagementEvent, DataManagementState> 
           await _repository.importSql(path);
           emit(const DataOperationSuccess('Full database restore complete'));
         } else {
-          emit(const DataOperationFailure('Unsupported file format'));
+          emit(DataOperationFailure('Unsupported file format: .$extension'));
         }
       }
     } catch (e) {
-      emit(DataOperationFailure('Import failed: $e'));
+      emit(DataOperationFailure('Import process failed: $e'));
     }
   }
 }

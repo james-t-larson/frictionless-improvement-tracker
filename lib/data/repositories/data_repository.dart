@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 import 'package:csv/csv.dart';
@@ -59,8 +60,7 @@ class DataRepository {
 
     if (await file.exists()) {
       await Share.shareXFiles(
-        [XFile(file.path)], 
-        text: 'My Gym Logs Export',
+        [XFile(file.path, name: 'gym_logs_${DateTime.now().millisecondsSinceEpoch}.csv')], 
         sharePositionOrigin: const Rect.fromLTWH(0, 0, 10, 10), // Required for iPad/Tablets
       );
     } else {
@@ -109,8 +109,7 @@ class DataRepository {
 
     if (await file.exists()) {
       await Share.shareXFiles(
-        [XFile(file.path)], 
-        text: 'Gym Tracker SQL Backup',
+        [XFile(file.path, name: 'gym_backup_${DateTime.now().millisecondsSinceEpoch}.sql')], 
         sharePositionOrigin: const Rect.fromLTWH(0, 0, 10, 10),
       );
     } else {
@@ -122,43 +121,61 @@ class DataRepository {
 
   Future<void> importSql(String filePath) async {
     final file = File(filePath);
+    if (!await file.exists()) {
+      throw Exception('SQL file does not exist at path: $filePath');
+    }
+    
     final sqlContent = await file.readAsString();
     final lines = sqlContent.split('\n');
 
-    await _db.transaction((txn) async {
-      await txn.execute('PRAGMA foreign_keys=OFF;');
-      
-      final tables = [
-        'workout_variations',
-        'workouts',
-        'movement_variations',
-        'variations',
-        'movement_muscles',
-        'muscle_groups',
-        'movements',
-        'settings'
-      ];
+    // Pragmas must be outside transaction
+    await _db.execute('PRAGMA foreign_keys=OFF;');
+    
+    try {
+      await _db.transaction((txn) async {
+        final tables = [
+          'workout_variations',
+          'workouts',
+          'movement_variations',
+          'variations',
+          'movement_muscles',
+          'muscle_groups',
+          'movements',
+          'settings'
+        ];
 
-      for (var table in tables) {
-        await txn.execute('DELETE FROM $table;');
-      }
-
-      Batch batch = txn.batch();
-      for (var line in lines) {
-        final trimmed = line.trim();
-        if (trimmed.startsWith('INSERT INTO')) {
-          batch.execute(trimmed);
+        for (var table in tables) {
+          await txn.execute('DELETE FROM $table;');
         }
-      }
-      await batch.commit(noResult: true);
-      
-      await txn.execute('PRAGMA foreign_keys=ON;');
-    });
+
+        Batch batch = txn.batch();
+        for (var line in lines) {
+          final trimmed = line.trim();
+          if (trimmed.startsWith('INSERT INTO')) {
+            batch.execute(trimmed);
+          }
+        }
+        await batch.commit(noResult: true);
+      });
+    } finally {
+      await _db.execute('PRAGMA foreign_keys=ON;');
+    }
   }
 
   Future<int> importCsv(String filePath) async {
     final file = File(filePath);
-    final csvString = await file.readAsString();
+    if (!await file.exists()) {
+      throw Exception('CSV file does not exist at path: $filePath');
+    }
+
+    String csvString;
+    try {
+      csvString = await file.readAsString();
+    } catch (e) {
+      // Fallback for potential encoding issues
+      final bytes = await file.readAsBytes();
+      csvString = utf8.decode(bytes, allowMalformed: true);
+    }
     
     // Offload heavy parsing to background isolate
     final List<List<dynamic>> rows = await compute(_parseCsv, csvString);
