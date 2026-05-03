@@ -57,14 +57,6 @@ class AppSidebar extends StatelessWidget {
                           initialExpanded: true,
                           children: [
                             _SidebarActionTile(
-                              icon: Icons.upload_file_rounded,
-                              label: 'Export CSV',
-                              isLoading: isLoading,
-                              onTap: () {
-                                context.read<DataManagementBloc>().add(ExportCsvRequested());
-                              },
-                            ),
-                            _SidebarActionTile(
                               icon: Icons.storage_rounded,
                               label: 'Export SQL',
                               isLoading: isLoading,

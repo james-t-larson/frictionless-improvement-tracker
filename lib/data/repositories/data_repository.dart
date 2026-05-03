@@ -61,7 +61,13 @@ class DataRepository {
 
     if (await file.exists()) {
       await Share.shareXFiles(
-        [XFile(file.path, name: fileName)], 
+        [
+          XFile(
+            file.path,
+            name: fileName,
+            mimeType: 'text/csv',
+          )
+        ],
         sharePositionOrigin: const Rect.fromLTWH(0, 0, 10, 10), // Required for iPad/Tablets
       );
     } else {
@@ -111,7 +117,13 @@ class DataRepository {
 
     if (await file.exists()) {
       await Share.shareXFiles(
-        [XFile(file.path, name: fileName)], 
+        [
+          XFile(
+            file.path,
+            name: fileName,
+            mimeType: 'text/plain',
+          )
+        ],
         sharePositionOrigin: const Rect.fromLTWH(0, 0, 10, 10),
       );
     } else {

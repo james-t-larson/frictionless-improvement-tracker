@@ -88,13 +88,21 @@ class DataManagementBloc extends Bloc<DataManagementEvent, DataManagementState> 
         emit(DataOperationInProgress());
         final path = result.files.single.path!;
         final fileName = result.files.single.name;
+        
+        // Try to get extension from PlatformFile, then fallback to filename, then fallback to path
         String? extension = result.files.single.extension?.toLowerCase();
         
-        // Comprehensive extension detection
         if (extension == null || extension.isEmpty) {
-          final parts = fileName.split('.');
-          if (parts.length > 1) {
-            extension = parts.last.toLowerCase();
+          final fileNameParts = fileName.split('.');
+          if (fileNameParts.length > 1) {
+            extension = fileNameParts.last.toLowerCase();
+          }
+        }
+
+        if (extension == null || extension.isEmpty) {
+          final pathParts = path.split('.');
+          if (pathParts.length > 1) {
+            extension = pathParts.last.toLowerCase();
           }
         }
 
