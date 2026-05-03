@@ -4,20 +4,11 @@ This document details the reverse-engineered implementation of the Import/Export
 
 ## Overview
 
-The application supports two primary data management workflows:
-1.  **CSV Export/Import**: Focused on data portability and human-readable logging.
-2.  **SQL Export/Import**: Focused on full database backup and restoration.
+The application supports data management workflows focused on full database backup and restoration.
 
 ---
 
 ## 1. Export Functionality
-
-### CSV Export
-Generates a human-readable summary of all workouts.
-
-*   **Logic**: Executes a complex SQL query joining `workouts`, `movements`, `muscle_groups`, and `variations`.
-*   **Format**: `Date, Movement, Muscle Group, Variations, Weight, Reps, Pain`
-*   **Delivery**: Saves to a temporary file and triggers the system share sheet.
 
 ### SQL Export
 Generates a full schema-compatible backup.
@@ -37,13 +28,12 @@ sequenceDiagram
     participant DB as SQLite DB
     participant Share as System Share
 
-    User->>UI: Tap Export (CSV/SQL)
-    UI->>Bloc: Dispatch ExportRequested
-    Bloc->>UI: Emit DataOperationInProgress
-    Bloc->>Repo: call exportToCsv() / exportToSql()
-    Repo->>DB: Query tables (workouts/all)
+    User->>UI: Tap Export SQL
+    UI->>Bloc: Dispatch ExportSqlRequested
+    Bloc->>Repo: call exportToSql()
+    Repo->>DB: Query tables (all)
     DB-->>Repo: Return data
-    Repo->>Repo: Format data (CSV string / SQL script)
+    Repo->>Repo: Format data (SQL script)
     Repo->>Repo: Save to temporary file
     Repo->>Share: ShareXFiles(tempFile)
     Share-->>User: Open Share Sheet
@@ -56,6 +46,7 @@ sequenceDiagram
 
 ### CSV Import (Merge Logic)
 Imports workout logs without overwriting the entire database. It "merges" data by creating missing entities and skipping duplicates.
+*Note: Currently maintained for potential future use or manual imports, but CSV Export is disabled.*
 
 *   **Entity Mapping**: Automatically maps muscle groups, movements, and variations by name (case-insensitive).
 *   **Deduplication**: Checks if a workout with the same `timestamp`, `movement_id`, `weight`, and `reps` already exists.

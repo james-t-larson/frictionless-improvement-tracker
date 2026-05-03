@@ -48,32 +48,24 @@ class AppSidebar extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    BlocBuilder<DataManagementBloc, DataManagementState>(
-                      builder: (context, state) {
-                        final isLoading = state is DataOperationInProgress;
-
-                        return AppAccordion(
-                          title: 'Data Management',
-                          initialExpanded: true,
-                          children: [
-                            _SidebarActionTile(
-                              icon: Icons.storage_rounded,
-                              label: 'Export SQL',
-                              isLoading: isLoading,
-                              onTap: () {
-                                context.read<DataManagementBloc>().add(ExportSqlRequested());
-                              },
-                            ),
-                            _SidebarActionTile(
-                              icon: Icons.download_rounded,
-                              label: 'Import Data',
-                              isLoading: isLoading,
-                              onTap: () => _handleImport(context),
-                              isDestructive: false,
-                            ),
-                          ],
-                        );
-                      },
+                    AppAccordion(
+                      title: 'Data Management',
+                      initialExpanded: true,
+                      children: [
+                        _SidebarActionTile(
+                          icon: Icons.storage_rounded,
+                          label: 'Export SQL',
+                          onTap: () {
+                            context.read<DataManagementBloc>().add(ExportSqlRequested());
+                          },
+                        ),
+                        _SidebarActionTile(
+                          icon: Icons.download_rounded,
+                          label: 'Import Data',
+                          onTap: () => _handleImport(context),
+                          isDestructive: false,
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -141,36 +133,30 @@ class _SidebarActionTile extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
   final bool isDestructive;
-  final bool isLoading;
 
   const _SidebarActionTile({
     required this.icon,
     required this.label,
     required this.onTap,
     this.isDestructive = false,
-    this.isLoading = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: isLoading ? null : onTap,
+      onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
-      leading: isLoading 
-        ? const SizedBox(
-            width: 20, 
-            height: 20, 
-            child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFFA1A1AA))
-          )
-        : Icon(
-            icon,
-            color: isDestructive ? const Color(0xFFEF4444) : const Color(0xFFFAFAFA),
-            size: 20,
-          ),
+      leading: Icon(
+        icon,
+        color: isDestructive 
+            ? const Color(0xFFEF4444) 
+            : const Color(0xFFFAFAFA),
+        size: 20,
+      ),
       title: Text(
         label,
         style: TextStyle(
-          color: isDestructive || isLoading ? const Color(0xFFA1A1AA) : const Color(0xFFFAFAFA),
+          color: isDestructive ? const Color(0xFFA1A1AA) : const Color(0xFFFAFAFA),
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
