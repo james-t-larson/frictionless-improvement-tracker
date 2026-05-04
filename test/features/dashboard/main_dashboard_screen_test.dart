@@ -2,18 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:simple_gym_tracker/features/dashboard/views/main_dashboard_screen.dart';
 import 'package:simple_gym_tracker/features/dashboard/viewmodels/dashboard_bloc.dart';
+import 'package:simple_gym_tracker/features/dashboard/viewmodels/data_management_bloc.dart';
+import 'package:simple_gym_tracker/data/repositories/movement_repository.dart';
 
 class MockDashboardBloc extends Mock implements DashboardBloc {}
+class MockDataManagementBloc extends Mock implements DataManagementBloc {}
+class MockMovementRepository extends Mock implements MovementRepository {}
 
 void main() {
   late MockDashboardBloc mockDashboardBloc;
+  late MockDataManagementBloc mockDataManagementBloc;
+  late MockMovementRepository mockMovementRepository;
+
+  setUpAll(() {
+    registerFallbackValue(const SearchDashboardLogs(''));
+  });
 
   setUp(() {
     mockDashboardBloc = MockDashboardBloc();
-    // We need to register a dummy service locator for the test if the screen uses it
-    // Or we can mock the specific repositories it uses
+    mockDataManagementBloc = MockDataManagementBloc();
+    mockMovementRepository = MockMovementRepository();
+
+    final getIt = GetIt.instance;
+    if (getIt.isRegistered<DataManagementBloc>()) {
+      getIt.unregister<DataManagementBloc>();
+    }
+    if (getIt.isRegistered<MovementRepository>()) {
+      getIt.unregister<MovementRepository>();
+    }
+    getIt.registerSingleton<DataManagementBloc>(mockDataManagementBloc);
+    getIt.registerSingleton<MovementRepository>(mockMovementRepository);
+
+    when(() => mockDashboardBloc.stream).thenAnswer((_) => const Stream.empty());
+    when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded(const {}, const [], query: ''));
+    
+    when(() => mockDataManagementBloc.stream).thenAnswer((_) => const Stream.empty());
+    when(() => mockDataManagementBloc.state).thenReturn(DataOperationInitial());
+  });
+
+  tearDown(() {
+    GetIt.instance.reset();
   });
 
   Widget createWidgetUnderTest() {
@@ -30,16 +61,16 @@ void main() {
     tester.view.physicalSize = Size(screenWidth, 800);
     tester.view.devicePixelRatio = 1.0;
 
-    when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded({}, [], query: ''));
-    
     await tester.pumpWidget(createWidgetUnderTest());
+    await tester.pumpAndSettle();
 
     final newLiftBtn = find.text('NEW LIFT');
     expect(newLiftBtn, findsOneWidget);
 
-    final btnSize = tester.getSize(find.ancestor(of: newLiftBtn, matching: find.byType(ElevatedButton)));
+    final btnFinder = find.ancestor(of: newLiftBtn, matching: find.byWidgetPredicate((w) => w is ButtonStyleButton));
+    expect(btnFinder, findsOneWidget);
     
-    // Width should be screenWidth minus padding (16*2 = 32)
+    final btnSize = tester.getSize(btnFinder);
     expect(btnSize.width, screenWidth - 32);
     
     addTearDown(() {
@@ -53,19 +84,46 @@ void main() {
     tester.view.physicalSize = Size(400, screenHeight);
     tester.view.devicePixelRatio = 1.0;
 
-    when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded({}, [], query: ''));
-    
     await tester.pumpWidget(createWidgetUnderTest());
+    await tester.pumpAndSettle();
 
     final newLiftBtn = find.text('NEW LIFT');
-    final btnCenter = tester.getCenter(find.ancestor(of: newLiftBtn, matching: find.byType(ElevatedButton)));
-    
-    // Button should be in the bottom half of the screen
+    expect(newLiftBtn, findsOneWidget);
+
+    final btnFinder = find.ancestor(of: newLiftBtn, matching: find.byWidgetPredicate((w) => w is ButtonStyleButton));
+    expect(btnFinder, findsOneWidget);
+
+    final btnCenter = tester.getCenter(btnFinder);
     expect(btnCenter.dy, greaterThan(screenHeight * 0.8));
     
     addTearDown(() {
       tester.view.resetPhysicalSize();
       tester.view.resetDevicePixelRatio();
     });
+  });
+
+  testWidgets('Search bar triggers search and clear events', (tester) async {
+    await tester.pumpWidget(createWidgetUnderTest());
+    await tester.pumpAndSettle();
+
+    final searchField = find.byType(TextField);
+    expect(searchField, findsOneWidget);
+
+    // Type in search field
+    await tester.enterText(searchField, 'Bench');
+    await tester.pump();
+
+    verify(() => mockDashboardBloc.add(const SearchDashboardLogs('Bench'))).called(1);
+
+    // Clear button should be visible
+    final clearBtn = find.byIcon(Icons.close_rounded);
+    expect(clearBtn, findsOneWidget);
+
+    // Tap clear button
+    await tester.tap(clearBtn);
+    await tester.pump();
+
+    verify(() => mockDashboardBloc.add(const SearchDashboardLogs(''))).called(1);
+    expect(find.text('Bench'), findsNothing);
   });
 }

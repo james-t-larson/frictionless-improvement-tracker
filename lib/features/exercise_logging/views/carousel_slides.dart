@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../viewmodels/log_exercise_bloc.dart';
+import '../../../core/widgets/app_search_bar.dart';
+
 
 // --- Slide 1: Movement Selection ---
 class MovementSelectionSlide extends StatefulWidget {
@@ -26,15 +28,12 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 8),
-        TextField(
+        AppSearchBar(
           controller: _controller,
           autofocus: true,
           onChanged: (val) => context.read<LogExerciseBloc>().add(SearchMovement(val)),
-          decoration: const InputDecoration(
-            hintText: 'Bench Press, Squat...',
-            border: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFF52525B))),
-            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFFFAFAFA))),
-          ),
+          hintText: 'Bench Press, Squat...',
+          style: AppSearchBarStyle.underlined,
         ),
         const SizedBox(height: 16),
         Expanded(
@@ -106,15 +105,12 @@ class _VariationSelectionSlideState extends State<VariationSelectionSlide> {
         return Column(
           children: [
             const SizedBox(height: 8),
-            TextField(
+            AppSearchBar(
               controller: _controller,
               autofocus: true,
               onChanged: (val) => context.read<LogExerciseBloc>().add(SearchVariation(val)),
-              decoration: const InputDecoration(
-                hintText: 'Incline, Dumbbell...',
-                border: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFF52525B))),
-                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFFFAFAFA))),
-              ),
+              hintText: 'Incline, Dumbbell...',
+              style: AppSearchBarStyle.underlined,
             ),
             const SizedBox(height: 16),
             Expanded(

@@ -1,16 +1,30 @@
-# Frictionless Improvement Tracker
+# Simple Gym Tracker (Frictionless Improvement Tracker)
 
-A new Flutter project.
+A clean and efficient gym tracker built with Flutter, focused on local privacy and ease of use.
 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### Prerequisites
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter SDK (latest stable version)
+- CocoaPods (for iOS/macOS development)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Running the App
+
+```bash
+flutter pub get
+flutter run
+```
+
+## Documentation
+
+- [Build Process (IPA Generation)](docs/build_process.md)
+- [Import/Export Specification](docs/import_export_spec.md)
+- [Architecture & Conventions](GEMINI.md)
+
+## Development Resources
+
+- [Flutter Documentation](https://docs.flutter.dev/)
+- [BLoC Library](https://bloclibrary.dev/)
