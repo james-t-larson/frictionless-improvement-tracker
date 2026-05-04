@@ -25,14 +25,7 @@ class WorkoutHistoryTable extends StatelessWidget {
 
         if (state is DashboardLoaded) {
           if (state.groupedLogs.isEmpty) {
-            return const SliverFillRemaining(
-              child: Center(
-                child: Text(
-                  'No logs found. Tap [+] to start.',
-                  style: TextStyle(color: Color(0xFF71717A)),
-                ),
-              ),
-            );
+            return const SliverToBoxAdapter(child: SizedBox.shrink());
           }
 
           final dates = state.groupedLogs.keys.toList();

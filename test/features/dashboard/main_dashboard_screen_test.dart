@@ -57,7 +57,11 @@ void main() {
     );
   }
 
-  testWidgets('Buttons take up available horizontal width on mobile', (tester) async {
+  testWidgets('Buttons take up available horizontal width on mobile when logs exist', (tester) async {
+    when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded(const {}, [
+      WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: 123, painFelt: false, variations: [], movementName: 'Bench Press')
+    ], query: ''));
+
     const screenWidth = 400.0;
     tester.view.physicalSize = Size(screenWidth, 800);
     tester.view.devicePixelRatio = 1.0;
@@ -72,7 +76,9 @@ void main() {
     expect(btnFinder, findsOneWidget);
     
     final btnSize = tester.getSize(btnFinder);
-    expect(btnSize.width, screenWidth - 32);
+    // When logs exist, both ADD SET and NEW LIFT are shown, so they share the width.
+    // (400 - 32 padding - 12 gap) / 2 = 178
+    expect(btnSize.width, (screenWidth - 32 - 12) / 2);
     
     addTearDown(() {
       tester.view.resetPhysicalSize();
@@ -80,7 +86,11 @@ void main() {
     });
   });
 
-  testWidgets('Buttons are positioned at the bottom of the screen', (tester) async {
+  testWidgets('Buttons are positioned at the bottom of the screen when logs exist', (tester) async {
+    when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded(const {}, [
+      WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: 123, painFelt: false, variations: [], movementName: 'Bench Press')
+    ], query: ''));
+
     const screenHeight = 800.0;
     tester.view.physicalSize = Size(400, screenHeight);
     tester.view.devicePixelRatio = 1.0;
@@ -96,6 +106,34 @@ void main() {
 
     final btnCenter = tester.getCenter(btnFinder);
     expect(btnCenter.dy, greaterThan(screenHeight * 0.8));
+    
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+  });
+
+  testWidgets('New Lift button is centered when no logs are present', (tester) async {
+    when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded(const {}, const [], query: ''));
+
+    const screenHeight = 800.0;
+    const screenWidth = 400.0;
+    tester.view.physicalSize = Size(screenWidth, screenHeight);
+    tester.view.devicePixelRatio = 1.0;
+
+    await tester.pumpWidget(createWidgetUnderTest());
+    await tester.pumpAndSettle();
+
+    final newLiftBtn = find.text('NEW LIFT');
+    expect(newLiftBtn, findsOneWidget);
+
+    final btnFinder = find.ancestor(of: newLiftBtn, matching: find.byWidgetPredicate((w) => w is ButtonStyleButton));
+    expect(btnFinder, findsOneWidget);
+
+    final btnCenter = tester.getCenter(btnFinder);
+    // Should be roughly in the middle of the screen
+    expect(btnCenter.dy, closeTo(screenHeight / 2, 100));
+    expect(btnCenter.dx, closeTo(screenWidth / 2, 10));
     
     addTearDown(() {
       tester.view.resetPhysicalSize();

@@ -53,6 +53,31 @@ class MainDashboardScreen extends StatelessWidget {
                   ),
                   BlocBuilder<DashboardBloc, DashboardState>(
                     builder: (context, state) {
+                      if (state is DashboardLoaded && state.allLogs.isEmpty) {
+                        return SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 32),
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(maxWidth: 300),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    _ActionButton(
+                                      onPressed: () => _openNewLiftDialog(context),
+                                      icon: Icons.fitness_center_rounded,
+                                      label: 'NEW LIFT',
+                                      isPrimary: true,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+
                       final hasRecords = state is DashboardLoaded && state.allLogs.isNotEmpty;
                       if (!hasRecords) {
                         return const SliverToBoxAdapter(child: SizedBox.shrink());
@@ -70,70 +95,77 @@ class MainDashboardScreen extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              color: const Color(0xFF09090B).withValues(alpha: 0.8),
-              child: SafeArea(
-                child: BlocBuilder<DashboardBloc, DashboardState>(
-                  builder: (context, state) {
-                    WorkoutLog? lastLog;
-                    if (state is DashboardLoaded && state.allLogs.isNotEmpty) {
-                      lastLog = state.allLogs.first;
-                    }
+        bottomNavigationBar: BlocBuilder<DashboardBloc, DashboardState>(
+          builder: (context, state) {
+            final hasRecords = state is DashboardLoaded && state.allLogs.isNotEmpty;
+            if (!hasRecords) return const SizedBox.shrink();
 
-                    final screenWidth = MediaQuery.of(context).size.width;
-                    final isTablet = screenWidth > 600;
+            return ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(
+                  color: const Color(0xFF09090B).withValues(alpha: 0.8),
+                  child: SafeArea(
+                    child: Builder(
+                      builder: (context) {
+                        WorkoutLog? lastLog;
+                        if (state is DashboardLoaded && state.allLogs.isNotEmpty) {
+                          lastLog = state.allLogs.first;
+                        }
 
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(height: 12),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Divider(
-                            color: const Color(0xFFFAFAFA).withValues(alpha: 0.1),
-                            height: 1,
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(maxWidth: isTablet ? 500 : double.infinity),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                if (lastLog != null) ...[
-                                  Expanded(
-                                    child: _ActionButton(
-                                      onPressed: () => _openAddSetDialog(context, lastLog!),
-                                      icon: Icons.add_rounded,
-                                      label: 'ADD SET',
-                                      isPrimary: false,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                ],
-                                Expanded(
-                                  child: _ActionButton(
-                                    onPressed: () => _openNewLiftDialog(context),
-                                    icon: Icons.fitness_center_rounded,
-                                    label: 'NEW LIFT',
-                                    isPrimary: true,
-                                  ),
-                                ),
-                              ],
+                        final screenWidth = MediaQuery.of(context).size.width;
+                        final isTablet = screenWidth > 600;
+
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const SizedBox(height: 12),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child: Divider(
+                                color: const Color(0xFFFAFAFA).withValues(alpha: 0.1),
+                                height: 1,
+                              ),
                             ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(maxWidth: isTablet ? 500 : double.infinity),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (lastLog != null) ...[
+                                      Expanded(
+                                        child: _ActionButton(
+                                          onPressed: () => _openAddSetDialog(context, lastLog!),
+                                          icon: Icons.add_rounded,
+                                          label: 'ADD SET',
+                                          isPrimary: false,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                    ],
+                                    Expanded(
+                                      child: _ActionButton(
+                                        onPressed: () => _openNewLiftDialog(context),
+                                        icon: Icons.fitness_center_rounded,
+                                        label: 'NEW LIFT',
+                                        isPrimary: true,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );
