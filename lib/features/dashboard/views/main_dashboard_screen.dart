@@ -51,9 +51,17 @@ class MainDashboardScreen extends StatelessWidget {
                     ),
                     centerTitle: false,
                   ),
-                  const SliverPersistentHeader(
-                    pinned: true,
-                    delegate: _SearchHeaderDelegate(),
+                  BlocBuilder<DashboardBloc, DashboardState>(
+                    builder: (context, state) {
+                      final hasRecords = state is DashboardLoaded && state.allLogs.isNotEmpty;
+                      if (!hasRecords) {
+                        return const SliverToBoxAdapter(child: SizedBox.shrink());
+                      }
+                      return const SliverPersistentHeader(
+                        pinned: true,
+                        delegate: _SearchHeaderDelegate(),
+                      );
+                    },
                   ),
                   const WorkoutHistoryTable(),
                   const SliverPadding(padding: EdgeInsets.only(bottom: 120)),

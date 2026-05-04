@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:simple_gym_tracker/features/dashboard/views/main_dashboard_screen.dart';
 import 'package:simple_gym_tracker/features/dashboard/viewmodels/dashboard_bloc.dart';
 import 'package:simple_gym_tracker/features/dashboard/viewmodels/data_management_bloc.dart';
+import 'package:simple_gym_tracker/data/models/workout_log.dart';
 import 'package:simple_gym_tracker/data/repositories/movement_repository.dart';
 
 class MockDashboardBloc extends Mock implements DashboardBloc {}
@@ -103,6 +104,13 @@ void main() {
   });
 
   testWidgets('Search bar triggers search and clear events', (tester) async {
+    // Provide a state with logs so the search bar is visible
+    when(() => mockDashboardBloc.state).thenReturn(
+      DashboardLoaded(const {}, [
+        WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: 123, painFelt: false, variations: [], movementName: 'Bench Press')
+      ], query: '')
+    );
+
     await tester.pumpWidget(createWidgetUnderTest());
     await tester.pumpAndSettle();
 
@@ -125,5 +133,14 @@ void main() {
 
     verify(() => mockDashboardBloc.add(const SearchDashboardLogs(''))).called(1);
     expect(find.text('Bench'), findsNothing);
+  });
+
+  testWidgets('Search bar is hidden when no logs are present', (tester) async {
+    when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded(const {}, const [], query: ''));
+
+    await tester.pumpWidget(createWidgetUnderTest());
+    await tester.pumpAndSettle();
+
+    expect(find.byType(TextField), findsNothing);
   });
 }
