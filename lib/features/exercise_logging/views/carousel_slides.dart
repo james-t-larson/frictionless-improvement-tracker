@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../viewmodels/log_exercise_bloc.dart';
 import '../../../core/widgets/app_search_bar.dart';
+import 'dart:async';
 
 
 // --- Slide 1: Movement Selection ---
@@ -15,27 +16,37 @@ class MovementSelectionSlide extends StatefulWidget {
 
 class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
   final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void dispose() {
+    _focusNode.dispose();
     _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 8),
-        AppSearchBar(
-          controller: _controller,
-          autofocus: true,
-          onChanged: (val) => context.read<LogExerciseBloc>().add(SearchMovement(val)),
-          hintText: 'Bench Press, Squat...',
-          style: AppSearchBarStyle.underlined,
-        ),
-        const SizedBox(height: 16),
+    return BlocListener<LogExerciseBloc, LogExerciseState>(
+      listenWhen: (previous, current) => previous.currentStep != current.currentStep,
+      listener: (context, state) {
+        if (state.currentStep == ExerciseLogStep.movement) {
+          _focusNode.requestFocus();
+        }
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 8),
+          AppSearchBar(
+            controller: _controller,
+            focusNode: _focusNode,
+            autofocus: true,
+            onChanged: (val) => context.read<LogExerciseBloc>().add(SearchMovement(val)),
+            hintText: 'Bench Press, Squat...',
+            style: AppSearchBarStyle.underlined,
+          ),
+          const SizedBox(height: 16),
         Expanded(
           child: BlocBuilder<LogExerciseBloc, LogExerciseState>(
             builder: (context, state) {
@@ -73,6 +84,7 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
           ),
         ),
       ],
+    ),
     );
   }
 }
@@ -107,7 +119,7 @@ class _VariationSelectionSlideState extends State<VariationSelectionSlide> {
             const SizedBox(height: 8),
             AppSearchBar(
               controller: _controller,
-              autofocus: true,
+              autofocus: false,
               onChanged: (val) => context.read<LogExerciseBloc>().add(SearchVariation(val)),
               hintText: 'Incline, Dumbbell...',
               style: AppSearchBarStyle.underlined,
@@ -206,6 +218,7 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
   final TextEditingController _repsController = TextEditingController();
   final FocusNode _weightFocusNode = FocusNode();
   final FocusNode _repsFocusNode = FocusNode();
+  Timer? _debounceTimer;
 
   @override
   void initState() {
@@ -229,6 +242,7 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
 
   @override
   void dispose() {
+    _debounceTimer?.cancel();
     _weightController.dispose();
     _repsController.dispose();
     _weightFocusNode.dispose();
@@ -240,6 +254,30 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
     final w = double.tryParse(_weightController.text) ?? 0.0;
     final r = int.tryParse(_repsController.text) ?? 0;
     context.read<LogExerciseBloc>().add(UpdateMetrics(w, r));
+  }
+
+  void _onWeightChanged(String value) {
+    _update();
+    
+    _debounceTimer?.cancel();
+    
+    if (_weightFocusNode.hasFocus && value.isNotEmpty) {
+      if (value.replaceAll('.', '').length >= 3) {
+        _moveToReps();
+      } else {
+        _debounceTimer = Timer(const Duration(milliseconds: 1000), () {
+          if (mounted && _weightFocusNode.hasFocus) {
+            _moveToReps();
+          }
+        });
+      }
+    }
+  }
+
+  void _moveToReps() {
+    if (_weightFocusNode.hasFocus) {
+      _repsFocusNode.requestFocus();
+    }
   }
 
   @override
@@ -284,7 +322,7 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
                   controller: _weightController,
                   focusNode: _weightFocusNode,
                   keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                  onChanged: (_) => _update(),
+                  onChanged: _onWeightChanged,
                 ),
               ),
               const SizedBox(width: 24),

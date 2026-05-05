@@ -49,6 +49,9 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
             Navigator.pop(context);
 
           } else {
+            if (state.currentStep == ExerciseLogStep.variation) {
+              FocusScope.of(context).unfocus();
+            }
             _pageController.animateToPage(
               state.currentStep.slideIndex,
               duration: const Duration(milliseconds: 300),

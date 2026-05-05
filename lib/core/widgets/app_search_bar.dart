@@ -12,6 +12,7 @@ class AppSearchBar extends StatefulWidget {
   final AppSearchBarStyle style;
   final bool autofocus;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
 
   const AppSearchBar({
     super.key,
@@ -21,6 +22,7 @@ class AppSearchBar extends StatefulWidget {
     this.style = AppSearchBarStyle.boxed,
     this.autofocus = false,
     this.controller,
+    this.focusNode,
   });
 
   @override
@@ -76,6 +78,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
         ),
         child: TextField(
           controller: _controller,
+          focusNode: widget.focusNode,
           autofocus: widget.autofocus,
           onChanged: widget.onChanged,
           style: const TextStyle(color: Color(0xFFFAFAFA)),
@@ -98,6 +101,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
       // Underlined style
       return TextField(
         controller: _controller,
+        focusNode: widget.focusNode,
         autofocus: widget.autofocus,
         onChanged: widget.onChanged,
         style: const TextStyle(color: Color(0xFFFAFAFA)),
