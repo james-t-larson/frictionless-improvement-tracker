@@ -56,85 +56,89 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
             );
           }
         },
-        child: Dialog(
-          alignment: Alignment.topCenter,
-          backgroundColor: const Color(0xFF18181B),
-          insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          child: Container(
-            width: double.infinity,
-            constraints: const BoxConstraints(maxHeight: 650),
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                BlocBuilder<LogExerciseBloc, LogExerciseState>(
-                  builder: (context, state) {
-                    String title = '';
-                    switch (state.currentStep) {
-                      case ExerciseLogStep.movement:
-                        title = 'MOVEMENT';
-                        break;
-                      case ExerciseLogStep.variation:
-                        title = 'VARIATION';
-                        break;
-                      case ExerciseLogStep.details:
-                        title = 'METRICS';
-                        break;
-                    }
+        child: Material(
+          color: const Color(0xFF18181B),
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).viewInsets.bottom -
+                    MediaQuery.of(context).padding.top,
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                children: [
+                  BlocBuilder<LogExerciseBloc, LogExerciseState>(
+                    builder: (context, state) {
+                      String title = '';
+                      switch (state.currentStep) {
+                        case ExerciseLogStep.movement:
+                          title = 'MOVEMENT';
+                          break;
+                        case ExerciseLogStep.variation:
+                          title = 'VARIATION';
+                          break;
+                        case ExerciseLogStep.details:
+                          title = 'METRICS';
+                          break;
+                      }
 
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          children: [
-                            if (state.currentStep.slideIndex > 0)
-                              IconButton(
-                                icon: const Icon(Icons.chevron_left, color: Color(0xFFA1A1AA), size: 28),
-                                onPressed: () => context.read<LogExerciseBloc>().add(PreviousStepRequested()),
-                              )
-                            else
-                              const SizedBox(width: 48),
-                            const Spacer(),
-                            Text(
-                              title,
-                              style: const TextStyle(
-                                color: Color(0xFFFAFAFA),
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 2,
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            children: [
+                              if (state.currentStep.slideIndex > 0)
+                                IconButton(
+                                  icon: const Icon(Icons.chevron_left, color: Color(0xFFA1A1AA), size: 28),
+                                  onPressed: () => context.read<LogExerciseBloc>().add(PreviousStepRequested()),
+                                )
+                              else
+                                const SizedBox(width: 48),
+                              const Spacer(),
+                              Text(
+                                title,
+                                style: const TextStyle(
+                                  color: Color(0xFFFAFAFA),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 2,
+                                ),
                               ),
-                            ),
-                            const Spacer(),
-                            IconButton(
-                              icon: const Icon(Icons.close, color: Color(0xFFA1A1AA), size: 24),
-                              onPressed: () => Navigator.pop(context),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Divider(color: const Color(0xFFFAFAFA).withValues(alpha: 0.1), height: 1),
-                        const SizedBox(height: 16),
-                      ],
-                    );
-                  },
-                ),
-                Expanded(
-                  child: PageView(
-                    controller: _pageController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: const [
-                      MovementSelectionSlide(),
-                      VariationSelectionSlide(),
-                      MetricsAndFeedbackSlide(),
-                    ],
+                              const Spacer(),
+                              IconButton(
+                                icon: const Icon(Icons.close, color: Color(0xFFA1A1AA), size: 24),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Divider(color: const Color(0xFFFAFAFA).withValues(alpha: 0.1), height: 1),
+                          const SizedBox(height: 16),
+                        ],
+                      );
+                    },
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: PageView(
+                      controller: _pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: const [
+                        MovementSelectionSlide(),
+                        VariationSelectionSlide(),
+                        MetricsAndFeedbackSlide(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
-    );
+    ),
+  );
   }
 }

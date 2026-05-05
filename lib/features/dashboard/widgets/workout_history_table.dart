@@ -420,8 +420,11 @@ class _WorkoutLogRowState extends State<_WorkoutLogRow> with SingleTickerProvide
 
     context.read<DashboardBloc>().add(RecordSwipeAction());
 
-    showDialog(
+    showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.transparent,
       builder: (_) => LogExerciseDialog(
         initialPage: 2,
         initialEvent: InitializeFlowForEdit(widget.log, movement: movement),

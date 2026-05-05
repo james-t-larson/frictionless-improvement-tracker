@@ -172,8 +172,11 @@ class MainDashboardScreen extends StatelessWidget {
   }
 
   void _openNewLiftDialog(BuildContext context) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.transparent,
       builder: (context) => const LogExerciseDialog(),
     );
   }
@@ -184,8 +187,11 @@ class MainDashboardScreen extends StatelessWidget {
 
     if (!context.mounted) return;
 
-    showDialog(
+    showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.transparent,
       builder: (context) => LogExerciseDialog(
         initialPage: 2,
         initialEvent: InitializeWithPreviousLog(
