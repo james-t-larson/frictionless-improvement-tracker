@@ -27,21 +27,14 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LogExerciseBloc, LogExerciseState>(
-      listenWhen: (previous, current) => previous.currentStep != current.currentStep,
-      listener: (context, state) {
-        if (state.currentStep == ExerciseLogStep.movement) {
-          _focusNode.requestFocus();
-        }
-      },
-      child: Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 8),
           AppSearchBar(
             controller: _controller,
             focusNode: _focusNode,
-            autofocus: true,
+            autofocus: false,
             onChanged: (val) => context.read<LogExerciseBloc>().add(SearchMovement(val)),
             hintText: 'Bench Press, Squat...',
             style: AppSearchBarStyle.underlined,
@@ -84,7 +77,6 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
           ),
         ),
       ],
-    ),
     );
   }
 }
