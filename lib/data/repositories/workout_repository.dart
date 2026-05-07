@@ -9,9 +9,11 @@ class WorkoutRepository {
 
   Future<List<WorkoutLog>> getAllLogs() async {
     final List<Map<String, dynamic>> maps = await _db.rawQuery('''
-      SELECT w.*, m.name as movement_name 
+      SELECT w.*, m.name as movement_name, mg.name as muscle_group_name
       FROM workouts w
       JOIN movements m ON w.movement_id = m.id
+      LEFT JOIN movement_muscles mm ON m.id = mm.movement_id AND mm.is_primary = 1
+      LEFT JOIN muscle_groups mg ON mm.muscle_id = mg.id
       ORDER BY w.timestamp DESC
     ''');
 

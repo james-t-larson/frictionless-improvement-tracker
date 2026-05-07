@@ -36,7 +36,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         expandedDates.add(grouped.keys.first);
       }
       
-      emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates));
+      final commonMuscleGroups = _computeCommonMuscleGroups(logs);
+
+      emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates, commonMuscleGroups: commonMuscleGroups));
     } catch (e) {
       emit(DashboardError());
     }
@@ -49,12 +51,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         return log.movementName?.toLowerCase().contains(event.query.toLowerCase()) ?? false;
       }).toList();
       final grouped = _groupLogs(filtered);
+      final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
       emit(DashboardLoaded(
         grouped,
         currentState.allLogs,
         query: event.query,
         hasSwipedBefore: currentState.hasSwipedBefore,
         expandedDates: currentState.expandedDates,
+        commonMuscleGroups: commonMuscleGroups,
       ));
     }
   }
@@ -69,12 +73,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
         }).toList();
         final grouped = _groupLogs(filtered);
+        final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
         emit(DashboardLoaded(
           grouped,
           updatedLogs,
           query: currentState.query,
           hasSwipedBefore: currentState.hasSwipedBefore,
           expandedDates: currentState.expandedDates,
+          commonMuscleGroups: commonMuscleGroups,
         ));
       }
     } catch (e) {
@@ -92,21 +98,24 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
         }).toList();
         final grouped = _groupLogs(filtered);
+        final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
         emit(DashboardLoaded(
           grouped,
           logs,
           query: currentState.query,
           hasSwipedBefore: currentState.hasSwipedBefore,
           expandedDates: currentState.expandedDates,
+          commonMuscleGroups: commonMuscleGroups,
         ));
       } else {
         final grouped = _groupLogs(logs);
+        final commonMuscleGroups = _computeCommonMuscleGroups(logs);
         final hasSwiped = await _settingsRepository.getHasSwiped();
         final expandedDates = <String>{};
         if (grouped.isNotEmpty) {
           expandedDates.add(grouped.keys.first);
         }
-        emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates));
+        emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates, commonMuscleGroups: commonMuscleGroups));
       }
     } catch (e) {
       emit(DashboardError());
@@ -125,12 +134,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
         }).toList();
         final grouped = _groupLogs(filtered);
+        final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
         emit(DashboardLoaded(
           grouped,
           logs,
           query: currentState.query,
           hasSwipedBefore: currentState.hasSwipedBefore,
           expandedDates: currentState.expandedDates,
+          commonMuscleGroups: commonMuscleGroups,
         ));
       }
     } catch (e) {
@@ -159,12 +170,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
         }).toList();
         final grouped = _groupLogs(filtered);
+        final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
         emit(DashboardLoaded(
           grouped,
           logs,
           query: currentState.query,
           hasSwipedBefore: currentState.hasSwipedBefore,
           expandedDates: currentState.expandedDates,
+          commonMuscleGroups: commonMuscleGroups,
         ));
       }
     } catch (e) {
@@ -209,6 +222,34 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     final Map<String, List<WorkoutHistoryItem>> result = {};
     for (var dateKey in groupedByDate.keys) {
       result[dateKey] = _stackLogs(groupedByDate[dateKey]!);
+    }
+    return result;
+  }
+
+  Map<String, List<String>> _computeCommonMuscleGroups(List<WorkoutLog> logs) {
+    final Map<String, List<WorkoutLog>> groupedByDate = {};
+    for (var log in logs) {
+      final dateKey = DateFormatters.formatTimestamp(log.timestamp);
+      if (!groupedByDate.containsKey(dateKey)) {
+        groupedByDate[dateKey] = [];
+      }
+      groupedByDate[dateKey]!.add(log);
+    }
+
+    final Map<String, List<String>> result = {};
+    for (var dateKey in groupedByDate.keys) {
+      final dailyLogs = groupedByDate[dateKey]!;
+      final counts = <String, int>{};
+      for (var log in dailyLogs) {
+        if (log.muscleGroupName != null) {
+          counts[log.muscleGroupName!] = (counts[log.muscleGroupName!] ?? 0) + 1;
+        }
+      }
+      if (counts.isNotEmpty) {
+        final sortedEntries = counts.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        result[dateKey] = sortedEntries.take(2).map((e) => e.key).toList();
+      }
     }
     return result;
   }

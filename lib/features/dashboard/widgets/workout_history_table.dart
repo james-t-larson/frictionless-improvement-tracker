@@ -42,13 +42,38 @@ class WorkoutHistoryTable extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              date.toUpperCase(),
-                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    fontSize: 14,
-                                    letterSpacing: 1.5,
-                                    color: const Color(0xFFA1A1AA),
-                                  ),
+                            Row(
+                              children: [
+                                Text(
+                                  date.toUpperCase(),
+                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                        fontSize: 14,
+                                        letterSpacing: 1.5,
+                                        color: const Color(0xFFA1A1AA),
+                                      ),
+                                ),
+                                if (state.commonMuscleGroups[date] != null)
+                                  ...state.commonMuscleGroups[date]!.map((group) => Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF27272A),
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(color: const Color(0xFF3F3F46)),
+                                      ),
+                                      child: Text(
+                                        group.toUpperCase(),
+                                        style: const TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xFFE4E4E7),
+                                          letterSpacing: 0.5,
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                              ],
                             ),
                             AnimatedRotation(
                               turns: isExpanded ? 0.5 : 0,
