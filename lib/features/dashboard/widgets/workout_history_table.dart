@@ -38,7 +38,7 @@ class WorkoutHistoryTable extends StatelessWidget {
                         context.read<DashboardBloc>().add(ToggleDateExpansion(date));
                       },
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
