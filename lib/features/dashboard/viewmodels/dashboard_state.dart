@@ -40,12 +40,14 @@ class DashboardLoaded extends DashboardState {
   final List<WorkoutLog> allLogs;
   final String query;
   final bool hasSwipedBefore;
+  final Set<String> expandedDates;
 
   const DashboardLoaded(
     this.groupedLogs,
     this.allLogs, {
     this.query = '',
     this.hasSwipedBefore = true,
+    this.expandedDates = const {},
   });
 
   DashboardLoaded copyWith({
@@ -53,17 +55,19 @@ class DashboardLoaded extends DashboardState {
     List<WorkoutLog>? allLogs,
     String? query,
     bool? hasSwipedBefore,
+    Set<String>? expandedDates,
   }) {
     return DashboardLoaded(
       groupedLogs ?? this.groupedLogs,
       allLogs ?? this.allLogs,
       query: query ?? this.query,
       hasSwipedBefore: hasSwipedBefore ?? this.hasSwipedBefore,
+      expandedDates: expandedDates ?? this.expandedDates,
     );
   }
 
   @override
-  List<Object?> get props => [groupedLogs, allLogs, query, hasSwipedBefore];
+  List<Object?> get props => [groupedLogs, allLogs, query, hasSwipedBefore, expandedDates];
 }
 
 class DashboardError extends DashboardState {}

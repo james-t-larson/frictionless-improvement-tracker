@@ -21,6 +21,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     on<DashboardWorkoutGroupDeleted>(_onWorkoutGroupDeleted);
     on<DashboardDuplicateLastSet>(_onDuplicateLastSet);
     on<RecordSwipeAction>(_onRecordSwipeAction);
+    on<ToggleDateExpansion>(_onToggleDateExpansion);
   }
 
   Future<void> _onLoadLogs(LoadDashboardLogs event, Emitter<DashboardState> emit) async {
@@ -29,7 +30,13 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       final logs = await _repository.getAllLogs();
       final hasSwiped = await _settingsRepository.getHasSwiped();
       final grouped = _groupLogs(logs);
-      emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped));
+      
+      final expandedDates = <String>{};
+      if (grouped.isNotEmpty) {
+        expandedDates.add(grouped.keys.first);
+      }
+      
+      emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates));
     } catch (e) {
       emit(DashboardError());
     }
@@ -47,6 +54,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         currentState.allLogs,
         query: event.query,
         hasSwipedBefore: currentState.hasSwipedBefore,
+        expandedDates: currentState.expandedDates,
       ));
     }
   }
@@ -66,6 +74,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           updatedLogs,
           query: currentState.query,
           hasSwipedBefore: currentState.hasSwipedBefore,
+          expandedDates: currentState.expandedDates,
         ));
       }
     } catch (e) {
@@ -88,11 +97,16 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           logs,
           query: currentState.query,
           hasSwipedBefore: currentState.hasSwipedBefore,
+          expandedDates: currentState.expandedDates,
         ));
       } else {
         final grouped = _groupLogs(logs);
         final hasSwiped = await _settingsRepository.getHasSwiped();
-        emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped));
+        final expandedDates = <String>{};
+        if (grouped.isNotEmpty) {
+          expandedDates.add(grouped.keys.first);
+        }
+        emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates));
       }
     } catch (e) {
       emit(DashboardError());
@@ -116,6 +130,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           logs,
           query: currentState.query,
           hasSwipedBefore: currentState.hasSwipedBefore,
+          expandedDates: currentState.expandedDates,
         ));
       }
     } catch (e) {
@@ -149,6 +164,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           logs,
           query: currentState.query,
           hasSwipedBefore: currentState.hasSwipedBefore,
+          expandedDates: currentState.expandedDates,
         ));
       }
     } catch (e) {
@@ -163,6 +179,20 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         await _settingsRepository.setHasSwiped(true);
         emit(currentState.copyWith(hasSwipedBefore: true));
       }
+    }
+  }
+
+  void _onToggleDateExpansion(ToggleDateExpansion event, Emitter<DashboardState> emit) {
+    if (state is DashboardLoaded) {
+      final currentState = state as DashboardLoaded;
+
+      final newExpanded = Set<String>.from(currentState.expandedDates);
+      if (newExpanded.contains(event.dateKey)) {
+        newExpanded.remove(event.dateKey);
+      } else {
+        newExpanded.add(event.dateKey);
+      }
+      emit(currentState.copyWith(expandedDates: newExpanded));
     }
   }
 

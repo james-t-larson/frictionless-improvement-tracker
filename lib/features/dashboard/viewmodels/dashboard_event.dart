@@ -49,3 +49,10 @@ class DashboardDuplicateLastSet extends DashboardEvent {
 class RecordSwipeAction extends DashboardEvent {
   const RecordSwipeAction();
 }
+
+class ToggleDateExpansion extends DashboardEvent {
+  final String dateKey;
+  const ToggleDateExpansion(this.dateKey);
+  @override
+  List<Object?> get props => [dateKey];
+}
