@@ -52,12 +52,23 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       }).toList();
       final grouped = _groupLogs(filtered);
       final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
+
+      // When a search is active, expand all result dates so matches are visible.
+      // When the query is cleared, revert to only the first date — matching
+      // the initial load behavior from _onLoadLogs.
+      final Set<String> expandedDates;
+      if (event.query.isEmpty) {
+        expandedDates = grouped.isNotEmpty ? {grouped.keys.first} : {};
+      } else {
+        expandedDates = grouped.keys.toSet();
+      }
+
       emit(DashboardLoaded(
         grouped,
         currentState.allLogs,
         query: event.query,
         hasSwipedBefore: currentState.hasSwipedBefore,
-        expandedDates: currentState.expandedDates,
+        expandedDates: expandedDates,
         commonMuscleGroups: commonMuscleGroups,
       ));
     }
