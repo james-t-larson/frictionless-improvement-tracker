@@ -19,6 +19,7 @@ class MovementRepository {
       final List<dynamic> data = await _dataSource.getExercises();
       Map<String, int> variationCache = {};
       Map<String, int> muscleCache = {};
+      Map<String, int> groupCache = {};
 
       await _db.transaction((txn) async {
         for (var json in data) {
@@ -62,6 +63,22 @@ class MovementRepository {
 
           await linkMuscles(movement.primaryMuscles, 1);
           await linkMuscles(movement.secondaryMuscles, 0);
+
+          // Handle Workout Groups
+          final groups = movement.workoutGroups.toSet().toList();
+          for (var gName in groups) {
+            int groupId;
+            if (groupCache.containsKey(gName)) {
+              groupId = groupCache[gName]!;
+            } else {
+              groupId = await txn.insert('workout_groups', {'name': gName});
+              groupCache[gName] = groupId;
+            }
+            await txn.insert('movement_groups', {
+              'movement_id': movementId,
+              'group_id': groupId,
+            });
+          }
         }
       });
     }
@@ -116,11 +133,20 @@ class MovementRepository {
         .map((m) => m['name'] as String)
         .toList();
 
+    final groupRows = await _db.rawQuery('''
+      SELECT wg.name
+      FROM workout_groups wg
+      JOIN movement_groups mg ON wg.id = mg.group_id
+      WHERE mg.movement_id = ?
+    ''', [movement.id]);
+    final groups = groupRows.map((r) => r['name'] as String).toList();
+
     return Movement(
       id: movement.id,
       name: movement.name,
       primaryMuscles: primary,
       secondaryMuscles: secondary,
+      workoutGroups: groups,
     );
   }
 
@@ -231,6 +257,23 @@ class MovementRepository {
     List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
     for (var i = 0; i < movements.length; i++) {
         movements[i] = await _withMuscles(movements[i]);
+    }
+    return movements;
+  }
+
+  Future<List<Movement>> getMovementsByWorkoutGroup(String groupName) async {
+    final List<Map<String, dynamic>> maps = await _db.rawQuery('''
+      SELECT m.*
+      FROM movements m
+      JOIN movement_groups mg ON m.id = mg.movement_id
+      JOIN workout_groups wg ON wg.id = mg.group_id
+      WHERE wg.name = ?
+      ORDER BY m.name ASC
+    ''', [groupName]);
+
+    List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
+    for (var i = 0; i < movements.length; i++) {
+      movements[i] = await _withMuscles(movements[i]);
     }
     return movements;
   }

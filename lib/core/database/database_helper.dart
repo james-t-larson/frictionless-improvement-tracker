@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
   static const _databaseName = "gym_tracker.db";
-  static const _databaseVersion = 3;
+  static const _databaseVersion = 4;
 
   static Future<Database> initDb() async {
     final documentsDirectory = await getApplicationDocumentsDirectory();
@@ -15,7 +15,7 @@ class DatabaseHelper {
       version: _databaseVersion,
       onCreate: onCreate,
       onUpgrade: (db, oldVersion, newVersion) async {
-        if (oldVersion < 3) {
+        if (oldVersion < 4) {
           // Simplest upgrade: Drop all and recreate for now
           // In a production app, we would write migrations.
           await db.execute("DROP TABLE IF EXISTS workout_variations");
@@ -24,6 +24,8 @@ class DatabaseHelper {
           await db.execute("DROP TABLE IF EXISTS variations");
           await db.execute("DROP TABLE IF EXISTS movement_muscles");
           await db.execute("DROP TABLE IF EXISTS muscle_groups");
+          await db.execute("DROP TABLE IF EXISTS movement_groups");
+          await db.execute("DROP TABLE IF EXISTS workout_groups");
           await db.execute("DROP TABLE IF EXISTS movements");
           await onCreate(db, newVersion);
         }
@@ -101,6 +103,23 @@ class DatabaseHelper {
         PRIMARY KEY (workout_id, variation_id),
         FOREIGN KEY (workout_id) REFERENCES workouts (id) ON DELETE CASCADE,
         FOREIGN KEY (variation_id) REFERENCES variations (id) ON DELETE CASCADE
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE workout_groups (
+        id   INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL UNIQUE
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE movement_groups (
+        movement_id INTEGER NOT NULL,
+        group_id    INTEGER NOT NULL,
+        PRIMARY KEY (movement_id, group_id),
+        FOREIGN KEY (movement_id) REFERENCES movements (id) ON DELETE CASCADE,
+        FOREIGN KEY (group_id)    REFERENCES workout_groups (id) ON DELETE CASCADE
       )
     ''');
 
