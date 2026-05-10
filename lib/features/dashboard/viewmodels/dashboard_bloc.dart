@@ -252,8 +252,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       final dailyLogs = groupedByDate[dateKey]!;
       final counts = <String, int>{};
       for (var log in dailyLogs) {
-        if (log.muscleGroupName != null) {
-          counts[log.muscleGroupName!] = (counts[log.muscleGroupName!] ?? 0) + 1;
+        if (log.workoutGroupName != null) {
+          counts[log.workoutGroupName!] = (counts[log.workoutGroupName!] ?? 0) + 1;
         }
       }
       if (counts.isNotEmpty) {

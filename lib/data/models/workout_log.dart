@@ -11,7 +11,7 @@ class WorkoutLog {
   
   // Joined data
   final String? movementName;
-  final String? muscleGroupName;
+  final String? workoutGroupName;
 
   WorkoutLog({
     this.id,
@@ -22,7 +22,7 @@ class WorkoutLog {
     this.painFelt = false,
     this.variations = const [],
     this.movementName,
-    this.muscleGroupName,
+    this.workoutGroupName,
   });
 
   Map<String, dynamic> toMap() {
@@ -45,7 +45,7 @@ class WorkoutLog {
       timestamp: map['timestamp'] as int? ?? 0,
       painFelt: (map['pain_felt'] as int? ?? 0) == 1,
       movementName: map['movement_name'] as String?,
-      muscleGroupName: map['muscle_group_name'] as String?,
+      workoutGroupName: map['workout_group_name'] as String?,
       variations: variations,
     );
   }
@@ -59,7 +59,7 @@ class WorkoutLog {
     bool? painFelt,
     List<Variation>? variations,
     String? movementName,
-    String? muscleGroupName,
+    String? workoutGroupName,
   }) {
     return WorkoutLog(
       id: id ?? this.id,
@@ -70,7 +70,7 @@ class WorkoutLog {
       painFelt: painFelt ?? this.painFelt,
       variations: variations ?? this.variations,
       movementName: movementName ?? this.movementName,
-      muscleGroupName: muscleGroupName ?? this.muscleGroupName,
+      workoutGroupName: workoutGroupName ?? this.workoutGroupName,
     );
   }
 }

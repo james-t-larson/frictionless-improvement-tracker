@@ -338,8 +338,8 @@ const String staticExerciseJson = r'''[
   },
   {
     "pk": "a189b026-3641-426f-b9a2-d32678ccb99f",
-    "name": "Straight Arm Lat Pulldown",
-    "variations": ["cable", "dumbbell", "band", "rope", "single-arm", "seated", "standing", "kneeling", "bent-arm", "wide-grip", "close-grip", "neutral-grip", "overhand-grip", "underhand-grip", "bar"],
+    "name": "Lat Pulldown",
+    "variations": ["straight arm", "cable", "dumbbell", "band", "rope", "single-arm", "seated", "standing", "kneeling", "bent-arm", "wide-grip", "close-grip", "neutral-grip", "overhand-grip", "underhand-grip", "bar"],
     "workoutGroups": ["Pull", "Back"],
     "primaryMuscles": ["lat"],
     "secondaryMuscles": [
