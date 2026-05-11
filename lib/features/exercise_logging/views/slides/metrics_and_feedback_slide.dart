@@ -105,9 +105,21 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
         children: [
           BlocBuilder<LogExerciseBloc, LogExerciseState>(
             builder: (context, state) {
-              return Text(
-                state.lastPerformanceHint ?? '',
-                style: const TextStyle(color: Color(0xFFA1A1AA), fontSize: 13),
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (state.selectedMovement != null)
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: _SelectedMovementLabel(name: state.selectedMovement!.name),
+                      ),
+                    ),
+                  Text(
+                    state.lastPerformanceHint ?? '',
+                    style: const TextStyle(color: Color(0xFFA1A1AA), fontSize: 13),
+                  ),
+                ],
               );
             },
           ),
@@ -280,6 +292,44 @@ class _PainToggleButton extends StatelessWidget {
             letterSpacing: 1,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _SelectedMovementLabel extends StatelessWidget {
+  final String name;
+
+  const _SelectedMovementLabel({required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: const Color(0xFF27272A),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: const Color(0xFF3F3F46), width: 1),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(
+            Icons.fitness_center_rounded,
+            color: Color(0xFF71717A),
+            size: 12,
+          ),
+          const SizedBox(width: 6),
+          Text(
+            name,
+            style: const TextStyle(
+              color: Color(0xFFA1A1AA),
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.3,
+            ),
+          ),
+        ],
       ),
     );
   }

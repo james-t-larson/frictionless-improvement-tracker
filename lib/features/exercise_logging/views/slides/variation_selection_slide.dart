@@ -28,8 +28,15 @@ class _VariationSelectionSlideState extends State<VariationSelectionSlide> {
         }
         
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 8),
+            if (state.selectedMovement != null)
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: _SelectedMovementLabel(name: state.selectedMovement!.name),
+                ),
+              ),
             AppSearchBar(
               controller: _controller,
               autofocus: false,
@@ -247,6 +254,44 @@ class _AddVariationButton extends StatelessWidget {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
             ),
             child: const Text('ADD'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SelectedMovementLabel extends StatelessWidget {
+  final String name;
+
+  const _SelectedMovementLabel({required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: const Color(0xFF27272A),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: const Color(0xFF3F3F46), width: 1),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(
+            Icons.fitness_center_rounded,
+            color: Color(0xFF71717A),
+            size: 12,
+          ),
+          const SizedBox(width: 6),
+          Text(
+            name,
+            style: const TextStyle(
+              color: Color(0xFFA1A1AA),
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.3,
+            ),
           ),
         ],
       ),
