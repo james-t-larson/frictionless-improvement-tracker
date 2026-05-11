@@ -34,7 +34,7 @@ const String staticExerciseJson = r'''[
     "name": "Face Pull",
     "slug": "face-pull",
     "variations": ["cable", "band", "rope", "single-arm", "high-pulley", "low-pulley", "kneeling", "seated", "chest-level", "pronated", "supinated"],
-    "workoutGroups": ["Shoulders", "Accessory"],
+    "workoutGroups": ["Shoulders", "Back"],
     "primaryMuscles": ["rotator cuff - back", "trap", "shoulder - back"],
     "secondaryMuscles": ["shoulder - side", "forearm - outer"]
   },
@@ -72,7 +72,7 @@ const String staticExerciseJson = r'''[
     "pk": "2b9085c4-ad46-466b-acc9-f863a93dbaa9",
     "name": "Curl",
     "variations": ["bodyweight", "preacher", "cross-body", "single-arm", "barbell", "dumbbell", "incline", "decline", "close-grip", "wide-grip", "rope", "cable", "EZ-bar", "zottman", "21s", "spider", "machine", "seated", "standing", "reverse", "drag", "band", "kettlebell", "alternating"],
-    "workoutGroups": ["Biceps"],
+    "workoutGroups": ["Biceps", "Arms"],
     "primaryMuscles": ["bicep"],
     "secondaryMuscles": ["forearm - inner"]
   },
@@ -158,7 +158,7 @@ const String staticExerciseJson = r'''[
     "pk": "7e95b8b5-a6eb-41b6-a3c9-ae06a9ba7ac4",
     "name": "Hip Abduction",
     "variations": ["machine", "cable", "banded", "single-leg", "standing", "seated", "lying", "fire hydrant", "clamshell", "side-lying"],
-    "workoutGroups": ["Legs", "Accessory"],
+    "workoutGroups": ["Legs"],
     "primaryMuscles": ["thigh - outer"],
     "secondaryMuscles": ["glute"]
   },
@@ -243,7 +243,7 @@ const String staticExerciseJson = r'''[
     "name": "Rear Delt Fly",
     "alternativeNames": ["Rear Delt Raise"],
     "variations": ["dumbbell", "cable", "machine", "single-arm", "bent-over", "seated", "incline bench", "reverse pec deck", "band", "lying"],
-    "workoutGroups": ["Shoulders", "Accessory"],
+    "workoutGroups": ["Shoulders", "Back"],
     "primaryMuscles": ["shoulder - back", "trap"],
     "secondaryMuscles": [
       "forearm - inner",
@@ -256,7 +256,7 @@ const String staticExerciseJson = r'''[
     "pk": "e8dc87a4-79e1-4114-90a4-418a4b67359f",
     "name": "Shrugs",
     "variations": ["dumbbell", "barbell", "single-arm", "cable", "machine", "kettlebell", "trap bar", "smith machine", "behind-the-back", "overhead", "band"],
-    "workoutGroups": ["Shoulders", "Back", "Accessory"],
+    "workoutGroups": ["Shoulders", "Back"],
     "primaryMuscles": ["shoulder - back", "trap"],
     "secondaryMuscles": [
       "forearm - inner",
@@ -352,7 +352,7 @@ const String staticExerciseJson = r'''[
     "pk": "c46c643f-d109-4720-8ce9-3b5d24b9cdec",
     "name": "Lateral Walk",
     "variations": ["band", "dumbbell", "kettlebell", "barbell", "wide-stance", "squat position", "hip-level", "weighted vest", "ankle weights"],
-    "workoutGroups": ["Legs", "Accessory"],
+    "workoutGroups": ["Legs"],
     "primaryMuscles": ["glute", "thigh - outer"],
     "secondaryMuscles": ["calf", "hamstring", "quad", "thigh - inner"]
   },
@@ -406,7 +406,7 @@ const String staticExerciseJson = r'''[
     "pk": "f1c844bd-28c8-4191-9b2a-d0233e6941e1",
     "name": "Wrist Curl",
     "variations": ["barbell", "dumbbell", "cable", "band", "single-arm", "behind-the-back", "seated", "standing", "EZ-bar", "reverse", "pronated"],
-    "workoutGroups": ["Accessory"],
+    "workoutGroups": ["Arms"],
     "primaryMuscles": ["forearm - inner"],
     "secondaryMuscles": []
   },
@@ -518,7 +518,7 @@ const String staticExerciseJson = r'''[
     "pk": "b0c93d0a-1e2f-4b74-a5c0-2d7f8b1a4e96",
     "name": "Hammer Curl",
     "variations": ["dumbbell", "cable", "rope", "single-arm", "cross-body", "incline", "seated", "standing", "alternating", "preacher", "drag", "machine", "band"],
-    "workoutGroups": ["Biceps"],
+    "workoutGroups": ["Biceps", "Arms"],
     "primaryMuscles": ["bicep"],
     "secondaryMuscles": ["forearm - outer", "forearm - inner"]
   },
@@ -542,7 +542,7 @@ const String staticExerciseJson = r'''[
     "pk": "c7d60e7b-8f9a-4c41-b2d7-9e4a5c8b1f63",
     "name": "Wrist Extension",
     "variations": ["barbell", "dumbbell", "cable", "band", "single-arm", "seated", "standing", "EZ-bar", "reverse wrist curl", "pronated"],
-    "workoutGroups": ["Accessory"],
+    "workoutGroups": ["Arms"],
     "primaryMuscles": ["forearm - outer"],
     "secondaryMuscles": []
   },
@@ -550,7 +550,7 @@ const String staticExerciseJson = r'''[
     "pk": "d8e71f8c-9a0b-4d52-c3e8-0f5b6d9c2a74",
     "name": "Farmer's Carry",
     "variations": ["dumbbell", "barbell", "kettlebell", "trap bar", "single-arm", "overhead", "yoke", "waiter's carry", "suitcase carry", "mixed-grip", "axle bar", "double kettlebell"],
-    "workoutGroups": ["Accessory", "Back"],
+    "workoutGroups": ["Shoulders", "Back"],
     "primaryMuscles": ["forearm - inner", "trap"],
     "secondaryMuscles": ["lower back", "shoulder - side", "glute"]
   },
@@ -606,7 +606,7 @@ const String staticExerciseJson = r'''[
     "pk": "d0e93f0c-1a2b-4d74-c5e0-2f7a8d1e4f96",
     "name": "Band Pull-Apart",
     "variations": ["overhand", "underhand", "wide-grip", "narrow-grip", "chest-level", "overhead", "behind-the-back", "diagonal", "single-arm", "band"],
-    "workoutGroups": ["Shoulders", "Accessory"],
+    "workoutGroups": ["Shoulders"],
     "primaryMuscles": ["shoulder - back", "rotator cuff - back"],
     "secondaryMuscles": ["trap", "shoulder - side"]
   },
@@ -614,7 +614,7 @@ const String staticExerciseJson = r'''[
     "pk": "e1f04a1d-2b3c-4e85-d6f1-3a8d9e2f5a07",
     "name": "Cable External Rotation",
     "variations": ["standing", "seated", "single-arm", "band", "lying", "90-degree abduction", "side-lying", "prone", "doorway"],
-    "workoutGroups": ["Accessory"],
+    "workoutGroups": ["Shoulders"],
     "primaryMuscles": ["rotator cuff - back"],
     "secondaryMuscles": ["shoulder - back"]
   },
@@ -622,7 +622,7 @@ const String staticExerciseJson = r'''[
     "pk": "f2a15b2e-3c4d-4f96-e7a2-4b9e0f3a6b18",
     "name": "Internal Rotation",
     "variations": ["cable", "band", "standing", "seated", "single-arm", "lying", "90-degree abduction", "side-lying", "prone"],
-    "workoutGroups": ["Accessory"],
+    "workoutGroups": ["Shoulders"],
     "primaryMuscles": ["rotator cuff - front"],
     "secondaryMuscles": ["shoulder - front"]
   },
@@ -638,7 +638,7 @@ const String staticExerciseJson = r'''[
     "pk": "e7f60a7e-8b9c-4e41-d2f7-9a4c5e8f1b63",
     "name": "Hip Adduction",
     "variations": ["machine", "cable", "banded", "seated", "standing", "lying", "Copenhagen plank", "side-lying", "single-leg"],
-    "workoutGroups": ["Legs", "Accessory"],
+    "workoutGroups": ["Legs"],
     "primaryMuscles": ["thigh - inner"],
     "secondaryMuscles": ["glute"]
   },

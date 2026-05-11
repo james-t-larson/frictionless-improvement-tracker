@@ -193,7 +193,7 @@ class MainDashboardScreen extends StatelessWidget {
       useSafeArea: true,
       backgroundColor: Colors.transparent,
       builder: (context) => LogExerciseDialog(
-        initialPage: 2,
+        metricsOnly: true,
         initialEvent: InitializeWithPreviousLog(
           movement: movement,
           selectedVariations: lastLog.variations,
