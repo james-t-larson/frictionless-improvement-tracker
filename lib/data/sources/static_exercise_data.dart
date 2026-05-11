@@ -367,7 +367,7 @@ const String staticExerciseJson = r'''[
   {
     "pk": "0c5940e6-419e-476b-a1eb-39302e0aebe5",
     "name": "Chest Fly",
-    "variations": ["dumbbell", "cable", "machine", "band", "incline", "decline", "flat", "neutral-grip", "overhand-grip", "underhand-grip", "barbell"],
+    "variations": ["dumbbell", "cable crossover", "machine", "band", "incline", "decline", "flat", "overhand-grip", "underhand-grip", "pec-dec"],
     "workoutGroups": ["Chest"],
     "primaryMuscles": ["chest"],
     "secondaryMuscles": ["bicep", "forearm - inner", "shoulder - front"]

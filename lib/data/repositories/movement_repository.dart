@@ -119,22 +119,22 @@ class MovementRepository {
   /// If [muscleGroupIds] is empty (no lifts logged today), falls back to
   /// [getTopMovements] — the user's all-time most common movements.
   ///
-  /// Otherwise, returns movements that share at least one muscle group with
-  /// any of the provided IDs. This handles multi-group days (e.g. back + chest)
-  /// automatically: the IN clause qualifies any movement overlapping any worked
-  /// muscle, then results are ranked by all-time frequency.
+  /// Otherwise, returns ALL movements in the database sorted so that movements
+  /// sharing a muscle group with today's session surface first (is_relevant = 1),
+  /// then remaining movements by frequency. This ensures every movement is
+  /// reachable without searching, regardless of the day's split.
   Future<List<Movement>> getSuggestedMovements(Set<int> muscleGroupIds) async {
     if (muscleGroupIds.isEmpty) return getTopMovements();
 
     final placeholders = muscleGroupIds.map((_) => '?').join(', ');
     final List<Map<String, dynamic>> maps = await _db.rawQuery('''
-      SELECT m.*, COUNT(DISTINCT w.id) as usage_count
+      SELECT m.*, COUNT(DISTINCT w.id) as usage_count,
+        MAX(CASE WHEN mm.muscle_id IN ($placeholders) THEN 1 ELSE 0 END) as is_relevant
       FROM movements m
-      JOIN movement_muscles mm ON m.id = mm.movement_id
+      LEFT JOIN movement_muscles mm ON m.id = mm.movement_id
       LEFT JOIN workouts w ON m.id = w.movement_id
-      WHERE mm.muscle_id IN ($placeholders)
       GROUP BY m.id
-      ORDER BY usage_count DESC, m.name ASC
+      ORDER BY is_relevant DESC, usage_count DESC, m.name ASC
     ''', muscleGroupIds.toList());
 
     List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
