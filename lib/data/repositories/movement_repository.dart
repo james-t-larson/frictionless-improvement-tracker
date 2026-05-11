@@ -114,6 +114,36 @@ class MovementRepository {
     return movements;
   }
 
+  /// Returns movements relevant to a given session, ranked by all-time usage.
+  ///
+  /// If [muscleGroupIds] is empty (no lifts logged today), falls back to
+  /// [getTopMovements] — the user's all-time most common movements.
+  ///
+  /// Otherwise, returns movements that share at least one muscle group with
+  /// any of the provided IDs. This handles multi-group days (e.g. back + chest)
+  /// automatically: the IN clause qualifies any movement overlapping any worked
+  /// muscle, then results are ranked by all-time frequency.
+  Future<List<Movement>> getSuggestedMovements(Set<int> muscleGroupIds) async {
+    if (muscleGroupIds.isEmpty) return getTopMovements();
+
+    final placeholders = muscleGroupIds.map((_) => '?').join(', ');
+    final List<Map<String, dynamic>> maps = await _db.rawQuery('''
+      SELECT m.*, COUNT(DISTINCT w.id) as usage_count
+      FROM movements m
+      JOIN movement_muscles mm ON m.id = mm.movement_id
+      LEFT JOIN workouts w ON m.id = w.movement_id
+      WHERE mm.muscle_id IN ($placeholders)
+      GROUP BY m.id
+      ORDER BY usage_count DESC, m.name ASC
+    ''', muscleGroupIds.toList());
+
+    List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
+    for (var i = 0; i < movements.length; i++) {
+      movements[i] = await _withMuscles(movements[i]);
+    }
+    return movements;
+  }
+
   Future<Movement> _withMuscles(Movement movement) async {
     if (movement.id == null) return movement;
 

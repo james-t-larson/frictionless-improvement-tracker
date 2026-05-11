@@ -37,8 +37,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       }
       
       final commonMuscleGroups = _computeCommonMuscleGroups(logs);
+      final todaysMuscleGroupIds = await _repository.getTodaysMuscleGroupIds();
 
-      emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates, commonMuscleGroups: commonMuscleGroups));
+      emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates, commonMuscleGroups: commonMuscleGroups, todaysMuscleGroupIds: todaysMuscleGroupIds));
     } catch (e) {
       emit(DashboardError());
     }
@@ -103,6 +104,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     try {
       await _repository.updateWorkoutLog(event.updatedLog);
       final logs = await _repository.getAllLogs();
+      final todaysMuscleGroupIds = await _repository.getTodaysMuscleGroupIds();
       if (state is DashboardLoaded) {
         final currentState = state as DashboardLoaded;
         final filtered = logs.where((log) {
@@ -117,6 +119,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           hasSwipedBefore: currentState.hasSwipedBefore,
           expandedDates: currentState.expandedDates,
           commonMuscleGroups: commonMuscleGroups,
+          todaysMuscleGroupIds: todaysMuscleGroupIds,
         ));
       } else {
         final grouped = _groupLogs(logs);
@@ -126,7 +129,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         if (grouped.isNotEmpty) {
           expandedDates.add(grouped.keys.first);
         }
-        emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates, commonMuscleGroups: commonMuscleGroups));
+        emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates, commonMuscleGroups: commonMuscleGroups, todaysMuscleGroupIds: todaysMuscleGroupIds));
       }
     } catch (e) {
       emit(DashboardError());
@@ -139,6 +142,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         await _repository.deleteWorkoutLog(id);
       }
       final logs = await _repository.getAllLogs();
+      final todaysMuscleGroupIds = await _repository.getTodaysMuscleGroupIds();
       if (state is DashboardLoaded) {
         final currentState = state as DashboardLoaded;
         final filtered = logs.where((log) {
@@ -153,6 +157,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           hasSwipedBefore: currentState.hasSwipedBefore,
           expandedDates: currentState.expandedDates,
           commonMuscleGroups: commonMuscleGroups,
+          todaysMuscleGroupIds: todaysMuscleGroupIds,
         ));
       }
     } catch (e) {
@@ -175,6 +180,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       );
       await _repository.saveWorkoutLog(newLog);
       final logs = await _repository.getAllLogs();
+      final todaysMuscleGroupIds = await _repository.getTodaysMuscleGroupIds();
       if (state is DashboardLoaded) {
         final currentState = state as DashboardLoaded;
         final filtered = logs.where((log) {
@@ -189,6 +195,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           hasSwipedBefore: currentState.hasSwipedBefore,
           expandedDates: currentState.expandedDates,
           commonMuscleGroups: commonMuscleGroups,
+          todaysMuscleGroupIds: todaysMuscleGroupIds,
         ));
       }
     } catch (e) {

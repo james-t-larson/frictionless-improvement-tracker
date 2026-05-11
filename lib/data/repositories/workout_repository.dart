@@ -71,6 +71,23 @@ class WorkoutRepository {
     return null;
   }
 
+  /// Returns all distinct muscle group IDs from workouts logged today (since midnight).
+  /// Used to drive contextual movement suggestions when the user opens "New Lift".
+  Future<Set<int>> getTodaysMuscleGroupIds() async {
+    final now = DateTime.now();
+    final midnightMs = DateTime(now.year, now.month, now.day)
+        .millisecondsSinceEpoch;
+
+    final rows = await _db.rawQuery('''
+      SELECT DISTINCT mm.muscle_id
+      FROM workouts w
+      JOIN movement_muscles mm ON w.movement_id = mm.movement_id
+      WHERE w.timestamp >= ?
+    ''', [midnightMs]);
+
+    return rows.map((r) => r['muscle_id'] as int).toSet();
+  }
+
   Future<void> deleteWorkoutLog(int id) async {
     await _db.delete(
       'workouts',

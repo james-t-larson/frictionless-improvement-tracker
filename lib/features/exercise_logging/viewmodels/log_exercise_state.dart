@@ -33,6 +33,14 @@ class LogExerciseState extends Equatable {
   final bool painFelt;
   final int? editingLogId;
 
+  /// Section header shown above the suggestions list.
+  /// 'TODAY\'S SPLIT' when today has logged lifts, 'MOST COMMON' otherwise.
+  final String suggestionLabel;
+
+  /// Muscle group IDs from today's lifts. Stored in state so the BLoC can
+  /// restore the right suggestions when a search query is cleared.
+  final Set<int> todaysMuscleGroupIds;
+
   const LogExerciseState({
     this.currentStep = ExerciseLogStep.movement,
     this.muscleGroups = const [],
@@ -50,6 +58,8 @@ class LogExerciseState extends Equatable {
     this.isSuccess = false,
     this.painFelt = false,
     this.editingLogId,
+    this.suggestionLabel = 'MOST COMMON',
+    this.todaysMuscleGroupIds = const {},
   });
 
   LogExerciseState copyWith({
@@ -69,6 +79,8 @@ class LogExerciseState extends Equatable {
     bool? isSuccess,
     bool? painFelt,
     int? editingLogId,
+    String? suggestionLabel,
+    Set<int>? todaysMuscleGroupIds,
   }) {
     // Note: To clear selected fields, we'd need a more complex copyWith or just handle it in the BLoC.
     // For now, simple copyWith is usually enough if we pass null explicitly for nullable fields.
@@ -89,6 +101,8 @@ class LogExerciseState extends Equatable {
       isSuccess: isSuccess ?? this.isSuccess,
       painFelt: painFelt ?? this.painFelt,
       editingLogId: editingLogId ?? this.editingLogId,
+      suggestionLabel: suggestionLabel ?? this.suggestionLabel,
+      todaysMuscleGroupIds: todaysMuscleGroupIds ?? this.todaysMuscleGroupIds,
     );
   }
 
@@ -129,5 +143,7 @@ class LogExerciseState extends Equatable {
         isSuccess,
         painFelt,
         editingLogId,
+        suggestionLabel,
+        todaysMuscleGroupIds,
       ];
 }

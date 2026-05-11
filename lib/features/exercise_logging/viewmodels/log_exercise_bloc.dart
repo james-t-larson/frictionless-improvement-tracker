@@ -39,11 +39,15 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
   ) async {
     emit(const LogExerciseState());
     
-    // Pre-fetch top movements
-    final topMovements = await _movementRepository.getTopMovements();
+    final ids = event.todaysMuscleGroupIds;
+    final suggested = await _movementRepository.getSuggestedMovements(ids);
+    final label = ids.isNotEmpty ? 'TODAY\'S SPLIT' : 'MOST COMMON';
+
     emit(state.copyWith(
-      movementSearchResults: topMovements,
+      movementSearchResults: suggested,
       currentStep: ExerciseLogStep.movement,
+      suggestionLabel: label,
+      todaysMuscleGroupIds: ids,
     ));
   }
 
@@ -154,8 +158,9 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
         final movements = await _movementRepository.getMovementsByMuscleGroup(state.selectedMuscleGroup!.id!);
         emit(state.copyWith(movementQuery: '', movementSearchResults: movements));
       } else {
-        final common = await _movementRepository.getTopMovements();
-        emit(state.copyWith(movementQuery: '', movementSearchResults: common));
+        // Restore contextual suggestions using stored IDs (today's split or most common)
+        final suggested = await _movementRepository.getSuggestedMovements(state.todaysMuscleGroupIds);
+        emit(state.copyWith(movementQuery: '', movementSearchResults: suggested));
       }
       return;
     }

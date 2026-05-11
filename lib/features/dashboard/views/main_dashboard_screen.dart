@@ -172,12 +172,19 @@ class MainDashboardScreen extends StatelessWidget {
   }
 
   void _openNewLiftDialog(BuildContext context) {
+    final dashState = context.read<DashboardBloc>().state;
+    final todaysMuscleGroupIds = dashState is DashboardLoaded
+        ? dashState.todaysMuscleGroupIds
+        : const <int>{};
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => const LogExerciseDialog(),
+      builder: (context) => LogExerciseDialog(
+        initialEvent: InitializeFlow(todaysMuscleGroupIds: todaysMuscleGroupIds),
+      ),
     );
   }
 

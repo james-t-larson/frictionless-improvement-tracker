@@ -12,7 +12,11 @@ sealed class LogExerciseEvent extends Equatable {
 }
 
 class InitializeFlow extends LogExerciseEvent {
-  const InitializeFlow();
+  final Set<int> todaysMuscleGroupIds;
+  const InitializeFlow({this.todaysMuscleGroupIds = const {}});
+
+  @override
+  List<Object?> get props => [todaysMuscleGroupIds];
 }
 
 class MuscleGroupSelected extends LogExerciseEvent {
