@@ -3,7 +3,7 @@ const String staticExerciseJson = r'''[
     "pk": "1232d6bd-1b97-4c14-b8e6-de4a40cae8db",
     "name": "Pull-Up",
     "variations": ["bodyweight", "weighted", "assisted", "neutral-grip", "wide-grip", "close-grip", "kipping", "butterfly", "archer", "L-sit", "typewriter", "commando", "ring", "towel", "behind-the-neck", "muscle-up"],
-    "workoutGroups": ["Pull", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["lat"],
     "secondaryMuscles": [
       "bicep",
@@ -198,7 +198,7 @@ const String staticExerciseJson = r'''[
     "pk": "a40205d6-396c-4c0b-a4b9-8ffbef49ed32",
     "name": "Row",
     "variations": ["t-bar", "dumbbell", "barbell", "cable", "machine", "pendlay", "chest-supported", "seated", "standing", "single-arm", "wide-grip", "close-grip", "neutral-grip", "overhand", "underhand", "kroc", "yates", "landmine", "ring", "pause"],
-    "workoutGroups": ["Pull", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["lat", "shoulder - back", "trap"],
     "secondaryMuscles": [
       "bicep",
@@ -283,7 +283,7 @@ const String staticExerciseJson = r'''[
     "pk": "e8dc87a4-79e1-4114-90a4-418a4b67359f",
     "name": "Rear Delt Row",
     "variations": ["dumbbell", "barbell", "cable", "machine", "single-arm", "prone", "wide-grip", "close-grip", "band", "kettlebell"],
-    "workoutGroups": ["Shoulders", "Pull", "Back"],
+    "workoutGroups": ["Shoulders", "Back"],
     "primaryMuscles": ["shoulder - back", "trap"],
     "secondaryMuscles": [
       "forearm - inner",
@@ -340,7 +340,7 @@ const String staticExerciseJson = r'''[
     "pk": "a189b026-3641-426f-b9a2-d32678ccb99f",
     "name": "Lat Pulldown",
     "variations": ["straight arm", "cable", "dumbbell", "band", "rope", "single-arm", "seated", "standing", "kneeling", "bent-arm", "wide-grip", "close-grip", "neutral-grip", "overhand-grip", "underhand-grip", "bar"],
-    "workoutGroups": ["Pull", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["lat"],
     "secondaryMuscles": [
       "rotator cuff - back",
@@ -392,7 +392,7 @@ const String staticExerciseJson = r'''[
     "pk": "03ded3cd-bba0-4f04-9afd-f7e321aec282",
     "name": "Lat Pulldown",
     "variations": ["cable", "rope", "single-arm", "kneeling", "wide-grip", "close-grip", "neutral-grip", "overhand-grip", "underhand-grip", "bar"],
-    "workoutGroups": ["Pull", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["lat"],
     "secondaryMuscles": [
       "bicep",
@@ -478,7 +478,7 @@ const String staticExerciseJson = r'''[
     "pk": "c5d48e5b-6f7a-4c29-b0d5-7e2a3c6b9f41",
     "name": "Chin-Up",
     "variations": ["bodyweight", "weighted", "assisted", "close-grip", "neutral-grip", "wide-grip", "L-sit", "ring", "band-resisted", "kipping", "typewriter", "supinated"],
-    "workoutGroups": ["Pull", "Back", "Biceps"],
+    "workoutGroups": ["Back", "Biceps"],
     "primaryMuscles": ["lat", "bicep"],
     "secondaryMuscles": ["forearm - inner", "shoulder - back", "rotator cuff - back"]
   },
@@ -486,7 +486,7 @@ const String staticExerciseJson = r'''[
     "pk": "d6e59f6c-7a8b-4d30-c1e6-8f3b4d7c0a52",
     "name": "Inverted Row",
     "variations": ["bodyweight", "weighted", "wide-grip", "close-grip", "underhand", "feet-elevated", "suspension trainer", "barbell", "rings", "overhand", "neutral", "pronated", "single-arm"],
-    "workoutGroups": ["Pull", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["lat", "shoulder - back"],
     "secondaryMuscles": ["bicep", "trap", "forearm - inner"]
   },
@@ -494,7 +494,7 @@ const String staticExerciseJson = r'''[
     "pk": "e7f60a7d-8b9c-4e41-d2f7-9a4c5e8d1b63",
     "name": "Seal Row",
     "variations": ["barbell", "dumbbell", "machine", "wide-grip", "close-grip", "neutral-grip", "single-arm", "cable"],
-    "workoutGroups": ["Pull", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["lat", "shoulder - back"],
     "secondaryMuscles": ["bicep", "trap", "rotator cuff - back"]
   },
@@ -502,7 +502,7 @@ const String staticExerciseJson = r'''[
     "pk": "f8a71b8e-9c0d-4f52-e3a8-0b5d6f9e2c74",
     "name": "Chest-Supported Row",
     "variations": ["dumbbell", "barbell", "machine", "cable", "single-arm", "wide-grip", "close-grip", "neutral-grip", "prone", "incline"],
-    "workoutGroups": ["Pull", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["lat", "shoulder - back"],
     "secondaryMuscles": ["bicep", "trap", "forearm - inner"]
   },
@@ -510,7 +510,7 @@ const String staticExerciseJson = r'''[
     "pk": "a9b82c9f-0d1e-4a63-f4b9-1c6e7a0f3d85",
     "name": "Cable Row",
     "variations": ["seated", "standing", "single-arm", "wide-grip", "close-grip", "neutral-grip", "rope", "kneeling", "half-kneeling", "split-stance", "overhand", "underhand", "face-away"],
-    "workoutGroups": ["Pull", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["lat", "shoulder - back"],
     "secondaryMuscles": ["bicep", "trap", "lower back", "forearm - inner"]
   },
@@ -598,7 +598,7 @@ const String staticExerciseJson = r'''[
     "pk": "b8c71d8a-9e0f-4b52-a3c8-0d5f6b9e2c74",
     "name": "Meadows Row",
     "variations": ["overhand", "underhand", "neutral-grip", "kneeling", "chest-supported", "staggered-stance", "heavy", "single-arm"],
-    "workoutGroups": ["Pull", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["lat", "shoulder - back"],
     "secondaryMuscles": ["bicep", "forearm - inner", "trap"]
   },
