@@ -50,7 +50,7 @@ const String staticExerciseJson = r'''[
     "pk": "ba2387cd-2192-42d5-8895-4c8ad78b3607",
     "name": "Deadlift",
     "variations": ["barbell", "dumbbell", "kettlebell", "trap bar", "sumo", "single-leg", "romainian", "stiff-leg", "rack-pull", "hex-bar", "deficit", "banded", "paused", "snatch-grip", "block-pull", "straps"],
-    "workoutGroups": ["Hinge", "Back", "Legs"],
+    "workoutGroups": ["Back", "Legs"],
     "primaryMuscles": ["glute", "hamstring", "lower back"],
     "secondaryMuscles": [
       "calf",
@@ -112,7 +112,7 @@ const String staticExerciseJson = r'''[
     "pk": "328b8330-4a04-4f43-a255-f17cba659635",
     "name": "Back Extension",
     "variations": ["weighted", "machine", "floor", "barbell", "band", "single-leg", "45-degree", "GHD", "reverse", "dumbbell", "plate"],
-    "workoutGroups": ["Hinge", "Back", "Glutes"],
+    "workoutGroups": ["Back", "Glutes"],
     "primaryMuscles": ["glute", "hamstring", "lower back"],
     "secondaryMuscles": ["abdominal"]
   },
@@ -120,7 +120,7 @@ const String staticExerciseJson = r'''[
     "pk": "ab0da03b-dd54-4a7f-bb06-40c866dfa88c",
     "name": "Glute Bridge",
     "variations": ["weighted", "single-leg", "banded", "barbell", "feet-elevated", "plate", "dumbbell", "double-leg", "kettlebell"],
-    "workoutGroups": ["Glutes", "Hinge"],
+    "workoutGroups": ["Glutes"],
     "primaryMuscles": ["glute", "hamstring"],
     "secondaryMuscles": ["thigh - inner"]
   },
@@ -304,7 +304,7 @@ const String staticExerciseJson = r'''[
     "pk": "8431323c-ca05-4424-9e2f-995e85f4f9e3",
     "name": "Power Clean",
     "variations": ["hang", "wide-grip", "dumbbell", "kettlebell", "clean and press", "clean and jerk", "close-grip", "sumo", "clean and push press", "clean and push jerk", "block", "tall", "low-hang", "mid-thigh", "paused", "pause at knee"],
-    "workoutGroups": ["Hinge", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["glute", "lower back"],
     "secondaryMuscles": [
       "forearm - outer",
@@ -422,7 +422,7 @@ const String staticExerciseJson = r'''[
     "pk": "b9e2a547-3c68-4f10-a1d7-5c8b0e3d2f94",
     "name": "Hip Thrust",
     "variations": ["barbell", "dumbbell", "banded", "single-leg", "machine", "smith machine", "paused", "feet-elevated", "narrow-stance", "wide-stance", "plate", "american", "B-stance"],
-    "workoutGroups": ["Glutes", "Hinge"],
+    "workoutGroups": ["Glutes"],
     "primaryMuscles": ["glute"],
     "secondaryMuscles": ["hamstring", "thigh - inner"]
   },
@@ -430,7 +430,7 @@ const String staticExerciseJson = r'''[
     "pk": "c1d83b6a-7f29-4e5c-b2a8-9d0e5f7c3b21",
     "name": "Romanian Deadlift",
     "variations": ["barbell", "dumbbell", "kettlebell", "single-leg", "cable", "trap bar", "banded", "paused", "stiff-leg", "wide-grip", "snatch-grip", "B-stance", "deficit"],
-    "workoutGroups": ["Hinge", "Legs", "Glutes"],
+    "workoutGroups": ["Legs", "Glutes"],
     "primaryMuscles": ["hamstring", "glute"],
     "secondaryMuscles": ["lower back", "calf"]
   },
@@ -438,7 +438,7 @@ const String staticExerciseJson = r'''[
     "pk": "d4c96e3f-8a1b-4d72-c3e9-2f5a7b0d4c68",
     "name": "Nordic Curl",
     "variations": ["bodyweight", "weighted", "partner-assisted", "machine", "eccentric", "GHD", "band-assisted", "feet-anchored"],
-    "workoutGroups": ["Hinge", "Legs"],
+    "workoutGroups": ["Legs"],
     "primaryMuscles": ["hamstring"],
     "secondaryMuscles": ["glute", "calf"]
   },
@@ -446,7 +446,7 @@ const String staticExerciseJson = r'''[
     "pk": "e7f04a19-2b3c-4e85-d6f1-3a8c9e2d5b07",
     "name": "Good Morning",
     "variations": ["barbell", "banded", "seated", "single-leg", "dumbbell", "cable", "smith machine", "safety bar", "good morning squat", "suspended", "wide-grip", "paused"],
-    "workoutGroups": ["Hinge", "Back"],
+    "workoutGroups": ["Glutes", "Back"],
     "primaryMuscles": ["hamstring", "lower back"],
     "secondaryMuscles": ["glute", "abdominal"]
   },
@@ -558,7 +558,7 @@ const String staticExerciseJson = r'''[
     "pk": "e9f82a9d-0b1c-4e63-d4f9-1a6c7e0d3b85",
     "name": "Snatch",
     "variations": ["barbell", "dumbbell", "kettlebell", "hang", "power", "squat", "muscle snatch", "block", "overhead squat", "snatch balance", "drop snatch", "paused", "wide-grip"],
-    "workoutGroups": ["Hinge", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["glute", "hamstring", "lower back"],
     "secondaryMuscles": ["trap", "shoulder - front", "quad", "forearm - outer"]
   },
@@ -566,7 +566,7 @@ const String staticExerciseJson = r'''[
     "pk": "f0a93b0e-1c2d-4f74-e5a0-2b7d8f1e4c96",
     "name": "Clean",
     "variations": ["hang", "power", "squat", "single-arm", "dumbbell", "kettlebell", "clean pull", "tall clean", "block", "clean shrug", "low-hang", "paused", "deficit"],
-    "workoutGroups": ["Hinge", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["glute", "hamstring", "lower back"],
     "secondaryMuscles": ["trap", "quad", "forearm - outer"]
   },
@@ -574,7 +574,7 @@ const String staticExerciseJson = r'''[
     "pk": "a1b04c1f-2d3e-4a85-f6b1-3c8e9a2d5f07",
     "name": "Kettlebell Swing",
     "variations": ["two-hand", "single-arm", "American", "banded", "sumo", "high pull", "dead swing", "ballistic", "snatch-grip"],
-    "workoutGroups": ["Hinge", "Glutes"],
+    "workoutGroups": ["Back", "Glutes"],
     "primaryMuscles": ["glute", "hamstring"],
     "secondaryMuscles": ["lower back", "shoulder - front", "forearm - inner"]
   },
@@ -589,7 +589,7 @@ const String staticExerciseJson = r'''[
   {
     "pk": "f6a59b6e-7c8d-4f30-e1a6-8b3d4f7c0e52",
     "name": "Pullover",
-    "variations": ["dumbbell - flat bench", "dumbbell - decline bench", "single-arm", "cable", "barbell", "EZ-bar", "machine", "straight-arm", "bent-arm"],
+    "variations": ["dumbbell", "flat bench", "decline", "single-arm", "cable", "barbell", "EZ-bar", "machine", "straight-arm", "bent-arm"],
     "workoutGroups": ["Chest", "Back"],
     "primaryMuscles": ["chest", "lat"],
     "secondaryMuscles": ["tricep", "shoulder - back"]
@@ -605,7 +605,7 @@ const String staticExerciseJson = r'''[
   {
     "pk": "d0e93f0c-1a2b-4d74-c5e0-2f7a8d1e4f96",
     "name": "Band Pull-Apart",
-    "variations": ["overhand", "underhand", "wide-grip", "narrow-grip", "chest-level", "overhead", "behind-the-back", "diagonal", "single-arm", "band"],
+    "variations": ["overhand", "underhand", "wide-grip", "narrow-grip", "chest-level", "overhead", "single-arm"],
     "workoutGroups": ["Shoulders"],
     "primaryMuscles": ["shoulder - back", "rotator cuff - back"],
     "secondaryMuscles": ["trap", "shoulder - side"]
@@ -630,7 +630,7 @@ const String staticExerciseJson = r'''[
     "pk": "d6e59f6d-7a8b-4d30-c1e6-8f3b4d7e0a52",
     "name": "Rack Pull",
     "variations": ["barbell", "below-knee", "above-knee", "sumo", "straps", "wide-grip", "snatch-grip", "mixed-grip", "overhand", "deficit", "paused"],
-    "workoutGroups": ["Hinge", "Back"],
+    "workoutGroups": ["Back"],
     "primaryMuscles": ["lower back", "glute"],
     "secondaryMuscles": ["trap", "hamstring", "forearm - inner"]
   },
@@ -718,7 +718,7 @@ const String staticExerciseJson = r'''[
     "pk": "c7d60e52-8f9a-4c41-b2d7-9e4a5c8c1f63",
     "name": "Reverse Hyperextension",
     "variations": ["machine", "flat bench", "weighted", "banded", "GHD", "single-leg", "hip extension", "swiss ball", "parallel bars"],
-    "workoutGroups": ["Hinge", "Glutes", "Back"],
+    "workoutGroups": ["Glutes", "Back"],
     "primaryMuscles": ["glute", "hamstring", "lower back"],
     "secondaryMuscles": []
   },

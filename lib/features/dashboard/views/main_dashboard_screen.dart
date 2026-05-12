@@ -109,7 +109,7 @@ class MainDashboardScreen extends StatelessWidget {
                     child: Builder(
                       builder: (context) {
                         WorkoutLog? lastLog;
-                        if (state is DashboardLoaded && state.allLogs.isNotEmpty) {
+                        if (state.allLogs.isNotEmpty) {
                           lastLog = state.allLogs.first;
                         }
 
