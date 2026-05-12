@@ -22,8 +22,10 @@ class DateFormatters {
       return 'Today';
     } else if (checkDate == yesterday) {
       return 'Yesterday';
+    } else if (checkDate.year == today.year) {
+      return DateFormat('E, MMM d').format(date);
     } else {
-      return DateFormat('MMM d, yyyy').format(date);
+      return DateFormat('E, MMM d, yy').format(date);
     }
   }
 }
