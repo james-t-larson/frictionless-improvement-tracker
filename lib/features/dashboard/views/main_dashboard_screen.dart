@@ -67,7 +67,7 @@ class MainDashboardScreen extends StatelessWidget {
                                     _ActionButton(
                                       onPressed: () => _openNewLiftDialog(context),
                                       icon: Icons.fitness_center_rounded,
-                                      label: 'NEW LIFT',
+                                      label: 'START WORKOUT',
                                       isPrimary: true,
                                     ),
                                   ],
@@ -109,8 +109,14 @@ class MainDashboardScreen extends StatelessWidget {
                     child: Builder(
                       builder: (context) {
                         WorkoutLog? lastLog;
+                        bool isWorkoutActive = false;
                         if (state.allLogs.isNotEmpty) {
                           lastLog = state.allLogs.first;
+                          final lastLogTime = DateTime.fromMillisecondsSinceEpoch(lastLog.timestamp);
+                          final now = DateTime.now();
+                          if (now.difference(lastLogTime).inMinutes <= 90) {
+                            isWorkoutActive = true;
+                          }
                         }
 
                         final screenWidth = MediaQuery.of(context).size.width;
@@ -134,7 +140,7 @@ class MainDashboardScreen extends StatelessWidget {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    if (lastLog != null) ...[
+                                    if (isWorkoutActive && lastLog != null) ...[
                                       Expanded(
                                         child: _ActionButton(
                                           onPressed: () => _openAddSetDialog(context, lastLog!),
@@ -149,7 +155,7 @@ class MainDashboardScreen extends StatelessWidget {
                                       child: _ActionButton(
                                         onPressed: () => _openNewLiftDialog(context),
                                         icon: Icons.fitness_center_rounded,
-                                        label: 'NEW LIFT',
+                                        label: isWorkoutActive ? 'NEW LIFT' : 'START WORKOUT',
                                         isPrimary: true,
                                       ),
                                     ),

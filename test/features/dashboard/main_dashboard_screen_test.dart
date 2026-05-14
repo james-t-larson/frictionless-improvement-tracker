@@ -59,7 +59,7 @@ void main() {
 
   testWidgets('Buttons take up available horizontal width on mobile when logs exist', (tester) async {
     when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded(const {}, [
-      WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: 123, painFelt: false, variations: [], movementName: 'Bench Press')
+      WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: DateTime.now().millisecondsSinceEpoch, painFelt: false, variations: [], movementName: 'Bench Press')
     ], query: ''));
 
     const screenWidth = 400.0;
@@ -88,7 +88,7 @@ void main() {
 
   testWidgets('Buttons are positioned at the bottom of the screen when logs exist', (tester) async {
     when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded(const {}, [
-      WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: 123, painFelt: false, variations: [], movementName: 'Bench Press')
+      WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: DateTime.now().millisecondsSinceEpoch, painFelt: false, variations: [], movementName: 'Bench Press')
     ], query: ''));
 
     const screenHeight = 800.0;
@@ -113,7 +113,7 @@ void main() {
     });
   });
 
-  testWidgets('New Lift button is centered when no logs are present', (tester) async {
+  testWidgets('Start Workout button is centered when no logs are present', (tester) async {
     when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded(const {}, const [], query: ''));
 
     const screenHeight = 800.0;
@@ -124,7 +124,7 @@ void main() {
     await tester.pumpWidget(createWidgetUnderTest());
     await tester.pumpAndSettle();
 
-    final newLiftBtn = find.text('NEW LIFT');
+    final newLiftBtn = find.text('START WORKOUT');
     expect(newLiftBtn, findsOneWidget);
 
     final btnFinder = find.ancestor(of: newLiftBtn, matching: find.byWidgetPredicate((w) => w is ButtonStyleButton));
@@ -145,7 +145,7 @@ void main() {
     // Provide a state with logs so the search bar is visible
     when(() => mockDashboardBloc.state).thenReturn(
       DashboardLoaded(const {}, [
-        WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: 123, painFelt: false, variations: [], movementName: 'Bench Press')
+        WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: DateTime.now().millisecondsSinceEpoch, painFelt: false, variations: [], movementName: 'Bench Press')
       ], query: '')
     );
 
