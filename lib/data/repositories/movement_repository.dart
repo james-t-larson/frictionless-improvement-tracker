@@ -27,7 +27,14 @@ class MovementRepository {
           final movementId = await txn.insert('movements', movement.toMap());
 
           // Handle Variations
-          List<String> variations = List<String>.from(json['variations'] ?? []).toSet().toList();
+          List<String> movementVariations = List<String>.from(
+            json['movementVariations'] ?? [],
+          );
+          List<String> equipment = List<String>.from(json['equipment'] ?? []);
+          List<String> variations = {
+            ...movementVariations,
+            ...equipment,
+          }.toList();
           for (var vName in variations) {
             int variationId;
             if (variationCache.containsKey(vName)) {
@@ -90,10 +97,12 @@ class MovementRepository {
       where: 'name LIKE ?',
       whereArgs: ['%$query%'],
     );
-    
-    List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
+
+    List<Movement> movements = maps
+        .map((map) => Movement.fromMap(map))
+        .toList();
     for (var i = 0; i < movements.length; i++) {
-        movements[i] = await _withMuscles(movements[i]);
+      movements[i] = await _withMuscles(movements[i]);
     }
     return movements;
   }
@@ -106,10 +115,12 @@ class MovementRepository {
       GROUP BY m.id
       ORDER BY usage_count DESC, m.name ASC
     ''');
-    
-    List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
+
+    List<Movement> movements = maps
+        .map((map) => Movement.fromMap(map))
+        .toList();
     for (var i = 0; i < movements.length; i++) {
-        movements[i] = await _withMuscles(movements[i]);
+      movements[i] = await _withMuscles(movements[i]);
     }
     return movements;
   }
@@ -137,7 +148,9 @@ class MovementRepository {
       ORDER BY is_relevant DESC, usage_count DESC, m.name ASC
     ''', muscleGroupIds.toList());
 
-    List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
+    List<Movement> movements = maps
+        .map((map) => Movement.fromMap(map))
+        .toList();
     for (var i = 0; i < movements.length; i++) {
       movements[i] = await _withMuscles(movements[i]);
     }
@@ -147,12 +160,15 @@ class MovementRepository {
   Future<Movement> _withMuscles(Movement movement) async {
     if (movement.id == null) return movement;
 
-    final muscles = await _db.rawQuery('''
+    final muscles = await _db.rawQuery(
+      '''
       SELECT mg.name, mm.is_primary
       FROM muscle_groups mg
       JOIN movement_muscles mm ON mg.id = mm.muscle_id
       WHERE mm.movement_id = ?
-    ''', [movement.id]);
+    ''',
+      [movement.id],
+    );
 
     final primary = muscles
         .where((m) => m['is_primary'] == 1)
@@ -163,12 +179,15 @@ class MovementRepository {
         .map((m) => m['name'] as String)
         .toList();
 
-    final groupRows = await _db.rawQuery('''
+    final groupRows = await _db.rawQuery(
+      '''
       SELECT wg.name
       FROM workout_groups wg
       JOIN movement_groups mg ON wg.id = mg.group_id
       WHERE mg.movement_id = ?
-    ''', [movement.id]);
+    ''',
+      [movement.id],
+    );
     final groups = groupRows.map((r) => r['name'] as String).toList();
 
     return Movement(
@@ -211,11 +230,17 @@ class MovementRepository {
   }
 
   Future<List<Variation>> getAllVariations() async {
-    final List<Map<String, dynamic>> maps = await _db.query('variations', orderBy: 'name ASC');
+    final List<Map<String, dynamic>> maps = await _db.query(
+      'variations',
+      orderBy: 'name ASC',
+    );
     return maps.map((map) => Variation.fromMap(map)).toList();
   }
 
-  Future<Variation> createVariationForMovement(int movementId, String name) async {
+  Future<Variation> createVariationForMovement(
+    int movementId,
+    String name,
+  ) async {
     // Check if variation exists globally
     final List<Map<String, dynamic>> results = await _db.query(
       'variations',
@@ -248,11 +273,14 @@ class MovementRepository {
     return Variation(id: variationId, name: name);
   }
 
-  Future<void> syncVariationsToMovement(int movementId, List<Variation> variations) async {
+  Future<void> syncVariationsToMovement(
+    int movementId,
+    List<Variation> variations,
+  ) async {
     await _db.transaction((txn) async {
       for (var variation in variations) {
         if (variation.id == null) continue;
-        
+
         // Link it to the movement if not already linked
         final List<Map<String, dynamic>> linkResults = await txn.query(
           'movement_variations',
@@ -271,37 +299,50 @@ class MovementRepository {
   }
 
   Future<List<MuscleGroup>> getMuscleGroups() async {
-    final List<Map<String, dynamic>> maps = await _db.query('muscle_groups', orderBy: 'name ASC');
+    final List<Map<String, dynamic>> maps = await _db.query(
+      'muscle_groups',
+      orderBy: 'name ASC',
+    );
     return maps.map((map) => MuscleGroup.fromMap(map)).toList();
   }
 
   Future<List<Movement>> getMovementsByMuscleGroup(int muscleGroupId) async {
-    final List<Map<String, dynamic>> maps = await _db.rawQuery('''
+    final List<Map<String, dynamic>> maps = await _db.rawQuery(
+      '''
       SELECT m.*
       FROM movements m
       JOIN movement_muscles mm ON m.id = mm.movement_id
       WHERE mm.muscle_id = ?
       ORDER BY m.name ASC
-    ''', [muscleGroupId]);
-    
-    List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
+    ''',
+      [muscleGroupId],
+    );
+
+    List<Movement> movements = maps
+        .map((map) => Movement.fromMap(map))
+        .toList();
     for (var i = 0; i < movements.length; i++) {
-        movements[i] = await _withMuscles(movements[i]);
+      movements[i] = await _withMuscles(movements[i]);
     }
     return movements;
   }
 
   Future<List<Movement>> getMovementsByWorkoutGroup(String groupName) async {
-    final List<Map<String, dynamic>> maps = await _db.rawQuery('''
+    final List<Map<String, dynamic>> maps = await _db.rawQuery(
+      '''
       SELECT m.*
       FROM movements m
       JOIN movement_groups mg ON m.id = mg.movement_id
       JOIN workout_groups wg ON wg.id = mg.group_id
       WHERE wg.name = ?
       ORDER BY m.name ASC
-    ''', [groupName]);
+    ''',
+      [groupName],
+    );
 
-    List<Movement> movements = maps.map((map) => Movement.fromMap(map)).toList();
+    List<Movement> movements = maps
+        .map((map) => Movement.fromMap(map))
+        .toList();
     for (var i = 0; i < movements.length; i++) {
       movements[i] = await _withMuscles(movements[i]);
     }
