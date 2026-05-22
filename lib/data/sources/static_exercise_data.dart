@@ -4417,25 +4417,21 @@ const String staticExerciseJson = r'''[
       "incline": [
         "dumbbell",
         "cable crossover",
-        "machine",
         "band"
       ],
       "decline": [
         "dumbbell",
         "cable crossover",
-        "machine",
         "band"
       ],
       "flat": [
         "dumbbell",
         "cable crossover",
-        "machine",
         "band"
       ],
       "overhand-grip": [
         "dumbbell",
         "cable crossover",
-        "machine",
         "band"
       ],
       "underhand-grip": [
@@ -4444,19 +4440,13 @@ const String staticExerciseJson = r'''[
         "machine",
         "band"
       ],
-      "pec-dec": [
-        "dumbbell",
-        "cable crossover",
-        "machine",
-        "band"
-      ],
+      "pec-dec": [],
       "dumbbell": [
         "incline",
         "decline",
         "flat",
         "overhand-grip",
         "underhand-grip",
-        "pec-dec"
       ],
       "cable crossover": [
         "incline",
@@ -4464,15 +4454,6 @@ const String staticExerciseJson = r'''[
         "flat",
         "overhand-grip",
         "underhand-grip",
-        "pec-dec"
-      ],
-      "machine": [
-        "incline",
-        "decline",
-        "flat",
-        "overhand-grip",
-        "underhand-grip",
-        "pec-dec"
       ],
       "band": [
         "incline",
@@ -4480,7 +4461,6 @@ const String staticExerciseJson = r'''[
         "flat",
         "overhand-grip",
         "underhand-grip",
-        "pec-dec"
       ]
     }
   },
