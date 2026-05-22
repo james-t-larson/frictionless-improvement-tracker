@@ -7,8 +7,8 @@ void main() {
       final json = {
         'name': 'Pull-Up',
         'variations': {
-          'bodyweight': ['neutral-grip', 'wide-grip'],
-          'neutral-grip': ['bodyweight', 'weighted'],
+          'bodyweight': {'excludedVariations': ['neutral-grip', 'wide-grip']},
+          'neutral-grip': {'excludedVariations': ['bodyweight', 'weighted']},
         }
       };
 
@@ -32,9 +32,9 @@ void main() {
       final json = movement.toJson();
 
       expect(json['name'], 'Pull-Up');
-      expect(json['variations'], isA<Map<String, List<String>>>());
-      final vars = json['variations'] as Map<String, List<String>>;
-      expect(vars['bodyweight'], equals(['neutral-grip']));
+      expect(json['variations'], isA<Map<String, dynamic>>());
+      final vars = json['variations'] as Map<String, dynamic>;
+      expect(vars['bodyweight']['excludedVariations'], equals(['neutral-grip']));
     });
 
     test('fromJson handles missing variations gracefully', () {

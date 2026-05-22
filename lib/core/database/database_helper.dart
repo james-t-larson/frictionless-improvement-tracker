@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
   static const _databaseName = "gym_tracker.db";
-  static const _databaseVersion = 6;
+  static const _databaseVersion = 7;
 
   static Future<Database> initDb() async {
     final documentsDirectory = await getApplicationDocumentsDirectory();
@@ -31,6 +31,14 @@ class DatabaseHelper {
           await db.execute("DROP TABLE IF EXISTS logs");
           await db.execute("DROP TABLE IF EXISTS settings");
           await onCreate(db, newVersion);
+        } else if (oldVersion < 7) {
+          await db.execute("DROP TABLE IF EXISTS movements");
+          await db.execute('''
+            CREATE TABLE movements (
+              id TEXT PRIMARY KEY,
+              data TEXT NOT NULL
+            )
+          ''');
         }
       },
     );

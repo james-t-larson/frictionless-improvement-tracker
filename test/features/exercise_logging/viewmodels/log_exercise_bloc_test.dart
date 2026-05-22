@@ -28,11 +28,11 @@ void main() {
       id: '1',
       name: 'Pull-Up',
       variations: {
-        'bodyweight': ['neutral-grip', 'wide-grip'],
-        'neutral-grip': ['bodyweight', 'weighted'],
-        'wide-grip': ['bodyweight', 'weighted'],
-        'weighted': ['neutral-grip', 'wide-grip'],
-        'assisted': ['neutral-grip', 'wide-grip'],
+        'bodyweight': ['weighted', 'assisted'],
+        'neutral-grip': ['wide-grip', 'assisted'],
+        'wide-grip': ['neutral-grip', 'assisted'],
+        'weighted': ['bodyweight', 'assisted'],
+        'assisted': ['bodyweight', 'weighted'],
       },
     );
 
@@ -57,7 +57,9 @@ void main() {
       await Future.delayed(Duration.zero);
 
       expect(bloc.state.selectedVariations, contains('bodyweight'));
-      expect(bloc.state.availableVariations.length, 2);
+      // Now expects 3 because bodyweight itself remains available
+      expect(bloc.state.availableVariations.length, 3);
+      expect(bloc.state.availableVariations, contains('bodyweight'));
       expect(bloc.state.availableVariations, contains('neutral-grip'));
       expect(bloc.state.availableVariations, contains('wide-grip'));
     });
@@ -76,7 +78,7 @@ void main() {
       expect(bloc.state.availableVariations.length, 5); // Restored all
     });
 
-    test('ToggleVariation calculates intersection for multiple selections', () async {
+    test('ToggleVariation calculates exclusions for multiple selections', () async {
       when(() => mockWorkoutRepository.getLastPerformance(any())).thenAnswer((_) async => null);
       
       bloc.add(SelectMovement(movement));
@@ -88,21 +90,35 @@ void main() {
 
       expect(bloc.state.selectedVariations, contains('bodyweight'));
       expect(bloc.state.selectedVariations, contains('neutral-grip'));
-      expect(bloc.state.availableVariations, isEmpty);
+      // bodyweight excludes: weighted, assisted
+      // neutral-grip excludes: wide-grip, assisted
+      // available remaining: bodyweight, neutral-grip (size 2)
+      expect(bloc.state.availableVariations.length, 2);
+      expect(bloc.state.availableVariations, contains('bodyweight'));
+      expect(bloc.state.availableVariations, contains('neutral-grip'));
     });
 
-    test('ToggleVariation handles empty intersection gracefully', () async {
+    test('ToggleVariation handles conflicting selections gracefully', () async {
       when(() => mockWorkoutRepository.getLastPerformance(any())).thenAnswer((_) async => null);
       
       bloc.add(SelectMovement(movement));
       await Future.delayed(Duration.zero);
       bloc.add(const ToggleVariation('bodyweight'));
       await Future.delayed(Duration.zero);
-      bloc.add(const ToggleVariation('neutral-grip')); // Incompatible, intersection empty
+      bloc.add(const ToggleVariation('weighted')); // They exclude each other
       await Future.delayed(Duration.zero);
 
       expect(bloc.state.selectedVariations.length, 2);
-      expect(bloc.state.availableVariations, isEmpty);
+      // Since they exclude each other, neither bodyweight nor weighted should be available!
+      // Actually, if selected, they explicitly exclude each other. So both will be removed from available.
+      // neutral-grip and wide-grip are NOT excluded by bodyweight OR weighted? 
+      // Wait: bodyweight excludes weighted/assisted. weighted excludes bodyweight/assisted.
+      // So bodyweight, weighted, assisted are excluded.
+      // What about neutral-grip? It excludes wide-grip, assisted. It doesn't exclude bodyweight/weighted.
+      // So neutral-grip and wide-grip remain available!
+      expect(bloc.state.availableVariations.length, 2);
+      expect(bloc.state.availableVariations, contains('neutral-grip'));
+      expect(bloc.state.availableVariations, contains('wide-grip'));
     });
   });
 }

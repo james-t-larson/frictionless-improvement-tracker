@@ -55,7 +55,7 @@ void main() {
     expect(data['name'], 'Pull-Up');
 
     final expectedVariations = ["bodyweight", "neutral-grip", "wide-grip", "close-grip"];
-    final actualVariations = (data['movementVariations'] as List).map((e) => e.toString()).toList();
+    final actualVariations = (data['variations'] as Map).keys.map((e) => e.toString()).toList();
     
     for (var v in expectedVariations) {
       expect(actualVariations, contains(v));

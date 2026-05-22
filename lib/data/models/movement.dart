@@ -26,7 +26,7 @@ class Movement {
       'primaryMuscles': primaryMuscles,
       'secondaryMuscles': secondaryMuscles,
       'muscleGroups': muscleGroups,
-      'variations': variations,
+      'variations': variations.map((key, value) => MapEntry(key, {'excludedVariations': value})),
     };
   }
 
@@ -38,7 +38,7 @@ class Movement {
       secondaryMuscles: List<String>.from(json['secondaryMuscles'] ?? []),
       muscleGroups: List<String>.from(json['muscleGroups'] ?? []),
       variations: (json['variations'] as Map?)?.map(
-            (key, value) => MapEntry(key.toString(), List<String>.from(value as Iterable)),
+            (key, value) => MapEntry(key.toString(), List<String>.from((value as Map)['excludedVariations'] as Iterable)),
           ) ??
           {},
     );

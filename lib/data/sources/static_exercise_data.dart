@@ -15,148 +15,200 @@ const String staticExerciseJson = r'''[
       "posterior deltoid"
     ],
     "variations": {
-      "bodyweight": [
-        "weighted",
-        "assisted",
-        "kipping",
-        "ring",
-        "towel"
-      ],
-      "neutral-grip": [
-        "weighted",
-        "assisted",
-        "kipping",
-        "ring",
-        "towel"
-      ],
-      "wide-grip": [
-        "weighted",
-        "assisted",
-        "kipping",
-        "ring",
-        "towel"
-      ],
-      "close-grip": [
-        "weighted",
-        "assisted",
-        "kipping",
-        "ring",
-        "towel"
-      ],
-      "butterfly": [
-        "weighted",
-        "assisted",
-        "kipping",
-        "ring",
-        "towel"
-      ],
-      "archer": [
-        "weighted",
-        "assisted",
-        "kipping",
-        "ring",
-        "towel"
-      ],
-      "L-sit": [
-        "weighted",
-        "assisted",
-        "kipping",
-        "ring",
-        "towel"
-      ],
-      "typewriter": [
-        "weighted",
-        "assisted",
-        "kipping",
-        "ring",
-        "towel"
-      ],
-      "commando": [
-        "weighted",
-        "assisted",
-        "kipping",
-        "ring",
-        "towel"
-      ],
-      "behind-the-neck": [
-        "weighted",
-        "assisted",
-        "kipping",
-        "ring",
-        "towel"
-      ],
-      "muscle-up": [
-        "weighted",
-        "assisted",
-        "kipping",
-        "ring",
-        "towel"
-      ],
-      "weighted": [
-        "bodyweight",
-        "neutral-grip",
-        "wide-grip",
-        "close-grip",
-        "butterfly",
-        "archer",
-        "L-sit",
-        "typewriter",
-        "commando",
-        "behind-the-neck",
-        "muscle-up"
-      ],
-      "assisted": [
-        "bodyweight",
-        "neutral-grip",
-        "wide-grip",
-        "close-grip",
-        "butterfly",
-        "archer",
-        "L-sit",
-        "typewriter",
-        "commando",
-        "behind-the-neck",
-        "muscle-up"
-      ],
-      "kipping": [
-        "bodyweight",
-        "neutral-grip",
-        "wide-grip",
-        "close-grip",
-        "butterfly",
-        "archer",
-        "L-sit",
-        "typewriter",
-        "commando",
-        "behind-the-neck",
-        "muscle-up"
-      ],
-      "ring": [
-        "bodyweight",
-        "neutral-grip",
-        "wide-grip",
-        "close-grip",
-        "butterfly",
-        "archer",
-        "L-sit",
-        "typewriter",
-        "commando",
-        "behind-the-neck",
-        "muscle-up"
-      ],
-      "towel": [
-        "bodyweight",
-        "neutral-grip",
-        "wide-grip",
-        "close-grip",
-        "butterfly",
-        "archer",
-        "L-sit",
-        "typewriter",
-        "commando",
-        "behind-the-neck",
-        "muscle-up"
-      ]
+      "bodyweight": {
+        "excludedVariations": [
+          "L-sit",
+          "archer",
+          "behind-the-neck",
+          "butterfly",
+          "close-grip",
+          "commando",
+          "muscle-up",
+          "neutral-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "L-sit",
+          "archer",
+          "behind-the-neck",
+          "bodyweight",
+          "butterfly",
+          "close-grip",
+          "commando",
+          "muscle-up",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "L-sit",
+          "archer",
+          "behind-the-neck",
+          "bodyweight",
+          "butterfly",
+          "close-grip",
+          "commando",
+          "muscle-up",
+          "neutral-grip",
+          "typewriter"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "L-sit",
+          "archer",
+          "behind-the-neck",
+          "bodyweight",
+          "butterfly",
+          "commando",
+          "muscle-up",
+          "neutral-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "butterfly": {
+        "excludedVariations": [
+          "L-sit",
+          "archer",
+          "behind-the-neck",
+          "bodyweight",
+          "close-grip",
+          "commando",
+          "muscle-up",
+          "neutral-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "archer": {
+        "excludedVariations": [
+          "L-sit",
+          "behind-the-neck",
+          "bodyweight",
+          "butterfly",
+          "close-grip",
+          "commando",
+          "muscle-up",
+          "neutral-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "L-sit": {
+        "excludedVariations": [
+          "archer",
+          "behind-the-neck",
+          "bodyweight",
+          "butterfly",
+          "close-grip",
+          "commando",
+          "muscle-up",
+          "neutral-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "typewriter": {
+        "excludedVariations": [
+          "L-sit",
+          "archer",
+          "behind-the-neck",
+          "bodyweight",
+          "butterfly",
+          "close-grip",
+          "commando",
+          "muscle-up",
+          "neutral-grip",
+          "wide-grip"
+        ]
+      },
+      "commando": {
+        "excludedVariations": [
+          "L-sit",
+          "archer",
+          "behind-the-neck",
+          "bodyweight",
+          "butterfly",
+          "close-grip",
+          "muscle-up",
+          "neutral-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "behind-the-neck": {
+        "excludedVariations": [
+          "L-sit",
+          "archer",
+          "bodyweight",
+          "butterfly",
+          "close-grip",
+          "commando",
+          "muscle-up",
+          "neutral-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "muscle-up": {
+        "excludedVariations": [
+          "L-sit",
+          "archer",
+          "behind-the-neck",
+          "bodyweight",
+          "butterfly",
+          "close-grip",
+          "commando",
+          "neutral-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "assisted",
+          "kipping",
+          "ring",
+          "towel"
+        ]
+      },
+      "assisted": {
+        "excludedVariations": [
+          "kipping",
+          "ring",
+          "towel",
+          "weighted"
+        ]
+      },
+      "kipping": {
+        "excludedVariations": [
+          "assisted",
+          "ring",
+          "towel",
+          "weighted"
+        ]
+      },
+      "ring": {
+        "excludedVariations": [
+          "assisted",
+          "kipping",
+          "towel",
+          "weighted"
+        ]
+      },
+      "towel": {
+        "excludedVariations": [
+          "assisted",
+          "kipping",
+          "ring",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -175,292 +227,416 @@ const String staticExerciseJson = r'''[
       "gastrocnemius"
     ],
     "variations": {
-      "pause": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "bodyweight": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "front": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "back": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "split": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "Bulgarian split": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "pistol": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "zercher": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "overhead": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "heel-elevated": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "tempo": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "anderson": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "wide-stance": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "narrow-stance": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "sumo": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "low-bar": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "high-bar": [
-        "landmine",
-        "belt",
-        "barbell",
-        "dumbbell",
-        "goblet",
-        "box",
-        "safety bar"
-      ],
-      "landmine": [
-        "pause",
-        "bodyweight",
-        "front",
-        "back",
-        "split",
-        "Bulgarian split",
-        "pistol",
-        "zercher",
-        "overhead",
-        "heel-elevated",
-        "tempo",
-        "anderson",
-        "wide-stance",
-        "narrow-stance",
-        "sumo",
-        "low-bar",
-        "high-bar"
-      ],
-      "belt": [
-        "pause",
-        "bodyweight",
-        "front",
-        "back",
-        "split",
-        "Bulgarian split",
-        "pistol",
-        "zercher",
-        "overhead",
-        "heel-elevated",
-        "tempo",
-        "anderson",
-        "wide-stance",
-        "narrow-stance",
-        "sumo",
-        "low-bar",
-        "high-bar"
-      ],
-      "barbell": [
-        "pause",
-        "bodyweight",
-        "front",
-        "back",
-        "split",
-        "Bulgarian split",
-        "pistol",
-        "zercher",
-        "overhead",
-        "heel-elevated",
-        "tempo",
-        "anderson",
-        "wide-stance",
-        "narrow-stance",
-        "sumo",
-        "low-bar",
-        "high-bar"
-      ],
-      "dumbbell": [
-        "pause",
-        "bodyweight",
-        "front",
-        "back",
-        "split",
-        "Bulgarian split",
-        "pistol",
-        "zercher",
-        "overhead",
-        "heel-elevated",
-        "tempo",
-        "anderson",
-        "wide-stance",
-        "narrow-stance",
-        "sumo",
-        "low-bar",
-        "high-bar"
-      ],
-      "goblet": [
-        "pause",
-        "bodyweight",
-        "front",
-        "back",
-        "split",
-        "Bulgarian split",
-        "pistol",
-        "zercher",
-        "overhead",
-        "heel-elevated",
-        "tempo",
-        "anderson",
-        "wide-stance",
-        "narrow-stance",
-        "sumo",
-        "low-bar",
-        "high-bar"
-      ],
-      "box": [
-        "pause",
-        "bodyweight",
-        "front",
-        "back",
-        "split",
-        "Bulgarian split",
-        "pistol",
-        "zercher",
-        "overhead",
-        "heel-elevated",
-        "tempo",
-        "anderson",
-        "wide-stance",
-        "narrow-stance",
-        "sumo",
-        "low-bar",
-        "high-bar"
-      ],
-      "safety bar": [
-        "pause",
-        "bodyweight",
-        "front",
-        "back",
-        "split",
-        "Bulgarian split",
-        "pistol",
-        "zercher",
-        "overhead",
-        "heel-elevated",
-        "tempo",
-        "anderson",
-        "wide-stance",
-        "narrow-stance",
-        "sumo",
-        "low-bar",
-        "high-bar"
-      ]
+      "pause": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "bodyweight": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "front": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "back": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "split": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "Bulgarian split": {
+        "excludedVariations": [
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "pistol": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "zercher": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance"
+        ]
+      },
+      "overhead": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "heel-elevated": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "tempo": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "anderson": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "wide-stance": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "zercher"
+        ]
+      },
+      "narrow-stance": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "sumo": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "low-bar": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "high-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "high-bar": {
+        "excludedVariations": [
+          "Bulgarian split",
+          "anderson",
+          "back",
+          "bodyweight",
+          "front",
+          "heel-elevated",
+          "low-bar",
+          "narrow-stance",
+          "overhead",
+          "pause",
+          "pistol",
+          "split",
+          "sumo",
+          "tempo",
+          "wide-stance",
+          "zercher"
+        ]
+      },
+      "landmine": {
+        "excludedVariations": [
+          "barbell",
+          "belt",
+          "box",
+          "dumbbell",
+          "goblet",
+          "safety bar"
+        ]
+      },
+      "belt": {
+        "excludedVariations": [
+          "barbell",
+          "box",
+          "dumbbell",
+          "goblet",
+          "landmine",
+          "safety bar"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "belt",
+          "box",
+          "dumbbell",
+          "goblet",
+          "landmine",
+          "safety bar"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "barbell",
+          "belt",
+          "box",
+          "goblet",
+          "landmine",
+          "safety bar"
+        ]
+      },
+      "goblet": {
+        "excludedVariations": [
+          "barbell",
+          "belt",
+          "box",
+          "dumbbell",
+          "landmine",
+          "safety bar"
+        ]
+      },
+      "box": {
+        "excludedVariations": [
+          "barbell",
+          "belt",
+          "dumbbell",
+          "goblet",
+          "landmine",
+          "safety bar"
+        ]
+      },
+      "safety bar": {
+        "excludedVariations": [
+          "barbell",
+          "belt",
+          "box",
+          "dumbbell",
+          "goblet",
+          "landmine"
+        ]
+      }
     }
   },
   {
@@ -480,184 +656,374 @@ const String staticExerciseJson = r'''[
       "rectus abdominis"
     ],
     "variations": {
-      "standard": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "decline": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "incline": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "wide-grip": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "close-grip": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "diamond": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "plyometric": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "archer": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "pike": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "spiderman": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "T": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "staggered": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "hindu": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "one-arm": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "clap": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "pseudo planche": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "deficit": [
-        "feet-in-rings",
-        "weighted",
-        "assisted",
-        "ring"
-      ],
-      "feet-in-rings": [
-        "standard",
-        "decline",
-        "incline",
-        "wide-grip",
-        "close-grip",
-        "diamond",
-        "plyometric",
-        "archer",
-        "pike",
-        "spiderman",
-        "T",
-        "staggered",
-        "hindu",
-        "one-arm",
-        "clap",
-        "pseudo planche",
-        "deficit"
-      ],
-      "weighted": [
-        "standard",
-        "decline",
-        "incline",
-        "wide-grip",
-        "close-grip",
-        "diamond",
-        "plyometric",
-        "archer",
-        "pike",
-        "spiderman",
-        "T",
-        "staggered",
-        "hindu",
-        "one-arm",
-        "clap",
-        "pseudo planche",
-        "deficit"
-      ],
-      "assisted": [
-        "standard",
-        "decline",
-        "incline",
-        "wide-grip",
-        "close-grip",
-        "diamond",
-        "plyometric",
-        "archer",
-        "pike",
-        "spiderman",
-        "T",
-        "staggered",
-        "hindu",
-        "one-arm",
-        "clap",
-        "pseudo planche",
-        "deficit"
-      ],
-      "ring": [
-        "standard",
-        "decline",
-        "incline",
-        "wide-grip",
-        "close-grip",
-        "diamond",
-        "plyometric",
-        "archer",
-        "pike",
-        "spiderman",
-        "T",
-        "staggered",
-        "hindu",
-        "one-arm",
-        "clap",
-        "pseudo planche",
-        "deficit"
-      ]
+      "standard": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "wide-grip"
+        ]
+      },
+      "decline": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "incline": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "diamond": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "plyometric": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "archer": {
+        "excludedVariations": [
+          "T",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "pike": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "spiderman": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "T": {
+        "excludedVariations": [
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "staggered": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "hindu": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "one-arm": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "clap": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "pseudo planche": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "deficit",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "deficit": {
+        "excludedVariations": [
+          "T",
+          "archer",
+          "clap",
+          "close-grip",
+          "decline",
+          "diamond",
+          "hindu",
+          "incline",
+          "one-arm",
+          "pike",
+          "plyometric",
+          "pseudo planche",
+          "spiderman",
+          "staggered",
+          "standard",
+          "wide-grip"
+        ]
+      },
+      "feet-in-rings": {
+        "excludedVariations": [
+          "assisted",
+          "ring",
+          "weighted"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "assisted",
+          "feet-in-rings",
+          "ring"
+        ]
+      },
+      "assisted": {
+        "excludedVariations": [
+          "feet-in-rings",
+          "ring",
+          "weighted"
+        ]
+      },
+      "ring": {
+        "excludedVariations": [
+          "assisted",
+          "feet-in-rings",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -678,84 +1044,104 @@ const String staticExerciseJson = r'''[
       "wrist extensors"
     ],
     "variations": {
-      "single-arm": [
-        "cable",
-        "band",
-        "rope",
-        "supinated"
-      ],
-      "high-pulley": [
-        "cable",
-        "band",
-        "rope",
-        "supinated"
-      ],
-      "low-pulley": [
-        "cable",
-        "band",
-        "rope",
-        "supinated"
-      ],
-      "kneeling": [
-        "cable",
-        "band",
-        "rope",
-        "supinated"
-      ],
-      "seated": [
-        "cable",
-        "band",
-        "rope",
-        "supinated"
-      ],
-      "chest-level": [
-        "cable",
-        "band",
-        "rope",
-        "supinated"
-      ],
-      "pronated": [
-        "cable",
-        "band",
-        "rope",
-        "supinated"
-      ],
-      "cable": [
-        "single-arm",
-        "high-pulley",
-        "low-pulley",
-        "kneeling",
-        "seated",
-        "chest-level",
-        "pronated"
-      ],
-      "band": [
-        "single-arm",
-        "high-pulley",
-        "low-pulley",
-        "kneeling",
-        "seated",
-        "chest-level",
-        "pronated"
-      ],
-      "rope": [
-        "single-arm",
-        "high-pulley",
-        "low-pulley",
-        "kneeling",
-        "seated",
-        "chest-level",
-        "pronated"
-      ],
-      "supinated": [
-        "single-arm",
-        "high-pulley",
-        "low-pulley",
-        "kneeling",
-        "seated",
-        "chest-level",
-        "pronated"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "chest-level",
+          "high-pulley",
+          "kneeling",
+          "low-pulley",
+          "pronated",
+          "seated"
+        ]
+      },
+      "high-pulley": {
+        "excludedVariations": [
+          "chest-level",
+          "kneeling",
+          "low-pulley",
+          "pronated",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "low-pulley": {
+        "excludedVariations": [
+          "chest-level",
+          "high-pulley",
+          "kneeling",
+          "pronated",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "kneeling": {
+        "excludedVariations": [
+          "chest-level",
+          "high-pulley",
+          "low-pulley",
+          "pronated",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "chest-level",
+          "high-pulley",
+          "kneeling",
+          "low-pulley",
+          "pronated",
+          "single-arm"
+        ]
+      },
+      "chest-level": {
+        "excludedVariations": [
+          "high-pulley",
+          "kneeling",
+          "low-pulley",
+          "pronated",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "pronated": {
+        "excludedVariations": [
+          "chest-level",
+          "high-pulley",
+          "kneeling",
+          "low-pulley",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "rope",
+          "supinated"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "cable",
+          "rope",
+          "supinated"
+        ]
+      },
+      "rope": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "supinated"
+        ]
+      },
+      "supinated": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "rope"
+        ]
+      }
     }
   },
   {
@@ -773,284 +1159,322 @@ const String staticExerciseJson = r'''[
       "triceps brachii"
     ],
     "variations": {
-      "incline": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "decline": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "close-grip": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "wide-grip": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "neutral-grip": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "feet-up": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "paused": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "floor": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "reverse-grip": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "spoto": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "touch-and-go": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "larsen": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "tempo": [
-        "barbell",
-        "dumbbell",
-        "smith machine",
-        "board",
-        "pin",
-        "axle bar",
-        "slingshot",
-        "banded",
-        "chains"
-      ],
-      "barbell": [
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "neutral-grip",
-        "feet-up",
-        "paused",
-        "floor",
-        "reverse-grip",
-        "spoto",
-        "touch-and-go",
-        "larsen",
-        "tempo"
-      ],
-      "dumbbell": [
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "neutral-grip",
-        "feet-up",
-        "paused",
-        "floor",
-        "reverse-grip",
-        "spoto",
-        "touch-and-go",
-        "larsen",
-        "tempo"
-      ],
-      "smith machine": [
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "neutral-grip",
-        "feet-up",
-        "paused",
-        "floor",
-        "reverse-grip",
-        "spoto",
-        "touch-and-go",
-        "larsen",
-        "tempo"
-      ],
-      "board": [
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "neutral-grip",
-        "feet-up",
-        "paused",
-        "floor",
-        "reverse-grip",
-        "spoto",
-        "touch-and-go",
-        "larsen",
-        "tempo"
-      ],
-      "pin": [
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "neutral-grip",
-        "feet-up",
-        "paused",
-        "floor",
-        "reverse-grip",
-        "spoto",
-        "touch-and-go",
-        "larsen",
-        "tempo"
-      ],
-      "axle bar": [
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "neutral-grip",
-        "feet-up",
-        "paused",
-        "floor",
-        "reverse-grip",
-        "spoto",
-        "touch-and-go",
-        "larsen",
-        "tempo"
-      ],
-      "slingshot": [
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "neutral-grip",
-        "feet-up",
-        "paused",
-        "floor",
-        "reverse-grip",
-        "spoto",
-        "touch-and-go",
-        "larsen",
-        "tempo"
-      ],
-      "banded": [
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "neutral-grip",
-        "feet-up",
-        "paused",
-        "floor",
-        "reverse-grip",
-        "spoto",
-        "touch-and-go",
-        "larsen",
-        "tempo"
-      ],
-      "chains": [
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "neutral-grip",
-        "feet-up",
-        "paused",
-        "floor",
-        "reverse-grip",
-        "spoto",
-        "touch-and-go",
-        "larsen",
-        "tempo"
-      ]
+      "incline": {
+        "excludedVariations": [
+          "close-grip",
+          "decline",
+          "feet-up",
+          "floor",
+          "larsen",
+          "neutral-grip",
+          "paused",
+          "reverse-grip",
+          "spoto",
+          "tempo",
+          "touch-and-go",
+          "wide-grip"
+        ]
+      },
+      "decline": {
+        "excludedVariations": [
+          "close-grip",
+          "feet-up",
+          "floor",
+          "incline",
+          "larsen",
+          "neutral-grip",
+          "paused",
+          "reverse-grip",
+          "spoto",
+          "tempo",
+          "touch-and-go",
+          "wide-grip"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "decline",
+          "feet-up",
+          "floor",
+          "incline",
+          "larsen",
+          "neutral-grip",
+          "paused",
+          "reverse-grip",
+          "spoto",
+          "tempo",
+          "touch-and-go",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "close-grip",
+          "decline",
+          "feet-up",
+          "floor",
+          "incline",
+          "larsen",
+          "neutral-grip",
+          "paused",
+          "reverse-grip",
+          "spoto",
+          "tempo",
+          "touch-and-go"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "close-grip",
+          "decline",
+          "feet-up",
+          "floor",
+          "incline",
+          "larsen",
+          "paused",
+          "reverse-grip",
+          "spoto",
+          "tempo",
+          "touch-and-go",
+          "wide-grip"
+        ]
+      },
+      "feet-up": {
+        "excludedVariations": [
+          "close-grip",
+          "decline",
+          "floor",
+          "incline",
+          "larsen",
+          "neutral-grip",
+          "paused",
+          "reverse-grip",
+          "spoto",
+          "tempo",
+          "touch-and-go",
+          "wide-grip"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "close-grip",
+          "decline",
+          "feet-up",
+          "floor",
+          "incline",
+          "larsen",
+          "neutral-grip",
+          "reverse-grip",
+          "spoto",
+          "tempo",
+          "touch-and-go",
+          "wide-grip"
+        ]
+      },
+      "floor": {
+        "excludedVariations": [
+          "close-grip",
+          "decline",
+          "feet-up",
+          "incline",
+          "larsen",
+          "neutral-grip",
+          "paused",
+          "reverse-grip",
+          "spoto",
+          "tempo",
+          "touch-and-go",
+          "wide-grip"
+        ]
+      },
+      "reverse-grip": {
+        "excludedVariations": [
+          "close-grip",
+          "decline",
+          "feet-up",
+          "floor",
+          "incline",
+          "larsen",
+          "neutral-grip",
+          "paused",
+          "spoto",
+          "tempo",
+          "touch-and-go",
+          "wide-grip"
+        ]
+      },
+      "spoto": {
+        "excludedVariations": [
+          "close-grip",
+          "decline",
+          "feet-up",
+          "floor",
+          "incline",
+          "larsen",
+          "neutral-grip",
+          "paused",
+          "reverse-grip",
+          "tempo",
+          "touch-and-go",
+          "wide-grip"
+        ]
+      },
+      "touch-and-go": {
+        "excludedVariations": [
+          "close-grip",
+          "decline",
+          "feet-up",
+          "floor",
+          "incline",
+          "larsen",
+          "neutral-grip",
+          "paused",
+          "reverse-grip",
+          "spoto",
+          "tempo",
+          "wide-grip"
+        ]
+      },
+      "larsen": {
+        "excludedVariations": [
+          "close-grip",
+          "decline",
+          "feet-up",
+          "floor",
+          "incline",
+          "neutral-grip",
+          "paused",
+          "reverse-grip",
+          "spoto",
+          "tempo",
+          "touch-and-go",
+          "wide-grip"
+        ]
+      },
+      "tempo": {
+        "excludedVariations": [
+          "close-grip",
+          "decline",
+          "feet-up",
+          "floor",
+          "incline",
+          "larsen",
+          "neutral-grip",
+          "paused",
+          "reverse-grip",
+          "spoto",
+          "touch-and-go",
+          "wide-grip"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "axle bar",
+          "banded",
+          "board",
+          "chains",
+          "dumbbell",
+          "pin",
+          "slingshot",
+          "smith machine"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "axle bar",
+          "banded",
+          "barbell",
+          "board",
+          "chains",
+          "pin",
+          "slingshot",
+          "smith machine"
+        ]
+      },
+      "smith machine": {
+        "excludedVariations": [
+          "axle bar",
+          "banded",
+          "barbell",
+          "board",
+          "chains",
+          "dumbbell",
+          "pin",
+          "slingshot"
+        ]
+      },
+      "board": {
+        "excludedVariations": [
+          "axle bar",
+          "banded",
+          "barbell",
+          "chains",
+          "dumbbell",
+          "pin",
+          "slingshot",
+          "smith machine"
+        ]
+      },
+      "pin": {
+        "excludedVariations": [
+          "axle bar",
+          "banded",
+          "barbell",
+          "board",
+          "chains",
+          "dumbbell",
+          "slingshot",
+          "smith machine"
+        ]
+      },
+      "axle bar": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "board",
+          "chains",
+          "dumbbell",
+          "pin",
+          "slingshot",
+          "smith machine"
+        ]
+      },
+      "slingshot": {
+        "excludedVariations": [
+          "axle bar",
+          "banded",
+          "barbell",
+          "board",
+          "chains",
+          "dumbbell",
+          "pin",
+          "smith machine"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "axle bar",
+          "barbell",
+          "board",
+          "chains",
+          "dumbbell",
+          "pin",
+          "slingshot",
+          "smith machine"
+        ]
+      },
+      "chains": {
+        "excludedVariations": [
+          "axle bar",
+          "banded",
+          "barbell",
+          "board",
+          "dumbbell",
+          "pin",
+          "slingshot",
+          "smith machine"
+        ]
+      }
     }
   },
   {
@@ -1073,166 +1497,182 @@ const String staticExerciseJson = r'''[
       "quadriceps femoris"
     ],
     "variations": {
-      "sumo": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "trap bar",
-        "hex-bar",
-        "banded",
-        "block-pull",
-        "straps"
-      ],
-      "single-leg": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "trap bar",
-        "hex-bar",
-        "banded",
-        "block-pull",
-        "straps"
-      ],
-      "romainian": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "trap bar",
-        "hex-bar",
-        "banded",
-        "block-pull",
-        "straps"
-      ],
-      "stiff-leg": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "trap bar",
-        "hex-bar",
-        "banded",
-        "block-pull",
-        "straps"
-      ],
-      "rack-pull": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "trap bar",
-        "hex-bar",
-        "banded",
-        "block-pull",
-        "straps"
-      ],
-      "deficit": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "trap bar",
-        "hex-bar",
-        "banded",
-        "block-pull",
-        "straps"
-      ],
-      "paused": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "trap bar",
-        "hex-bar",
-        "banded",
-        "block-pull",
-        "straps"
-      ],
-      "snatch-grip": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "trap bar",
-        "hex-bar",
-        "banded",
-        "block-pull",
-        "straps"
-      ],
-      "barbell": [
-        "sumo",
-        "single-leg",
-        "romainian",
-        "stiff-leg",
-        "rack-pull",
-        "deficit",
-        "paused",
-        "snatch-grip"
-      ],
-      "dumbbell": [
-        "sumo",
-        "single-leg",
-        "romainian",
-        "stiff-leg",
-        "rack-pull",
-        "deficit",
-        "paused",
-        "snatch-grip"
-      ],
-      "kettlebell": [
-        "sumo",
-        "single-leg",
-        "romainian",
-        "stiff-leg",
-        "rack-pull",
-        "deficit",
-        "paused",
-        "snatch-grip"
-      ],
-      "trap bar": [
-        "sumo",
-        "single-leg",
-        "romainian",
-        "stiff-leg",
-        "rack-pull",
-        "deficit",
-        "paused",
-        "snatch-grip"
-      ],
-      "hex-bar": [
-        "sumo",
-        "single-leg",
-        "romainian",
-        "stiff-leg",
-        "rack-pull",
-        "deficit",
-        "paused",
-        "snatch-grip"
-      ],
-      "banded": [
-        "sumo",
-        "single-leg",
-        "romainian",
-        "stiff-leg",
-        "rack-pull",
-        "deficit",
-        "paused",
-        "snatch-grip"
-      ],
-      "block-pull": [
-        "sumo",
-        "single-leg",
-        "romainian",
-        "stiff-leg",
-        "rack-pull",
-        "deficit",
-        "paused",
-        "snatch-grip"
-      ],
-      "straps": [
-        "sumo",
-        "single-leg",
-        "romainian",
-        "stiff-leg",
-        "rack-pull",
-        "deficit",
-        "paused",
-        "snatch-grip"
-      ]
+      "sumo": {
+        "excludedVariations": [
+          "deficit",
+          "paused",
+          "rack-pull",
+          "romainian",
+          "single-leg",
+          "snatch-grip",
+          "stiff-leg"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "deficit",
+          "paused",
+          "rack-pull",
+          "romainian",
+          "snatch-grip",
+          "stiff-leg",
+          "sumo"
+        ]
+      },
+      "romainian": {
+        "excludedVariations": [
+          "deficit",
+          "paused",
+          "rack-pull",
+          "single-leg",
+          "snatch-grip",
+          "stiff-leg",
+          "sumo"
+        ]
+      },
+      "stiff-leg": {
+        "excludedVariations": [
+          "deficit",
+          "paused",
+          "rack-pull",
+          "romainian",
+          "single-leg",
+          "snatch-grip",
+          "sumo"
+        ]
+      },
+      "rack-pull": {
+        "excludedVariations": [
+          "deficit",
+          "paused",
+          "romainian",
+          "single-leg",
+          "snatch-grip",
+          "stiff-leg",
+          "sumo"
+        ]
+      },
+      "deficit": {
+        "excludedVariations": [
+          "paused",
+          "rack-pull",
+          "romainian",
+          "single-leg",
+          "snatch-grip",
+          "stiff-leg",
+          "sumo"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "deficit",
+          "rack-pull",
+          "romainian",
+          "single-leg",
+          "snatch-grip",
+          "stiff-leg",
+          "sumo"
+        ]
+      },
+      "snatch-grip": {
+        "excludedVariations": [
+          "deficit",
+          "paused",
+          "rack-pull",
+          "romainian",
+          "single-leg",
+          "stiff-leg",
+          "sumo"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "banded",
+          "block-pull",
+          "dumbbell",
+          "hex-bar",
+          "kettlebell",
+          "straps",
+          "trap bar"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "block-pull",
+          "hex-bar",
+          "kettlebell",
+          "straps",
+          "trap bar"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "block-pull",
+          "dumbbell",
+          "hex-bar",
+          "straps",
+          "trap bar"
+        ]
+      },
+      "trap bar": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "block-pull",
+          "dumbbell",
+          "hex-bar",
+          "kettlebell",
+          "straps"
+        ]
+      },
+      "hex-bar": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "block-pull",
+          "dumbbell",
+          "kettlebell",
+          "straps",
+          "trap bar"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "barbell",
+          "block-pull",
+          "dumbbell",
+          "hex-bar",
+          "kettlebell",
+          "straps",
+          "trap bar"
+        ]
+      },
+      "block-pull": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "hex-bar",
+          "kettlebell",
+          "straps",
+          "trap bar"
+        ]
+      },
+      "straps": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "block-pull",
+          "dumbbell",
+          "hex-bar",
+          "kettlebell",
+          "trap bar"
+        ]
+      }
     }
   },
   {
@@ -1250,64 +1690,124 @@ const String staticExerciseJson = r'''[
       "hamstrings"
     ],
     "variations": {
-      "hack squat": [
-        "machine",
-        "banded"
-      ],
-      "single-leg": [
-        "machine",
-        "banded"
-      ],
-      "paused": [
-        "machine",
-        "banded"
-      ],
-      "heel-elevated": [
-        "machine",
-        "banded"
-      ],
-      "toe-elevated": [
-        "machine",
-        "banded"
-      ],
-      "wide-stance": [
-        "machine",
-        "banded"
-      ],
-      "narrow-stance": [
-        "machine",
-        "banded"
-      ],
-      "high-foot": [
-        "machine",
-        "banded"
-      ],
-      "low-foot": [
-        "machine",
-        "banded"
-      ],
-      "machine": [
-        "hack squat",
-        "single-leg",
-        "paused",
-        "heel-elevated",
-        "toe-elevated",
-        "wide-stance",
-        "narrow-stance",
-        "high-foot",
-        "low-foot"
-      ],
-      "banded": [
-        "hack squat",
-        "single-leg",
-        "paused",
-        "heel-elevated",
-        "toe-elevated",
-        "wide-stance",
-        "narrow-stance",
-        "high-foot",
-        "low-foot"
-      ]
+      "hack squat": {
+        "excludedVariations": [
+          "heel-elevated",
+          "high-foot",
+          "low-foot",
+          "narrow-stance",
+          "paused",
+          "single-leg",
+          "toe-elevated",
+          "wide-stance"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "hack squat",
+          "heel-elevated",
+          "high-foot",
+          "low-foot",
+          "narrow-stance",
+          "paused",
+          "toe-elevated",
+          "wide-stance"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "hack squat",
+          "heel-elevated",
+          "high-foot",
+          "low-foot",
+          "narrow-stance",
+          "single-leg",
+          "toe-elevated",
+          "wide-stance"
+        ]
+      },
+      "heel-elevated": {
+        "excludedVariations": [
+          "hack squat",
+          "high-foot",
+          "low-foot",
+          "narrow-stance",
+          "paused",
+          "single-leg",
+          "toe-elevated",
+          "wide-stance"
+        ]
+      },
+      "toe-elevated": {
+        "excludedVariations": [
+          "hack squat",
+          "heel-elevated",
+          "high-foot",
+          "low-foot",
+          "narrow-stance",
+          "paused",
+          "single-leg",
+          "wide-stance"
+        ]
+      },
+      "wide-stance": {
+        "excludedVariations": [
+          "hack squat",
+          "heel-elevated",
+          "high-foot",
+          "low-foot",
+          "narrow-stance",
+          "paused",
+          "single-leg",
+          "toe-elevated"
+        ]
+      },
+      "narrow-stance": {
+        "excludedVariations": [
+          "hack squat",
+          "heel-elevated",
+          "high-foot",
+          "low-foot",
+          "paused",
+          "single-leg",
+          "toe-elevated",
+          "wide-stance"
+        ]
+      },
+      "high-foot": {
+        "excludedVariations": [
+          "hack squat",
+          "heel-elevated",
+          "low-foot",
+          "narrow-stance",
+          "paused",
+          "single-leg",
+          "toe-elevated",
+          "wide-stance"
+        ]
+      },
+      "low-foot": {
+        "excludedVariations": [
+          "hack squat",
+          "heel-elevated",
+          "high-foot",
+          "narrow-stance",
+          "paused",
+          "single-leg",
+          "toe-elevated",
+          "wide-stance"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "banded"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -1324,292 +1824,416 @@ const String staticExerciseJson = r'''[
       "wrist flexors"
     ],
     "variations": {
-      "bodyweight": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "preacher": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "cross-body": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "single-arm": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "incline": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "decline": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "close-grip": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "wide-grip": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "EZ-bar": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "zottman": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "21s": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "spider": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "seated": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "standing": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "reverse": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "drag": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "alternating": [
-        "barbell",
-        "dumbbell",
-        "rope",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "barbell": [
-        "bodyweight",
-        "preacher",
-        "cross-body",
-        "single-arm",
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "EZ-bar",
-        "zottman",
-        "21s",
-        "spider",
-        "seated",
-        "standing",
-        "reverse",
-        "drag",
-        "alternating"
-      ],
-      "dumbbell": [
-        "bodyweight",
-        "preacher",
-        "cross-body",
-        "single-arm",
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "EZ-bar",
-        "zottman",
-        "21s",
-        "spider",
-        "seated",
-        "standing",
-        "reverse",
-        "drag",
-        "alternating"
-      ],
-      "rope": [
-        "bodyweight",
-        "preacher",
-        "cross-body",
-        "single-arm",
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "EZ-bar",
-        "zottman",
-        "21s",
-        "spider",
-        "seated",
-        "standing",
-        "reverse",
-        "drag",
-        "alternating"
-      ],
-      "cable": [
-        "bodyweight",
-        "preacher",
-        "cross-body",
-        "single-arm",
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "EZ-bar",
-        "zottman",
-        "21s",
-        "spider",
-        "seated",
-        "standing",
-        "reverse",
-        "drag",
-        "alternating"
-      ],
-      "machine": [
-        "bodyweight",
-        "preacher",
-        "cross-body",
-        "single-arm",
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "EZ-bar",
-        "zottman",
-        "21s",
-        "spider",
-        "seated",
-        "standing",
-        "reverse",
-        "drag",
-        "alternating"
-      ],
-      "band": [
-        "bodyweight",
-        "preacher",
-        "cross-body",
-        "single-arm",
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "EZ-bar",
-        "zottman",
-        "21s",
-        "spider",
-        "seated",
-        "standing",
-        "reverse",
-        "drag",
-        "alternating"
-      ],
-      "kettlebell": [
-        "bodyweight",
-        "preacher",
-        "cross-body",
-        "single-arm",
-        "incline",
-        "decline",
-        "close-grip",
-        "wide-grip",
-        "EZ-bar",
-        "zottman",
-        "21s",
-        "spider",
-        "seated",
-        "standing",
-        "reverse",
-        "drag",
-        "alternating"
-      ]
+      "bodyweight": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "preacher": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "cross-body": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "incline": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "decline": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "zottman"
+        ]
+      },
+      "EZ-bar": {
+        "excludedVariations": [
+          "21s",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "zottman": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip"
+        ]
+      },
+      "21s": {
+        "excludedVariations": [
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "spider": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "reverse": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "drag": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "alternating",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "alternating": {
+        "excludedVariations": [
+          "21s",
+          "EZ-bar",
+          "bodyweight",
+          "close-grip",
+          "cross-body",
+          "decline",
+          "drag",
+          "incline",
+          "preacher",
+          "reverse",
+          "seated",
+          "single-arm",
+          "spider",
+          "standing",
+          "wide-grip",
+          "zottman"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "rope"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "kettlebell",
+          "machine",
+          "rope"
+        ]
+      },
+      "rope": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "rope"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "rope"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "rope"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "machine",
+          "rope"
+        ]
+      }
     }
   },
   {
@@ -1626,40 +2250,56 @@ const String staticExerciseJson = r'''[
       "hip adductors"
     ],
     "variations": {
-      "single-leg": [
-        "banded",
-        "weighted",
-        "plate-weighted",
-        "barbell",
-        "dumbbell"
-      ],
-      "feet-elevated": [
-        "banded",
-        "weighted",
-        "plate-weighted",
-        "barbell",
-        "dumbbell"
-      ],
-      "banded": [
-        "single-leg",
-        "feet-elevated"
-      ],
-      "weighted": [
-        "single-leg",
-        "feet-elevated"
-      ],
-      "plate-weighted": [
-        "single-leg",
-        "feet-elevated"
-      ],
-      "barbell": [
-        "single-leg",
-        "feet-elevated"
-      ],
-      "dumbbell": [
-        "single-leg",
-        "feet-elevated"
-      ]
+      "single-leg": {
+        "excludedVariations": [
+          "feet-elevated"
+        ]
+      },
+      "feet-elevated": {
+        "excludedVariations": [
+          "single-leg"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "plate-weighted",
+          "weighted"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "plate-weighted"
+        ]
+      },
+      "plate-weighted": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "weighted"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "banded",
+          "dumbbell",
+          "plate-weighted",
+          "weighted"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "plate-weighted",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -1675,24 +2315,37 @@ const String staticExerciseJson = r'''[
       "rectus abdominis"
     ],
     "variations": {
-      "single-leg": [
-        "weighted"
-      ],
-      "bent-knee": [
-        "weighted"
-      ],
-      "feet-elevated": [
-        "weighted"
-      ],
-      "decline": [
-        "weighted"
-      ],
-      "weighted": [
-        "single-leg",
-        "bent-knee",
-        "feet-elevated",
-        "decline"
-      ]
+      "single-leg": {
+        "excludedVariations": [
+          "bent-knee",
+          "decline",
+          "feet-elevated"
+        ]
+      },
+      "bent-knee": {
+        "excludedVariations": [
+          "decline",
+          "feet-elevated",
+          "single-leg"
+        ]
+      },
+      "feet-elevated": {
+        "excludedVariations": [
+          "bent-knee",
+          "decline",
+          "single-leg"
+        ]
+      },
+      "decline": {
+        "excludedVariations": [
+          "bent-knee",
+          "feet-elevated",
+          "single-leg"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": []
+      }
     }
   },
   {
@@ -1712,100 +2365,116 @@ const String staticExerciseJson = r'''[
       "anterior deltoid"
     ],
     "variations": {
-      "bodyweight": [
-        "weighted",
-        "assisted",
-        "rings",
-        "bench",
-        "machine",
-        "parallel bars",
-        "banded"
-      ],
-      "chest-forward": [
-        "weighted",
-        "assisted",
-        "rings",
-        "bench",
-        "machine",
-        "parallel bars",
-        "banded"
-      ],
-      "upright": [
-        "weighted",
-        "assisted",
-        "rings",
-        "bench",
-        "machine",
-        "parallel bars",
-        "banded"
-      ],
-      "korean": [
-        "weighted",
-        "assisted",
-        "rings",
-        "bench",
-        "machine",
-        "parallel bars",
-        "banded"
-      ],
-      "single-arm": [
-        "weighted",
-        "assisted",
-        "rings",
-        "bench",
-        "machine",
-        "parallel bars",
-        "banded"
-      ],
-      "weighted": [
-        "bodyweight",
-        "chest-forward",
-        "upright",
-        "korean",
-        "single-arm"
-      ],
-      "assisted": [
-        "bodyweight",
-        "chest-forward",
-        "upright",
-        "korean",
-        "single-arm"
-      ],
-      "rings": [
-        "bodyweight",
-        "chest-forward",
-        "upright",
-        "korean",
-        "single-arm"
-      ],
-      "bench": [
-        "bodyweight",
-        "chest-forward",
-        "upright",
-        "korean",
-        "single-arm"
-      ],
-      "machine": [
-        "bodyweight",
-        "chest-forward",
-        "upright",
-        "korean",
-        "single-arm"
-      ],
-      "parallel bars": [
-        "bodyweight",
-        "chest-forward",
-        "upright",
-        "korean",
-        "single-arm"
-      ],
-      "banded": [
-        "bodyweight",
-        "chest-forward",
-        "upright",
-        "korean",
-        "single-arm"
-      ]
+      "bodyweight": {
+        "excludedVariations": [
+          "chest-forward",
+          "korean",
+          "single-arm",
+          "upright"
+        ]
+      },
+      "chest-forward": {
+        "excludedVariations": [
+          "bodyweight",
+          "korean",
+          "single-arm",
+          "upright"
+        ]
+      },
+      "upright": {
+        "excludedVariations": [
+          "bodyweight",
+          "chest-forward",
+          "korean",
+          "single-arm"
+        ]
+      },
+      "korean": {
+        "excludedVariations": [
+          "bodyweight",
+          "chest-forward",
+          "single-arm",
+          "upright"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "bodyweight",
+          "chest-forward",
+          "korean",
+          "upright"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "assisted",
+          "banded",
+          "bench",
+          "machine",
+          "parallel bars",
+          "rings"
+        ]
+      },
+      "assisted": {
+        "excludedVariations": [
+          "banded",
+          "bench",
+          "machine",
+          "parallel bars",
+          "rings",
+          "weighted"
+        ]
+      },
+      "rings": {
+        "excludedVariations": [
+          "assisted",
+          "banded",
+          "bench",
+          "machine",
+          "parallel bars",
+          "weighted"
+        ]
+      },
+      "bench": {
+        "excludedVariations": [
+          "assisted",
+          "banded",
+          "machine",
+          "parallel bars",
+          "rings",
+          "weighted"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "assisted",
+          "banded",
+          "bench",
+          "parallel bars",
+          "rings",
+          "weighted"
+        ]
+      },
+      "parallel bars": {
+        "excludedVariations": [
+          "assisted",
+          "banded",
+          "bench",
+          "machine",
+          "rings",
+          "weighted"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "assisted",
+          "bench",
+          "machine",
+          "parallel bars",
+          "rings",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -1820,34 +2489,28 @@ const String staticExerciseJson = r'''[
     ],
     "secondaryMuscles": [],
     "variations": {
-      "seated": [
-        "dumbbell",
-        "cable"
-      ],
-      "standing": [
-        "dumbbell",
-        "cable"
-      ],
-      "single-arm": [
-        "dumbbell",
-        "cable"
-      ],
-      "alternating": [
-        "dumbbell",
-        "cable"
-      ],
-      "dumbbell": [
-        "seated",
-        "standing",
-        "single-arm",
-        "alternating"
-      ],
-      "cable": [
-        "seated",
-        "standing",
-        "single-arm",
-        "alternating"
-      ]
+      "seated": {
+        "excludedVariations": ["standing"]
+      },
+      "standing": {
+        "excludedVariations": ["seated"]
+      },
+      "single-arm": {
+        "excludedVariations": []
+      },
+      "alternating": {
+        "excludedVariations": []
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "cable"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "dumbbell"
+        ]
+      }
     }
   },
   {
@@ -1866,88 +2529,100 @@ const String staticExerciseJson = r'''[
       "rectus abdominis"
     ],
     "variations": {
-      "floor": [
-        "weighted",
-        "machine",
-        "barbell",
-        "band",
-        "dumbbell",
-        "plate"
-      ],
-      "single-leg": [
-        "weighted",
-        "machine",
-        "barbell",
-        "band",
-        "dumbbell",
-        "plate"
-      ],
-      "45-degree": [
-        "weighted",
-        "machine",
-        "barbell",
-        "band",
-        "dumbbell",
-        "plate"
-      ],
-      "GHD": [
-        "weighted",
-        "machine",
-        "barbell",
-        "band",
-        "dumbbell",
-        "plate"
-      ],
-      "reverse": [
-        "weighted",
-        "machine",
-        "barbell",
-        "band",
-        "dumbbell",
-        "plate"
-      ],
-      "weighted": [
-        "floor",
-        "single-leg",
-        "45-degree",
-        "GHD",
-        "reverse"
-      ],
-      "machine": [
-        "floor",
-        "single-leg",
-        "45-degree",
-        "GHD",
-        "reverse"
-      ],
-      "barbell": [
-        "floor",
-        "single-leg",
-        "45-degree",
-        "GHD",
-        "reverse"
-      ],
-      "band": [
-        "floor",
-        "single-leg",
-        "45-degree",
-        "GHD",
-        "reverse"
-      ],
-      "dumbbell": [
-        "floor",
-        "single-leg",
-        "45-degree",
-        "GHD",
-        "reverse"
-      ],
-      "plate": [
-        "floor",
-        "single-leg",
-        "45-degree",
-        "GHD",
-        "reverse"
-      ]
+      "floor": {
+        "excludedVariations": [
+          "45-degree",
+          "GHD",
+          "reverse",
+          "single-leg"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "45-degree",
+          "GHD",
+          "floor",
+          "reverse"
+        ]
+      },
+      "45-degree": {
+        "excludedVariations": [
+          "GHD",
+          "floor",
+          "reverse",
+          "single-leg"
+        ]
+      },
+      "GHD": {
+        "excludedVariations": [
+          "45-degree",
+          "floor",
+          "reverse",
+          "single-leg"
+        ]
+      },
+      "reverse": {
+        "excludedVariations": [
+          "45-degree",
+          "GHD",
+          "floor",
+          "single-leg"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell",
+          "machine",
+          "plate"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell",
+          "plate",
+          "weighted"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band",
+          "dumbbell",
+          "machine",
+          "plate",
+          "weighted"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "machine",
+          "plate",
+          "weighted"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "machine",
+          "plate",
+          "weighted"
+        ]
+      },
+      "plate": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell",
+          "machine",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -1964,60 +2639,78 @@ const String staticExerciseJson = r'''[
       "hip adductors"
     ],
     "variations": {
-      "single-leg": [
-        "weighted",
-        "banded",
-        "barbell",
-        "plate",
-        "dumbbell",
-        "kettlebell"
-      ],
-      "feet-elevated": [
-        "weighted",
-        "banded",
-        "barbell",
-        "plate",
-        "dumbbell",
-        "kettlebell"
-      ],
-      "double-leg": [
-        "weighted",
-        "banded",
-        "barbell",
-        "plate",
-        "dumbbell",
-        "kettlebell"
-      ],
-      "weighted": [
-        "single-leg",
-        "feet-elevated",
-        "double-leg"
-      ],
-      "banded": [
-        "single-leg",
-        "feet-elevated",
-        "double-leg"
-      ],
-      "barbell": [
-        "single-leg",
-        "feet-elevated",
-        "double-leg"
-      ],
-      "plate": [
-        "single-leg",
-        "feet-elevated",
-        "double-leg"
-      ],
-      "dumbbell": [
-        "single-leg",
-        "feet-elevated",
-        "double-leg"
-      ],
-      "kettlebell": [
-        "single-leg",
-        "feet-elevated",
-        "double-leg"
-      ]
+      "single-leg": {
+        "excludedVariations": [
+          "double-leg",
+          "feet-elevated"
+        ]
+      },
+      "feet-elevated": {
+        "excludedVariations": [
+          "double-leg",
+          "single-leg"
+        ]
+      },
+      "double-leg": {
+        "excludedVariations": [
+          "feet-elevated",
+          "single-leg"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "plate"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "plate",
+          "weighted"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "banded",
+          "dumbbell",
+          "kettlebell",
+          "plate",
+          "weighted"
+        ]
+      },
+      "plate": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "weighted"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "kettlebell",
+          "plate",
+          "weighted"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "plate",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -2035,102 +2728,114 @@ const String staticExerciseJson = r'''[
       "external obliques"
     ],
     "variations": {
-      "hanging": [
-        "weighted",
-        "captain's chair",
-        "bench",
-        "incline bench",
-        "band",
-        "cable"
-      ],
-      "lying": [
-        "weighted",
-        "captain's chair",
-        "bench",
-        "incline bench",
-        "band",
-        "cable"
-      ],
-      "single-leg": [
-        "weighted",
-        "captain's chair",
-        "bench",
-        "incline bench",
-        "band",
-        "cable"
-      ],
-      "knee-raise": [
-        "weighted",
-        "captain's chair",
-        "bench",
-        "incline bench",
-        "band",
-        "cable"
-      ],
-      "toes-to-bar": [
-        "weighted",
-        "captain's chair",
-        "bench",
-        "incline bench",
-        "band",
-        "cable"
-      ],
-      "flutter kick": [
-        "weighted",
-        "captain's chair",
-        "bench",
-        "incline bench",
-        "band",
-        "cable"
-      ],
-      "weighted": [
-        "hanging",
-        "lying",
-        "single-leg",
-        "knee-raise",
-        "toes-to-bar",
-        "flutter kick"
-      ],
-      "captain's chair": [
-        "hanging",
-        "lying",
-        "single-leg",
-        "knee-raise",
-        "toes-to-bar",
-        "flutter kick"
-      ],
-      "bench": [
-        "hanging",
-        "lying",
-        "single-leg",
-        "knee-raise",
-        "toes-to-bar",
-        "flutter kick"
-      ],
-      "incline bench": [
-        "hanging",
-        "lying",
-        "single-leg",
-        "knee-raise",
-        "toes-to-bar",
-        "flutter kick"
-      ],
-      "band": [
-        "hanging",
-        "lying",
-        "single-leg",
-        "knee-raise",
-        "toes-to-bar",
-        "flutter kick"
-      ],
-      "cable": [
-        "hanging",
-        "lying",
-        "single-leg",
-        "knee-raise",
-        "toes-to-bar",
-        "flutter kick"
-      ]
+      "hanging": {
+        "excludedVariations": [
+          "flutter kick",
+          "knee-raise",
+          "lying",
+          "single-leg",
+          "toes-to-bar"
+        ]
+      },
+      "lying": {
+        "excludedVariations": [
+          "flutter kick",
+          "hanging",
+          "knee-raise",
+          "single-leg",
+          "toes-to-bar"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "flutter kick",
+          "hanging",
+          "knee-raise",
+          "lying",
+          "toes-to-bar"
+        ]
+      },
+      "knee-raise": {
+        "excludedVariations": [
+          "flutter kick",
+          "hanging",
+          "lying",
+          "single-leg",
+          "toes-to-bar"
+        ]
+      },
+      "toes-to-bar": {
+        "excludedVariations": [
+          "flutter kick",
+          "hanging",
+          "knee-raise",
+          "lying",
+          "single-leg"
+        ]
+      },
+      "flutter kick": {
+        "excludedVariations": [
+          "hanging",
+          "knee-raise",
+          "lying",
+          "single-leg",
+          "toes-to-bar"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "band",
+          "bench",
+          "cable",
+          "captain's chair",
+          "incline bench"
+        ]
+      },
+      "captain's chair": {
+        "excludedVariations": [
+          "band",
+          "bench",
+          "cable",
+          "incline bench",
+          "weighted"
+        ]
+      },
+      "bench": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "captain's chair",
+          "incline bench",
+          "weighted"
+        ]
+      },
+      "incline bench": {
+        "excludedVariations": [
+          "band",
+          "bench",
+          "cable",
+          "captain's chair",
+          "weighted"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "bench",
+          "cable",
+          "captain's chair",
+          "incline bench",
+          "weighted"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "bench",
+          "captain's chair",
+          "incline bench",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -2152,74 +2857,88 @@ const String staticExerciseJson = r'''[
       "trapezius"
     ],
     "variations": {
-      "single-leg": [
-        "bosu",
-        "weighted",
-        "box jump",
-        "dumbbell"
-      ],
-      "pull-up": [
-        "bosu",
-        "weighted",
-        "box jump",
-        "dumbbell"
-      ],
-      "no-jump": [
-        "bosu",
-        "weighted",
-        "box jump",
-        "dumbbell"
-      ],
-      "push-up": [
-        "bosu",
-        "weighted",
-        "box jump",
-        "dumbbell"
-      ],
-      "tuck": [
-        "bosu",
-        "weighted",
-        "box jump",
-        "dumbbell"
-      ],
-      "half": [
-        "bosu",
-        "weighted",
-        "box jump",
-        "dumbbell"
-      ],
-      "bosu": [
-        "single-leg",
-        "pull-up",
-        "no-jump",
-        "push-up",
-        "tuck",
-        "half"
-      ],
-      "weighted": [
-        "single-leg",
-        "pull-up",
-        "no-jump",
-        "push-up",
-        "tuck",
-        "half"
-      ],
-      "box jump": [
-        "single-leg",
-        "pull-up",
-        "no-jump",
-        "push-up",
-        "tuck",
-        "half"
-      ],
-      "dumbbell": [
-        "single-leg",
-        "pull-up",
-        "no-jump",
-        "push-up",
-        "tuck",
-        "half"
-      ]
+      "single-leg": {
+        "excludedVariations": [
+          "half",
+          "no-jump",
+          "pull-up",
+          "push-up",
+          "tuck"
+        ]
+      },
+      "pull-up": {
+        "excludedVariations": [
+          "half",
+          "no-jump",
+          "push-up",
+          "single-leg",
+          "tuck"
+        ]
+      },
+      "no-jump": {
+        "excludedVariations": [
+          "half",
+          "pull-up",
+          "push-up",
+          "single-leg",
+          "tuck"
+        ]
+      },
+      "push-up": {
+        "excludedVariations": [
+          "half",
+          "no-jump",
+          "pull-up",
+          "single-leg",
+          "tuck"
+        ]
+      },
+      "tuck": {
+        "excludedVariations": [
+          "half",
+          "no-jump",
+          "pull-up",
+          "push-up",
+          "single-leg"
+        ]
+      },
+      "half": {
+        "excludedVariations": [
+          "no-jump",
+          "pull-up",
+          "push-up",
+          "single-leg",
+          "tuck"
+        ]
+      },
+      "bosu": {
+        "excludedVariations": [
+          "box jump",
+          "dumbbell",
+          "weighted"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "bosu",
+          "box jump",
+          "dumbbell"
+        ]
+      },
+      "box jump": {
+        "excludedVariations": [
+          "bosu",
+          "dumbbell",
+          "weighted"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "bosu",
+          "box jump",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -2233,60 +2952,78 @@ const String staticExerciseJson = r'''[
     ],
     "secondaryMuscles": [],
     "variations": {
-      "single-leg": [
-        "machine",
-        "cable",
-        "band"
-      ],
-      "seated": [
-        "machine",
-        "cable",
-        "band"
-      ],
-      "lying": [
-        "machine",
-        "cable",
-        "band"
-      ],
-      "sissy squat": [
-        "machine",
-        "cable",
-        "band"
-      ],
-      "tempo": [
-        "machine",
-        "cable",
-        "band"
-      ],
-      "paused": [
-        "machine",
-        "cable",
-        "band"
-      ],
-      "machine": [
-        "single-leg",
-        "seated",
-        "lying",
-        "sissy squat",
-        "tempo",
-        "paused"
-      ],
-      "cable": [
-        "single-leg",
-        "seated",
-        "lying",
-        "sissy squat",
-        "tempo",
-        "paused"
-      ],
-      "band": [
-        "single-leg",
-        "seated",
-        "lying",
-        "sissy squat",
-        "tempo",
-        "paused"
-      ]
+      "single-leg": {
+        "excludedVariations": [
+          "lying",
+          "paused",
+          "seated",
+          "sissy squat",
+          "tempo"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "lying",
+          "paused",
+          "single-leg",
+          "sissy squat",
+          "tempo"
+        ]
+      },
+      "lying": {
+        "excludedVariations": [
+          "paused",
+          "seated",
+          "single-leg",
+          "sissy squat",
+          "tempo"
+        ]
+      },
+      "sissy squat": {
+        "excludedVariations": [
+          "lying",
+          "paused",
+          "seated",
+          "single-leg",
+          "tempo"
+        ]
+      },
+      "tempo": {
+        "excludedVariations": [
+          "lying",
+          "paused",
+          "seated",
+          "single-leg",
+          "sissy squat"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "lying",
+          "seated",
+          "single-leg",
+          "sissy squat",
+          "tempo"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "band",
+          "cable"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "machine"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "cable",
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -2302,68 +3039,94 @@ const String staticExerciseJson = r'''[
       "gluteus maximus"
     ],
     "variations": {
-      "single-leg": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "standing": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "seated": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "lying": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "fire hydrant": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "clamshell": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "side-lying": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "machine": [
-        "single-leg",
-        "standing",
-        "seated",
-        "lying",
-        "fire hydrant",
-        "clamshell",
-        "side-lying"
-      ],
-      "cable": [
-        "single-leg",
-        "standing",
-        "seated",
-        "lying",
-        "fire hydrant",
-        "clamshell",
-        "side-lying"
-      ],
-      "banded": [
-        "single-leg",
-        "standing",
-        "seated",
-        "lying",
-        "fire hydrant",
-        "clamshell",
-        "side-lying"
-      ]
+      "single-leg": {
+        "excludedVariations": [
+          "clamshell",
+          "fire hydrant",
+          "lying",
+          "seated",
+          "side-lying",
+          "standing"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "clamshell",
+          "fire hydrant",
+          "lying",
+          "seated",
+          "side-lying",
+          "single-leg"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "clamshell",
+          "fire hydrant",
+          "lying",
+          "side-lying",
+          "single-leg",
+          "standing"
+        ]
+      },
+      "lying": {
+        "excludedVariations": [
+          "clamshell",
+          "fire hydrant",
+          "seated",
+          "side-lying",
+          "single-leg",
+          "standing"
+        ]
+      },
+      "fire hydrant": {
+        "excludedVariations": [
+          "clamshell",
+          "lying",
+          "seated",
+          "side-lying",
+          "single-leg",
+          "standing"
+        ]
+      },
+      "clamshell": {
+        "excludedVariations": [
+          "fire hydrant",
+          "lying",
+          "seated",
+          "side-lying",
+          "single-leg",
+          "standing"
+        ]
+      },
+      "side-lying": {
+        "excludedVariations": [
+          "clamshell",
+          "fire hydrant",
+          "lying",
+          "seated",
+          "single-leg",
+          "standing"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "banded",
+          "cable"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "banded",
+          "machine"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "cable",
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -2381,92 +3144,154 @@ const String staticExerciseJson = r'''[
       "anterior deltoid"
     ],
     "variations": {
-      "forearm": [
-        "weighted",
-        "bosu",
-        "band"
-      ],
-      "hands": [
-        "weighted",
-        "bosu",
-        "band"
-      ],
-      "side": [
-        "weighted",
-        "bosu",
-        "band"
-      ],
-      "single-leg": [
-        "weighted",
-        "bosu",
-        "band"
-      ],
-      "RKC": [
-        "weighted",
-        "bosu",
-        "band"
-      ],
-      "reach": [
-        "weighted",
-        "bosu",
-        "band"
-      ],
-      "suitcase": [
-        "weighted",
-        "bosu",
-        "band"
-      ],
-      "reverse": [
-        "weighted",
-        "bosu",
-        "band"
-      ],
-      "long-lever": [
-        "weighted",
-        "bosu",
-        "band"
-      ],
-      "stir the pot": [
-        "weighted",
-        "bosu",
-        "band"
-      ],
-      "weighted": [
-        "forearm",
-        "hands",
-        "side",
-        "single-leg",
-        "RKC",
-        "reach",
-        "suitcase",
-        "reverse",
-        "long-lever",
-        "stir the pot"
-      ],
-      "bosu": [
-        "forearm",
-        "hands",
-        "side",
-        "single-leg",
-        "RKC",
-        "reach",
-        "suitcase",
-        "reverse",
-        "long-lever",
-        "stir the pot"
-      ],
-      "band": [
-        "forearm",
-        "hands",
-        "side",
-        "single-leg",
-        "RKC",
-        "reach",
-        "suitcase",
-        "reverse",
-        "long-lever",
-        "stir the pot"
-      ]
+      "forearm": {
+        "excludedVariations": [
+          "RKC",
+          "hands",
+          "long-lever",
+          "reach",
+          "reverse",
+          "side",
+          "single-leg",
+          "stir the pot",
+          "suitcase"
+        ]
+      },
+      "hands": {
+        "excludedVariations": [
+          "RKC",
+          "forearm",
+          "long-lever",
+          "reach",
+          "reverse",
+          "side",
+          "single-leg",
+          "stir the pot",
+          "suitcase"
+        ]
+      },
+      "side": {
+        "excludedVariations": [
+          "RKC",
+          "forearm",
+          "hands",
+          "long-lever",
+          "reach",
+          "reverse",
+          "single-leg",
+          "stir the pot",
+          "suitcase"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "RKC",
+          "forearm",
+          "hands",
+          "long-lever",
+          "reach",
+          "reverse",
+          "side",
+          "stir the pot",
+          "suitcase"
+        ]
+      },
+      "RKC": {
+        "excludedVariations": [
+          "forearm",
+          "hands",
+          "long-lever",
+          "reach",
+          "reverse",
+          "side",
+          "single-leg",
+          "stir the pot",
+          "suitcase"
+        ]
+      },
+      "reach": {
+        "excludedVariations": [
+          "RKC",
+          "forearm",
+          "hands",
+          "long-lever",
+          "reverse",
+          "side",
+          "single-leg",
+          "stir the pot",
+          "suitcase"
+        ]
+      },
+      "suitcase": {
+        "excludedVariations": [
+          "RKC",
+          "forearm",
+          "hands",
+          "long-lever",
+          "reach",
+          "reverse",
+          "side",
+          "single-leg",
+          "stir the pot"
+        ]
+      },
+      "reverse": {
+        "excludedVariations": [
+          "RKC",
+          "forearm",
+          "hands",
+          "long-lever",
+          "reach",
+          "side",
+          "single-leg",
+          "stir the pot",
+          "suitcase"
+        ]
+      },
+      "long-lever": {
+        "excludedVariations": [
+          "RKC",
+          "forearm",
+          "hands",
+          "reach",
+          "reverse",
+          "side",
+          "single-leg",
+          "stir the pot",
+          "suitcase"
+        ]
+      },
+      "stir the pot": {
+        "excludedVariations": [
+          "RKC",
+          "forearm",
+          "hands",
+          "long-lever",
+          "reach",
+          "reverse",
+          "side",
+          "single-leg",
+          "suitcase"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "band",
+          "bosu"
+        ]
+      },
+      "bosu": {
+        "excludedVariations": [
+          "band",
+          "weighted"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "bosu",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -2483,60 +3308,78 @@ const String staticExerciseJson = r'''[
       "hip adductors"
     ],
     "variations": {
-      "single-leg": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "floor": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "donkey kick": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "quadruped": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "straight-leg": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "bent-knee": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "machine": [
-        "single-leg",
-        "floor",
-        "donkey kick",
-        "quadruped",
-        "straight-leg",
-        "bent-knee"
-      ],
-      "cable": [
-        "single-leg",
-        "floor",
-        "donkey kick",
-        "quadruped",
-        "straight-leg",
-        "bent-knee"
-      ],
-      "banded": [
-        "single-leg",
-        "floor",
-        "donkey kick",
-        "quadruped",
-        "straight-leg",
-        "bent-knee"
-      ]
+      "single-leg": {
+        "excludedVariations": [
+          "bent-knee",
+          "donkey kick",
+          "floor",
+          "quadruped",
+          "straight-leg"
+        ]
+      },
+      "floor": {
+        "excludedVariations": [
+          "bent-knee",
+          "donkey kick",
+          "quadruped",
+          "single-leg",
+          "straight-leg"
+        ]
+      },
+      "donkey kick": {
+        "excludedVariations": [
+          "bent-knee",
+          "floor",
+          "quadruped",
+          "single-leg",
+          "straight-leg"
+        ]
+      },
+      "quadruped": {
+        "excludedVariations": [
+          "bent-knee",
+          "donkey kick",
+          "floor",
+          "single-leg",
+          "straight-leg"
+        ]
+      },
+      "straight-leg": {
+        "excludedVariations": [
+          "bent-knee",
+          "donkey kick",
+          "floor",
+          "quadruped",
+          "single-leg"
+        ]
+      },
+      "bent-knee": {
+        "excludedVariations": [
+          "donkey kick",
+          "floor",
+          "quadruped",
+          "single-leg",
+          "straight-leg"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "banded",
+          "cable"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "banded",
+          "machine"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "cable",
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -2554,242 +3397,364 @@ const String staticExerciseJson = r'''[
       "gastrocnemius"
     ],
     "variations": {
-      "walking": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "reverse": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "side": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "curtsy": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "front": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "back": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "split": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "bulgarian": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "pistol": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "deficit": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "paused": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "tempo": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "overhead": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "suitcase": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "crossover": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "explosive": [
-        "dumbbell",
-        "barbell",
-        "goblet",
-        "kettlebell",
-        "banded",
-        "weighted vest"
-      ],
-      "dumbbell": [
-        "walking",
-        "reverse",
-        "side",
-        "curtsy",
-        "front",
-        "back",
-        "split",
-        "bulgarian",
-        "pistol",
-        "deficit",
-        "paused",
-        "tempo",
-        "overhead",
-        "suitcase",
-        "crossover",
-        "explosive"
-      ],
-      "barbell": [
-        "walking",
-        "reverse",
-        "side",
-        "curtsy",
-        "front",
-        "back",
-        "split",
-        "bulgarian",
-        "pistol",
-        "deficit",
-        "paused",
-        "tempo",
-        "overhead",
-        "suitcase",
-        "crossover",
-        "explosive"
-      ],
-      "goblet": [
-        "walking",
-        "reverse",
-        "side",
-        "curtsy",
-        "front",
-        "back",
-        "split",
-        "bulgarian",
-        "pistol",
-        "deficit",
-        "paused",
-        "tempo",
-        "overhead",
-        "suitcase",
-        "crossover",
-        "explosive"
-      ],
-      "kettlebell": [
-        "walking",
-        "reverse",
-        "side",
-        "curtsy",
-        "front",
-        "back",
-        "split",
-        "bulgarian",
-        "pistol",
-        "deficit",
-        "paused",
-        "tempo",
-        "overhead",
-        "suitcase",
-        "crossover",
-        "explosive"
-      ],
-      "banded": [
-        "walking",
-        "reverse",
-        "side",
-        "curtsy",
-        "front",
-        "back",
-        "split",
-        "bulgarian",
-        "pistol",
-        "deficit",
-        "paused",
-        "tempo",
-        "overhead",
-        "suitcase",
-        "crossover",
-        "explosive"
-      ],
-      "weighted vest": [
-        "walking",
-        "reverse",
-        "side",
-        "curtsy",
-        "front",
-        "back",
-        "split",
-        "bulgarian",
-        "pistol",
-        "deficit",
-        "paused",
-        "tempo",
-        "overhead",
-        "suitcase",
-        "crossover",
-        "explosive"
-      ]
+      "walking": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "tempo"
+        ]
+      },
+      "reverse": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "side",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "side": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "curtsy": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "front": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "back": {
+        "excludedVariations": [
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "split": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "bulgarian": {
+        "excludedVariations": [
+          "back",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "pistol": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "deficit": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "tempo": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "walking"
+        ]
+      },
+      "overhead": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "suitcase": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "tempo",
+          "walking"
+        ]
+      },
+      "crossover": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "curtsy",
+          "deficit",
+          "explosive",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "explosive": {
+        "excludedVariations": [
+          "back",
+          "bulgarian",
+          "crossover",
+          "curtsy",
+          "deficit",
+          "front",
+          "overhead",
+          "paused",
+          "pistol",
+          "reverse",
+          "side",
+          "split",
+          "suitcase",
+          "tempo",
+          "walking"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "goblet",
+          "kettlebell",
+          "weighted vest"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "banded",
+          "dumbbell",
+          "goblet",
+          "kettlebell",
+          "weighted vest"
+        ]
+      },
+      "goblet": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "weighted vest"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "goblet",
+          "weighted vest"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "goblet",
+          "kettlebell",
+          "weighted vest"
+        ]
+      },
+      "weighted vest": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "goblet",
+          "kettlebell"
+        ]
+      }
     }
   },
   {
@@ -2806,16 +3771,136 @@ const String staticExerciseJson = r'''[
       "anterior deltoid"
     ],
     "variations": {
-      "rotational": [],
-      "overhead": [],
-      "chest pass": [],
-      "slam": [],
-      "wall ball": [],
-      "squat throw": [],
-      "kneeling": [],
-      "partner": [],
-      "side throw": [],
-      "scoop toss": []
+      "rotational": {
+        "excludedVariations": [
+          "chest pass",
+          "kneeling",
+          "overhead",
+          "partner",
+          "scoop toss",
+          "side throw",
+          "slam",
+          "squat throw",
+          "wall ball"
+        ]
+      },
+      "overhead": {
+        "excludedVariations": [
+          "chest pass",
+          "kneeling",
+          "partner",
+          "rotational",
+          "scoop toss",
+          "side throw",
+          "slam",
+          "squat throw",
+          "wall ball"
+        ]
+      },
+      "chest pass": {
+        "excludedVariations": [
+          "kneeling",
+          "overhead",
+          "partner",
+          "rotational",
+          "scoop toss",
+          "side throw",
+          "slam",
+          "squat throw",
+          "wall ball"
+        ]
+      },
+      "slam": {
+        "excludedVariations": [
+          "chest pass",
+          "kneeling",
+          "overhead",
+          "partner",
+          "rotational",
+          "scoop toss",
+          "side throw",
+          "squat throw",
+          "wall ball"
+        ]
+      },
+      "wall ball": {
+        "excludedVariations": [
+          "chest pass",
+          "kneeling",
+          "overhead",
+          "partner",
+          "rotational",
+          "scoop toss",
+          "side throw",
+          "slam",
+          "squat throw"
+        ]
+      },
+      "squat throw": {
+        "excludedVariations": [
+          "chest pass",
+          "kneeling",
+          "overhead",
+          "partner",
+          "rotational",
+          "scoop toss",
+          "side throw",
+          "slam",
+          "wall ball"
+        ]
+      },
+      "kneeling": {
+        "excludedVariations": [
+          "chest pass",
+          "overhead",
+          "partner",
+          "rotational",
+          "scoop toss",
+          "side throw",
+          "slam",
+          "squat throw",
+          "wall ball"
+        ]
+      },
+      "partner": {
+        "excludedVariations": [
+          "chest pass",
+          "kneeling",
+          "overhead",
+          "rotational",
+          "scoop toss",
+          "side throw",
+          "slam",
+          "squat throw",
+          "wall ball"
+        ]
+      },
+      "side throw": {
+        "excludedVariations": [
+          "chest pass",
+          "kneeling",
+          "overhead",
+          "partner",
+          "rotational",
+          "scoop toss",
+          "slam",
+          "squat throw",
+          "wall ball"
+        ]
+      },
+      "scoop toss": {
+        "excludedVariations": [
+          "chest pass",
+          "kneeling",
+          "overhead",
+          "partner",
+          "rotational",
+          "side throw",
+          "slam",
+          "squat throw",
+          "wall ball"
+        ]
+      }
     }
   },
   {
@@ -2837,214 +3922,298 @@ const String staticExerciseJson = r'''[
       "subscapularis"
     ],
     "variations": {
-      "t-bar": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "pendlay": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "chest-supported": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "seated": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "standing": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "single-arm": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "wide-grip": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "close-grip": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "neutral-grip": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "overhand": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "underhand": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "kroc": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "yates": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "pause": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "landmine",
-        "ring"
-      ],
-      "dumbbell": [
-        "t-bar",
-        "pendlay",
-        "chest-supported",
-        "seated",
-        "standing",
-        "single-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand",
-        "underhand",
-        "kroc",
-        "yates",
-        "pause"
-      ],
-      "barbell": [
-        "t-bar",
-        "pendlay",
-        "chest-supported",
-        "seated",
-        "standing",
-        "single-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand",
-        "underhand",
-        "kroc",
-        "yates",
-        "pause"
-      ],
-      "cable": [
-        "t-bar",
-        "pendlay",
-        "chest-supported",
-        "seated",
-        "standing",
-        "single-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand",
-        "underhand",
-        "kroc",
-        "yates",
-        "pause"
-      ],
-      "machine": [
-        "t-bar",
-        "pendlay",
-        "chest-supported",
-        "seated",
-        "standing",
-        "single-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand",
-        "underhand",
-        "kroc",
-        "yates",
-        "pause"
-      ],
-      "landmine": [
-        "t-bar",
-        "pendlay",
-        "chest-supported",
-        "seated",
-        "standing",
-        "single-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand",
-        "underhand",
-        "kroc",
-        "yates",
-        "pause"
-      ],
-      "ring": [
-        "t-bar",
-        "pendlay",
-        "chest-supported",
-        "seated",
-        "standing",
-        "single-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand",
-        "underhand",
-        "kroc",
-        "yates",
-        "pause"
-      ]
+      "t-bar": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "kroc",
+          "neutral-grip",
+          "overhand",
+          "pause",
+          "pendlay",
+          "seated",
+          "single-arm",
+          "standing",
+          "underhand",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "pendlay": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "kroc",
+          "neutral-grip",
+          "overhand",
+          "pause",
+          "seated",
+          "single-arm",
+          "standing",
+          "t-bar",
+          "underhand",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "chest-supported": {
+        "excludedVariations": [
+          "close-grip",
+          "kroc",
+          "neutral-grip",
+          "overhand",
+          "pause",
+          "pendlay",
+          "seated",
+          "single-arm",
+          "standing",
+          "t-bar",
+          "underhand",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "kroc",
+          "neutral-grip",
+          "overhand",
+          "pause",
+          "pendlay",
+          "single-arm",
+          "standing",
+          "t-bar",
+          "underhand",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "kroc",
+          "neutral-grip",
+          "overhand",
+          "pause",
+          "pendlay",
+          "seated",
+          "single-arm",
+          "t-bar",
+          "underhand",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "kroc",
+          "neutral-grip",
+          "overhand",
+          "pause",
+          "pendlay",
+          "seated",
+          "standing",
+          "t-bar",
+          "underhand",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "kroc",
+          "neutral-grip",
+          "overhand",
+          "pause",
+          "pendlay",
+          "seated",
+          "single-arm",
+          "standing",
+          "t-bar",
+          "underhand",
+          "yates"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "chest-supported",
+          "kroc",
+          "neutral-grip",
+          "overhand",
+          "pause",
+          "pendlay",
+          "seated",
+          "single-arm",
+          "standing",
+          "t-bar",
+          "underhand",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "kroc",
+          "overhand",
+          "pause",
+          "pendlay",
+          "seated",
+          "single-arm",
+          "standing",
+          "t-bar",
+          "underhand",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "overhand": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "kroc",
+          "neutral-grip",
+          "pause",
+          "pendlay",
+          "seated",
+          "single-arm",
+          "standing",
+          "t-bar",
+          "underhand",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "underhand": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "kroc",
+          "neutral-grip",
+          "overhand",
+          "pause",
+          "pendlay",
+          "seated",
+          "single-arm",
+          "standing",
+          "t-bar",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "kroc": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "neutral-grip",
+          "overhand",
+          "pause",
+          "pendlay",
+          "seated",
+          "single-arm",
+          "standing",
+          "t-bar",
+          "underhand",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "yates": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "kroc",
+          "neutral-grip",
+          "overhand",
+          "pause",
+          "pendlay",
+          "seated",
+          "single-arm",
+          "standing",
+          "t-bar",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "pause": {
+        "excludedVariations": [
+          "chest-supported",
+          "close-grip",
+          "kroc",
+          "neutral-grip",
+          "overhand",
+          "pendlay",
+          "seated",
+          "single-arm",
+          "standing",
+          "t-bar",
+          "underhand",
+          "wide-grip",
+          "yates"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "landmine",
+          "machine",
+          "ring"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "cable",
+          "dumbbell",
+          "landmine",
+          "machine",
+          "ring"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "landmine",
+          "machine",
+          "ring"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "landmine",
+          "ring"
+        ]
+      },
+      "landmine": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "machine",
+          "ring"
+        ]
+      },
+      "ring": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "landmine",
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -3062,148 +4231,164 @@ const String staticExerciseJson = r'''[
       "triceps brachii"
     ],
     "variations": {
-      "single-arm": [
-        "dumbbell",
-        "barbell",
-        "smith machine",
-        "machine",
-        "kettlebell",
-        "pin",
-        "cable"
-      ],
-      "seated": [
-        "dumbbell",
-        "barbell",
-        "smith machine",
-        "machine",
-        "kettlebell",
-        "pin",
-        "cable"
-      ],
-      "standing": [
-        "dumbbell",
-        "barbell",
-        "smith machine",
-        "machine",
-        "kettlebell",
-        "pin",
-        "cable"
-      ],
-      "push press": [
-        "dumbbell",
-        "barbell",
-        "smith machine",
-        "machine",
-        "kettlebell",
-        "pin",
-        "cable"
-      ],
-      "behind-the-neck": [
-        "dumbbell",
-        "barbell",
-        "smith machine",
-        "machine",
-        "kettlebell",
-        "pin",
-        "cable"
-      ],
-      "paused": [
-        "dumbbell",
-        "barbell",
-        "smith machine",
-        "machine",
-        "kettlebell",
-        "pin",
-        "cable"
-      ],
-      "Bradford": [
-        "dumbbell",
-        "barbell",
-        "smith machine",
-        "machine",
-        "kettlebell",
-        "pin",
-        "cable"
-      ],
-      "alternating": [
-        "dumbbell",
-        "barbell",
-        "smith machine",
-        "machine",
-        "kettlebell",
-        "pin",
-        "cable"
-      ],
-      "dumbbell": [
-        "single-arm",
-        "seated",
-        "standing",
-        "push press",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating"
-      ],
-      "barbell": [
-        "single-arm",
-        "seated",
-        "standing",
-        "push press",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating"
-      ],
-      "smith machine": [
-        "single-arm",
-        "seated",
-        "standing",
-        "push press",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating"
-      ],
-      "machine": [
-        "single-arm",
-        "seated",
-        "standing",
-        "push press",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating"
-      ],
-      "kettlebell": [
-        "single-arm",
-        "seated",
-        "standing",
-        "push press",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating"
-      ],
-      "pin": [
-        "single-arm",
-        "seated",
-        "standing",
-        "push press",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating"
-      ],
-      "cable": [
-        "single-arm",
-        "seated",
-        "standing",
-        "push press",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "Bradford",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push press",
+          "seated",
+          "standing"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "Bradford",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push press",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "Bradford",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push press",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "push press": {
+        "excludedVariations": [
+          "Bradford",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "behind-the-neck": {
+        "excludedVariations": [
+          "Bradford",
+          "alternating",
+          "paused",
+          "push press",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "Bradford",
+          "alternating",
+          "behind-the-neck",
+          "push press",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "Bradford": {
+        "excludedVariations": [
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push press",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "alternating": {
+        "excludedVariations": [
+          "Bradford",
+          "behind-the-neck",
+          "paused",
+          "push press",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "kettlebell",
+          "machine",
+          "pin",
+          "smith machine"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "pin",
+          "smith machine"
+        ]
+      },
+      "smith machine": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "pin"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "pin",
+          "smith machine"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "machine",
+          "pin",
+          "smith machine"
+        ]
+      },
+      "pin": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "smith machine"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "pin",
+          "smith machine"
+        ]
+      }
     }
   },
   {
@@ -3222,60 +4407,78 @@ const String staticExerciseJson = r'''[
       "trapezius"
     ],
     "variations": {
-      "wide-grip": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "kettlebell",
-        "smith machine",
-        "band"
-      ],
-      "narrow-grip": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "kettlebell",
-        "smith machine",
-        "band"
-      ],
-      "single-arm": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "kettlebell",
-        "smith machine",
-        "band"
-      ],
-      "barbell": [
-        "wide-grip",
-        "narrow-grip",
-        "single-arm"
-      ],
-      "dumbbell": [
-        "wide-grip",
-        "narrow-grip",
-        "single-arm"
-      ],
-      "cable": [
-        "wide-grip",
-        "narrow-grip",
-        "single-arm"
-      ],
-      "kettlebell": [
-        "wide-grip",
-        "narrow-grip",
-        "single-arm"
-      ],
-      "smith machine": [
-        "wide-grip",
-        "narrow-grip",
-        "single-arm"
-      ],
-      "band": [
-        "wide-grip",
-        "narrow-grip",
-        "single-arm"
-      ]
+      "wide-grip": {
+        "excludedVariations": [
+          "narrow-grip",
+          "single-arm"
+        ]
+      },
+      "narrow-grip": {
+        "excludedVariations": [
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "narrow-grip",
+          "wide-grip"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "smith machine"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "kettlebell",
+          "smith machine"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "smith machine"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "smith machine"
+        ]
+      },
+      "smith machine": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "smith machine"
+        ]
+      }
     }
   },
   {
@@ -3300,88 +4503,100 @@ const String staticExerciseJson = r'''[
       "latissimus dorsi"
     ],
     "variations": {
-      "single-arm": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "band",
-        "behind-the-back cable",
-        "kettlebell"
-      ],
-      "seated": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "band",
-        "behind-the-back cable",
-        "kettlebell"
-      ],
-      "lying": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "band",
-        "behind-the-back cable",
-        "kettlebell"
-      ],
-      "leaning": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "band",
-        "behind-the-back cable",
-        "kettlebell"
-      ],
-      "partial": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "band",
-        "behind-the-back cable",
-        "kettlebell"
-      ],
-      "dumbbell": [
-        "single-arm",
-        "seated",
-        "lying",
-        "leaning",
-        "partial"
-      ],
-      "cable": [
-        "single-arm",
-        "seated",
-        "lying",
-        "leaning",
-        "partial"
-      ],
-      "machine": [
-        "single-arm",
-        "seated",
-        "lying",
-        "leaning",
-        "partial"
-      ],
-      "band": [
-        "single-arm",
-        "seated",
-        "lying",
-        "leaning",
-        "partial"
-      ],
-      "behind-the-back cable": [
-        "single-arm",
-        "seated",
-        "lying",
-        "leaning",
-        "partial"
-      ],
-      "kettlebell": [
-        "single-arm",
-        "seated",
-        "lying",
-        "leaning",
-        "partial"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "leaning",
+          "lying",
+          "partial",
+          "seated"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "leaning",
+          "lying",
+          "partial",
+          "single-arm"
+        ]
+      },
+      "lying": {
+        "excludedVariations": [
+          "leaning",
+          "partial",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "leaning": {
+        "excludedVariations": [
+          "lying",
+          "partial",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "partial": {
+        "excludedVariations": [
+          "leaning",
+          "lying",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "behind-the-back cable",
+          "cable",
+          "kettlebell",
+          "machine"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "behind-the-back cable",
+          "dumbbell",
+          "kettlebell",
+          "machine"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "band",
+          "behind-the-back cable",
+          "cable",
+          "dumbbell",
+          "kettlebell"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "behind-the-back cable",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine"
+        ]
+      },
+      "behind-the-back cable": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "band",
+          "behind-the-back cable",
+          "cable",
+          "dumbbell",
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -3405,76 +4620,86 @@ const String staticExerciseJson = r'''[
       "latissimus dorsi"
     ],
     "variations": {
-      "single-arm": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "incline bench",
-        "band"
-      ],
-      "bent-over": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "incline bench",
-        "band"
-      ],
-      "seated": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "incline bench",
-        "band"
-      ],
-      "reverse pec deck": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "incline bench",
-        "band"
-      ],
-      "lying": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "incline bench",
-        "band"
-      ],
-      "dumbbell": [
-        "single-arm",
-        "bent-over",
-        "seated",
-        "reverse pec deck",
-        "lying"
-      ],
-      "cable": [
-        "single-arm",
-        "bent-over",
-        "seated",
-        "reverse pec deck",
-        "lying"
-      ],
-      "machine": [
-        "single-arm",
-        "bent-over",
-        "seated",
-        "reverse pec deck",
-        "lying"
-      ],
-      "incline bench": [
-        "single-arm",
-        "bent-over",
-        "seated",
-        "reverse pec deck",
-        "lying"
-      ],
-      "band": [
-        "single-arm",
-        "bent-over",
-        "seated",
-        "reverse pec deck",
-        "lying"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "bent-over",
+          "lying",
+          "reverse pec deck",
+          "seated"
+        ]
+      },
+      "bent-over": {
+        "excludedVariations": [
+          "lying",
+          "reverse pec deck",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "bent-over",
+          "lying",
+          "reverse pec deck",
+          "single-arm"
+        ]
+      },
+      "reverse pec deck": {
+        "excludedVariations": [
+          "bent-over",
+          "lying",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "lying": {
+        "excludedVariations": [
+          "bent-over",
+          "reverse pec deck",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "incline bench",
+          "machine"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "dumbbell",
+          "incline bench",
+          "machine"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "incline bench"
+        ]
+      },
+      "incline bench": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "machine"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "cable",
+          "dumbbell",
+          "incline bench",
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -3495,76 +4720,112 @@ const String staticExerciseJson = r'''[
       "latissimus dorsi"
     ],
     "variations": {
-      "single-arm": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "kettlebell",
-        "trap bar",
-        "smith machine",
-        "band"
-      ],
-      "behind-the-back": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "kettlebell",
-        "trap bar",
-        "smith machine",
-        "band"
-      ],
-      "overhead": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "kettlebell",
-        "trap bar",
-        "smith machine",
-        "band"
-      ],
-      "dumbbell": [
-        "single-arm",
-        "behind-the-back",
-        "overhead"
-      ],
-      "barbell": [
-        "single-arm",
-        "behind-the-back",
-        "overhead"
-      ],
-      "cable": [
-        "single-arm",
-        "behind-the-back",
-        "overhead"
-      ],
-      "machine": [
-        "single-arm",
-        "behind-the-back",
-        "overhead"
-      ],
-      "kettlebell": [
-        "single-arm",
-        "behind-the-back",
-        "overhead"
-      ],
-      "trap bar": [
-        "single-arm",
-        "behind-the-back",
-        "overhead"
-      ],
-      "smith machine": [
-        "single-arm",
-        "behind-the-back",
-        "overhead"
-      ],
-      "band": [
-        "single-arm",
-        "behind-the-back",
-        "overhead"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "behind-the-back",
+          "overhead"
+        ]
+      },
+      "behind-the-back": {
+        "excludedVariations": [
+          "overhead",
+          "single-arm"
+        ]
+      },
+      "overhead": {
+        "excludedVariations": [
+          "behind-the-back",
+          "single-arm"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "kettlebell",
+          "machine",
+          "smith machine",
+          "trap bar"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "smith machine",
+          "trap bar"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "smith machine",
+          "trap bar"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "smith machine",
+          "trap bar"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "machine",
+          "smith machine",
+          "trap bar"
+        ]
+      },
+      "trap bar": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "smith machine"
+        ]
+      },
+      "smith machine": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "trap bar"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine",
+          "smith machine",
+          "trap bar"
+        ]
+      }
     }
   },
   {
@@ -3587,74 +4848,88 @@ const String staticExerciseJson = r'''[
       "latissimus dorsi"
     ],
     "variations": {
-      "single-arm": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "barbell",
-        "plate",
-        "band"
-      ],
-      "incline": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "barbell",
-        "plate",
-        "band"
-      ],
-      "prone": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "barbell",
-        "plate",
-        "band"
-      ],
-      "seated": [
-        "dumbbell",
-        "cable",
-        "machine",
-        "barbell",
-        "plate",
-        "band"
-      ],
-      "dumbbell": [
-        "single-arm",
-        "incline",
-        "prone",
-        "seated"
-      ],
-      "cable": [
-        "single-arm",
-        "incline",
-        "prone",
-        "seated"
-      ],
-      "machine": [
-        "single-arm",
-        "incline",
-        "prone",
-        "seated"
-      ],
-      "barbell": [
-        "single-arm",
-        "incline",
-        "prone",
-        "seated"
-      ],
-      "plate": [
-        "single-arm",
-        "incline",
-        "prone",
-        "seated"
-      ],
-      "band": [
-        "single-arm",
-        "incline",
-        "prone",
-        "seated"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "incline",
+          "prone",
+          "seated"
+        ]
+      },
+      "incline": {
+        "excludedVariations": [
+          "prone",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "prone": {
+        "excludedVariations": [
+          "incline",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "incline",
+          "prone",
+          "single-arm"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "machine",
+          "plate"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell",
+          "machine",
+          "plate"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "plate"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "machine",
+          "plate"
+        ]
+      },
+      "plate": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "machine"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "machine",
+          "plate"
+        ]
+      }
     }
   },
   {
@@ -3675,74 +4950,88 @@ const String staticExerciseJson = r'''[
       "latissimus dorsi"
     ],
     "variations": {
-      "single-arm": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "prone": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "wide-grip": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "close-grip": [
-        "dumbbell",
-        "barbell",
-        "cable",
-        "machine",
-        "band",
-        "kettlebell"
-      ],
-      "dumbbell": [
-        "single-arm",
-        "prone",
-        "wide-grip",
-        "close-grip"
-      ],
-      "barbell": [
-        "single-arm",
-        "prone",
-        "wide-grip",
-        "close-grip"
-      ],
-      "cable": [
-        "single-arm",
-        "prone",
-        "wide-grip",
-        "close-grip"
-      ],
-      "machine": [
-        "single-arm",
-        "prone",
-        "wide-grip",
-        "close-grip"
-      ],
-      "band": [
-        "single-arm",
-        "prone",
-        "wide-grip",
-        "close-grip"
-      ],
-      "kettlebell": [
-        "single-arm",
-        "prone",
-        "wide-grip",
-        "close-grip"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "close-grip",
+          "prone",
+          "wide-grip"
+        ]
+      },
+      "prone": {
+        "excludedVariations": [
+          "close-grip",
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "close-grip",
+          "prone",
+          "single-arm"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "prone",
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "kettlebell",
+          "machine"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "machine"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "machine"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -3760,54 +5049,62 @@ const String staticExerciseJson = r'''[
       "triceps brachii"
     ],
     "variations": {
-      "single-arm": [
-        "dumbbell",
-        "barbell",
-        "kettlebell",
-        "banded"
-      ],
-      "close-grip": [
-        "dumbbell",
-        "barbell",
-        "kettlebell",
-        "banded"
-      ],
-      "paused": [
-        "dumbbell",
-        "barbell",
-        "kettlebell",
-        "banded"
-      ],
-      "neutral-grip": [
-        "dumbbell",
-        "barbell",
-        "kettlebell",
-        "banded"
-      ],
-      "dumbbell": [
-        "single-arm",
-        "close-grip",
-        "paused",
-        "neutral-grip"
-      ],
-      "barbell": [
-        "single-arm",
-        "close-grip",
-        "paused",
-        "neutral-grip"
-      ],
-      "kettlebell": [
-        "single-arm",
-        "close-grip",
-        "paused",
-        "neutral-grip"
-      ],
-      "banded": [
-        "single-arm",
-        "close-grip",
-        "paused",
-        "neutral-grip"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "close-grip",
+          "neutral-grip",
+          "paused"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "neutral-grip",
+          "paused",
+          "single-arm"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "close-grip",
+          "neutral-grip",
+          "single-arm"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "close-grip",
+          "paused",
+          "single-arm"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "kettlebell"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "banded",
+          "dumbbell",
+          "kettlebell"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "kettlebell"
+        ]
+      }
     }
   },
   {
@@ -3827,116 +5124,232 @@ const String staticExerciseJson = r'''[
       "trapezius"
     ],
     "variations": {
-      "hang": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "wide-grip": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "clean and press": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "clean and jerk": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "close-grip": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "sumo": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "clean and push press": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "clean and push jerk": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "tall": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "low-hang": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "mid-thigh": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "paused": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "pause at knee": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "dumbbell": [
-        "hang",
-        "wide-grip",
-        "clean and press",
-        "clean and jerk",
-        "close-grip",
-        "sumo",
-        "clean and push press",
-        "clean and push jerk",
-        "tall",
-        "low-hang",
-        "mid-thigh",
-        "paused",
-        "pause at knee"
-      ],
-      "kettlebell": [
-        "hang",
-        "wide-grip",
-        "clean and press",
-        "clean and jerk",
-        "close-grip",
-        "sumo",
-        "clean and push press",
-        "clean and push jerk",
-        "tall",
-        "low-hang",
-        "mid-thigh",
-        "paused",
-        "pause at knee"
-      ],
-      "block": [
-        "hang",
-        "wide-grip",
-        "clean and press",
-        "clean and jerk",
-        "close-grip",
-        "sumo",
-        "clean and push press",
-        "clean and push jerk",
-        "tall",
-        "low-hang",
-        "mid-thigh",
-        "paused",
-        "pause at knee"
-      ]
+      "hang": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and press",
+          "clean and push jerk",
+          "clean and push press",
+          "close-grip",
+          "low-hang",
+          "mid-thigh",
+          "pause at knee",
+          "paused",
+          "sumo",
+          "tall",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and press",
+          "clean and push jerk",
+          "clean and push press",
+          "close-grip",
+          "hang",
+          "low-hang",
+          "mid-thigh",
+          "pause at knee",
+          "paused",
+          "sumo",
+          "tall"
+        ]
+      },
+      "clean and press": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and push jerk",
+          "clean and push press",
+          "close-grip",
+          "hang",
+          "low-hang",
+          "mid-thigh",
+          "pause at knee",
+          "paused",
+          "sumo",
+          "tall",
+          "wide-grip"
+        ]
+      },
+      "clean and jerk": {
+        "excludedVariations": [
+          "clean and press",
+          "clean and push jerk",
+          "clean and push press",
+          "close-grip",
+          "hang",
+          "low-hang",
+          "mid-thigh",
+          "pause at knee",
+          "paused",
+          "sumo",
+          "tall",
+          "wide-grip"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and press",
+          "clean and push jerk",
+          "clean and push press",
+          "hang",
+          "low-hang",
+          "mid-thigh",
+          "pause at knee",
+          "paused",
+          "sumo",
+          "tall",
+          "wide-grip"
+        ]
+      },
+      "sumo": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and press",
+          "clean and push jerk",
+          "clean and push press",
+          "close-grip",
+          "hang",
+          "low-hang",
+          "mid-thigh",
+          "pause at knee",
+          "paused",
+          "tall",
+          "wide-grip"
+        ]
+      },
+      "clean and push press": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and press",
+          "clean and push jerk",
+          "close-grip",
+          "hang",
+          "low-hang",
+          "mid-thigh",
+          "pause at knee",
+          "paused",
+          "sumo",
+          "tall",
+          "wide-grip"
+        ]
+      },
+      "clean and push jerk": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and press",
+          "clean and push press",
+          "close-grip",
+          "hang",
+          "low-hang",
+          "mid-thigh",
+          "pause at knee",
+          "paused",
+          "sumo",
+          "tall",
+          "wide-grip"
+        ]
+      },
+      "tall": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and press",
+          "clean and push jerk",
+          "clean and push press",
+          "close-grip",
+          "hang",
+          "low-hang",
+          "mid-thigh",
+          "pause at knee",
+          "paused",
+          "sumo",
+          "wide-grip"
+        ]
+      },
+      "low-hang": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and press",
+          "clean and push jerk",
+          "clean and push press",
+          "close-grip",
+          "hang",
+          "mid-thigh",
+          "pause at knee",
+          "paused",
+          "sumo",
+          "tall",
+          "wide-grip"
+        ]
+      },
+      "mid-thigh": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and press",
+          "clean and push jerk",
+          "clean and push press",
+          "close-grip",
+          "hang",
+          "low-hang",
+          "pause at knee",
+          "paused",
+          "sumo",
+          "tall",
+          "wide-grip"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and press",
+          "clean and push jerk",
+          "clean and push press",
+          "close-grip",
+          "hang",
+          "low-hang",
+          "mid-thigh",
+          "pause at knee",
+          "sumo",
+          "tall",
+          "wide-grip"
+        ]
+      },
+      "pause at knee": {
+        "excludedVariations": [
+          "clean and jerk",
+          "clean and press",
+          "clean and push jerk",
+          "clean and push press",
+          "close-grip",
+          "hang",
+          "low-hang",
+          "mid-thigh",
+          "paused",
+          "sumo",
+          "tall",
+          "wide-grip"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "block",
+          "kettlebell"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "block",
+          "dumbbell"
+        ]
+      },
+      "block": {
+        "excludedVariations": [
+          "dumbbell",
+          "kettlebell"
+        ]
+      }
     }
   },
   {
@@ -3950,40 +5363,56 @@ const String staticExerciseJson = r'''[
     ],
     "secondaryMuscles": [],
     "variations": {
-      "single-leg": [
-        "weighted",
-        "band-resisted"
-      ],
-      "bent-knee": [
-        "weighted",
-        "band-resisted"
-      ],
-      "hollow body": [
-        "weighted",
-        "band-resisted"
-      ],
-      "tuck": [
-        "weighted",
-        "band-resisted"
-      ],
-      "full": [
-        "weighted",
-        "band-resisted"
-      ],
-      "weighted": [
-        "single-leg",
-        "bent-knee",
-        "hollow body",
-        "tuck",
-        "full"
-      ],
-      "band-resisted": [
-        "single-leg",
-        "bent-knee",
-        "hollow body",
-        "tuck",
-        "full"
-      ]
+      "single-leg": {
+        "excludedVariations": [
+          "bent-knee",
+          "full",
+          "hollow body",
+          "tuck"
+        ]
+      },
+      "bent-knee": {
+        "excludedVariations": [
+          "full",
+          "hollow body",
+          "single-leg",
+          "tuck"
+        ]
+      },
+      "hollow body": {
+        "excludedVariations": [
+          "bent-knee",
+          "full",
+          "single-leg",
+          "tuck"
+        ]
+      },
+      "tuck": {
+        "excludedVariations": [
+          "bent-knee",
+          "full",
+          "hollow body",
+          "single-leg"
+        ]
+      },
+      "full": {
+        "excludedVariations": [
+          "bent-knee",
+          "hollow body",
+          "single-leg",
+          "tuck"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "band-resisted"
+        ]
+      },
+      "band-resisted": {
+        "excludedVariations": [
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -4004,88 +5433,100 @@ const String staticExerciseJson = r'''[
       "trapezius"
     ],
     "variations": {
-      "reverse": [
-        "barbell",
-        "dumbbell",
-        "machine",
-        "smith machine",
-        "banded",
-        "safety bar"
-      ],
-      "narrow-stance": [
-        "barbell",
-        "dumbbell",
-        "machine",
-        "smith machine",
-        "banded",
-        "safety bar"
-      ],
-      "wide-stance": [
-        "barbell",
-        "dumbbell",
-        "machine",
-        "smith machine",
-        "banded",
-        "safety bar"
-      ],
-      "paused": [
-        "barbell",
-        "dumbbell",
-        "machine",
-        "smith machine",
-        "banded",
-        "safety bar"
-      ],
-      "heel-elevated": [
-        "barbell",
-        "dumbbell",
-        "machine",
-        "smith machine",
-        "banded",
-        "safety bar"
-      ],
-      "barbell": [
-        "reverse",
-        "narrow-stance",
-        "wide-stance",
-        "paused",
-        "heel-elevated"
-      ],
-      "dumbbell": [
-        "reverse",
-        "narrow-stance",
-        "wide-stance",
-        "paused",
-        "heel-elevated"
-      ],
-      "machine": [
-        "reverse",
-        "narrow-stance",
-        "wide-stance",
-        "paused",
-        "heel-elevated"
-      ],
-      "smith machine": [
-        "reverse",
-        "narrow-stance",
-        "wide-stance",
-        "paused",
-        "heel-elevated"
-      ],
-      "banded": [
-        "reverse",
-        "narrow-stance",
-        "wide-stance",
-        "paused",
-        "heel-elevated"
-      ],
-      "safety bar": [
-        "reverse",
-        "narrow-stance",
-        "wide-stance",
-        "paused",
-        "heel-elevated"
-      ]
+      "reverse": {
+        "excludedVariations": [
+          "heel-elevated",
+          "narrow-stance",
+          "paused",
+          "wide-stance"
+        ]
+      },
+      "narrow-stance": {
+        "excludedVariations": [
+          "heel-elevated",
+          "paused",
+          "reverse",
+          "wide-stance"
+        ]
+      },
+      "wide-stance": {
+        "excludedVariations": [
+          "heel-elevated",
+          "narrow-stance",
+          "paused",
+          "reverse"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "heel-elevated",
+          "narrow-stance",
+          "reverse",
+          "wide-stance"
+        ]
+      },
+      "heel-elevated": {
+        "excludedVariations": [
+          "narrow-stance",
+          "paused",
+          "reverse",
+          "wide-stance"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "banded",
+          "dumbbell",
+          "machine",
+          "safety bar",
+          "smith machine"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "machine",
+          "safety bar",
+          "smith machine"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "safety bar",
+          "smith machine"
+        ]
+      },
+      "smith machine": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "machine",
+          "safety bar"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "machine",
+          "safety bar",
+          "smith machine"
+        ]
+      },
+      "safety bar": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "machine",
+          "smith machine"
+        ]
+      }
     }
   },
   {
@@ -4103,134 +5544,214 @@ const String staticExerciseJson = r'''[
       "posterior deltoid"
     ],
     "variations": {
-      "straight arm": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "single-arm": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "seated": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "standing": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "kneeling": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "bent-arm": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "wide-grip": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "close-grip": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "neutral-grip": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "overhand-grip": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "underhand-grip": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "bar": [
-        "cable",
-        "dumbbell",
-        "band",
-        "rope"
-      ],
-      "cable": [
-        "straight arm",
-        "single-arm",
-        "seated",
-        "standing",
-        "kneeling",
-        "bent-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand-grip",
-        "underhand-grip",
-        "bar"
-      ],
-      "dumbbell": [
-        "straight arm",
-        "single-arm",
-        "seated",
-        "standing",
-        "kneeling",
-        "bent-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand-grip",
-        "underhand-grip",
-        "bar"
-      ],
-      "band": [
-        "straight arm",
-        "single-arm",
-        "seated",
-        "standing",
-        "kneeling",
-        "bent-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand-grip",
-        "underhand-grip",
-        "bar"
-      ],
-      "rope": [
-        "straight arm",
-        "single-arm",
-        "seated",
-        "standing",
-        "kneeling",
-        "bent-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand-grip",
-        "underhand-grip",
-        "bar"
-      ]
+      "straight arm": {
+        "excludedVariations": [
+          "bar",
+          "bent-arm",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "seated",
+          "single-arm",
+          "standing",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "bar",
+          "bent-arm",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "seated",
+          "standing",
+          "straight arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "bar",
+          "bent-arm",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "standing",
+          "straight arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "bar",
+          "bent-arm",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "seated",
+          "single-arm",
+          "straight arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "kneeling": {
+        "excludedVariations": [
+          "bar",
+          "bent-arm",
+          "close-grip",
+          "neutral-grip",
+          "overhand-grip",
+          "seated",
+          "single-arm",
+          "standing",
+          "straight arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "bent-arm": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "seated",
+          "single-arm",
+          "standing",
+          "straight arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "bar",
+          "bent-arm",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "seated",
+          "single-arm",
+          "standing",
+          "straight arm",
+          "underhand-grip"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "bar",
+          "bent-arm",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "seated",
+          "single-arm",
+          "standing",
+          "straight arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "bar",
+          "bent-arm",
+          "close-grip",
+          "kneeling",
+          "overhand-grip",
+          "seated",
+          "single-arm",
+          "standing",
+          "straight arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "overhand-grip": {
+        "excludedVariations": [
+          "bar",
+          "bent-arm",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "seated",
+          "single-arm",
+          "standing",
+          "straight arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "underhand-grip": {
+        "excludedVariations": [
+          "bar",
+          "bent-arm",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "seated",
+          "single-arm",
+          "standing",
+          "straight arm",
+          "wide-grip"
+        ]
+      },
+      "bar": {
+        "excludedVariations": [
+          "bent-arm",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "seated",
+          "single-arm",
+          "standing",
+          "straight arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "dumbbell",
+          "rope"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "rope"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "cable",
+          "dumbbell",
+          "rope"
+        ]
+      },
+      "rope": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell"
+        ]
+      }
     }
   },
   {
@@ -4250,60 +5771,78 @@ const String staticExerciseJson = r'''[
       "hip adductors"
     ],
     "variations": {
-      "wide-stance": [
-        "band",
-        "dumbbell",
-        "kettlebell",
-        "barbell",
-        "weighted vest",
-        "ankle weights"
-      ],
-      "squat position": [
-        "band",
-        "dumbbell",
-        "kettlebell",
-        "barbell",
-        "weighted vest",
-        "ankle weights"
-      ],
-      "hip-level": [
-        "band",
-        "dumbbell",
-        "kettlebell",
-        "barbell",
-        "weighted vest",
-        "ankle weights"
-      ],
-      "band": [
-        "wide-stance",
-        "squat position",
-        "hip-level"
-      ],
-      "dumbbell": [
-        "wide-stance",
-        "squat position",
-        "hip-level"
-      ],
-      "kettlebell": [
-        "wide-stance",
-        "squat position",
-        "hip-level"
-      ],
-      "barbell": [
-        "wide-stance",
-        "squat position",
-        "hip-level"
-      ],
-      "weighted vest": [
-        "wide-stance",
-        "squat position",
-        "hip-level"
-      ],
-      "ankle weights": [
-        "wide-stance",
-        "squat position",
-        "hip-level"
-      ]
+      "wide-stance": {
+        "excludedVariations": [
+          "hip-level",
+          "squat position"
+        ]
+      },
+      "squat position": {
+        "excludedVariations": [
+          "hip-level",
+          "wide-stance"
+        ]
+      },
+      "hip-level": {
+        "excludedVariations": [
+          "squat position",
+          "wide-stance"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "ankle weights",
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "weighted vest"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "ankle weights",
+          "band",
+          "barbell",
+          "kettlebell",
+          "weighted vest"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "ankle weights",
+          "band",
+          "barbell",
+          "dumbbell",
+          "weighted vest"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "ankle weights",
+          "band",
+          "dumbbell",
+          "kettlebell",
+          "weighted vest"
+        ]
+      },
+      "weighted vest": {
+        "excludedVariations": [
+          "ankle weights",
+          "band",
+          "barbell",
+          "dumbbell",
+          "kettlebell"
+        ]
+      },
+      "ankle weights": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "weighted vest"
+        ]
+      }
     }
   },
   {
@@ -4319,84 +5858,132 @@ const String staticExerciseJson = r'''[
       "external obliques"
     ],
     "variations": {
-      "standard": [
-        "weighted",
-        "band-resisted",
-        "feet-in-rings"
-      ],
-      "decline": [
-        "weighted",
-        "band-resisted",
-        "feet-in-rings"
-      ],
-      "incline": [
-        "weighted",
-        "band-resisted",
-        "feet-in-rings"
-      ],
-      "anchor": [
-        "weighted",
-        "band-resisted",
-        "feet-in-rings"
-      ],
-      "crossed-arms": [
-        "weighted",
-        "band-resisted",
-        "feet-in-rings"
-      ],
-      "hands-behind-head": [
-        "weighted",
-        "band-resisted",
-        "feet-in-rings"
-      ],
-      "twisting": [
-        "weighted",
-        "band-resisted",
-        "feet-in-rings"
-      ],
-      "janda": [
-        "weighted",
-        "band-resisted",
-        "feet-in-rings"
-      ],
-      "GHD": [
-        "weighted",
-        "band-resisted",
-        "feet-in-rings"
-      ],
-      "weighted": [
-        "standard",
-        "decline",
-        "incline",
-        "anchor",
-        "crossed-arms",
-        "hands-behind-head",
-        "twisting",
-        "janda",
-        "GHD"
-      ],
-      "band-resisted": [
-        "standard",
-        "decline",
-        "incline",
-        "anchor",
-        "crossed-arms",
-        "hands-behind-head",
-        "twisting",
-        "janda",
-        "GHD"
-      ],
-      "feet-in-rings": [
-        "standard",
-        "decline",
-        "incline",
-        "anchor",
-        "crossed-arms",
-        "hands-behind-head",
-        "twisting",
-        "janda",
-        "GHD"
-      ]
+      "standard": {
+        "excludedVariations": [
+          "GHD",
+          "anchor",
+          "crossed-arms",
+          "decline",
+          "hands-behind-head",
+          "incline",
+          "janda",
+          "twisting"
+        ]
+      },
+      "decline": {
+        "excludedVariations": [
+          "GHD",
+          "anchor",
+          "crossed-arms",
+          "hands-behind-head",
+          "incline",
+          "janda",
+          "standard",
+          "twisting"
+        ]
+      },
+      "incline": {
+        "excludedVariations": [
+          "GHD",
+          "anchor",
+          "crossed-arms",
+          "decline",
+          "hands-behind-head",
+          "janda",
+          "standard",
+          "twisting"
+        ]
+      },
+      "anchor": {
+        "excludedVariations": [
+          "GHD",
+          "crossed-arms",
+          "decline",
+          "hands-behind-head",
+          "incline",
+          "janda",
+          "standard",
+          "twisting"
+        ]
+      },
+      "crossed-arms": {
+        "excludedVariations": [
+          "GHD",
+          "anchor",
+          "decline",
+          "hands-behind-head",
+          "incline",
+          "janda",
+          "standard",
+          "twisting"
+        ]
+      },
+      "hands-behind-head": {
+        "excludedVariations": [
+          "GHD",
+          "anchor",
+          "crossed-arms",
+          "decline",
+          "incline",
+          "janda",
+          "standard",
+          "twisting"
+        ]
+      },
+      "twisting": {
+        "excludedVariations": [
+          "GHD",
+          "anchor",
+          "crossed-arms",
+          "decline",
+          "hands-behind-head",
+          "incline",
+          "janda",
+          "standard"
+        ]
+      },
+      "janda": {
+        "excludedVariations": [
+          "GHD",
+          "anchor",
+          "crossed-arms",
+          "decline",
+          "hands-behind-head",
+          "incline",
+          "standard",
+          "twisting"
+        ]
+      },
+      "GHD": {
+        "excludedVariations": [
+          "anchor",
+          "crossed-arms",
+          "decline",
+          "hands-behind-head",
+          "incline",
+          "janda",
+          "standard",
+          "twisting"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "band-resisted",
+          "feet-in-rings"
+        ]
+      },
+      "band-resisted": {
+        "excludedVariations": [
+          "feet-in-rings",
+          "weighted"
+        ]
+      },
+      "feet-in-rings": {
+        "excludedVariations": [
+          "band-resisted",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -4414,54 +6001,84 @@ const String staticExerciseJson = r'''[
       "anterior deltoid"
     ],
     "variations": {
-      "incline": [
-        "dumbbell",
-        "cable crossover",
-        "band"
-      ],
-      "decline": [
-        "dumbbell",
-        "cable crossover",
-        "band"
-      ],
-      "flat": [
-        "dumbbell",
-        "cable crossover",
-        "band"
-      ],
-      "overhand-grip": [
-        "dumbbell",
-        "cable crossover",
-        "band"
-      ],
-      "underhand-grip": [
-        "dumbbell",
-        "cable crossover",
-        "machine",
-        "band"
-      ],
-      "pec-dec": [],
-      "dumbbell": [
-        "incline",
-        "decline",
-        "flat",
-        "overhand-grip",
-        "underhand-grip",
-      ],
-      "cable crossover": [
-        "incline",
-        "decline",
-        "flat",
-        "overhand-grip",
-        "underhand-grip",
-      ],
-      "band": [
-        "incline",
-        "decline",
-        "flat",
-        "overhand-grip",
-        "underhand-grip",
-      ]
+      "incline": {
+        "excludedVariations": [
+          "decline",
+          "flat",
+          "overhand-grip",
+          "pec-dec",
+          "underhand-grip"
+        ]
+      },
+      "decline": {
+        "excludedVariations": [
+          "flat",
+          "incline",
+          "overhand-grip",
+          "pec-dec",
+          "underhand-grip"
+        ]
+      },
+      "flat": {
+        "excludedVariations": [
+          "decline",
+          "incline",
+          "overhand-grip",
+          "pec-dec",
+          "underhand-grip"
+        ]
+      },
+      "overhand-grip": {
+        "excludedVariations": [
+          "decline",
+          "flat",
+          "incline",
+          "pec-dec",
+          "underhand-grip"
+        ]
+      },
+      "underhand-grip": {
+        "excludedVariations": [
+          "decline",
+          "flat",
+          "incline",
+          "overhand-grip",
+          "pec-dec"
+        ]
+      },
+      "pec-dec": {
+        "excludedVariations": [
+          "band",
+          "cable crossover",
+          "decline",
+          "dumbbell",
+          "flat",
+          "incline",
+          "overhand-grip",
+          "underhand-grip"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "cable crossover",
+          "pec-dec"
+        ]
+      },
+      "cable crossover": {
+        "excludedVariations": [
+          "band",
+          "dumbbell",
+          "pec-dec"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "cable crossover",
+          "dumbbell",
+          "pec-dec"
+        ]
+      }
     }
   },
   {
@@ -4477,44 +6094,52 @@ const String staticExerciseJson = r'''[
       "external obliques"
     ],
     "variations": {
-      "slow": [
-        "resistance band",
-        "slider",
-        "bosu",
-        "weighted vest"
-      ],
-      "cross-body": [
-        "resistance band",
-        "slider",
-        "bosu",
-        "weighted vest"
-      ],
-      "elevated": [
-        "resistance band",
-        "slider",
-        "bosu",
-        "weighted vest"
-      ],
-      "resistance band": [
-        "slow",
-        "cross-body",
-        "elevated"
-      ],
-      "slider": [
-        "slow",
-        "cross-body",
-        "elevated"
-      ],
-      "bosu": [
-        "slow",
-        "cross-body",
-        "elevated"
-      ],
-      "weighted vest": [
-        "slow",
-        "cross-body",
-        "elevated"
-      ]
+      "slow": {
+        "excludedVariations": [
+          "cross-body",
+          "elevated"
+        ]
+      },
+      "cross-body": {
+        "excludedVariations": [
+          "elevated",
+          "slow"
+        ]
+      },
+      "elevated": {
+        "excludedVariations": [
+          "cross-body",
+          "slow"
+        ]
+      },
+      "resistance band": {
+        "excludedVariations": [
+          "bosu",
+          "slider",
+          "weighted vest"
+        ]
+      },
+      "slider": {
+        "excludedVariations": [
+          "bosu",
+          "resistance band",
+          "weighted vest"
+        ]
+      },
+      "bosu": {
+        "excludedVariations": [
+          "resistance band",
+          "slider",
+          "weighted vest"
+        ]
+      },
+      "weighted vest": {
+        "excludedVariations": [
+          "bosu",
+          "resistance band",
+          "slider"
+        ]
+      }
     }
   },
   {
@@ -4528,84 +6153,132 @@ const String staticExerciseJson = r'''[
     ],
     "secondaryMuscles": [],
     "variations": {
-      "single-arm": [
-        "cable",
-        "rope",
-        "band"
-      ],
-      "standing": [
-        "cable",
-        "rope",
-        "band"
-      ],
-      "kneeling": [
-        "cable",
-        "rope",
-        "band"
-      ],
-      "wide-grip": [
-        "cable",
-        "rope",
-        "band"
-      ],
-      "close-grip": [
-        "cable",
-        "rope",
-        "band"
-      ],
-      "neutral-grip": [
-        "cable",
-        "rope",
-        "band"
-      ],
-      "overhand-grip": [
-        "cable",
-        "rope",
-        "band"
-      ],
-      "underhand-grip": [
-        "cable",
-        "rope",
-        "band"
-      ],
-      "bar": [
-        "cable",
-        "rope",
-        "band"
-      ],
-      "cable": [
-        "single-arm",
-        "standing",
-        "kneeling",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand-grip",
-        "underhand-grip",
-        "bar"
-      ],
-      "rope": [
-        "single-arm",
-        "standing",
-        "kneeling",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand-grip",
-        "underhand-grip",
-        "bar"
-      ],
-      "band": [
-        "single-arm",
-        "standing",
-        "kneeling",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand-grip",
-        "underhand-grip",
-        "bar"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "standing",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "kneeling": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "standing",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "standing",
+          "underhand-grip"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "bar",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "standing",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "overhand-grip",
+          "single-arm",
+          "standing",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "overhand-grip": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "single-arm",
+          "standing",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "underhand-grip": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "standing",
+          "wide-grip"
+        ]
+      },
+      "bar": {
+        "excludedVariations": [
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "standing",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "rope"
+        ]
+      },
+      "rope": {
+        "excludedVariations": [
+          "band",
+          "cable"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "cable",
+          "rope"
+        ]
+      }
     }
   },
   {
@@ -4625,58 +6298,104 @@ const String staticExerciseJson = r'''[
       "posterior deltoid"
     ],
     "variations": {
-      "single-arm": [
-        "cable",
-        "rope"
-      ],
-      "kneeling": [
-        "cable",
-        "rope"
-      ],
-      "wide-grip": [
-        "cable",
-        "rope"
-      ],
-      "close-grip": [
-        "cable",
-        "rope"
-      ],
-      "neutral-grip": [
-        "cable",
-        "rope"
-      ],
-      "overhand-grip": [
-        "cable",
-        "rope"
-      ],
-      "underhand-grip": [
-        "cable",
-        "rope"
-      ],
-      "bar": [
-        "cable",
-        "rope"
-      ],
-      "cable": [
-        "single-arm",
-        "kneeling",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand-grip",
-        "underhand-grip",
-        "bar"
-      ],
-      "rope": [
-        "single-arm",
-        "kneeling",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "overhand-grip",
-        "underhand-grip",
-        "bar"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "kneeling": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "underhand-grip"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "bar",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "overhand-grip",
+          "single-arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "overhand-grip": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "single-arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "underhand-grip": {
+        "excludedVariations": [
+          "bar",
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "bar": {
+        "excludedVariations": [
+          "close-grip",
+          "kneeling",
+          "neutral-grip",
+          "overhand-grip",
+          "single-arm",
+          "underhand-grip",
+          "wide-grip"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "rope"
+        ]
+      },
+      "rope": {
+        "excludedVariations": [
+          "cable"
+        ]
+      }
     }
   },
   {
@@ -4690,84 +6409,104 @@ const String staticExerciseJson = r'''[
     ],
     "secondaryMuscles": [],
     "variations": {
-      "single-arm": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "behind-the-back": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "seated": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "standing": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "EZ-bar": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "reverse": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "pronated": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "barbell": [
-        "single-arm",
-        "behind-the-back",
-        "seated",
-        "standing",
-        "EZ-bar",
-        "reverse",
-        "pronated"
-      ],
-      "dumbbell": [
-        "single-arm",
-        "behind-the-back",
-        "seated",
-        "standing",
-        "EZ-bar",
-        "reverse",
-        "pronated"
-      ],
-      "cable": [
-        "single-arm",
-        "behind-the-back",
-        "seated",
-        "standing",
-        "EZ-bar",
-        "reverse",
-        "pronated"
-      ],
-      "band": [
-        "single-arm",
-        "behind-the-back",
-        "seated",
-        "standing",
-        "EZ-bar",
-        "reverse",
-        "pronated"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "EZ-bar",
+          "behind-the-back",
+          "pronated",
+          "reverse",
+          "seated",
+          "standing"
+        ]
+      },
+      "behind-the-back": {
+        "excludedVariations": [
+          "EZ-bar",
+          "pronated",
+          "reverse",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "EZ-bar",
+          "behind-the-back",
+          "pronated",
+          "reverse",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "EZ-bar",
+          "behind-the-back",
+          "pronated",
+          "reverse",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "EZ-bar": {
+        "excludedVariations": [
+          "behind-the-back",
+          "pronated",
+          "reverse",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "reverse": {
+        "excludedVariations": [
+          "EZ-bar",
+          "behind-the-back",
+          "pronated",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "pronated": {
+        "excludedVariations": [
+          "EZ-bar",
+          "behind-the-back",
+          "reverse",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell"
+        ]
+      }
     }
   },
   {
@@ -4787,160 +6526,226 @@ const String staticExerciseJson = r'''[
       "subscapularis"
     ],
     "variations": {
-      "push press": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "strict": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "seated": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "standing": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "single-arm": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "behind-the-neck": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "paused": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "Bradford": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "alternating": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "push jerk": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "split jerk": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "Z-press": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "landmine",
-        "pin"
-      ],
-      "barbell": [
-        "push press",
-        "strict",
-        "seated",
-        "standing",
-        "single-arm",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating",
-        "push jerk",
-        "split jerk",
-        "Z-press"
-      ],
-      "dumbbell": [
-        "push press",
-        "strict",
-        "seated",
-        "standing",
-        "single-arm",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating",
-        "push jerk",
-        "split jerk",
-        "Z-press"
-      ],
-      "kettlebell": [
-        "push press",
-        "strict",
-        "seated",
-        "standing",
-        "single-arm",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating",
-        "push jerk",
-        "split jerk",
-        "Z-press"
-      ],
-      "landmine": [
-        "push press",
-        "strict",
-        "seated",
-        "standing",
-        "single-arm",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating",
-        "push jerk",
-        "split jerk",
-        "Z-press"
-      ],
-      "pin": [
-        "push press",
-        "strict",
-        "seated",
-        "standing",
-        "single-arm",
-        "behind-the-neck",
-        "paused",
-        "Bradford",
-        "alternating",
-        "push jerk",
-        "split jerk",
-        "Z-press"
-      ]
+      "push press": {
+        "excludedVariations": [
+          "Bradford",
+          "Z-press",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push jerk",
+          "seated",
+          "single-arm",
+          "split jerk",
+          "standing",
+          "strict"
+        ]
+      },
+      "strict": {
+        "excludedVariations": [
+          "Bradford",
+          "Z-press",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push jerk",
+          "push press",
+          "seated",
+          "single-arm",
+          "split jerk",
+          "standing"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "Bradford",
+          "Z-press",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push jerk",
+          "push press",
+          "single-arm",
+          "split jerk",
+          "standing",
+          "strict"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "Bradford",
+          "Z-press",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push jerk",
+          "push press",
+          "seated",
+          "single-arm",
+          "split jerk",
+          "strict"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "Bradford",
+          "Z-press",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push jerk",
+          "push press",
+          "seated",
+          "split jerk",
+          "standing",
+          "strict"
+        ]
+      },
+      "behind-the-neck": {
+        "excludedVariations": [
+          "Bradford",
+          "Z-press",
+          "alternating",
+          "paused",
+          "push jerk",
+          "push press",
+          "seated",
+          "single-arm",
+          "split jerk",
+          "standing",
+          "strict"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "Bradford",
+          "Z-press",
+          "alternating",
+          "behind-the-neck",
+          "push jerk",
+          "push press",
+          "seated",
+          "single-arm",
+          "split jerk",
+          "standing",
+          "strict"
+        ]
+      },
+      "Bradford": {
+        "excludedVariations": [
+          "Z-press",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push jerk",
+          "push press",
+          "seated",
+          "single-arm",
+          "split jerk",
+          "standing",
+          "strict"
+        ]
+      },
+      "alternating": {
+        "excludedVariations": [
+          "Bradford",
+          "Z-press",
+          "behind-the-neck",
+          "paused",
+          "push jerk",
+          "push press",
+          "seated",
+          "single-arm",
+          "split jerk",
+          "standing",
+          "strict"
+        ]
+      },
+      "push jerk": {
+        "excludedVariations": [
+          "Bradford",
+          "Z-press",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push press",
+          "seated",
+          "single-arm",
+          "split jerk",
+          "standing",
+          "strict"
+        ]
+      },
+      "split jerk": {
+        "excludedVariations": [
+          "Bradford",
+          "Z-press",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push jerk",
+          "push press",
+          "seated",
+          "single-arm",
+          "standing",
+          "strict"
+        ]
+      },
+      "Z-press": {
+        "excludedVariations": [
+          "Bradford",
+          "alternating",
+          "behind-the-neck",
+          "paused",
+          "push jerk",
+          "push press",
+          "seated",
+          "single-arm",
+          "split jerk",
+          "standing",
+          "strict"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "dumbbell",
+          "kettlebell",
+          "landmine",
+          "pin"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "barbell",
+          "kettlebell",
+          "landmine",
+          "pin"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "landmine",
+          "pin"
+        ]
+      },
+      "landmine": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "pin"
+        ]
+      },
+      "pin": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "landmine"
+        ]
+      }
     }
   },
   {
@@ -4957,116 +6762,130 @@ const String staticExerciseJson = r'''[
       "hip adductors"
     ],
     "variations": {
-      "single-leg": [
-        "barbell",
-        "dumbbell",
-        "banded",
-        "machine",
-        "smith machine",
-        "plate"
-      ],
-      "paused": [
-        "barbell",
-        "dumbbell",
-        "banded",
-        "machine",
-        "smith machine",
-        "plate"
-      ],
-      "feet-elevated": [
-        "barbell",
-        "dumbbell",
-        "banded",
-        "machine",
-        "smith machine",
-        "plate"
-      ],
-      "narrow-stance": [
-        "barbell",
-        "dumbbell",
-        "banded",
-        "machine",
-        "smith machine",
-        "plate"
-      ],
-      "wide-stance": [
-        "barbell",
-        "dumbbell",
-        "banded",
-        "machine",
-        "smith machine",
-        "plate"
-      ],
-      "american": [
-        "barbell",
-        "dumbbell",
-        "banded",
-        "machine",
-        "smith machine",
-        "plate"
-      ],
-      "B-stance": [
-        "barbell",
-        "dumbbell",
-        "banded",
-        "machine",
-        "smith machine",
-        "plate"
-      ],
-      "barbell": [
-        "single-leg",
-        "paused",
-        "feet-elevated",
-        "narrow-stance",
-        "wide-stance",
-        "american",
-        "B-stance"
-      ],
-      "dumbbell": [
-        "single-leg",
-        "paused",
-        "feet-elevated",
-        "narrow-stance",
-        "wide-stance",
-        "american",
-        "B-stance"
-      ],
-      "banded": [
-        "single-leg",
-        "paused",
-        "feet-elevated",
-        "narrow-stance",
-        "wide-stance",
-        "american",
-        "B-stance"
-      ],
-      "machine": [
-        "single-leg",
-        "paused",
-        "feet-elevated",
-        "narrow-stance",
-        "wide-stance",
-        "american",
-        "B-stance"
-      ],
-      "smith machine": [
-        "single-leg",
-        "paused",
-        "feet-elevated",
-        "narrow-stance",
-        "wide-stance",
-        "american",
-        "B-stance"
-      ],
-      "plate": [
-        "single-leg",
-        "paused",
-        "feet-elevated",
-        "narrow-stance",
-        "wide-stance",
-        "american",
-        "B-stance"
-      ]
+      "single-leg": {
+        "excludedVariations": [
+          "B-stance",
+          "american",
+          "feet-elevated",
+          "narrow-stance",
+          "paused",
+          "wide-stance"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "B-stance",
+          "american",
+          "feet-elevated",
+          "narrow-stance",
+          "single-leg",
+          "wide-stance"
+        ]
+      },
+      "feet-elevated": {
+        "excludedVariations": [
+          "B-stance",
+          "american",
+          "narrow-stance",
+          "paused",
+          "single-leg",
+          "wide-stance"
+        ]
+      },
+      "narrow-stance": {
+        "excludedVariations": [
+          "B-stance",
+          "american",
+          "feet-elevated",
+          "paused",
+          "single-leg",
+          "wide-stance"
+        ]
+      },
+      "wide-stance": {
+        "excludedVariations": [
+          "B-stance",
+          "american",
+          "feet-elevated",
+          "narrow-stance",
+          "paused",
+          "single-leg"
+        ]
+      },
+      "american": {
+        "excludedVariations": [
+          "B-stance",
+          "feet-elevated",
+          "narrow-stance",
+          "paused",
+          "single-leg",
+          "wide-stance"
+        ]
+      },
+      "B-stance": {
+        "excludedVariations": [
+          "american",
+          "feet-elevated",
+          "narrow-stance",
+          "paused",
+          "single-leg",
+          "wide-stance"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "banded",
+          "dumbbell",
+          "machine",
+          "plate",
+          "smith machine"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "machine",
+          "plate",
+          "smith machine"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "machine",
+          "plate",
+          "smith machine"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "plate",
+          "smith machine"
+        ]
+      },
+      "smith machine": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "machine",
+          "plate"
+        ]
+      },
+      "plate": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "machine",
+          "smith machine"
+        ]
+      }
     }
   },
   {
@@ -5085,116 +6904,130 @@ const String staticExerciseJson = r'''[
       "gastrocnemius"
     ],
     "variations": {
-      "single-leg": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "cable",
-        "trap bar",
-        "banded"
-      ],
-      "paused": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "cable",
-        "trap bar",
-        "banded"
-      ],
-      "stiff-leg": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "cable",
-        "trap bar",
-        "banded"
-      ],
-      "wide-grip": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "cable",
-        "trap bar",
-        "banded"
-      ],
-      "snatch-grip": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "cable",
-        "trap bar",
-        "banded"
-      ],
-      "B-stance": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "cable",
-        "trap bar",
-        "banded"
-      ],
-      "deficit": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "cable",
-        "trap bar",
-        "banded"
-      ],
-      "barbell": [
-        "single-leg",
-        "paused",
-        "stiff-leg",
-        "wide-grip",
-        "snatch-grip",
-        "B-stance",
-        "deficit"
-      ],
-      "dumbbell": [
-        "single-leg",
-        "paused",
-        "stiff-leg",
-        "wide-grip",
-        "snatch-grip",
-        "B-stance",
-        "deficit"
-      ],
-      "kettlebell": [
-        "single-leg",
-        "paused",
-        "stiff-leg",
-        "wide-grip",
-        "snatch-grip",
-        "B-stance",
-        "deficit"
-      ],
-      "cable": [
-        "single-leg",
-        "paused",
-        "stiff-leg",
-        "wide-grip",
-        "snatch-grip",
-        "B-stance",
-        "deficit"
-      ],
-      "trap bar": [
-        "single-leg",
-        "paused",
-        "stiff-leg",
-        "wide-grip",
-        "snatch-grip",
-        "B-stance",
-        "deficit"
-      ],
-      "banded": [
-        "single-leg",
-        "paused",
-        "stiff-leg",
-        "wide-grip",
-        "snatch-grip",
-        "B-stance",
-        "deficit"
-      ]
+      "single-leg": {
+        "excludedVariations": [
+          "B-stance",
+          "deficit",
+          "paused",
+          "snatch-grip",
+          "stiff-leg",
+          "wide-grip"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "B-stance",
+          "deficit",
+          "single-leg",
+          "snatch-grip",
+          "stiff-leg",
+          "wide-grip"
+        ]
+      },
+      "stiff-leg": {
+        "excludedVariations": [
+          "B-stance",
+          "deficit",
+          "paused",
+          "single-leg",
+          "snatch-grip",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "B-stance",
+          "deficit",
+          "paused",
+          "single-leg",
+          "snatch-grip",
+          "stiff-leg"
+        ]
+      },
+      "snatch-grip": {
+        "excludedVariations": [
+          "B-stance",
+          "deficit",
+          "paused",
+          "single-leg",
+          "stiff-leg",
+          "wide-grip"
+        ]
+      },
+      "B-stance": {
+        "excludedVariations": [
+          "deficit",
+          "paused",
+          "single-leg",
+          "snatch-grip",
+          "stiff-leg",
+          "wide-grip"
+        ]
+      },
+      "deficit": {
+        "excludedVariations": [
+          "B-stance",
+          "paused",
+          "single-leg",
+          "snatch-grip",
+          "stiff-leg",
+          "wide-grip"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "banded",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "trap bar"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "cable",
+          "kettlebell",
+          "trap bar"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "trap bar"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "trap bar"
+        ]
+      },
+      "trap bar": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "kettlebell",
+          "trap bar"
+        ]
+      }
     }
   },
   {
@@ -5211,54 +7044,62 @@ const String staticExerciseJson = r'''[
       "gastrocnemius"
     ],
     "variations": {
-      "bodyweight": [
-        "weighted",
-        "partner-assisted",
-        "machine",
-        "band-assisted"
-      ],
-      "eccentric": [
-        "weighted",
-        "partner-assisted",
-        "machine",
-        "band-assisted"
-      ],
-      "GHD": [
-        "weighted",
-        "partner-assisted",
-        "machine",
-        "band-assisted"
-      ],
-      "feet-anchored": [
-        "weighted",
-        "partner-assisted",
-        "machine",
-        "band-assisted"
-      ],
-      "weighted": [
-        "bodyweight",
-        "eccentric",
-        "GHD",
-        "feet-anchored"
-      ],
-      "partner-assisted": [
-        "bodyweight",
-        "eccentric",
-        "GHD",
-        "feet-anchored"
-      ],
-      "machine": [
-        "bodyweight",
-        "eccentric",
-        "GHD",
-        "feet-anchored"
-      ],
-      "band-assisted": [
-        "bodyweight",
-        "eccentric",
-        "GHD",
-        "feet-anchored"
-      ]
+      "bodyweight": {
+        "excludedVariations": [
+          "GHD",
+          "eccentric",
+          "feet-anchored"
+        ]
+      },
+      "eccentric": {
+        "excludedVariations": [
+          "GHD",
+          "bodyweight",
+          "feet-anchored"
+        ]
+      },
+      "GHD": {
+        "excludedVariations": [
+          "bodyweight",
+          "eccentric",
+          "feet-anchored"
+        ]
+      },
+      "feet-anchored": {
+        "excludedVariations": [
+          "GHD",
+          "bodyweight",
+          "eccentric"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "band-assisted",
+          "machine",
+          "partner-assisted"
+        ]
+      },
+      "partner-assisted": {
+        "excludedVariations": [
+          "band-assisted",
+          "machine",
+          "weighted"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "band-assisted",
+          "partner-assisted",
+          "weighted"
+        ]
+      },
+      "band-assisted": {
+        "excludedVariations": [
+          "machine",
+          "partner-assisted",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -5277,102 +7118,114 @@ const String staticExerciseJson = r'''[
       "rectus abdominis"
     ],
     "variations": {
-      "seated": [
-        "barbell",
-        "banded",
-        "dumbbell",
-        "cable",
-        "smith machine",
-        "safety bar"
-      ],
-      "single-leg": [
-        "barbell",
-        "banded",
-        "dumbbell",
-        "cable",
-        "smith machine",
-        "safety bar"
-      ],
-      "good morning squat": [
-        "barbell",
-        "banded",
-        "dumbbell",
-        "cable",
-        "smith machine",
-        "safety bar"
-      ],
-      "suspended": [
-        "barbell",
-        "banded",
-        "dumbbell",
-        "cable",
-        "smith machine",
-        "safety bar"
-      ],
-      "wide-grip": [
-        "barbell",
-        "banded",
-        "dumbbell",
-        "cable",
-        "smith machine",
-        "safety bar"
-      ],
-      "paused": [
-        "barbell",
-        "banded",
-        "dumbbell",
-        "cable",
-        "smith machine",
-        "safety bar"
-      ],
-      "barbell": [
-        "seated",
-        "single-leg",
-        "good morning squat",
-        "suspended",
-        "wide-grip",
-        "paused"
-      ],
-      "banded": [
-        "seated",
-        "single-leg",
-        "good morning squat",
-        "suspended",
-        "wide-grip",
-        "paused"
-      ],
-      "dumbbell": [
-        "seated",
-        "single-leg",
-        "good morning squat",
-        "suspended",
-        "wide-grip",
-        "paused"
-      ],
-      "cable": [
-        "seated",
-        "single-leg",
-        "good morning squat",
-        "suspended",
-        "wide-grip",
-        "paused"
-      ],
-      "smith machine": [
-        "seated",
-        "single-leg",
-        "good morning squat",
-        "suspended",
-        "wide-grip",
-        "paused"
-      ],
-      "safety bar": [
-        "seated",
-        "single-leg",
-        "good morning squat",
-        "suspended",
-        "wide-grip",
-        "paused"
-      ]
+      "seated": {
+        "excludedVariations": [
+          "good morning squat",
+          "paused",
+          "single-leg",
+          "suspended",
+          "wide-grip"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "good morning squat",
+          "paused",
+          "seated",
+          "suspended",
+          "wide-grip"
+        ]
+      },
+      "good morning squat": {
+        "excludedVariations": [
+          "paused",
+          "seated",
+          "single-leg",
+          "suspended",
+          "wide-grip"
+        ]
+      },
+      "suspended": {
+        "excludedVariations": [
+          "good morning squat",
+          "paused",
+          "seated",
+          "single-leg",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "good morning squat",
+          "paused",
+          "seated",
+          "single-leg",
+          "suspended"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "good morning squat",
+          "seated",
+          "single-leg",
+          "suspended",
+          "wide-grip"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "banded",
+          "cable",
+          "dumbbell",
+          "safety bar",
+          "smith machine"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "safety bar",
+          "smith machine"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "cable",
+          "safety bar",
+          "smith machine"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "dumbbell",
+          "safety bar",
+          "smith machine"
+        ]
+      },
+      "smith machine": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "safety bar"
+        ]
+      },
+      "safety bar": {
+        "excludedVariations": [
+          "banded",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "smith machine"
+        ]
+      }
     }
   },
   {
@@ -5390,112 +7243,134 @@ const String staticExerciseJson = r'''[
       "gastrocnemius"
     ],
     "variations": {
-      "bodyweight": [
-        "dumbbell",
-        "barbell",
-        "weighted vest",
-        "kettlebell",
-        "goblet"
-      ],
-      "lateral": [
-        "dumbbell",
-        "barbell",
-        "weighted vest",
-        "kettlebell",
-        "goblet"
-      ],
-      "single-leg": [
-        "dumbbell",
-        "barbell",
-        "weighted vest",
-        "kettlebell",
-        "goblet"
-      ],
-      "crossover": [
-        "dumbbell",
-        "barbell",
-        "weighted vest",
-        "kettlebell",
-        "goblet"
-      ],
-      "explosive": [
-        "dumbbell",
-        "barbell",
-        "weighted vest",
-        "kettlebell",
-        "goblet"
-      ],
-      "deficit": [
-        "dumbbell",
-        "barbell",
-        "weighted vest",
-        "kettlebell",
-        "goblet"
-      ],
-      "Bulgarian": [
-        "dumbbell",
-        "barbell",
-        "weighted vest",
-        "kettlebell",
-        "goblet"
-      ],
-      "paused": [
-        "dumbbell",
-        "barbell",
-        "weighted vest",
-        "kettlebell",
-        "goblet"
-      ],
-      "dumbbell": [
-        "bodyweight",
-        "lateral",
-        "single-leg",
-        "crossover",
-        "explosive",
-        "deficit",
-        "Bulgarian",
-        "paused"
-      ],
-      "barbell": [
-        "bodyweight",
-        "lateral",
-        "single-leg",
-        "crossover",
-        "explosive",
-        "deficit",
-        "Bulgarian",
-        "paused"
-      ],
-      "weighted vest": [
-        "bodyweight",
-        "lateral",
-        "single-leg",
-        "crossover",
-        "explosive",
-        "deficit",
-        "Bulgarian",
-        "paused"
-      ],
-      "kettlebell": [
-        "bodyweight",
-        "lateral",
-        "single-leg",
-        "crossover",
-        "explosive",
-        "deficit",
-        "Bulgarian",
-        "paused"
-      ],
-      "goblet": [
-        "bodyweight",
-        "lateral",
-        "single-leg",
-        "crossover",
-        "explosive",
-        "deficit",
-        "Bulgarian",
-        "paused"
-      ]
+      "bodyweight": {
+        "excludedVariations": [
+          "Bulgarian",
+          "crossover",
+          "deficit",
+          "explosive",
+          "lateral",
+          "paused",
+          "single-leg"
+        ]
+      },
+      "lateral": {
+        "excludedVariations": [
+          "Bulgarian",
+          "bodyweight",
+          "crossover",
+          "deficit",
+          "explosive",
+          "paused",
+          "single-leg"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "Bulgarian",
+          "bodyweight",
+          "crossover",
+          "deficit",
+          "explosive",
+          "lateral",
+          "paused"
+        ]
+      },
+      "crossover": {
+        "excludedVariations": [
+          "Bulgarian",
+          "bodyweight",
+          "deficit",
+          "explosive",
+          "lateral",
+          "paused",
+          "single-leg"
+        ]
+      },
+      "explosive": {
+        "excludedVariations": [
+          "Bulgarian",
+          "bodyweight",
+          "crossover",
+          "deficit",
+          "lateral",
+          "paused",
+          "single-leg"
+        ]
+      },
+      "deficit": {
+        "excludedVariations": [
+          "Bulgarian",
+          "bodyweight",
+          "crossover",
+          "explosive",
+          "lateral",
+          "paused",
+          "single-leg"
+        ]
+      },
+      "Bulgarian": {
+        "excludedVariations": [
+          "bodyweight",
+          "crossover",
+          "deficit",
+          "explosive",
+          "lateral",
+          "paused",
+          "single-leg"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "Bulgarian",
+          "bodyweight",
+          "crossover",
+          "deficit",
+          "explosive",
+          "lateral",
+          "single-leg"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "barbell",
+          "goblet",
+          "kettlebell",
+          "weighted vest"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "dumbbell",
+          "goblet",
+          "kettlebell",
+          "weighted vest"
+        ]
+      },
+      "weighted vest": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "goblet",
+          "kettlebell"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "goblet",
+          "weighted vest"
+        ]
+      },
+      "goblet": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "weighted vest"
+        ]
+      }
     }
   },
   {
@@ -5512,116 +7387,130 @@ const String staticExerciseJson = r'''[
       "gluteus maximus"
     ],
     "variations": {
-      "single-leg": [
-        "lying machine",
-        "seated machine",
-        "cable",
-        "dumbbell",
-        "band",
-        "slider",
-        "stability ball"
-      ],
-      "nordic": [
-        "lying machine",
-        "seated machine",
-        "cable",
-        "dumbbell",
-        "band",
-        "slider",
-        "stability ball"
-      ],
-      "prone": [
-        "lying machine",
-        "seated machine",
-        "cable",
-        "dumbbell",
-        "band",
-        "slider",
-        "stability ball"
-      ],
-      "standing": [
-        "lying machine",
-        "seated machine",
-        "cable",
-        "dumbbell",
-        "band",
-        "slider",
-        "stability ball"
-      ],
-      "paused": [
-        "lying machine",
-        "seated machine",
-        "cable",
-        "dumbbell",
-        "band",
-        "slider",
-        "stability ball"
-      ],
-      "tempo": [
-        "lying machine",
-        "seated machine",
-        "cable",
-        "dumbbell",
-        "band",
-        "slider",
-        "stability ball"
-      ],
-      "lying machine": [
-        "single-leg",
-        "nordic",
-        "prone",
-        "standing",
-        "paused",
-        "tempo"
-      ],
-      "seated machine": [
-        "single-leg",
-        "nordic",
-        "prone",
-        "standing",
-        "paused",
-        "tempo"
-      ],
-      "cable": [
-        "single-leg",
-        "nordic",
-        "prone",
-        "standing",
-        "paused",
-        "tempo"
-      ],
-      "dumbbell": [
-        "single-leg",
-        "nordic",
-        "prone",
-        "standing",
-        "paused",
-        "tempo"
-      ],
-      "band": [
-        "single-leg",
-        "nordic",
-        "prone",
-        "standing",
-        "paused",
-        "tempo"
-      ],
-      "slider": [
-        "single-leg",
-        "nordic",
-        "prone",
-        "standing",
-        "paused",
-        "tempo"
-      ],
-      "stability ball": [
-        "single-leg",
-        "nordic",
-        "prone",
-        "standing",
-        "paused",
-        "tempo"
-      ]
+      "single-leg": {
+        "excludedVariations": [
+          "nordic",
+          "paused",
+          "prone",
+          "standing",
+          "tempo"
+        ]
+      },
+      "nordic": {
+        "excludedVariations": [
+          "paused",
+          "prone",
+          "single-leg",
+          "standing",
+          "tempo"
+        ]
+      },
+      "prone": {
+        "excludedVariations": [
+          "nordic",
+          "paused",
+          "single-leg",
+          "standing",
+          "tempo"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "nordic",
+          "paused",
+          "prone",
+          "single-leg",
+          "tempo"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "nordic",
+          "prone",
+          "single-leg",
+          "standing",
+          "tempo"
+        ]
+      },
+      "tempo": {
+        "excludedVariations": [
+          "nordic",
+          "paused",
+          "prone",
+          "single-leg",
+          "standing"
+        ]
+      },
+      "lying machine": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "seated machine",
+          "slider",
+          "stability ball"
+        ]
+      },
+      "seated machine": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "lying machine",
+          "slider",
+          "stability ball"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "dumbbell",
+          "lying machine",
+          "seated machine",
+          "slider",
+          "stability ball"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "lying machine",
+          "seated machine",
+          "slider",
+          "stability ball"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "cable",
+          "dumbbell",
+          "lying machine",
+          "seated machine",
+          "slider",
+          "stability ball"
+        ]
+      },
+      "slider": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "lying machine",
+          "seated machine",
+          "stability ball"
+        ]
+      },
+      "stability ball": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "lying machine",
+          "seated machine",
+          "slider"
+        ]
+      }
     }
   },
   {
@@ -5635,124 +7524,188 @@ const String staticExerciseJson = r'''[
     ],
     "secondaryMuscles": [],
     "variations": {
-      "standing": [
-        "machine",
-        "barbell",
-        "dumbbell",
-        "band-resisted"
-      ],
-      "seated": [
-        "machine",
-        "barbell",
-        "dumbbell",
-        "band-resisted"
-      ],
-      "single-leg": [
-        "machine",
-        "barbell",
-        "dumbbell",
-        "band-resisted"
-      ],
-      "donkey": [
-        "machine",
-        "barbell",
-        "dumbbell",
-        "band-resisted"
-      ],
-      "leg press": [
-        "machine",
-        "barbell",
-        "dumbbell",
-        "band-resisted"
-      ],
-      "toe press": [
-        "machine",
-        "barbell",
-        "dumbbell",
-        "band-resisted"
-      ],
-      "offset": [
-        "machine",
-        "barbell",
-        "dumbbell",
-        "band-resisted"
-      ],
-      "paused": [
-        "machine",
-        "barbell",
-        "dumbbell",
-        "band-resisted"
-      ],
-      "tempo": [
-        "machine",
-        "barbell",
-        "dumbbell",
-        "band-resisted"
-      ],
-      "heel-elevated": [
-        "machine",
-        "barbell",
-        "dumbbell",
-        "band-resisted"
-      ],
-      "eccentric": [
-        "machine",
-        "barbell",
-        "dumbbell",
-        "band-resisted"
-      ],
-      "machine": [
-        "standing",
-        "seated",
-        "single-leg",
-        "donkey",
-        "leg press",
-        "toe press",
-        "offset",
-        "paused",
-        "tempo",
-        "heel-elevated",
-        "eccentric"
-      ],
-      "barbell": [
-        "standing",
-        "seated",
-        "single-leg",
-        "donkey",
-        "leg press",
-        "toe press",
-        "offset",
-        "paused",
-        "tempo",
-        "heel-elevated",
-        "eccentric"
-      ],
-      "dumbbell": [
-        "standing",
-        "seated",
-        "single-leg",
-        "donkey",
-        "leg press",
-        "toe press",
-        "offset",
-        "paused",
-        "tempo",
-        "heel-elevated",
-        "eccentric"
-      ],
-      "band-resisted": [
-        "standing",
-        "seated",
-        "single-leg",
-        "donkey",
-        "leg press",
-        "toe press",
-        "offset",
-        "paused",
-        "tempo",
-        "heel-elevated",
-        "eccentric"
-      ]
+      "standing": {
+        "excludedVariations": [
+          "donkey",
+          "eccentric",
+          "heel-elevated",
+          "leg press",
+          "offset",
+          "paused",
+          "seated",
+          "single-leg",
+          "tempo",
+          "toe press"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "donkey",
+          "eccentric",
+          "heel-elevated",
+          "leg press",
+          "offset",
+          "paused",
+          "single-leg",
+          "standing",
+          "tempo",
+          "toe press"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "donkey",
+          "eccentric",
+          "heel-elevated",
+          "leg press",
+          "offset",
+          "paused",
+          "seated",
+          "standing",
+          "tempo",
+          "toe press"
+        ]
+      },
+      "donkey": {
+        "excludedVariations": [
+          "eccentric",
+          "heel-elevated",
+          "leg press",
+          "offset",
+          "paused",
+          "seated",
+          "single-leg",
+          "standing",
+          "tempo",
+          "toe press"
+        ]
+      },
+      "leg press": {
+        "excludedVariations": [
+          "donkey",
+          "eccentric",
+          "heel-elevated",
+          "offset",
+          "paused",
+          "seated",
+          "single-leg",
+          "standing",
+          "tempo",
+          "toe press"
+        ]
+      },
+      "toe press": {
+        "excludedVariations": [
+          "donkey",
+          "eccentric",
+          "heel-elevated",
+          "leg press",
+          "offset",
+          "paused",
+          "seated",
+          "single-leg",
+          "standing",
+          "tempo"
+        ]
+      },
+      "offset": {
+        "excludedVariations": [
+          "donkey",
+          "eccentric",
+          "heel-elevated",
+          "leg press",
+          "paused",
+          "seated",
+          "single-leg",
+          "standing",
+          "tempo",
+          "toe press"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "donkey",
+          "eccentric",
+          "heel-elevated",
+          "leg press",
+          "offset",
+          "seated",
+          "single-leg",
+          "standing",
+          "tempo",
+          "toe press"
+        ]
+      },
+      "tempo": {
+        "excludedVariations": [
+          "donkey",
+          "eccentric",
+          "heel-elevated",
+          "leg press",
+          "offset",
+          "paused",
+          "seated",
+          "single-leg",
+          "standing",
+          "toe press"
+        ]
+      },
+      "heel-elevated": {
+        "excludedVariations": [
+          "donkey",
+          "eccentric",
+          "leg press",
+          "offset",
+          "paused",
+          "seated",
+          "single-leg",
+          "standing",
+          "tempo",
+          "toe press"
+        ]
+      },
+      "eccentric": {
+        "excludedVariations": [
+          "donkey",
+          "heel-elevated",
+          "leg press",
+          "offset",
+          "paused",
+          "seated",
+          "single-leg",
+          "standing",
+          "tempo",
+          "toe press"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "band-resisted",
+          "barbell",
+          "dumbbell"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band-resisted",
+          "dumbbell",
+          "machine"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band-resisted",
+          "barbell",
+          "machine"
+        ]
+      },
+      "band-resisted": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -5772,102 +7725,114 @@ const String staticExerciseJson = r'''[
       "infraspinatus"
     ],
     "variations": {
-      "bodyweight": [
-        "weighted",
-        "assisted",
-        "ring",
-        "band-resisted",
-        "kipping",
-        "supinated"
-      ],
-      "close-grip": [
-        "weighted",
-        "assisted",
-        "ring",
-        "band-resisted",
-        "kipping",
-        "supinated"
-      ],
-      "neutral-grip": [
-        "weighted",
-        "assisted",
-        "ring",
-        "band-resisted",
-        "kipping",
-        "supinated"
-      ],
-      "wide-grip": [
-        "weighted",
-        "assisted",
-        "ring",
-        "band-resisted",
-        "kipping",
-        "supinated"
-      ],
-      "L-sit": [
-        "weighted",
-        "assisted",
-        "ring",
-        "band-resisted",
-        "kipping",
-        "supinated"
-      ],
-      "typewriter": [
-        "weighted",
-        "assisted",
-        "ring",
-        "band-resisted",
-        "kipping",
-        "supinated"
-      ],
-      "weighted": [
-        "bodyweight",
-        "close-grip",
-        "neutral-grip",
-        "wide-grip",
-        "L-sit",
-        "typewriter"
-      ],
-      "assisted": [
-        "bodyweight",
-        "close-grip",
-        "neutral-grip",
-        "wide-grip",
-        "L-sit",
-        "typewriter"
-      ],
-      "ring": [
-        "bodyweight",
-        "close-grip",
-        "neutral-grip",
-        "wide-grip",
-        "L-sit",
-        "typewriter"
-      ],
-      "band-resisted": [
-        "bodyweight",
-        "close-grip",
-        "neutral-grip",
-        "wide-grip",
-        "L-sit",
-        "typewriter"
-      ],
-      "kipping": [
-        "bodyweight",
-        "close-grip",
-        "neutral-grip",
-        "wide-grip",
-        "L-sit",
-        "typewriter"
-      ],
-      "supinated": [
-        "bodyweight",
-        "close-grip",
-        "neutral-grip",
-        "wide-grip",
-        "L-sit",
-        "typewriter"
-      ]
+      "bodyweight": {
+        "excludedVariations": [
+          "L-sit",
+          "close-grip",
+          "neutral-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "L-sit",
+          "bodyweight",
+          "neutral-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "L-sit",
+          "bodyweight",
+          "close-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "L-sit",
+          "bodyweight",
+          "close-grip",
+          "neutral-grip",
+          "typewriter"
+        ]
+      },
+      "L-sit": {
+        "excludedVariations": [
+          "bodyweight",
+          "close-grip",
+          "neutral-grip",
+          "typewriter",
+          "wide-grip"
+        ]
+      },
+      "typewriter": {
+        "excludedVariations": [
+          "L-sit",
+          "bodyweight",
+          "close-grip",
+          "neutral-grip",
+          "wide-grip"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "assisted",
+          "band-resisted",
+          "kipping",
+          "ring",
+          "supinated"
+        ]
+      },
+      "assisted": {
+        "excludedVariations": [
+          "band-resisted",
+          "kipping",
+          "ring",
+          "supinated",
+          "weighted"
+        ]
+      },
+      "ring": {
+        "excludedVariations": [
+          "assisted",
+          "band-resisted",
+          "kipping",
+          "supinated",
+          "weighted"
+        ]
+      },
+      "band-resisted": {
+        "excludedVariations": [
+          "assisted",
+          "kipping",
+          "ring",
+          "supinated",
+          "weighted"
+        ]
+      },
+      "kipping": {
+        "excludedVariations": [
+          "assisted",
+          "band-resisted",
+          "ring",
+          "supinated",
+          "weighted"
+        ]
+      },
+      "supinated": {
+        "excludedVariations": [
+          "assisted",
+          "band-resisted",
+          "kipping",
+          "ring",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -5886,104 +7851,142 @@ const String staticExerciseJson = r'''[
       "wrist flexors"
     ],
     "variations": {
-      "bodyweight": [
-        "weighted",
-        "suspension trainer",
-        "barbell",
-        "rings"
-      ],
-      "wide-grip": [
-        "weighted",
-        "suspension trainer",
-        "barbell",
-        "rings"
-      ],
-      "close-grip": [
-        "weighted",
-        "suspension trainer",
-        "barbell",
-        "rings"
-      ],
-      "underhand": [
-        "weighted",
-        "suspension trainer",
-        "barbell",
-        "rings"
-      ],
-      "feet-elevated": [
-        "weighted",
-        "suspension trainer",
-        "barbell",
-        "rings"
-      ],
-      "overhand": [
-        "weighted",
-        "suspension trainer",
-        "barbell",
-        "rings"
-      ],
-      "neutral": [
-        "weighted",
-        "suspension trainer",
-        "barbell",
-        "rings"
-      ],
-      "pronated": [
-        "weighted",
-        "suspension trainer",
-        "barbell",
-        "rings"
-      ],
-      "single-arm": [
-        "weighted",
-        "suspension trainer",
-        "barbell",
-        "rings"
-      ],
-      "weighted": [
-        "bodyweight",
-        "wide-grip",
-        "close-grip",
-        "underhand",
-        "feet-elevated",
-        "overhand",
-        "neutral",
-        "pronated",
-        "single-arm"
-      ],
-      "suspension trainer": [
-        "bodyweight",
-        "wide-grip",
-        "close-grip",
-        "underhand",
-        "feet-elevated",
-        "overhand",
-        "neutral",
-        "pronated",
-        "single-arm"
-      ],
-      "barbell": [
-        "bodyweight",
-        "wide-grip",
-        "close-grip",
-        "underhand",
-        "feet-elevated",
-        "overhand",
-        "neutral",
-        "pronated",
-        "single-arm"
-      ],
-      "rings": [
-        "bodyweight",
-        "wide-grip",
-        "close-grip",
-        "underhand",
-        "feet-elevated",
-        "overhand",
-        "neutral",
-        "pronated",
-        "single-arm"
-      ]
+      "bodyweight": {
+        "excludedVariations": [
+          "close-grip",
+          "feet-elevated",
+          "neutral",
+          "overhand",
+          "pronated",
+          "single-arm",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "bodyweight",
+          "close-grip",
+          "feet-elevated",
+          "neutral",
+          "overhand",
+          "pronated",
+          "single-arm",
+          "underhand"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "bodyweight",
+          "feet-elevated",
+          "neutral",
+          "overhand",
+          "pronated",
+          "single-arm",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "underhand": {
+        "excludedVariations": [
+          "bodyweight",
+          "close-grip",
+          "feet-elevated",
+          "neutral",
+          "overhand",
+          "pronated",
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "feet-elevated": {
+        "excludedVariations": [
+          "bodyweight",
+          "close-grip",
+          "neutral",
+          "overhand",
+          "pronated",
+          "single-arm",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "overhand": {
+        "excludedVariations": [
+          "bodyweight",
+          "close-grip",
+          "feet-elevated",
+          "neutral",
+          "pronated",
+          "single-arm",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "neutral": {
+        "excludedVariations": [
+          "bodyweight",
+          "close-grip",
+          "feet-elevated",
+          "overhand",
+          "pronated",
+          "single-arm",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "pronated": {
+        "excludedVariations": [
+          "bodyweight",
+          "close-grip",
+          "feet-elevated",
+          "neutral",
+          "overhand",
+          "single-arm",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "bodyweight",
+          "close-grip",
+          "feet-elevated",
+          "neutral",
+          "overhand",
+          "pronated",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "barbell",
+          "rings",
+          "suspension trainer"
+        ]
+      },
+      "suspension trainer": {
+        "excludedVariations": [
+          "barbell",
+          "rings",
+          "weighted"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "rings",
+          "suspension trainer",
+          "weighted"
+        ]
+      },
+      "rings": {
+        "excludedVariations": [
+          "barbell",
+          "suspension trainer",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -6002,54 +8005,62 @@ const String staticExerciseJson = r'''[
       "infraspinatus"
     ],
     "variations": {
-      "wide-grip": [
-        "barbell",
-        "dumbbell",
-        "machine",
-        "cable"
-      ],
-      "close-grip": [
-        "barbell",
-        "dumbbell",
-        "machine",
-        "cable"
-      ],
-      "neutral-grip": [
-        "barbell",
-        "dumbbell",
-        "machine",
-        "cable"
-      ],
-      "single-arm": [
-        "barbell",
-        "dumbbell",
-        "machine",
-        "cable"
-      ],
-      "barbell": [
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "single-arm"
-      ],
-      "dumbbell": [
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "single-arm"
-      ],
-      "machine": [
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "single-arm"
-      ],
-      "cable": [
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "single-arm"
-      ]
+      "wide-grip": {
+        "excludedVariations": [
+          "close-grip",
+          "neutral-grip",
+          "single-arm"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "neutral-grip",
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "close-grip",
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "close-grip",
+          "neutral-grip",
+          "wide-grip"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "cable",
+          "dumbbell",
+          "machine"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "machine"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -6068,74 +8079,88 @@ const String staticExerciseJson = r'''[
       "wrist flexors"
     ],
     "variations": {
-      "single-arm": [
-        "dumbbell",
-        "barbell",
-        "machine",
-        "cable"
-      ],
-      "wide-grip": [
-        "dumbbell",
-        "barbell",
-        "machine",
-        "cable"
-      ],
-      "close-grip": [
-        "dumbbell",
-        "barbell",
-        "machine",
-        "cable"
-      ],
-      "neutral-grip": [
-        "dumbbell",
-        "barbell",
-        "machine",
-        "cable"
-      ],
-      "prone": [
-        "dumbbell",
-        "barbell",
-        "machine",
-        "cable"
-      ],
-      "incline": [
-        "dumbbell",
-        "barbell",
-        "machine",
-        "cable"
-      ],
-      "dumbbell": [
-        "single-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "prone",
-        "incline"
-      ],
-      "barbell": [
-        "single-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "prone",
-        "incline"
-      ],
-      "machine": [
-        "single-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "prone",
-        "incline"
-      ],
-      "cable": [
-        "single-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "prone",
-        "incline"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "close-grip",
+          "incline",
+          "neutral-grip",
+          "prone",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "close-grip",
+          "incline",
+          "neutral-grip",
+          "prone",
+          "single-arm"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "incline",
+          "neutral-grip",
+          "prone",
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "close-grip",
+          "incline",
+          "prone",
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "prone": {
+        "excludedVariations": [
+          "close-grip",
+          "incline",
+          "neutral-grip",
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "incline": {
+        "excludedVariations": [
+          "close-grip",
+          "neutral-grip",
+          "prone",
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "machine"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "cable",
+          "dumbbell",
+          "machine"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -6155,56 +8180,189 @@ const String staticExerciseJson = r'''[
       "wrist flexors"
     ],
     "variations": {
-      "seated": [
-        "rope"
-      ],
-      "standing": [
-        "rope"
-      ],
-      "single-arm": [
-        "rope"
-      ],
-      "wide-grip": [
-        "rope"
-      ],
-      "close-grip": [
-        "rope"
-      ],
-      "neutral-grip": [
-        "rope"
-      ],
-      "kneeling": [
-        "rope"
-      ],
-      "half-kneeling": [
-        "rope"
-      ],
-      "split-stance": [
-        "rope"
-      ],
-      "overhand": [
-        "rope"
-      ],
-      "underhand": [
-        "rope"
-      ],
-      "face-away": [
-        "rope"
-      ],
-      "rope": [
-        "seated",
-        "standing",
-        "single-arm",
-        "wide-grip",
-        "close-grip",
-        "neutral-grip",
-        "kneeling",
-        "half-kneeling",
-        "split-stance",
-        "overhand",
-        "underhand",
-        "face-away"
-      ]
+      "seated": {
+        "excludedVariations": [
+          "close-grip",
+          "face-away",
+          "half-kneeling",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "single-arm",
+          "split-stance",
+          "standing",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "close-grip",
+          "face-away",
+          "half-kneeling",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "seated",
+          "single-arm",
+          "split-stance",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "close-grip",
+          "face-away",
+          "half-kneeling",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "seated",
+          "split-stance",
+          "standing",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "close-grip",
+          "face-away",
+          "half-kneeling",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "seated",
+          "single-arm",
+          "split-stance",
+          "standing",
+          "underhand"
+        ]
+      },
+      "close-grip": {
+        "excludedVariations": [
+          "face-away",
+          "half-kneeling",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "seated",
+          "single-arm",
+          "split-stance",
+          "standing",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "close-grip",
+          "face-away",
+          "half-kneeling",
+          "kneeling",
+          "overhand",
+          "seated",
+          "single-arm",
+          "split-stance",
+          "standing",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "kneeling": {
+        "excludedVariations": [
+          "close-grip",
+          "face-away",
+          "half-kneeling",
+          "neutral-grip",
+          "overhand",
+          "seated",
+          "single-arm",
+          "split-stance",
+          "standing",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "half-kneeling": {
+        "excludedVariations": [
+          "close-grip",
+          "face-away",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "seated",
+          "single-arm",
+          "split-stance",
+          "standing",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "split-stance": {
+        "excludedVariations": [
+          "close-grip",
+          "face-away",
+          "half-kneeling",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "seated",
+          "single-arm",
+          "standing",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "overhand": {
+        "excludedVariations": [
+          "close-grip",
+          "face-away",
+          "half-kneeling",
+          "kneeling",
+          "neutral-grip",
+          "seated",
+          "single-arm",
+          "split-stance",
+          "standing",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "underhand": {
+        "excludedVariations": [
+          "close-grip",
+          "face-away",
+          "half-kneeling",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "seated",
+          "single-arm",
+          "split-stance",
+          "standing",
+          "wide-grip"
+        ]
+      },
+      "face-away": {
+        "excludedVariations": [
+          "close-grip",
+          "half-kneeling",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "seated",
+          "single-arm",
+          "split-stance",
+          "standing",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "rope": {
+        "excludedVariations": []
+      }
     }
   },
   {
@@ -6218,112 +8376,134 @@ const String staticExerciseJson = r'''[
     ],
     "secondaryMuscles": [],
     "variations": {
-      "EZ-bar": [
-        "cable",
-        "dumbbell",
-        "barbell",
-        "rope",
-        "band"
-      ],
-      "single-arm": [
-        "cable",
-        "dumbbell",
-        "barbell",
-        "rope",
-        "band"
-      ],
-      "overhead": [
-        "cable",
-        "dumbbell",
-        "barbell",
-        "rope",
-        "band"
-      ],
-      "lying": [
-        "cable",
-        "dumbbell",
-        "barbell",
-        "rope",
-        "band"
-      ],
-      "seated": [
-        "cable",
-        "dumbbell",
-        "barbell",
-        "rope",
-        "band"
-      ],
-      "standing": [
-        "cable",
-        "dumbbell",
-        "barbell",
-        "rope",
-        "band"
-      ],
-      "kickback": [
-        "cable",
-        "dumbbell",
-        "barbell",
-        "rope",
-        "band"
-      ],
-      "behind-the-head": [
-        "cable",
-        "dumbbell",
-        "barbell",
-        "rope",
-        "band"
-      ],
-      "cable": [
-        "EZ-bar",
-        "single-arm",
-        "overhead",
-        "lying",
-        "seated",
-        "standing",
-        "kickback",
-        "behind-the-head"
-      ],
-      "dumbbell": [
-        "EZ-bar",
-        "single-arm",
-        "overhead",
-        "lying",
-        "seated",
-        "standing",
-        "kickback",
-        "behind-the-head"
-      ],
-      "barbell": [
-        "EZ-bar",
-        "single-arm",
-        "overhead",
-        "lying",
-        "seated",
-        "standing",
-        "kickback",
-        "behind-the-head"
-      ],
-      "rope": [
-        "EZ-bar",
-        "single-arm",
-        "overhead",
-        "lying",
-        "seated",
-        "standing",
-        "kickback",
-        "behind-the-head"
-      ],
-      "band": [
-        "EZ-bar",
-        "single-arm",
-        "overhead",
-        "lying",
-        "seated",
-        "standing",
-        "kickback",
-        "behind-the-head"
-      ]
+      "EZ-bar": {
+        "excludedVariations": [
+          "behind-the-head",
+          "kickback",
+          "lying",
+          "overhead",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "EZ-bar",
+          "behind-the-head",
+          "kickback",
+          "lying",
+          "overhead",
+          "seated",
+          "standing"
+        ]
+      },
+      "overhead": {
+        "excludedVariations": [
+          "EZ-bar",
+          "behind-the-head",
+          "kickback",
+          "lying",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "lying": {
+        "excludedVariations": [
+          "EZ-bar",
+          "behind-the-head",
+          "kickback",
+          "overhead",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "EZ-bar",
+          "behind-the-head",
+          "kickback",
+          "lying",
+          "overhead",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "EZ-bar",
+          "behind-the-head",
+          "kickback",
+          "lying",
+          "overhead",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "kickback": {
+        "excludedVariations": [
+          "EZ-bar",
+          "behind-the-head",
+          "lying",
+          "overhead",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "behind-the-head": {
+        "excludedVariations": [
+          "EZ-bar",
+          "kickback",
+          "lying",
+          "overhead",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell",
+          "rope"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "rope"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell",
+          "rope"
+        ]
+      },
+      "rope": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "rope"
+        ]
+      }
     }
   },
   {
@@ -6337,84 +8517,104 @@ const String staticExerciseJson = r'''[
     ],
     "secondaryMuscles": [],
     "variations": {
-      "EZ-bar": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band",
-        "flat bench",
-        "incline bench",
-        "decline bench"
-      ],
-      "single-arm": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band",
-        "flat bench",
-        "incline bench",
-        "decline bench"
-      ],
-      "floor": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band",
-        "flat bench",
-        "incline bench",
-        "decline bench"
-      ],
-      "neutral-grip": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band",
-        "flat bench",
-        "incline bench",
-        "decline bench"
-      ],
-      "barbell": [
-        "EZ-bar",
-        "single-arm",
-        "floor",
-        "neutral-grip"
-      ],
-      "dumbbell": [
-        "EZ-bar",
-        "single-arm",
-        "floor",
-        "neutral-grip"
-      ],
-      "cable": [
-        "EZ-bar",
-        "single-arm",
-        "floor",
-        "neutral-grip"
-      ],
-      "band": [
-        "EZ-bar",
-        "single-arm",
-        "floor",
-        "neutral-grip"
-      ],
-      "flat bench": [
-        "EZ-bar",
-        "single-arm",
-        "floor",
-        "neutral-grip"
-      ],
-      "incline bench": [
-        "EZ-bar",
-        "single-arm",
-        "floor",
-        "neutral-grip"
-      ],
-      "decline bench": [
-        "EZ-bar",
-        "single-arm",
-        "floor",
-        "neutral-grip"
-      ]
+      "EZ-bar": {
+        "excludedVariations": [
+          "floor",
+          "neutral-grip",
+          "single-arm"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "EZ-bar",
+          "floor",
+          "neutral-grip"
+        ]
+      },
+      "floor": {
+        "excludedVariations": [
+          "EZ-bar",
+          "neutral-grip",
+          "single-arm"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "EZ-bar",
+          "floor",
+          "single-arm"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "decline bench",
+          "dumbbell",
+          "flat bench",
+          "incline bench"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "decline bench",
+          "flat bench",
+          "incline bench"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "decline bench",
+          "dumbbell",
+          "flat bench",
+          "incline bench"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "decline bench",
+          "dumbbell",
+          "flat bench",
+          "incline bench"
+        ]
+      },
+      "flat bench": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "decline bench",
+          "dumbbell",
+          "incline bench"
+        ]
+      },
+      "incline bench": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "decline bench",
+          "dumbbell",
+          "flat bench"
+        ]
+      },
+      "decline bench": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable",
+          "dumbbell",
+          "flat bench",
+          "incline bench"
+        ]
+      }
     }
   },
   {
@@ -6428,74 +8628,88 @@ const String staticExerciseJson = r'''[
     ],
     "secondaryMuscles": [],
     "variations": {
-      "single-arm": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "seated": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "standing": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "EZ-bar": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "reverse wrist curl": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "pronated": [
-        "barbell",
-        "dumbbell",
-        "cable",
-        "band"
-      ],
-      "barbell": [
-        "single-arm",
-        "seated",
-        "standing",
-        "EZ-bar",
-        "reverse wrist curl",
-        "pronated"
-      ],
-      "dumbbell": [
-        "single-arm",
-        "seated",
-        "standing",
-        "EZ-bar",
-        "reverse wrist curl",
-        "pronated"
-      ],
-      "cable": [
-        "single-arm",
-        "seated",
-        "standing",
-        "EZ-bar",
-        "reverse wrist curl",
-        "pronated"
-      ],
-      "band": [
-        "single-arm",
-        "seated",
-        "standing",
-        "EZ-bar",
-        "reverse wrist curl",
-        "pronated"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "EZ-bar",
+          "pronated",
+          "reverse wrist curl",
+          "seated",
+          "standing"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "EZ-bar",
+          "pronated",
+          "reverse wrist curl",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "EZ-bar",
+          "pronated",
+          "reverse wrist curl",
+          "seated",
+          "single-arm"
+        ]
+      },
+      "EZ-bar": {
+        "excludedVariations": [
+          "pronated",
+          "reverse wrist curl",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "reverse wrist curl": {
+        "excludedVariations": [
+          "EZ-bar",
+          "pronated",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "pronated": {
+        "excludedVariations": [
+          "EZ-bar",
+          "reverse wrist curl",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "dumbbell"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "cable"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "barbell",
+          "dumbbell"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell"
+        ]
+      }
     }
   },
   {
@@ -6515,100 +8729,116 @@ const String staticExerciseJson = r'''[
       "gluteus maximus"
     ],
     "variations": {
-      "single-arm": [
-        "dumbbell",
-        "barbell",
-        "kettlebell",
-        "trap bar",
-        "yoke",
-        "axle bar",
-        "double kettlebell"
-      ],
-      "overhead": [
-        "dumbbell",
-        "barbell",
-        "kettlebell",
-        "trap bar",
-        "yoke",
-        "axle bar",
-        "double kettlebell"
-      ],
-      "waiter's carry": [
-        "dumbbell",
-        "barbell",
-        "kettlebell",
-        "trap bar",
-        "yoke",
-        "axle bar",
-        "double kettlebell"
-      ],
-      "suitcase carry": [
-        "dumbbell",
-        "barbell",
-        "kettlebell",
-        "trap bar",
-        "yoke",
-        "axle bar",
-        "double kettlebell"
-      ],
-      "mixed-grip": [
-        "dumbbell",
-        "barbell",
-        "kettlebell",
-        "trap bar",
-        "yoke",
-        "axle bar",
-        "double kettlebell"
-      ],
-      "dumbbell": [
-        "single-arm",
-        "overhead",
-        "waiter's carry",
-        "suitcase carry",
-        "mixed-grip"
-      ],
-      "barbell": [
-        "single-arm",
-        "overhead",
-        "waiter's carry",
-        "suitcase carry",
-        "mixed-grip"
-      ],
-      "kettlebell": [
-        "single-arm",
-        "overhead",
-        "waiter's carry",
-        "suitcase carry",
-        "mixed-grip"
-      ],
-      "trap bar": [
-        "single-arm",
-        "overhead",
-        "waiter's carry",
-        "suitcase carry",
-        "mixed-grip"
-      ],
-      "yoke": [
-        "single-arm",
-        "overhead",
-        "waiter's carry",
-        "suitcase carry",
-        "mixed-grip"
-      ],
-      "axle bar": [
-        "single-arm",
-        "overhead",
-        "waiter's carry",
-        "suitcase carry",
-        "mixed-grip"
-      ],
-      "double kettlebell": [
-        "single-arm",
-        "overhead",
-        "waiter's carry",
-        "suitcase carry",
-        "mixed-grip"
-      ]
+      "single-arm": {
+        "excludedVariations": [
+          "mixed-grip",
+          "overhead",
+          "suitcase carry",
+          "waiter's carry"
+        ]
+      },
+      "overhead": {
+        "excludedVariations": [
+          "mixed-grip",
+          "single-arm",
+          "suitcase carry",
+          "waiter's carry"
+        ]
+      },
+      "waiter's carry": {
+        "excludedVariations": [
+          "mixed-grip",
+          "overhead",
+          "single-arm",
+          "suitcase carry"
+        ]
+      },
+      "suitcase carry": {
+        "excludedVariations": [
+          "mixed-grip",
+          "overhead",
+          "single-arm",
+          "waiter's carry"
+        ]
+      },
+      "mixed-grip": {
+        "excludedVariations": [
+          "overhead",
+          "single-arm",
+          "suitcase carry",
+          "waiter's carry"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "axle bar",
+          "barbell",
+          "double kettlebell",
+          "kettlebell",
+          "trap bar",
+          "yoke"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "axle bar",
+          "double kettlebell",
+          "dumbbell",
+          "kettlebell",
+          "trap bar",
+          "yoke"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "axle bar",
+          "barbell",
+          "double kettlebell",
+          "dumbbell",
+          "trap bar",
+          "yoke"
+        ]
+      },
+      "trap bar": {
+        "excludedVariations": [
+          "axle bar",
+          "barbell",
+          "double kettlebell",
+          "dumbbell",
+          "kettlebell",
+          "yoke"
+        ]
+      },
+      "yoke": {
+        "excludedVariations": [
+          "axle bar",
+          "barbell",
+          "double kettlebell",
+          "dumbbell",
+          "kettlebell",
+          "trap bar"
+        ]
+      },
+      "axle bar": {
+        "excludedVariations": [
+          "barbell",
+          "double kettlebell",
+          "dumbbell",
+          "kettlebell",
+          "trap bar",
+          "yoke"
+        ]
+      },
+      "double kettlebell": {
+        "excludedVariations": [
+          "axle bar",
+          "barbell",
+          "dumbbell",
+          "kettlebell",
+          "trap bar",
+          "yoke"
+        ]
+      }
     }
   },
   {
@@ -6629,104 +8859,142 @@ const String staticExerciseJson = r'''[
       "wrist extensors"
     ],
     "variations": {
-      "hang": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "power": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "squat": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "muscle snatch": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "overhead squat": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "snatch balance": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "drop snatch": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "paused": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "wide-grip": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "barbell": [
-        "hang",
-        "power",
-        "squat",
-        "muscle snatch",
-        "overhead squat",
-        "snatch balance",
-        "drop snatch",
-        "paused",
-        "wide-grip"
-      ],
-      "dumbbell": [
-        "hang",
-        "power",
-        "squat",
-        "muscle snatch",
-        "overhead squat",
-        "snatch balance",
-        "drop snatch",
-        "paused",
-        "wide-grip"
-      ],
-      "kettlebell": [
-        "hang",
-        "power",
-        "squat",
-        "muscle snatch",
-        "overhead squat",
-        "snatch balance",
-        "drop snatch",
-        "paused",
-        "wide-grip"
-      ],
-      "block": [
-        "hang",
-        "power",
-        "squat",
-        "muscle snatch",
-        "overhead squat",
-        "snatch balance",
-        "drop snatch",
-        "paused",
-        "wide-grip"
-      ]
+      "hang": {
+        "excludedVariations": [
+          "drop snatch",
+          "muscle snatch",
+          "overhead squat",
+          "paused",
+          "power",
+          "snatch balance",
+          "squat",
+          "wide-grip"
+        ]
+      },
+      "power": {
+        "excludedVariations": [
+          "drop snatch",
+          "hang",
+          "muscle snatch",
+          "overhead squat",
+          "paused",
+          "snatch balance",
+          "squat",
+          "wide-grip"
+        ]
+      },
+      "squat": {
+        "excludedVariations": [
+          "drop snatch",
+          "hang",
+          "muscle snatch",
+          "overhead squat",
+          "paused",
+          "power",
+          "snatch balance",
+          "wide-grip"
+        ]
+      },
+      "muscle snatch": {
+        "excludedVariations": [
+          "drop snatch",
+          "hang",
+          "overhead squat",
+          "paused",
+          "power",
+          "snatch balance",
+          "squat",
+          "wide-grip"
+        ]
+      },
+      "overhead squat": {
+        "excludedVariations": [
+          "drop snatch",
+          "hang",
+          "muscle snatch",
+          "paused",
+          "power",
+          "snatch balance",
+          "squat",
+          "wide-grip"
+        ]
+      },
+      "snatch balance": {
+        "excludedVariations": [
+          "drop snatch",
+          "hang",
+          "muscle snatch",
+          "overhead squat",
+          "paused",
+          "power",
+          "squat",
+          "wide-grip"
+        ]
+      },
+      "drop snatch": {
+        "excludedVariations": [
+          "hang",
+          "muscle snatch",
+          "overhead squat",
+          "paused",
+          "power",
+          "snatch balance",
+          "squat",
+          "wide-grip"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "drop snatch",
+          "hang",
+          "muscle snatch",
+          "overhead squat",
+          "power",
+          "snatch balance",
+          "squat",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "drop snatch",
+          "hang",
+          "muscle snatch",
+          "overhead squat",
+          "paused",
+          "power",
+          "snatch balance",
+          "squat"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "block",
+          "dumbbell",
+          "kettlebell"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "barbell",
+          "block",
+          "kettlebell"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "barbell",
+          "block",
+          "dumbbell"
+        ]
+      },
+      "block": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "kettlebell"
+        ]
+      }
     }
   },
   {
@@ -6746,92 +9014,154 @@ const String staticExerciseJson = r'''[
       "wrist extensors"
     ],
     "variations": {
-      "hang": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "power": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "squat": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "single-arm": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "clean pull": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "tall clean": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "clean shrug": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "low-hang": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "paused": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "deficit": [
-        "dumbbell",
-        "kettlebell",
-        "block"
-      ],
-      "dumbbell": [
-        "hang",
-        "power",
-        "squat",
-        "single-arm",
-        "clean pull",
-        "tall clean",
-        "clean shrug",
-        "low-hang",
-        "paused",
-        "deficit"
-      ],
-      "kettlebell": [
-        "hang",
-        "power",
-        "squat",
-        "single-arm",
-        "clean pull",
-        "tall clean",
-        "clean shrug",
-        "low-hang",
-        "paused",
-        "deficit"
-      ],
-      "block": [
-        "hang",
-        "power",
-        "squat",
-        "single-arm",
-        "clean pull",
-        "tall clean",
-        "clean shrug",
-        "low-hang",
-        "paused",
-        "deficit"
-      ]
+      "hang": {
+        "excludedVariations": [
+          "clean pull",
+          "clean shrug",
+          "deficit",
+          "low-hang",
+          "paused",
+          "power",
+          "single-arm",
+          "squat",
+          "tall clean"
+        ]
+      },
+      "power": {
+        "excludedVariations": [
+          "clean pull",
+          "clean shrug",
+          "deficit",
+          "hang",
+          "low-hang",
+          "paused",
+          "single-arm",
+          "squat",
+          "tall clean"
+        ]
+      },
+      "squat": {
+        "excludedVariations": [
+          "clean pull",
+          "clean shrug",
+          "deficit",
+          "hang",
+          "low-hang",
+          "paused",
+          "power",
+          "single-arm",
+          "tall clean"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "clean pull",
+          "clean shrug",
+          "deficit",
+          "hang",
+          "low-hang",
+          "paused",
+          "power",
+          "squat",
+          "tall clean"
+        ]
+      },
+      "clean pull": {
+        "excludedVariations": [
+          "clean shrug",
+          "deficit",
+          "hang",
+          "low-hang",
+          "paused",
+          "power",
+          "single-arm",
+          "squat",
+          "tall clean"
+        ]
+      },
+      "tall clean": {
+        "excludedVariations": [
+          "clean pull",
+          "clean shrug",
+          "deficit",
+          "hang",
+          "low-hang",
+          "paused",
+          "power",
+          "single-arm",
+          "squat"
+        ]
+      },
+      "clean shrug": {
+        "excludedVariations": [
+          "clean pull",
+          "deficit",
+          "hang",
+          "low-hang",
+          "paused",
+          "power",
+          "single-arm",
+          "squat",
+          "tall clean"
+        ]
+      },
+      "low-hang": {
+        "excludedVariations": [
+          "clean pull",
+          "clean shrug",
+          "deficit",
+          "hang",
+          "paused",
+          "power",
+          "single-arm",
+          "squat",
+          "tall clean"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "clean pull",
+          "clean shrug",
+          "deficit",
+          "hang",
+          "low-hang",
+          "power",
+          "single-arm",
+          "squat",
+          "tall clean"
+        ]
+      },
+      "deficit": {
+        "excludedVariations": [
+          "clean pull",
+          "clean shrug",
+          "hang",
+          "low-hang",
+          "paused",
+          "power",
+          "single-arm",
+          "squat",
+          "tall clean"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "block",
+          "kettlebell"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "block",
+          "dumbbell"
+        ]
+      },
+      "block": {
+        "excludedVariations": [
+          "dumbbell",
+          "kettlebell"
+        ]
+      }
     }
   },
   {
@@ -6851,40 +9181,97 @@ const String staticExerciseJson = r'''[
       "wrist flexors"
     ],
     "variations": {
-      "two-hand": [
-        "banded"
-      ],
-      "single-arm": [
-        "banded"
-      ],
-      "American": [
-        "banded"
-      ],
-      "sumo": [
-        "banded"
-      ],
-      "high pull": [
-        "banded"
-      ],
-      "dead swing": [
-        "banded"
-      ],
-      "ballistic": [
-        "banded"
-      ],
-      "snatch-grip": [
-        "banded"
-      ],
-      "banded": [
-        "two-hand",
-        "single-arm",
-        "American",
-        "sumo",
-        "high pull",
-        "dead swing",
-        "ballistic",
-        "snatch-grip"
-      ]
+      "two-hand": {
+        "excludedVariations": [
+          "American",
+          "ballistic",
+          "dead swing",
+          "high pull",
+          "single-arm",
+          "snatch-grip",
+          "sumo"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "American",
+          "ballistic",
+          "dead swing",
+          "high pull",
+          "snatch-grip",
+          "sumo",
+          "two-hand"
+        ]
+      },
+      "American": {
+        "excludedVariations": [
+          "ballistic",
+          "dead swing",
+          "high pull",
+          "single-arm",
+          "snatch-grip",
+          "sumo",
+          "two-hand"
+        ]
+      },
+      "sumo": {
+        "excludedVariations": [
+          "American",
+          "ballistic",
+          "dead swing",
+          "high pull",
+          "single-arm",
+          "snatch-grip",
+          "two-hand"
+        ]
+      },
+      "high pull": {
+        "excludedVariations": [
+          "American",
+          "ballistic",
+          "dead swing",
+          "single-arm",
+          "snatch-grip",
+          "sumo",
+          "two-hand"
+        ]
+      },
+      "dead swing": {
+        "excludedVariations": [
+          "American",
+          "ballistic",
+          "high pull",
+          "single-arm",
+          "snatch-grip",
+          "sumo",
+          "two-hand"
+        ]
+      },
+      "ballistic": {
+        "excludedVariations": [
+          "American",
+          "dead swing",
+          "high pull",
+          "single-arm",
+          "snatch-grip",
+          "sumo",
+          "two-hand"
+        ]
+      },
+      "snatch-grip": {
+        "excludedVariations": [
+          "American",
+          "ballistic",
+          "dead swing",
+          "high pull",
+          "single-arm",
+          "sumo",
+          "two-hand"
+        ]
+      },
+      "banded": {
+        "excludedVariations": []
+      }
     }
   },
   {
@@ -6904,16 +9291,136 @@ const String staticExerciseJson = r'''[
       "lateral deltoid"
     ],
     "variations": {
-      "single-arm": [],
-      "kneeling": [],
-      "standing": [],
-      "half-kneeling": [],
-      "push press": [],
-      "bilateral": [],
-      "alternating": [],
-      "rotational": [],
-      "squat-to-press": [],
-      "split-stance": []
+      "single-arm": {
+        "excludedVariations": [
+          "alternating",
+          "bilateral",
+          "half-kneeling",
+          "kneeling",
+          "push press",
+          "rotational",
+          "split-stance",
+          "squat-to-press",
+          "standing"
+        ]
+      },
+      "kneeling": {
+        "excludedVariations": [
+          "alternating",
+          "bilateral",
+          "half-kneeling",
+          "push press",
+          "rotational",
+          "single-arm",
+          "split-stance",
+          "squat-to-press",
+          "standing"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "alternating",
+          "bilateral",
+          "half-kneeling",
+          "kneeling",
+          "push press",
+          "rotational",
+          "single-arm",
+          "split-stance",
+          "squat-to-press"
+        ]
+      },
+      "half-kneeling": {
+        "excludedVariations": [
+          "alternating",
+          "bilateral",
+          "kneeling",
+          "push press",
+          "rotational",
+          "single-arm",
+          "split-stance",
+          "squat-to-press",
+          "standing"
+        ]
+      },
+      "push press": {
+        "excludedVariations": [
+          "alternating",
+          "bilateral",
+          "half-kneeling",
+          "kneeling",
+          "rotational",
+          "single-arm",
+          "split-stance",
+          "squat-to-press",
+          "standing"
+        ]
+      },
+      "bilateral": {
+        "excludedVariations": [
+          "alternating",
+          "half-kneeling",
+          "kneeling",
+          "push press",
+          "rotational",
+          "single-arm",
+          "split-stance",
+          "squat-to-press",
+          "standing"
+        ]
+      },
+      "alternating": {
+        "excludedVariations": [
+          "bilateral",
+          "half-kneeling",
+          "kneeling",
+          "push press",
+          "rotational",
+          "single-arm",
+          "split-stance",
+          "squat-to-press",
+          "standing"
+        ]
+      },
+      "rotational": {
+        "excludedVariations": [
+          "alternating",
+          "bilateral",
+          "half-kneeling",
+          "kneeling",
+          "push press",
+          "single-arm",
+          "split-stance",
+          "squat-to-press",
+          "standing"
+        ]
+      },
+      "squat-to-press": {
+        "excludedVariations": [
+          "alternating",
+          "bilateral",
+          "half-kneeling",
+          "kneeling",
+          "push press",
+          "rotational",
+          "single-arm",
+          "split-stance",
+          "standing"
+        ]
+      },
+      "split-stance": {
+        "excludedVariations": [
+          "alternating",
+          "bilateral",
+          "half-kneeling",
+          "kneeling",
+          "push press",
+          "rotational",
+          "single-arm",
+          "squat-to-press",
+          "standing"
+        ]
+      }
     }
   },
   {
@@ -6932,76 +9439,86 @@ const String staticExerciseJson = r'''[
       "posterior deltoid"
     ],
     "variations": {
-      "decline": [
-        "dumbbell",
-        "flat bench",
-        "cable",
-        "barbell",
-        "machine"
-      ],
-      "single-arm": [
-        "dumbbell",
-        "flat bench",
-        "cable",
-        "barbell",
-        "machine"
-      ],
-      "EZ-bar": [
-        "dumbbell",
-        "flat bench",
-        "cable",
-        "barbell",
-        "machine"
-      ],
-      "straight-arm": [
-        "dumbbell",
-        "flat bench",
-        "cable",
-        "barbell",
-        "machine"
-      ],
-      "bent-arm": [
-        "dumbbell",
-        "flat bench",
-        "cable",
-        "barbell",
-        "machine"
-      ],
-      "dumbbell": [
-        "decline",
-        "single-arm",
-        "EZ-bar",
-        "straight-arm",
-        "bent-arm"
-      ],
-      "flat bench": [
-        "decline",
-        "single-arm",
-        "EZ-bar",
-        "straight-arm",
-        "bent-arm"
-      ],
-      "cable": [
-        "decline",
-        "single-arm",
-        "EZ-bar",
-        "straight-arm",
-        "bent-arm"
-      ],
-      "barbell": [
-        "decline",
-        "single-arm",
-        "EZ-bar",
-        "straight-arm",
-        "bent-arm"
-      ],
-      "machine": [
-        "decline",
-        "single-arm",
-        "EZ-bar",
-        "straight-arm",
-        "bent-arm"
-      ]
+      "decline": {
+        "excludedVariations": [
+          "EZ-bar",
+          "bent-arm",
+          "single-arm",
+          "straight-arm"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "EZ-bar",
+          "bent-arm",
+          "decline",
+          "straight-arm"
+        ]
+      },
+      "EZ-bar": {
+        "excludedVariations": [
+          "bent-arm",
+          "decline",
+          "single-arm",
+          "straight-arm"
+        ]
+      },
+      "straight-arm": {
+        "excludedVariations": [
+          "EZ-bar",
+          "bent-arm",
+          "decline",
+          "single-arm"
+        ]
+      },
+      "bent-arm": {
+        "excludedVariations": [
+          "EZ-bar",
+          "decline",
+          "single-arm",
+          "straight-arm"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "flat bench",
+          "machine"
+        ]
+      },
+      "flat bench": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "machine"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "barbell",
+          "dumbbell",
+          "flat bench",
+          "machine"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "cable",
+          "dumbbell",
+          "flat bench",
+          "machine"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "barbell",
+          "cable",
+          "dumbbell",
+          "flat bench"
+        ]
+      }
     }
   },
   {
@@ -7020,14 +9537,94 @@ const String staticExerciseJson = r'''[
       "trapezius"
     ],
     "variations": {
-      "overhand": [],
-      "underhand": [],
-      "neutral-grip": [],
-      "kneeling": [],
-      "chest-supported": [],
-      "staggered-stance": [],
-      "heavy": [],
-      "single-arm": []
+      "overhand": {
+        "excludedVariations": [
+          "chest-supported",
+          "heavy",
+          "kneeling",
+          "neutral-grip",
+          "single-arm",
+          "staggered-stance",
+          "underhand"
+        ]
+      },
+      "underhand": {
+        "excludedVariations": [
+          "chest-supported",
+          "heavy",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "single-arm",
+          "staggered-stance"
+        ]
+      },
+      "neutral-grip": {
+        "excludedVariations": [
+          "chest-supported",
+          "heavy",
+          "kneeling",
+          "overhand",
+          "single-arm",
+          "staggered-stance",
+          "underhand"
+        ]
+      },
+      "kneeling": {
+        "excludedVariations": [
+          "chest-supported",
+          "heavy",
+          "neutral-grip",
+          "overhand",
+          "single-arm",
+          "staggered-stance",
+          "underhand"
+        ]
+      },
+      "chest-supported": {
+        "excludedVariations": [
+          "heavy",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "single-arm",
+          "staggered-stance",
+          "underhand"
+        ]
+      },
+      "staggered-stance": {
+        "excludedVariations": [
+          "chest-supported",
+          "heavy",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "single-arm",
+          "underhand"
+        ]
+      },
+      "heavy": {
+        "excludedVariations": [
+          "chest-supported",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "single-arm",
+          "staggered-stance",
+          "underhand"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "chest-supported",
+          "heavy",
+          "kneeling",
+          "neutral-grip",
+          "overhand",
+          "staggered-stance",
+          "underhand"
+        ]
+      }
     }
   },
   {
@@ -7045,13 +9642,76 @@ const String staticExerciseJson = r'''[
       "lateral deltoid"
     ],
     "variations": {
-      "overhand": [],
-      "underhand": [],
-      "wide-grip": [],
-      "narrow-grip": [],
-      "chest-level": [],
-      "overhead": [],
-      "single-arm": []
+      "overhand": {
+        "excludedVariations": [
+          "chest-level",
+          "narrow-grip",
+          "overhead",
+          "single-arm",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "underhand": {
+        "excludedVariations": [
+          "chest-level",
+          "narrow-grip",
+          "overhand",
+          "overhead",
+          "single-arm",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "chest-level",
+          "narrow-grip",
+          "overhand",
+          "overhead",
+          "single-arm",
+          "underhand"
+        ]
+      },
+      "narrow-grip": {
+        "excludedVariations": [
+          "chest-level",
+          "overhand",
+          "overhead",
+          "single-arm",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "chest-level": {
+        "excludedVariations": [
+          "narrow-grip",
+          "overhand",
+          "overhead",
+          "single-arm",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "overhead": {
+        "excludedVariations": [
+          "chest-level",
+          "narrow-grip",
+          "overhand",
+          "single-arm",
+          "underhand",
+          "wide-grip"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "chest-level",
+          "narrow-grip",
+          "overhand",
+          "overhead",
+          "underhand",
+          "wide-grip"
+        ]
+      }
     }
   },
   {
@@ -7067,40 +9727,97 @@ const String staticExerciseJson = r'''[
       "posterior deltoid"
     ],
     "variations": {
-      "standing": [
-        "band"
-      ],
-      "seated": [
-        "band"
-      ],
-      "single-arm": [
-        "band"
-      ],
-      "lying": [
-        "band"
-      ],
-      "90-degree abduction": [
-        "band"
-      ],
-      "side-lying": [
-        "band"
-      ],
-      "prone": [
-        "band"
-      ],
-      "doorway": [
-        "band"
-      ],
-      "band": [
-        "standing",
-        "seated",
-        "single-arm",
-        "lying",
-        "90-degree abduction",
-        "side-lying",
-        "prone",
-        "doorway"
-      ]
+      "standing": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "doorway",
+          "lying",
+          "prone",
+          "seated",
+          "side-lying",
+          "single-arm"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "doorway",
+          "lying",
+          "prone",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "doorway",
+          "lying",
+          "prone",
+          "seated",
+          "side-lying",
+          "standing"
+        ]
+      },
+      "lying": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "doorway",
+          "prone",
+          "seated",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "90-degree abduction": {
+        "excludedVariations": [
+          "doorway",
+          "lying",
+          "prone",
+          "seated",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "side-lying": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "doorway",
+          "lying",
+          "prone",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "prone": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "doorway",
+          "lying",
+          "seated",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "doorway": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "lying",
+          "prone",
+          "seated",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "band": {
+        "excludedVariations": []
+      }
     }
   },
   {
@@ -7116,52 +9833,86 @@ const String staticExerciseJson = r'''[
       "anterior deltoid"
     ],
     "variations": {
-      "standing": [
-        "cable",
-        "band"
-      ],
-      "seated": [
-        "cable",
-        "band"
-      ],
-      "single-arm": [
-        "cable",
-        "band"
-      ],
-      "lying": [
-        "cable",
-        "band"
-      ],
-      "90-degree abduction": [
-        "cable",
-        "band"
-      ],
-      "side-lying": [
-        "cable",
-        "band"
-      ],
-      "prone": [
-        "cable",
-        "band"
-      ],
-      "cable": [
-        "standing",
-        "seated",
-        "single-arm",
-        "lying",
-        "90-degree abduction",
-        "side-lying",
-        "prone"
-      ],
-      "band": [
-        "standing",
-        "seated",
-        "single-arm",
-        "lying",
-        "90-degree abduction",
-        "side-lying",
-        "prone"
-      ]
+      "standing": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "lying",
+          "prone",
+          "seated",
+          "side-lying",
+          "single-arm"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "lying",
+          "prone",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "lying",
+          "prone",
+          "seated",
+          "side-lying",
+          "standing"
+        ]
+      },
+      "lying": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "prone",
+          "seated",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "90-degree abduction": {
+        "excludedVariations": [
+          "lying",
+          "prone",
+          "seated",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "side-lying": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "lying",
+          "prone",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "prone": {
+        "excludedVariations": [
+          "90-degree abduction",
+          "lying",
+          "seated",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "cable"
+        ]
+      }
     }
   },
   {
@@ -7180,64 +9931,124 @@ const String staticExerciseJson = r'''[
       "wrist flexors"
     ],
     "variations": {
-      "below-knee": [
-        "barbell",
-        "straps"
-      ],
-      "above-knee": [
-        "barbell",
-        "straps"
-      ],
-      "sumo": [
-        "barbell",
-        "straps"
-      ],
-      "wide-grip": [
-        "barbell",
-        "straps"
-      ],
-      "snatch-grip": [
-        "barbell",
-        "straps"
-      ],
-      "mixed-grip": [
-        "barbell",
-        "straps"
-      ],
-      "overhand": [
-        "barbell",
-        "straps"
-      ],
-      "deficit": [
-        "barbell",
-        "straps"
-      ],
-      "paused": [
-        "barbell",
-        "straps"
-      ],
-      "barbell": [
-        "below-knee",
-        "above-knee",
-        "sumo",
-        "wide-grip",
-        "snatch-grip",
-        "mixed-grip",
-        "overhand",
-        "deficit",
-        "paused"
-      ],
-      "straps": [
-        "below-knee",
-        "above-knee",
-        "sumo",
-        "wide-grip",
-        "snatch-grip",
-        "mixed-grip",
-        "overhand",
-        "deficit",
-        "paused"
-      ]
+      "below-knee": {
+        "excludedVariations": [
+          "above-knee",
+          "deficit",
+          "mixed-grip",
+          "overhand",
+          "paused",
+          "snatch-grip",
+          "sumo",
+          "wide-grip"
+        ]
+      },
+      "above-knee": {
+        "excludedVariations": [
+          "below-knee",
+          "deficit",
+          "mixed-grip",
+          "overhand",
+          "paused",
+          "snatch-grip",
+          "sumo",
+          "wide-grip"
+        ]
+      },
+      "sumo": {
+        "excludedVariations": [
+          "above-knee",
+          "below-knee",
+          "deficit",
+          "mixed-grip",
+          "overhand",
+          "paused",
+          "snatch-grip",
+          "wide-grip"
+        ]
+      },
+      "wide-grip": {
+        "excludedVariations": [
+          "above-knee",
+          "below-knee",
+          "deficit",
+          "mixed-grip",
+          "overhand",
+          "paused",
+          "snatch-grip",
+          "sumo"
+        ]
+      },
+      "snatch-grip": {
+        "excludedVariations": [
+          "above-knee",
+          "below-knee",
+          "deficit",
+          "mixed-grip",
+          "overhand",
+          "paused",
+          "sumo",
+          "wide-grip"
+        ]
+      },
+      "mixed-grip": {
+        "excludedVariations": [
+          "above-knee",
+          "below-knee",
+          "deficit",
+          "overhand",
+          "paused",
+          "snatch-grip",
+          "sumo",
+          "wide-grip"
+        ]
+      },
+      "overhand": {
+        "excludedVariations": [
+          "above-knee",
+          "below-knee",
+          "deficit",
+          "mixed-grip",
+          "paused",
+          "snatch-grip",
+          "sumo",
+          "wide-grip"
+        ]
+      },
+      "deficit": {
+        "excludedVariations": [
+          "above-knee",
+          "below-knee",
+          "mixed-grip",
+          "overhand",
+          "paused",
+          "snatch-grip",
+          "sumo",
+          "wide-grip"
+        ]
+      },
+      "paused": {
+        "excludedVariations": [
+          "above-knee",
+          "below-knee",
+          "deficit",
+          "mixed-grip",
+          "overhand",
+          "snatch-grip",
+          "sumo",
+          "wide-grip"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "straps"
+        ]
+      },
+      "straps": {
+        "excludedVariations": [
+          "barbell"
+        ]
+      }
     }
   },
   {
@@ -7253,60 +10064,78 @@ const String staticExerciseJson = r'''[
       "gluteus maximus"
     ],
     "variations": {
-      "seated": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "standing": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "lying": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "Copenhagen plank": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "side-lying": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "single-leg": [
-        "machine",
-        "cable",
-        "banded"
-      ],
-      "machine": [
-        "seated",
-        "standing",
-        "lying",
-        "Copenhagen plank",
-        "side-lying",
-        "single-leg"
-      ],
-      "cable": [
-        "seated",
-        "standing",
-        "lying",
-        "Copenhagen plank",
-        "side-lying",
-        "single-leg"
-      ],
-      "banded": [
-        "seated",
-        "standing",
-        "lying",
-        "Copenhagen plank",
-        "side-lying",
-        "single-leg"
-      ]
+      "seated": {
+        "excludedVariations": [
+          "Copenhagen plank",
+          "lying",
+          "side-lying",
+          "single-leg",
+          "standing"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "Copenhagen plank",
+          "lying",
+          "seated",
+          "side-lying",
+          "single-leg"
+        ]
+      },
+      "lying": {
+        "excludedVariations": [
+          "Copenhagen plank",
+          "seated",
+          "side-lying",
+          "single-leg",
+          "standing"
+        ]
+      },
+      "Copenhagen plank": {
+        "excludedVariations": [
+          "lying",
+          "seated",
+          "side-lying",
+          "single-leg",
+          "standing"
+        ]
+      },
+      "side-lying": {
+        "excludedVariations": [
+          "Copenhagen plank",
+          "lying",
+          "seated",
+          "single-leg",
+          "standing"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "Copenhagen plank",
+          "lying",
+          "seated",
+          "side-lying",
+          "standing"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "banded",
+          "cable"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "banded",
+          "machine"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "cable",
+          "machine"
+        ]
+      }
     }
   },
   {
@@ -7324,68 +10153,94 @@ const String staticExerciseJson = r'''[
       "gastrocnemius"
     ],
     "variations": {
-      "standard": [
-        "weighted",
-        "banded",
-        "hurdle"
-      ],
-      "depth jump": [
-        "weighted",
-        "banded",
-        "hurdle"
-      ],
-      "single-leg": [
-        "weighted",
-        "banded",
-        "hurdle"
-      ],
-      "lateral": [
-        "weighted",
-        "banded",
-        "hurdle"
-      ],
-      "rotational": [
-        "weighted",
-        "banded",
-        "hurdle"
-      ],
-      "broad jump": [
-        "weighted",
-        "banded",
-        "hurdle"
-      ],
-      "step-down": [
-        "weighted",
-        "banded",
-        "hurdle"
-      ],
-      "weighted": [
-        "standard",
-        "depth jump",
-        "single-leg",
-        "lateral",
-        "rotational",
-        "broad jump",
-        "step-down"
-      ],
-      "banded": [
-        "standard",
-        "depth jump",
-        "single-leg",
-        "lateral",
-        "rotational",
-        "broad jump",
-        "step-down"
-      ],
-      "hurdle": [
-        "standard",
-        "depth jump",
-        "single-leg",
-        "lateral",
-        "rotational",
-        "broad jump",
-        "step-down"
-      ]
+      "standard": {
+        "excludedVariations": [
+          "broad jump",
+          "depth jump",
+          "lateral",
+          "rotational",
+          "single-leg",
+          "step-down"
+        ]
+      },
+      "depth jump": {
+        "excludedVariations": [
+          "broad jump",
+          "lateral",
+          "rotational",
+          "single-leg",
+          "standard",
+          "step-down"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "broad jump",
+          "depth jump",
+          "lateral",
+          "rotational",
+          "standard",
+          "step-down"
+        ]
+      },
+      "lateral": {
+        "excludedVariations": [
+          "broad jump",
+          "depth jump",
+          "rotational",
+          "single-leg",
+          "standard",
+          "step-down"
+        ]
+      },
+      "rotational": {
+        "excludedVariations": [
+          "broad jump",
+          "depth jump",
+          "lateral",
+          "single-leg",
+          "standard",
+          "step-down"
+        ]
+      },
+      "broad jump": {
+        "excludedVariations": [
+          "depth jump",
+          "lateral",
+          "rotational",
+          "single-leg",
+          "standard",
+          "step-down"
+        ]
+      },
+      "step-down": {
+        "excludedVariations": [
+          "broad jump",
+          "depth jump",
+          "lateral",
+          "rotational",
+          "single-leg",
+          "standard"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "banded",
+          "hurdle"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "hurdle",
+          "weighted"
+        ]
+      },
+      "hurdle": {
+        "excludedVariations": [
+          "banded",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -7403,52 +10258,64 @@ const String staticExerciseJson = r'''[
       "hamstrings"
     ],
     "variations": {
-      "bodyweight": [
-        "weighted",
-        "banded",
-        "stability ball"
-      ],
-      "single-leg": [
-        "weighted",
-        "banded",
-        "stability ball"
-      ],
-      "heels-elevated": [
-        "weighted",
-        "banded",
-        "stability ball"
-      ],
-      "with press": [
-        "weighted",
-        "banded",
-        "stability ball"
-      ],
-      "overhead hold": [
-        "weighted",
-        "banded",
-        "stability ball"
-      ],
-      "weighted": [
-        "bodyweight",
-        "single-leg",
-        "heels-elevated",
-        "with press",
-        "overhead hold"
-      ],
-      "banded": [
-        "bodyweight",
-        "single-leg",
-        "heels-elevated",
-        "with press",
-        "overhead hold"
-      ],
-      "stability ball": [
-        "bodyweight",
-        "single-leg",
-        "heels-elevated",
-        "with press",
-        "overhead hold"
-      ]
+      "bodyweight": {
+        "excludedVariations": [
+          "heels-elevated",
+          "overhead hold",
+          "single-leg",
+          "with press"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "bodyweight",
+          "heels-elevated",
+          "overhead hold",
+          "with press"
+        ]
+      },
+      "heels-elevated": {
+        "excludedVariations": [
+          "bodyweight",
+          "overhead hold",
+          "single-leg",
+          "with press"
+        ]
+      },
+      "with press": {
+        "excludedVariations": [
+          "bodyweight",
+          "heels-elevated",
+          "overhead hold",
+          "single-leg"
+        ]
+      },
+      "overhead hold": {
+        "excludedVariations": [
+          "bodyweight",
+          "heels-elevated",
+          "single-leg",
+          "with press"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "banded",
+          "stability ball"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "stability ball",
+          "weighted"
+        ]
+      },
+      "stability ball": {
+        "excludedVariations": [
+          "banded",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -7465,54 +10332,62 @@ const String staticExerciseJson = r'''[
       "erector spinae"
     ],
     "variations": {
-      "bodyweight": [
-        "weighted",
-        "band",
-        "stability ball",
-        "dumbbell"
-      ],
-      "single-arm": [
-        "weighted",
-        "band",
-        "stability ball",
-        "dumbbell"
-      ],
-      "single-leg": [
-        "weighted",
-        "band",
-        "stability ball",
-        "dumbbell"
-      ],
-      "contralateral": [
-        "weighted",
-        "band",
-        "stability ball",
-        "dumbbell"
-      ],
-      "weighted": [
-        "bodyweight",
-        "single-arm",
-        "single-leg",
-        "contralateral"
-      ],
-      "band": [
-        "bodyweight",
-        "single-arm",
-        "single-leg",
-        "contralateral"
-      ],
-      "stability ball": [
-        "bodyweight",
-        "single-arm",
-        "single-leg",
-        "contralateral"
-      ],
-      "dumbbell": [
-        "bodyweight",
-        "single-arm",
-        "single-leg",
-        "contralateral"
-      ]
+      "bodyweight": {
+        "excludedVariations": [
+          "contralateral",
+          "single-arm",
+          "single-leg"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "bodyweight",
+          "contralateral",
+          "single-leg"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "bodyweight",
+          "contralateral",
+          "single-arm"
+        ]
+      },
+      "contralateral": {
+        "excludedVariations": [
+          "bodyweight",
+          "single-arm",
+          "single-leg"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "band",
+          "dumbbell",
+          "stability ball"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "dumbbell",
+          "stability ball",
+          "weighted"
+        ]
+      },
+      "stability ball": {
+        "excludedVariations": [
+          "band",
+          "dumbbell",
+          "weighted"
+        ]
+      },
+      "dumbbell": {
+        "excludedVariations": [
+          "band",
+          "stability ball",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -7530,64 +10405,124 @@ const String staticExerciseJson = r'''[
       "erector spinae"
     ],
     "variations": {
-      "kneeling": [
-        "cable",
-        "band"
-      ],
-      "standing": [
-        "cable",
-        "band"
-      ],
-      "half-kneeling": [
-        "cable",
-        "band"
-      ],
-      "single-arm": [
-        "cable",
-        "band"
-      ],
-      "push": [
-        "cable",
-        "band"
-      ],
-      "overhead": [
-        "cable",
-        "band"
-      ],
-      "rotation": [
-        "cable",
-        "band"
-      ],
-      "isometric": [
-        "cable",
-        "band"
-      ],
-      "split-stance": [
-        "cable",
-        "band"
-      ],
-      "cable": [
-        "kneeling",
-        "standing",
-        "half-kneeling",
-        "single-arm",
-        "push",
-        "overhead",
-        "rotation",
-        "isometric",
-        "split-stance"
-      ],
-      "band": [
-        "kneeling",
-        "standing",
-        "half-kneeling",
-        "single-arm",
-        "push",
-        "overhead",
-        "rotation",
-        "isometric",
-        "split-stance"
-      ]
+      "kneeling": {
+        "excludedVariations": [
+          "half-kneeling",
+          "isometric",
+          "overhead",
+          "push",
+          "rotation",
+          "single-arm",
+          "split-stance",
+          "standing"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "half-kneeling",
+          "isometric",
+          "kneeling",
+          "overhead",
+          "push",
+          "rotation",
+          "single-arm",
+          "split-stance"
+        ]
+      },
+      "half-kneeling": {
+        "excludedVariations": [
+          "isometric",
+          "kneeling",
+          "overhead",
+          "push",
+          "rotation",
+          "single-arm",
+          "split-stance",
+          "standing"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "half-kneeling",
+          "isometric",
+          "kneeling",
+          "overhead",
+          "push",
+          "rotation",
+          "split-stance",
+          "standing"
+        ]
+      },
+      "push": {
+        "excludedVariations": [
+          "half-kneeling",
+          "isometric",
+          "kneeling",
+          "overhead",
+          "rotation",
+          "single-arm",
+          "split-stance",
+          "standing"
+        ]
+      },
+      "overhead": {
+        "excludedVariations": [
+          "half-kneeling",
+          "isometric",
+          "kneeling",
+          "push",
+          "rotation",
+          "single-arm",
+          "split-stance",
+          "standing"
+        ]
+      },
+      "rotation": {
+        "excludedVariations": [
+          "half-kneeling",
+          "isometric",
+          "kneeling",
+          "overhead",
+          "push",
+          "single-arm",
+          "split-stance",
+          "standing"
+        ]
+      },
+      "isometric": {
+        "excludedVariations": [
+          "half-kneeling",
+          "kneeling",
+          "overhead",
+          "push",
+          "rotation",
+          "single-arm",
+          "split-stance",
+          "standing"
+        ]
+      },
+      "split-stance": {
+        "excludedVariations": [
+          "half-kneeling",
+          "isometric",
+          "kneeling",
+          "overhead",
+          "push",
+          "rotation",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "cable"
+        ]
+      }
     }
   },
   {
@@ -7605,52 +10540,64 @@ const String staticExerciseJson = r'''[
       "anterior deltoid"
     ],
     "variations": {
-      "kneeling": [
-        "barbell",
-        "band-assisted",
-        "weighted"
-      ],
-      "standing": [
-        "barbell",
-        "band-assisted",
-        "weighted"
-      ],
-      "single-arm": [
-        "barbell",
-        "band-assisted",
-        "weighted"
-      ],
-      "pike": [
-        "barbell",
-        "band-assisted",
-        "weighted"
-      ],
-      "feet-elevated": [
-        "barbell",
-        "band-assisted",
-        "weighted"
-      ],
-      "barbell": [
-        "kneeling",
-        "standing",
-        "single-arm",
-        "pike",
-        "feet-elevated"
-      ],
-      "band-assisted": [
-        "kneeling",
-        "standing",
-        "single-arm",
-        "pike",
-        "feet-elevated"
-      ],
-      "weighted": [
-        "kneeling",
-        "standing",
-        "single-arm",
-        "pike",
-        "feet-elevated"
-      ]
+      "kneeling": {
+        "excludedVariations": [
+          "feet-elevated",
+          "pike",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "feet-elevated",
+          "kneeling",
+          "pike",
+          "single-arm"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "feet-elevated",
+          "kneeling",
+          "pike",
+          "standing"
+        ]
+      },
+      "pike": {
+        "excludedVariations": [
+          "feet-elevated",
+          "kneeling",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "feet-elevated": {
+        "excludedVariations": [
+          "kneeling",
+          "pike",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "barbell": {
+        "excludedVariations": [
+          "band-assisted",
+          "weighted"
+        ]
+      },
+      "band-assisted": {
+        "excludedVariations": [
+          "barbell",
+          "weighted"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "band-assisted",
+          "barbell"
+        ]
+      }
     }
   },
   {
@@ -7666,60 +10613,78 @@ const String staticExerciseJson = r'''[
       "rectus abdominis"
     ],
     "variations": {
-      "bodyweight": [
-        "weighted",
-        "medicine ball",
-        "cable",
-        "plate",
-        "kettlebell",
-        "band-resisted"
-      ],
-      "feet-elevated": [
-        "weighted",
-        "medicine ball",
-        "cable",
-        "plate",
-        "kettlebell",
-        "band-resisted"
-      ],
-      "decline": [
-        "weighted",
-        "medicine ball",
-        "cable",
-        "plate",
-        "kettlebell",
-        "band-resisted"
-      ],
-      "weighted": [
-        "bodyweight",
-        "feet-elevated",
-        "decline"
-      ],
-      "medicine ball": [
-        "bodyweight",
-        "feet-elevated",
-        "decline"
-      ],
-      "cable": [
-        "bodyweight",
-        "feet-elevated",
-        "decline"
-      ],
-      "plate": [
-        "bodyweight",
-        "feet-elevated",
-        "decline"
-      ],
-      "kettlebell": [
-        "bodyweight",
-        "feet-elevated",
-        "decline"
-      ],
-      "band-resisted": [
-        "bodyweight",
-        "feet-elevated",
-        "decline"
-      ]
+      "bodyweight": {
+        "excludedVariations": [
+          "decline",
+          "feet-elevated"
+        ]
+      },
+      "feet-elevated": {
+        "excludedVariations": [
+          "bodyweight",
+          "decline"
+        ]
+      },
+      "decline": {
+        "excludedVariations": [
+          "bodyweight",
+          "feet-elevated"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "band-resisted",
+          "cable",
+          "kettlebell",
+          "medicine ball",
+          "plate"
+        ]
+      },
+      "medicine ball": {
+        "excludedVariations": [
+          "band-resisted",
+          "cable",
+          "kettlebell",
+          "plate",
+          "weighted"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band-resisted",
+          "kettlebell",
+          "medicine ball",
+          "plate",
+          "weighted"
+        ]
+      },
+      "plate": {
+        "excludedVariations": [
+          "band-resisted",
+          "cable",
+          "kettlebell",
+          "medicine ball",
+          "weighted"
+        ]
+      },
+      "kettlebell": {
+        "excludedVariations": [
+          "band-resisted",
+          "cable",
+          "medicine ball",
+          "plate",
+          "weighted"
+        ]
+      },
+      "band-resisted": {
+        "excludedVariations": [
+          "cable",
+          "kettlebell",
+          "medicine ball",
+          "plate",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -7737,88 +10702,100 @@ const String staticExerciseJson = r'''[
       "iliopsoas"
     ],
     "variations": {
-      "hanging": [
-        "weighted",
-        "captain's chair",
-        "parallel bars",
-        "cable",
-        "band"
-      ],
-      "bodyweight": [
-        "weighted",
-        "captain's chair",
-        "parallel bars",
-        "cable",
-        "band"
-      ],
-      "straight-leg": [
-        "weighted",
-        "captain's chair",
-        "parallel bars",
-        "cable",
-        "band"
-      ],
-      "toes-to-bar": [
-        "weighted",
-        "captain's chair",
-        "parallel bars",
-        "cable",
-        "band"
-      ],
-      "lying": [
-        "weighted",
-        "captain's chair",
-        "parallel bars",
-        "cable",
-        "band"
-      ],
-      "incline": [
-        "weighted",
-        "captain's chair",
-        "parallel bars",
-        "cable",
-        "band"
-      ],
-      "weighted": [
-        "hanging",
-        "bodyweight",
-        "straight-leg",
-        "toes-to-bar",
-        "lying",
-        "incline"
-      ],
-      "captain's chair": [
-        "hanging",
-        "bodyweight",
-        "straight-leg",
-        "toes-to-bar",
-        "lying",
-        "incline"
-      ],
-      "parallel bars": [
-        "hanging",
-        "bodyweight",
-        "straight-leg",
-        "toes-to-bar",
-        "lying",
-        "incline"
-      ],
-      "cable": [
-        "hanging",
-        "bodyweight",
-        "straight-leg",
-        "toes-to-bar",
-        "lying",
-        "incline"
-      ],
-      "band": [
-        "hanging",
-        "bodyweight",
-        "straight-leg",
-        "toes-to-bar",
-        "lying",
-        "incline"
-      ]
+      "hanging": {
+        "excludedVariations": [
+          "bodyweight",
+          "incline",
+          "lying",
+          "straight-leg",
+          "toes-to-bar"
+        ]
+      },
+      "bodyweight": {
+        "excludedVariations": [
+          "hanging",
+          "incline",
+          "lying",
+          "straight-leg",
+          "toes-to-bar"
+        ]
+      },
+      "straight-leg": {
+        "excludedVariations": [
+          "bodyweight",
+          "hanging",
+          "incline",
+          "lying",
+          "toes-to-bar"
+        ]
+      },
+      "toes-to-bar": {
+        "excludedVariations": [
+          "bodyweight",
+          "hanging",
+          "incline",
+          "lying",
+          "straight-leg"
+        ]
+      },
+      "lying": {
+        "excludedVariations": [
+          "bodyweight",
+          "hanging",
+          "incline",
+          "straight-leg",
+          "toes-to-bar"
+        ]
+      },
+      "incline": {
+        "excludedVariations": [
+          "bodyweight",
+          "hanging",
+          "lying",
+          "straight-leg",
+          "toes-to-bar"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "captain's chair",
+          "parallel bars"
+        ]
+      },
+      "captain's chair": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "parallel bars",
+          "weighted"
+        ]
+      },
+      "parallel bars": {
+        "excludedVariations": [
+          "band",
+          "cable",
+          "captain's chair",
+          "weighted"
+        ]
+      },
+      "cable": {
+        "excludedVariations": [
+          "band",
+          "captain's chair",
+          "parallel bars",
+          "weighted"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "cable",
+          "captain's chair",
+          "parallel bars",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -7837,14 +10814,94 @@ const String staticExerciseJson = r'''[
       "erector spinae"
     ],
     "variations": {
-      "standing": [],
-      "kneeling": [],
-      "half-kneeling": [],
-      "single-arm": [],
-      "bilateral": [],
-      "chop": [],
-      "lift": [],
-      "rotational push-press": []
+      "standing": {
+        "excludedVariations": [
+          "bilateral",
+          "chop",
+          "half-kneeling",
+          "kneeling",
+          "lift",
+          "rotational push-press",
+          "single-arm"
+        ]
+      },
+      "kneeling": {
+        "excludedVariations": [
+          "bilateral",
+          "chop",
+          "half-kneeling",
+          "lift",
+          "rotational push-press",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "half-kneeling": {
+        "excludedVariations": [
+          "bilateral",
+          "chop",
+          "kneeling",
+          "lift",
+          "rotational push-press",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "bilateral",
+          "chop",
+          "half-kneeling",
+          "kneeling",
+          "lift",
+          "rotational push-press",
+          "standing"
+        ]
+      },
+      "bilateral": {
+        "excludedVariations": [
+          "chop",
+          "half-kneeling",
+          "kneeling",
+          "lift",
+          "rotational push-press",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "chop": {
+        "excludedVariations": [
+          "bilateral",
+          "half-kneeling",
+          "kneeling",
+          "lift",
+          "rotational push-press",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "lift": {
+        "excludedVariations": [
+          "bilateral",
+          "chop",
+          "half-kneeling",
+          "kneeling",
+          "rotational push-press",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "rotational push-press": {
+        "excludedVariations": [
+          "bilateral",
+          "chop",
+          "half-kneeling",
+          "kneeling",
+          "lift",
+          "single-arm",
+          "standing"
+        ]
+      }
     }
   },
   {
@@ -7860,52 +10917,86 @@ const String staticExerciseJson = r'''[
       "external obliques"
     ],
     "variations": {
-      "kneeling": [
-        "rope",
-        "band"
-      ],
-      "standing": [
-        "rope",
-        "band"
-      ],
-      "single-arm": [
-        "rope",
-        "band"
-      ],
-      "oblique": [
-        "rope",
-        "band"
-      ],
-      "reverse": [
-        "rope",
-        "band"
-      ],
-      "side-lying": [
-        "rope",
-        "band"
-      ],
-      "seated": [
-        "rope",
-        "band"
-      ],
-      "rope": [
-        "kneeling",
-        "standing",
-        "single-arm",
-        "oblique",
-        "reverse",
-        "side-lying",
-        "seated"
-      ],
-      "band": [
-        "kneeling",
-        "standing",
-        "single-arm",
-        "oblique",
-        "reverse",
-        "side-lying",
-        "seated"
-      ]
+      "kneeling": {
+        "excludedVariations": [
+          "oblique",
+          "reverse",
+          "seated",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "standing": {
+        "excludedVariations": [
+          "kneeling",
+          "oblique",
+          "reverse",
+          "seated",
+          "side-lying",
+          "single-arm"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "kneeling",
+          "oblique",
+          "reverse",
+          "seated",
+          "side-lying",
+          "standing"
+        ]
+      },
+      "oblique": {
+        "excludedVariations": [
+          "kneeling",
+          "reverse",
+          "seated",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "reverse": {
+        "excludedVariations": [
+          "kneeling",
+          "oblique",
+          "seated",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "side-lying": {
+        "excludedVariations": [
+          "kneeling",
+          "oblique",
+          "reverse",
+          "seated",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "kneeling",
+          "oblique",
+          "reverse",
+          "side-lying",
+          "single-arm",
+          "standing"
+        ]
+      },
+      "rope": {
+        "excludedVariations": [
+          "band"
+        ]
+      },
+      "band": {
+        "excludedVariations": [
+          "rope"
+        ]
+      }
     }
   },
   {
@@ -7922,60 +11013,78 @@ const String staticExerciseJson = r'''[
     ],
     "secondaryMuscles": [],
     "variations": {
-      "GHD": [
-        "machine",
-        "flat bench",
-        "weighted",
-        "banded",
-        "swiss ball",
-        "parallel bars"
-      ],
-      "single-leg": [
-        "machine",
-        "flat bench",
-        "weighted",
-        "banded",
-        "swiss ball",
-        "parallel bars"
-      ],
-      "hip extension": [
-        "machine",
-        "flat bench",
-        "weighted",
-        "banded",
-        "swiss ball",
-        "parallel bars"
-      ],
-      "machine": [
-        "GHD",
-        "single-leg",
-        "hip extension"
-      ],
-      "flat bench": [
-        "GHD",
-        "single-leg",
-        "hip extension"
-      ],
-      "weighted": [
-        "GHD",
-        "single-leg",
-        "hip extension"
-      ],
-      "banded": [
-        "GHD",
-        "single-leg",
-        "hip extension"
-      ],
-      "swiss ball": [
-        "GHD",
-        "single-leg",
-        "hip extension"
-      ],
-      "parallel bars": [
-        "GHD",
-        "single-leg",
-        "hip extension"
-      ]
+      "GHD": {
+        "excludedVariations": [
+          "hip extension",
+          "single-leg"
+        ]
+      },
+      "single-leg": {
+        "excludedVariations": [
+          "GHD",
+          "hip extension"
+        ]
+      },
+      "hip extension": {
+        "excludedVariations": [
+          "GHD",
+          "single-leg"
+        ]
+      },
+      "machine": {
+        "excludedVariations": [
+          "banded",
+          "flat bench",
+          "parallel bars",
+          "swiss ball",
+          "weighted"
+        ]
+      },
+      "flat bench": {
+        "excludedVariations": [
+          "banded",
+          "machine",
+          "parallel bars",
+          "swiss ball",
+          "weighted"
+        ]
+      },
+      "weighted": {
+        "excludedVariations": [
+          "banded",
+          "flat bench",
+          "machine",
+          "parallel bars",
+          "swiss ball"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "flat bench",
+          "machine",
+          "parallel bars",
+          "swiss ball",
+          "weighted"
+        ]
+      },
+      "swiss ball": {
+        "excludedVariations": [
+          "banded",
+          "flat bench",
+          "machine",
+          "parallel bars",
+          "weighted"
+        ]
+      },
+      "parallel bars": {
+        "excludedVariations": [
+          "banded",
+          "flat bench",
+          "machine",
+          "swiss ball",
+          "weighted"
+        ]
+      }
     }
   },
   {
@@ -7994,58 +11103,104 @@ const String staticExerciseJson = r'''[
       "anterior deltoid"
     ],
     "variations": {
-      "loaded": [
-        "prowler",
-        "banded"
-      ],
-      "sprint": [
-        "prowler",
-        "banded"
-      ],
-      "low-handles": [
-        "prowler",
-        "banded"
-      ],
-      "high-handles": [
-        "prowler",
-        "banded"
-      ],
-      "single-arm": [
-        "prowler",
-        "banded"
-      ],
-      "backward": [
-        "prowler",
-        "banded"
-      ],
-      "heavy": [
-        "prowler",
-        "banded"
-      ],
-      "lateral": [
-        "prowler",
-        "banded"
-      ],
-      "prowler": [
-        "loaded",
-        "sprint",
-        "low-handles",
-        "high-handles",
-        "single-arm",
-        "backward",
-        "heavy",
-        "lateral"
-      ],
-      "banded": [
-        "loaded",
-        "sprint",
-        "low-handles",
-        "high-handles",
-        "single-arm",
-        "backward",
-        "heavy",
-        "lateral"
-      ]
+      "loaded": {
+        "excludedVariations": [
+          "backward",
+          "heavy",
+          "high-handles",
+          "lateral",
+          "low-handles",
+          "single-arm",
+          "sprint"
+        ]
+      },
+      "sprint": {
+        "excludedVariations": [
+          "backward",
+          "heavy",
+          "high-handles",
+          "lateral",
+          "loaded",
+          "low-handles",
+          "single-arm"
+        ]
+      },
+      "low-handles": {
+        "excludedVariations": [
+          "backward",
+          "heavy",
+          "high-handles",
+          "lateral",
+          "loaded",
+          "single-arm",
+          "sprint"
+        ]
+      },
+      "high-handles": {
+        "excludedVariations": [
+          "backward",
+          "heavy",
+          "lateral",
+          "loaded",
+          "low-handles",
+          "single-arm",
+          "sprint"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "backward",
+          "heavy",
+          "high-handles",
+          "lateral",
+          "loaded",
+          "low-handles",
+          "sprint"
+        ]
+      },
+      "backward": {
+        "excludedVariations": [
+          "heavy",
+          "high-handles",
+          "lateral",
+          "loaded",
+          "low-handles",
+          "single-arm",
+          "sprint"
+        ]
+      },
+      "heavy": {
+        "excludedVariations": [
+          "backward",
+          "high-handles",
+          "lateral",
+          "loaded",
+          "low-handles",
+          "single-arm",
+          "sprint"
+        ]
+      },
+      "lateral": {
+        "excludedVariations": [
+          "backward",
+          "heavy",
+          "high-handles",
+          "loaded",
+          "low-handles",
+          "single-arm",
+          "sprint"
+        ]
+      },
+      "prowler": {
+        "excludedVariations": [
+          "banded"
+        ]
+      },
+      "banded": {
+        "excludedVariations": [
+          "prowler"
+        ]
+      }
     }
   },
   {
@@ -8064,44 +11219,117 @@ const String staticExerciseJson = r'''[
       "wrist flexors"
     ],
     "variations": {
-      "strap": [
-        "rope"
-      ],
-      "walking": [
-        "rope"
-      ],
-      "sprinting": [
-        "rope"
-      ],
-      "face-down": [
-        "rope"
-      ],
-      "backward drag": [
-        "rope"
-      ],
-      "hip harness": [
-        "rope"
-      ],
-      "ankle strap": [
-        "rope"
-      ],
-      "single-arm": [
-        "rope"
-      ],
-      "seated": [
-        "rope"
-      ],
-      "rope": [
-        "strap",
-        "walking",
-        "sprinting",
-        "face-down",
-        "backward drag",
-        "hip harness",
-        "ankle strap",
-        "single-arm",
-        "seated"
-      ]
+      "strap": {
+        "excludedVariations": [
+          "ankle strap",
+          "backward drag",
+          "face-down",
+          "hip harness",
+          "seated",
+          "single-arm",
+          "sprinting",
+          "walking"
+        ]
+      },
+      "walking": {
+        "excludedVariations": [
+          "ankle strap",
+          "backward drag",
+          "face-down",
+          "hip harness",
+          "seated",
+          "single-arm",
+          "sprinting",
+          "strap"
+        ]
+      },
+      "sprinting": {
+        "excludedVariations": [
+          "ankle strap",
+          "backward drag",
+          "face-down",
+          "hip harness",
+          "seated",
+          "single-arm",
+          "strap",
+          "walking"
+        ]
+      },
+      "face-down": {
+        "excludedVariations": [
+          "ankle strap",
+          "backward drag",
+          "hip harness",
+          "seated",
+          "single-arm",
+          "sprinting",
+          "strap",
+          "walking"
+        ]
+      },
+      "backward drag": {
+        "excludedVariations": [
+          "ankle strap",
+          "face-down",
+          "hip harness",
+          "seated",
+          "single-arm",
+          "sprinting",
+          "strap",
+          "walking"
+        ]
+      },
+      "hip harness": {
+        "excludedVariations": [
+          "ankle strap",
+          "backward drag",
+          "face-down",
+          "seated",
+          "single-arm",
+          "sprinting",
+          "strap",
+          "walking"
+        ]
+      },
+      "ankle strap": {
+        "excludedVariations": [
+          "backward drag",
+          "face-down",
+          "hip harness",
+          "seated",
+          "single-arm",
+          "sprinting",
+          "strap",
+          "walking"
+        ]
+      },
+      "single-arm": {
+        "excludedVariations": [
+          "ankle strap",
+          "backward drag",
+          "face-down",
+          "hip harness",
+          "seated",
+          "sprinting",
+          "strap",
+          "walking"
+        ]
+      },
+      "seated": {
+        "excludedVariations": [
+          "ankle strap",
+          "backward drag",
+          "face-down",
+          "hip harness",
+          "single-arm",
+          "sprinting",
+          "strap",
+          "walking"
+        ]
+      },
+      "rope": {
+        "excludedVariations": []
+      }
     }
   }
 ]''';

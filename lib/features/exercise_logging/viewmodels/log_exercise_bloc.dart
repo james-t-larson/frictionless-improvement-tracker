@@ -239,17 +239,21 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
       return movement.variations.keys.toList();
     }
     
-    Set<String>? intersection;
-    for (final v in selectedVariations) {
-      final compat = movement.variations[v]?.toSet() ?? <String>{};
-      if (intersection == null) {
-        intersection = compat;
-      } else {
-        intersection = intersection.intersection(compat);
+    Set<String> available = movement.variations.keys.toSet();
+    
+    for (final availableVariation in movement.variations.keys) {
+      final excludedByThis = movement.variations[availableVariation] ?? <String>[];
+      if (excludedByThis.any((e) => selectedVariations.contains(e))) {
+        available.remove(availableVariation);
       }
     }
+
+    for (final v in selectedVariations) {
+      final excluded = movement.variations[v] ?? <String>[];
+      available.removeAll(excluded);
+    }
     
-    return intersection?.toList() ?? [];
+    return available.toList();
   }
 
   void _onAdvanceFromVariations(
