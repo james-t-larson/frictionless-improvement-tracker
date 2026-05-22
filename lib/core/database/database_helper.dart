@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
   static const _databaseName = "gym_tracker.db";
-  static const _databaseVersion = 5;
+  static const _databaseVersion = 6;
 
   static Future<Database> initDb() async {
     final documentsDirectory = await getApplicationDocumentsDirectory();
@@ -15,9 +15,8 @@ class DatabaseHelper {
       version: _databaseVersion,
       onCreate: onCreate,
       onUpgrade: (db, oldVersion, newVersion) async {
-        if (oldVersion < 5) {
+        if (oldVersion < 6) {
           // Simplest upgrade: Drop all and recreate for now
-          // In a production app, we would write migrations.
           await db.execute("DROP TABLE IF EXISTS workout_variations");
           await db.execute("DROP TABLE IF EXISTS workouts");
           await db.execute("DROP TABLE IF EXISTS movement_variations");
@@ -29,6 +28,8 @@ class DatabaseHelper {
           await db.execute("DROP TABLE IF EXISTS movement_groups");
           await db.execute("DROP TABLE IF EXISTS workout_groups");
           await db.execute("DROP TABLE IF EXISTS movements");
+          await db.execute("DROP TABLE IF EXISTS logs");
+          await db.execute("DROP TABLE IF EXISTS settings");
           await onCreate(db, newVersion);
         }
       },
@@ -46,82 +47,15 @@ class DatabaseHelper {
   static Future onCreate(Database db, int version) async {
     await db.execute('''
       CREATE TABLE movements (
+        id TEXT PRIMARY KEY,
+        data TEXT NOT NULL
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL
-      )
-    ''');
-
-    await db.execute('''
-      CREATE TABLE muscles (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL UNIQUE
-      )
-    ''');
-
-    await db.execute('''
-      CREATE TABLE movement_muscles (
-        movement_id INTEGER NOT NULL,
-        muscle_id INTEGER NOT NULL,
-        is_primary INTEGER NOT NULL DEFAULT 0,
-        PRIMARY KEY (movement_id, muscle_id),
-        FOREIGN KEY (movement_id) REFERENCES movements (id) ON DELETE CASCADE,
-        FOREIGN KEY (muscle_id) REFERENCES muscles (id) ON DELETE CASCADE
-      )
-    ''');
-
-    await db.execute('''
-      CREATE TABLE variations (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL UNIQUE
-      )
-    ''');
-
-    await db.execute('''
-      CREATE TABLE movement_variations (
-        movement_id INTEGER NOT NULL,
-        variation_id INTEGER NOT NULL,
-        PRIMARY KEY (movement_id, variation_id),
-        FOREIGN KEY (movement_id) REFERENCES movements (id) ON DELETE CASCADE,
-        FOREIGN KEY (variation_id) REFERENCES variations (id) ON DELETE CASCADE
-      )
-    ''');
-
-    await db.execute('''
-      CREATE TABLE workouts (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        timestamp INTEGER NOT NULL,
-        movement_id INTEGER NOT NULL,
-        weight REAL NOT NULL,
-        reps INTEGER NOT NULL,
-        pain_felt INTEGER NOT NULL,
-        FOREIGN KEY (movement_id) REFERENCES movements (id) ON DELETE CASCADE
-      )
-    ''');
-
-    await db.execute('''
-      CREATE TABLE workout_variations (
-        workout_id INTEGER NOT NULL,
-        variation_id INTEGER NOT NULL,
-        PRIMARY KEY (workout_id, variation_id),
-        FOREIGN KEY (workout_id) REFERENCES workouts (id) ON DELETE CASCADE,
-        FOREIGN KEY (variation_id) REFERENCES variations (id) ON DELETE CASCADE
-      )
-    ''');
-
-    await db.execute('''
-      CREATE TABLE muscle_groups (
-        id   INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL UNIQUE
-      )
-    ''');
-
-    await db.execute('''
-      CREATE TABLE movement_muscle_groups (
-        movement_id INTEGER NOT NULL,
-        muscle_group_id    INTEGER NOT NULL,
-        PRIMARY KEY (movement_id, muscle_group_id),
-        FOREIGN KEY (movement_id) REFERENCES movements (id) ON DELETE CASCADE,
-        FOREIGN KEY (muscle_group_id)    REFERENCES muscle_groups (id) ON DELETE CASCADE
+        data TEXT NOT NULL
       )
     ''');
 

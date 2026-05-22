@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import '../../../data/models/workout_log.dart';
-import '../../../data/models/variation.dart';
+
 
 abstract class WorkoutHistoryItem extends Equatable {
   const WorkoutHistoryItem();
@@ -18,7 +18,7 @@ class GroupedLogsItem extends WorkoutHistoryItem {
   const GroupedLogsItem(this.logs);
   
   String get movementName => logs.first.movementName ?? 'Unknown';
-  List<Variation> get variations => logs.first.variations;
+  List<String> get variations => logs.first.variations;
   double get maxWeight => logs.isEmpty ? 0 : logs.map((l) => l.weight).reduce((a, b) => a > b ? a : b);
   int get totalSets => logs.length;
   bool get painFelt => logs.any((l) => l.painFelt);
@@ -46,7 +46,7 @@ class DashboardLoaded extends DashboardState {
   /// Distinct muscle group IDs from workouts logged today.
   /// Passed into InitializeFlow when the user opens "New Lift" to drive
   /// contextual movement suggestions without any async work in the view.
-  final Set<int> todaysMuscleGroupIds;
+  final Set<String> todaysMuscleGroupIds;
 
   const DashboardLoaded(
     this.groupedLogs,
@@ -65,7 +65,7 @@ class DashboardLoaded extends DashboardState {
     bool? hasSwipedBefore,
     Set<String>? expandedDates,
     Map<String, List<String>>? commonMuscleGroups,
-    Set<int>? todaysMuscleGroupIds,
+    Set<String>? todaysMuscleGroupIds,
   }) {
     return DashboardLoaded(
       groupedLogs ?? this.groupedLogs,

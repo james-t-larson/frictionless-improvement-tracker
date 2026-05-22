@@ -8,7 +8,6 @@ import 'package:simple_gym_tracker/data/sources/static_exercise_data.dart';
 import 'dart:convert';
 
 void main() {
-  // Initialize sqflite ffi
   sqfliteFfiInit();
   databaseFactory = databaseFactoryFfi;
 
@@ -33,42 +32,40 @@ void main() {
 
     // Assert
     final movements = await db.query('movements');
-    final jsonCount = (jsonDecode(staticExerciseJson) as List).length;
     
-    expect(movements.length, jsonCount, reason: 'Number of movements should match JSON entries');
+    // Convert static JSON string to list to count unique PKs
+    final decodedList = jsonDecode(staticExerciseJson) as List;
+    final Set<String> uniquePks = {};
+    for (var m in decodedList) {
+      if (m['pk'] != null) {
+        uniquePks.add(m['pk'] as String);
+      }
+    }
+    
+    expect(movements.length, uniquePks.length, reason: 'Number of movements should match unique PKs in JSON entries');
 
     // Verify a specific exercise: Pull-Up (the first one in JSON)
-    final pullUp = movements.firstWhere((m) => m['name'] == 'Pull-Up');
-    final pullUpId = pullUp['id'];
+    final pullUp = movements.firstWhere((m) {
+      final d = jsonDecode(m['data'] as String);
+      return d['name'] == 'Pull-Up';
+    });
+    
+    // Decode its JSON data
+    final data = jsonDecode(pullUp['data'] as String);
+    expect(data['name'], 'Pull-Up');
 
-    // Verify variations for Pull-Up
-    final pullUpVariations = await db.rawQuery('''
-      SELECT v.name 
-      FROM variations v
-      JOIN movement_variations mv ON v.id = mv.variation_id
-      WHERE mv.movement_id = ?
-    ''', [pullUpId]);
-
-    final expectedVariations = ["bodyweight", "weighted", "assisted", "neutral-grip", "wide-grip", "close-grip"];
-    final actualVariations = pullUpVariations.map((v) => v['name']).toList();
+    final expectedVariations = ["bodyweight", "neutral-grip", "wide-grip", "close-grip"];
+    final actualVariations = (data['movementVariations'] as List).map((e) => e.toString()).toList();
     
     for (var v in expectedVariations) {
       expect(actualVariations, contains(v));
     }
 
-    // Verify muscle groups for Pull-Up
-    final pullUpMuscles = await db.rawQuery('''
-      SELECT mg.name, mm.is_primary
-      FROM muscle_groups mg
-      JOIN movement_muscles mm ON mg.id = mm.muscle_id
-      WHERE mm.movement_id = ?
-    ''', [pullUpId]);
+    final primaryMuscles = (data['primaryMuscles'] as List).map((e) => e.toString()).toList();
+    final secondaryMuscles = (data['secondaryMuscles'] as List).map((e) => e.toString()).toList();
 
-    final primaryMuscles = pullUpMuscles.where((m) => m['is_primary'] == 1).map((m) => m['name']).toList();
-    final secondaryMuscles = pullUpMuscles.where((m) => m['is_primary'] == 0).map((m) => m['name']).toList();
-
-    expect(primaryMuscles, contains('lat'));
-    expect(secondaryMuscles, containsAll(['bicep', 'forearm - inner', 'rotator cuff - back', 'shoulder - back']));
+    expect(primaryMuscles, contains('latissimus dorsi'));
+    expect(secondaryMuscles, containsAll(['biceps brachii', 'wrist flexors', 'infraspinatus', 'posterior deltoid']));
   });
 
   test('seedMovementsIfEmpty should not duplicate data if already seeded', () async {
@@ -89,6 +86,7 @@ void main() {
     final results = await repository.searchMovements('Bench');
     
     expect(results.any((m) => m.name == 'Bench Press'), isTrue);
-    expect(results.first.primaryMuscles, contains('chest'));
+    expect(results.first.primaryMuscles, contains('pectoralis major'));
   });
 }
+

@@ -52,10 +52,10 @@ class _VariationSelectionSlideState extends State<VariationSelectionSlide> {
                   final allVariations = state.availableVariations;
                   final variations = query.isEmpty 
                       ? allVariations 
-                      : allVariations.where((v) => v.name.toLowerCase().contains(query)).toList();
+                      : allVariations.where((v) => v.toLowerCase().contains(query)).toList();
 
                   final isNew = query.isNotEmpty && 
-                      !variations.any((v) => v.name.toLowerCase() == query);
+                      !variations.any((v) => v.toLowerCase() == query);
 
                   if (variations.isEmpty && !isNew) {
                     return const Center(
@@ -78,7 +78,7 @@ class _VariationSelectionSlideState extends State<VariationSelectionSlide> {
                           : const _AddVariationButton();
                       }
                       final vr = variations[index];
-                      final isSelected = state.selectedVariations.any((v) => v.id == vr.id && v.name == vr.name);
+                      final isSelected = state.selectedVariations.contains(vr);
                       return GestureDetector(
                         onTap: () => context.read<LogExerciseBloc>().add(ToggleVariation(vr)),
                         child: Container(
@@ -88,7 +88,7 @@ class _VariationSelectionSlideState extends State<VariationSelectionSlide> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            vr.name.toUpperCase(),
+                            vr.toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: isSelected ? const Color(0xFFFAFAFA) : const Color(0xFFA1A1AA),

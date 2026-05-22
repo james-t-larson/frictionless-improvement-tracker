@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class DataRepository {
   final Database _db;
@@ -18,22 +19,10 @@ class DataRepository {
 
   Future<void> exportToCsv() async {
     final List<Map<String, dynamic>> results = await _db.rawQuery('''
-      SELECT 
-        w.timestamp,
-        m.name AS movement_name,
-        mg.name AS primary_muscle_group,
-        GROUP_CONCAT(v.name, '|') AS variations,
-        w.weight,
-        w.reps,
-        w.pain_felt
-      FROM workouts w
-      LEFT JOIN movements m ON w.movement_id = m.id
-      LEFT JOIN movement_muscles mm ON m.id = mm.movement_id AND mm.is_primary = 1
-      LEFT JOIN muscle_groups mg ON mm.muscle_id = mg.id
-      LEFT JOIN workout_variations wv ON w.id = wv.workout_id
-      LEFT JOIN variations v ON wv.variation_id = v.id
-      GROUP BY w.id
-      ORDER BY w.timestamp DESC
+      SELECT l.data as log_data, m.data as mov_data
+      FROM logs l
+      LEFT JOIN movements m ON json_extract(l.data, '\$.movementId') = m.id
+      ORDER BY json_extract(l.data, '\$.timestamp') DESC
     ''');
 
     List<List<dynamic>> csvData = [
@@ -41,15 +30,32 @@ class DataRepository {
     ];
 
     for (var row in results) {
-      final date = DateTime.fromMillisecondsSinceEpoch(row['timestamp']);
+      final logMap = jsonDecode(row['log_data'] as String);
+      final movMap = row['mov_data'] != null ? jsonDecode(row['mov_data'] as String) : {};
+
+      final timestamp = logMap['timestamp'] as int? ?? 0;
+      final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+      
+      final movementName = movMap['name']?.toString() ?? logMap['movementName']?.toString() ?? '';
+      
+      final muscleGroups = movMap['muscleGroups'] as List<dynamic>? ?? [];
+      final primaryMuscleGroup = muscleGroups.isNotEmpty ? muscleGroups.first.toString() : (logMap['muscleGroupName']?.toString() ?? '');
+
+      final variationsList = logMap['variations'] as List<dynamic>? ?? [];
+      final variationsStr = variationsList.map((e) => e.toString()).join(' | ');
+
+      final weight = logMap['weight'] ?? 0;
+      final reps = logMap['reps'] ?? 0;
+      final painFelt = logMap['painFelt'] == true ? 'TRUE' : 'FALSE';
+
       csvData.add([
         DateFormat('yyyy-MM-dd HH:mm:ss').format(date),
-        row['movement_name'] ?? '',
-        row['primary_muscle_group'] ?? '',
-        row['variations'] ?? '',
-        row['weight'],
-        row['reps'],
-        row['pain_felt'] == 1 ? 'TRUE' : 'FALSE',
+        movementName,
+        primaryMuscleGroup,
+        variationsStr,
+        weight,
+        reps,
+        painFelt,
       ]);
     }
 
@@ -77,14 +83,9 @@ class DataRepository {
 
   Future<void> exportToSql() async {
     final tables = [
-      'muscle_groups',
+      'settings',
       'movements',
-      'movement_muscles',
-      'variations',
-      'movement_variations',
-      'workouts',
-      'workout_variations',
-      'settings'
+      'logs'
     ];
 
     StringBuffer sqlBuffer = StringBuffer();
@@ -143,21 +144,11 @@ class DataRepository {
       final sqlContent = await file.readAsString();
       final lines = sqlContent.split('\n');
 
-      // Pragmas must be outside transaction
       await _db.execute('PRAGMA foreign_keys=OFF;');
       
       try {
         await _db.transaction((txn) async {
-          final tables = [
-            'workout_variations',
-            'workouts',
-            'movement_variations',
-            'variations',
-            'movement_muscles',
-            'muscle_groups',
-            'movements',
-            'settings'
-          ];
+          final tables = ['logs', 'movements', 'settings'];
 
           for (var table in tables) {
             await txn.execute('DELETE FROM $table;');
@@ -168,7 +159,6 @@ class DataRepository {
           for (var line in lines) {
             var statement = line.trim();
             if (statement.startsWith('INSERT INTO')) {
-              // sqflite batch.execute often fails if trailing semicolon is present
               if (statement.endsWith(';')) {
                 statement = statement.substring(0, statement.length - 1);
               }
@@ -225,12 +215,19 @@ class DataRepository {
 
     int importedCount = 0;
     int currentRow = 1;
+    final uuid = const Uuid();
 
     try {
       await _db.transaction((txn) async {
-        final muscleMap = {for (var m in await txn.query('muscle_groups')) (m['name'] as String).toLowerCase(): m['id'] as int};
-        final movementMap = {for (var m in await txn.query('movements')) (m['name'] as String).toLowerCase(): m['id'] as int};
-        final variationMap = {for (var v in await txn.query('variations')) (v['name'] as String).toLowerCase(): v['id'] as int};
+        final movementRows = await txn.query('movements');
+        final Map<String, String> movementMap = {};
+        for (var m in movementRows) {
+          final data = jsonDecode(m['data'] as String);
+          final name = data['name']?.toString().toLowerCase();
+          if (name != null) {
+            movementMap[name] = m['id'] as String;
+          }
+        }
 
         for (var row in dataRows) {
           currentRow++;
@@ -241,77 +238,59 @@ class DataRepository {
             mappedRow[headers[i]] = row[i];
           }
 
-          final mgName = (mappedRow['muscle group']?.toString() ?? '').trim();
-          int? muscleId = muscleMap[mgName.toLowerCase()];
-          if (muscleId == null && mgName.isNotEmpty) {
-            muscleId = await txn.insert('muscle_groups', {'name': mgName});
-            muscleMap[mgName.toLowerCase()] = muscleId;
-          }
-
           final mName = (mappedRow['movement']?.toString() ?? '').trim();
           if (mName.isEmpty) continue;
-          int? movementId = movementMap[mName.toLowerCase()];
+          
+          String? movementId = movementMap[mName.toLowerCase()];
           if (movementId == null) {
-            movementId = await txn.insert('movements', {'name': mName});
+            movementId = uuid.v4();
+            final mgName = (mappedRow['muscle group']?.toString() ?? '').trim();
+            final newMovData = {
+              'pk': movementId,
+              'name': mName,
+              'primaryMuscles': [],
+              'secondaryMuscles': [],
+              'muscleGroups': mgName.isNotEmpty ? [mgName] : [],
+              'movementVariations': [],
+              'equipment': []
+            };
+            await txn.insert('movements', {
+              'id': movementId,
+              'data': jsonEncode(newMovData)
+            });
             movementMap[mName.toLowerCase()] = movementId;
-            
-            if (muscleId != null) {
-              await txn.insert('movement_muscles', {
-                'movement_id': movementId,
-                'muscle_id': muscleId,
-                'is_primary': 1
-              });
-            }
           }
 
           final vNames = (mappedRow['variations']?.toString() ?? '').split('|').map((e) => e.trim()).where((e) => e.isNotEmpty).toList();
-          final List<int> variationIds = [];
-          for (var vn in vNames) {
-            int? vId = variationMap[vn.toLowerCase()];
-            if (vId == null) {
-              vId = await txn.insert('variations', {'name': vn});
-              variationMap[vn.toLowerCase()] = vId;
-            }
-            variationIds.add(vId);
-            
-            final existingLink = await txn.query('movement_variations', 
-              where: 'movement_id = ? AND variation_id = ?', 
-              whereArgs: [movementId, vId]
-            );
-            if (existingLink.isEmpty) {
-              await txn.insert('movement_variations', {
-                'movement_id': movementId,
-                'variation_id': vId
-              });
-            }
-          }
 
           final dateStr = mappedRow['date']?.toString() ?? '';
           final timestamp = _parseDate(dateStr).millisecondsSinceEpoch;
           final weight = double.tryParse(mappedRow['weight']?.toString() ?? '0') ?? 0.0;
           final reps = int.tryParse(mappedRow['reps']?.toString() ?? '0') ?? 0;
-          final pain = mappedRow['pain']?.toString().toUpperCase() == 'TRUE' ? 1 : 0;
+          final pain = mappedRow['pain']?.toString().toUpperCase() == 'TRUE';
 
-          final existingWorkout = await txn.query('workouts', 
-            where: 'timestamp = ? AND movement_id = ? AND weight = ? AND reps = ?',
-            whereArgs: [timestamp, movementId, weight, reps]
-          );
+          final logData = {
+            'movementId': movementId,
+            'weight': weight,
+            'reps': reps,
+            'timestamp': timestamp,
+            'painFelt': pain,
+            'variations': vNames,
+          };
 
-          if (existingWorkout.isEmpty) {
-            final workoutId = await txn.insert('workouts', {
-              'timestamp': timestamp,
-              'movement_id': movementId,
-              'weight': weight,
-              'reps': reps,
-              'pain_felt': pain
+          // Basic deduplication check
+          final existing = await txn.rawQuery('''
+            SELECT id FROM logs 
+            WHERE json_extract(data, '\$.timestamp') = ? 
+            AND json_extract(data, '\$.movementId') = ?
+            AND json_extract(data, '\$.weight') = ?
+            AND json_extract(data, '\$.reps') = ?
+          ''', [timestamp, movementId, weight, reps]);
+
+          if (existing.isEmpty) {
+            await txn.insert('logs', {
+              'data': jsonEncode(logData)
             });
-
-            for (var vId in variationIds) {
-              await txn.insert('workout_variations', {
-                'workout_id': workoutId,
-                'variation_id': vId
-              });
-            }
             importedCount++;
           }
         }

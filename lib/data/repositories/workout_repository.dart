@@ -1,6 +1,6 @@
+import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 import '../models/workout_log.dart';
-import '../models/variation.dart';
 
 class WorkoutRepository {
   final Database _db;
@@ -8,89 +8,75 @@ class WorkoutRepository {
   WorkoutRepository(this._db);
 
   Future<List<WorkoutLog>> getAllLogs() async {
-    final List<Map<String, dynamic>> maps = await _db.rawQuery('''
-      SELECT w.*, m.name as movement_name,
-        (SELECT wg.name FROM muscle_groups wg
-         JOIN movement_muscle_groups mg ON wg.id = mg.muscle_group_id
-         WHERE mg.movement_id = m.id
-         ORDER BY wg.name ASC LIMIT 1) as muscle_group_name
-      FROM workouts w
-      JOIN movements m ON w.movement_id = m.id
-      ORDER BY w.timestamp DESC
+    final List<Map<String, dynamic>> resultMaps = await _db.rawQuery('''
+      SELECT l.id, l.data as log_data, m.data as mov_data
+      FROM logs l
+      JOIN movements m ON json_extract(l.data, '\$.movementId') = m.id
+      ORDER BY json_extract(l.data, '\$.timestamp') DESC
     ''');
 
-    List<WorkoutLog> logs = [];
-    for (var map in maps) {
-      final List<Map<String, dynamic>> varMaps = await _db.rawQuery('''
-        SELECT v.* 
-        FROM variations v
-        JOIN workout_variations wv ON v.id = wv.variation_id
-        WHERE wv.workout_id = ?
-      ''', [map['id']]);
+    return resultMaps.map((map) {
+      final logMap = jsonDecode(map['log_data'] as String);
+      final movMap = jsonDecode(map['mov_data'] as String);
+      
+      final List<dynamic>? muscleGroups = movMap['muscleGroups'];
+      String? firstGroup;
+      if (muscleGroups != null && muscleGroups.isNotEmpty) {
+        firstGroup = muscleGroups.first.toString();
+      }
 
-      List<Variation> variations = varMaps.map((v) => Variation.fromMap(v)).toList();
-      logs.add(WorkoutLog.fromMap(map, variations: variations));
-    }
-    return logs;
+      return WorkoutLog.fromJson(logMap, id: map['id'] as int).copyWith(
+        movementName: movMap['name'] as String?,
+        muscleGroupName: firstGroup,
+      );
+    }).toList();
   }
 
   Future<void> saveWorkoutLog(WorkoutLog log) async {
-    await _db.transaction((txn) async {
-      final workoutId = await txn.insert('workouts', log.toMap());
-      
-      for (var variation in log.variations) {
-        if (variation.id != null) {
-          await txn.insert('workout_variations', {
-            'workout_id': workoutId,
-            'variation_id': variation.id,
-          });
-        }
-      }
-    });
+    await _db.insert('logs', log.toMap());
   }
 
-  Future<WorkoutLog?> getLastPerformance(int movementId) async {
-    final List<Map<String, dynamic>> maps = await _db.query(
-      'workouts',
-      where: 'movement_id = ?',
-      whereArgs: [movementId],
-      orderBy: 'timestamp DESC',
-      limit: 1,
-    );
+  Future<WorkoutLog?> getLastPerformance(String movementId) async {
+    final List<Map<String, dynamic>> maps = await _db.rawQuery('''
+      SELECT * FROM logs 
+      WHERE json_extract(data, '\$.movementId') = ?
+      ORDER BY json_extract(data, '\$.timestamp') DESC
+      LIMIT 1
+    ''', [movementId]);
+
     if (maps.isNotEmpty) {
-      final map = maps.first;
-      final List<Map<String, dynamic>> varMaps = await _db.rawQuery('''
-        SELECT v.* 
-        FROM variations v
-        JOIN workout_variations wv ON v.id = wv.variation_id
-        WHERE wv.workout_id = ?
-      ''', [map['id']]);
-      List<Variation> variations = varMaps.map((v) => Variation.fromMap(v)).toList();
-      return WorkoutLog.fromMap(map, variations: variations);
+      return WorkoutLog.fromMap(maps.first);
     }
     return null;
   }
 
-  /// Returns all distinct muscle group IDs from workouts logged today (since midnight).
-  /// Used to drive contextual movement suggestions when the user opens "New Lift".
-  Future<Set<int>> getTodaysMuscleGroupIds() async {
+  /// Returns all distinct muscle groups from workouts logged today.
+  Future<Set<String>> getTodaysMuscleGroupIds() async {
     final now = DateTime.now();
     final midnightMs = DateTime(now.year, now.month, now.day)
         .millisecondsSinceEpoch;
 
     final rows = await _db.rawQuery('''
-      SELECT DISTINCT mm.muscle_group_id
-      FROM workouts w
-      JOIN movement_muscle_groups mm ON w.movement_id = mm.movement_id
-      WHERE w.timestamp >= ?
+      SELECT json_extract(m.data, '\$.muscleGroups') as groups
+      FROM logs l
+      JOIN movements m ON json_extract(l.data, '\$.movementId') = m.id
+      WHERE json_extract(l.data, '\$.timestamp') >= ?
     ''', [midnightMs]);
 
-    return rows.map((r) => r['muscle_group_id'] as int).toSet();
+    final Set<String> todaysGroups = {};
+    for (var row in rows) {
+      final groupsStr = row['groups'] as String?;
+      if (groupsStr != null) {
+        final List<dynamic> parsed = jsonDecode(groupsStr);
+        todaysGroups.addAll(parsed.map((e) => e.toString()));
+      }
+    }
+    return todaysGroups;
   }
 
   Future<void> deleteWorkoutLog(int id) async {
     await _db.delete(
-      'workouts',
+      'logs',
       where: 'id = ?',
       whereArgs: [id],
     );
@@ -98,30 +84,11 @@ class WorkoutRepository {
 
   Future<void> updateWorkoutLog(WorkoutLog log) async {
     if (log.id == null) return;
-
-    await _db.transaction((txn) async {
-      await txn.update(
-        'workouts',
-        log.toMap(),
-        where: 'id = ?',
-        whereArgs: [log.id],
-      );
-
-      // Update variations: delete old and insert new
-      await txn.delete(
-        'workout_variations',
-        where: 'workout_id = ?',
-        whereArgs: [log.id],
-      );
-
-      for (var variation in log.variations) {
-        if (variation.id != null) {
-          await txn.insert('workout_variations', {
-            'workout_id': log.id,
-            'variation_id': variation.id,
-          });
-        }
-      }
-    });
+    await _db.update(
+      'logs',
+      log.toMap(),
+      where: 'id = ?',
+      whereArgs: [log.id],
+    );
   }
 }

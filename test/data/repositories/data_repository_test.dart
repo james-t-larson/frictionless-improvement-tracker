@@ -1,10 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:simple_gym_tracker/core/database/database_helper.dart';
 import 'package:simple_gym_tracker/data/repositories/data_repository.dart';
 import 'package:path/path.dart' as p;
-
 import 'package:csv/csv.dart';
 
 void main() {
@@ -24,16 +24,12 @@ void main() {
   });
 
   group('DataRepository Integration Tests', () {
-    test('Round-trip SQL Export/Import', () async {
-      // ... (unchanged)
-    });
-
     test('CSV Import with Smart Merge and Idempotency', () async {
       // 1. Prepare CSV using the converter itself
       final csvData = [
         ['Date', 'Movement', 'Muscle Group', 'Variations', 'Weight', 'Reps', 'Pain'],
-        ['2023-10-01 10:00:00', 'Squat', 'Legs', 'Back|Barbell', 225.0, 5, 'FALSE'],
-        ['2023-10-01 10:00:00', 'Squat', 'Legs', 'Back|Barbell', 225.0, 5, 'FALSE'],
+        ['2023-10-01 10:00:00', 'Squat', 'Legs', 'Back | Barbell', 225.0, 5, 'FALSE'],
+        ['2023-10-01 10:00:00', 'Squat', 'Legs', 'Back | Barbell', 225.0, 5, 'FALSE'],
       ];
       final csvContent = const ListToCsvConverter().convert(csvData);
 
@@ -48,26 +44,30 @@ void main() {
       
       final movements = await db.query('movements');
       expect(movements.length, 1);
-      expect(movements.first['name'], 'Squat');
+      final mData = jsonDecode(movements.first['data'] as String);
+      expect(mData['name'], 'Squat');
+      expect(mData['muscleGroups'], contains('Legs'));
 
-      final variations = await db.query('variations');
-      expect(variations.length, 2);
-      expect(variations.any((v) => v['name'] == 'Back'), isTrue);
-      expect(variations.any((v) => v['name'] == 'Barbell'), isTrue);
-
-      final muscleGroups = await db.query('muscle_groups');
-      expect(muscleGroups.length, 1);
-      expect(muscleGroups.first['name'], 'Legs');
-
-      // Verify Relationships
-      final workoutId = (await db.query('workouts')).first['id'];
-      final linkedVariations = await db.query('workout_variations', where: 'workout_id = ?', whereArgs: [workoutId]);
-      expect(linkedVariations.length, 2);
+      final logs = await db.query('logs');
+      expect(logs.length, 1);
+      final lData = jsonDecode(logs.first['data'] as String);
+      expect(lData['weight'], 225.0);
+      expect(lData['reps'], 5);
+      expect(lData['variations'], containsAll(['Back', 'Barbell']));
     });
 
     test('CSV Import - Name Normalization', () async {
-      // 1. Seed "Bench Press"
-      await db.insert('movements', {'name': 'Bench Press'});
+      // 1. Seed "Bench Press" in new schema
+      final benchId = 'bench-id';
+      final benchData = {
+        'pk': benchId,
+        'name': 'Bench Press',
+        'muscleGroups': ['Chest']
+      };
+      await db.insert('movements', {
+        'id': benchId,
+        'data': jsonEncode(benchData)
+      });
 
       // 2. Import CSV with "bench press" (lowercase)
       final csvData = [
@@ -84,7 +84,13 @@ void main() {
       // 3. Assert - Should NOT create a second movement
       final movements = await db.query('movements');
       expect(movements.length, 1);
+      
+      final logs = await db.query('logs');
+      expect(logs.length, 1);
+      final lData = jsonDecode(logs.first['data'] as String);
+      expect(lData['movementId'], benchId);
     });
   });
 }
+
 

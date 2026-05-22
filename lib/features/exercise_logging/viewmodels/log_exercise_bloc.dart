@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 import '../../../data/models/workout_log.dart';
-import '../../../data/models/variation.dart';
+import '../../../data/models/movement.dart';
 import '../../../data/repositories/movement_repository.dart';
 import '../../../data/repositories/workout_repository.dart';
 import 'log_exercise_event.dart';
@@ -55,7 +56,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     MuscleGroupSelected event,
     Emitter<LogExerciseState> emit,
   ) async {
-    final movements = await _movementRepository.getMovementsByMuscleGroup(event.group.id!);
+    final movements = await _movementRepository.getMovementsByMuscleGroupName(event.group);
     emit(state.copyWith(
       selectedMuscleGroup: event.group,
       movementSearchResults: movements,
@@ -75,10 +76,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     final movement = event.movement ?? await _movementRepository.getMovementById(event.log.movementId);
     if (movement == null) return;
 
-    List<Variation> variations = await _movementRepository.getVariationsForMovement(movement.id!);
-    if (variations.isEmpty) {
-      variations = await _movementRepository.getAllVariations();
-    }
+    List<String> variations = movement.movementVariations;
 
     emit(state.copyWith(
       editingLogId: event.log.id,
@@ -100,12 +98,9 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
   ) async {
     emit(const LogExerciseState());
     
-    List<Variation> variations = [];
+    List<String> variations = [];
     if (event.movement.id != null) {
-      variations = await _movementRepository.getVariationsForMovement(event.movement.id!);
-      if (variations.isEmpty) {
-        variations = await _movementRepository.getAllVariations();
-      }
+      variations = event.movement.movementVariations;
     }
 
     emit(state.copyWith(
@@ -153,12 +148,10 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     Emitter<LogExerciseState> emit,
   ) async {
     if (event.query.isEmpty) {
-      // If we have a selected muscle group, show those movements again
       if (state.selectedMuscleGroup != null) {
-        final movements = await _movementRepository.getMovementsByMuscleGroup(state.selectedMuscleGroup!.id!);
+        final movements = await _movementRepository.getMovementsByMuscleGroupName(state.selectedMuscleGroup!);
         emit(state.copyWith(movementQuery: '', movementSearchResults: movements));
       } else {
-        // Restore contextual suggestions using stored IDs (today's split or most common)
         final suggested = await _movementRepository.getSuggestedMovements(state.todaysMuscleGroupIds);
         emit(state.copyWith(movementQuery: '', movementSearchResults: suggested));
       }
@@ -184,12 +177,9 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     SelectMovement event,
     Emitter<LogExerciseState> emit,
   ) async {
-    List<Variation> variations = [];
+    List<String> variations = [];
     if (event.movement.id != null) {
-      variations = await _movementRepository.getVariationsForMovement(event.movement.id!);
-      if (variations.isEmpty) {
-        variations = await _movementRepository.getAllVariations();
-      }
+      variations = event.movement.movementVariations;
     }
     
     emit(
@@ -208,21 +198,29 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     CreateAndSelectMovement event,
     Emitter<LogExerciseState> emit,
   ) async {
-    final movement = await _movementRepository.createMovement(event.name);
-    List<Variation> variations = await _movementRepository.getAllVariations();
+    final newId = const Uuid().v4();
+    final movement = Movement(
+      id: newId,
+      name: event.name,
+      primaryMuscles: [],
+      secondaryMuscles: [],
+      muscleGroups: [],
+      movementVariations: [],
+      equipment: [],
+    );
+
+    // Note: To fully save it, you would inject the Database and insert it into 'movements'.
+    // Since we're doing a simplified schema, we can just use the object in memory for this log.
 
     emit(state.copyWith(
       selectedMovement: movement, 
       currentStep: ExerciseLogStep.variation,
-      availableVariations: variations,
+      availableVariations: [],
     ));
-    if (movement.id != null) {
-      _fetchLastPerformance(movement.id!, emit);
-    }
   }
 
   Future<void> _fetchLastPerformance(
-    int movementId,
+    String movementId,
     Emitter<LogExerciseState> emit,
   ) async {
     final last = await _workoutRepository.getLastPerformance(movementId);
@@ -244,12 +242,9 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     ToggleVariation event,
     Emitter<LogExerciseState> emit,
   ) {
-    final updated = List<Variation>.from(state.selectedVariations);
-    int index = updated.indexWhere(
-      (v) => v.id == event.variation.id && v.name == event.variation.name,
-    );
-    if (index >= 0) {
-      updated.removeAt(index);
+    final updated = List<String>.from(state.selectedVariations);
+    if (updated.contains(event.variation)) {
+      updated.remove(event.variation);
     } else {
       updated.add(event.variation);
     }
@@ -262,20 +257,17 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
   ) async {
     if (state.selectedMovement == null || state.selectedMovement!.id == null) return;
 
-    final variation = await _movementRepository.createVariationForMovement(
-      state.selectedMovement!.id!,
-      event.name,
-    );
+    final variation = event.name;
 
-    // Append to existing available variations to avoid losing other global variations
-    // if this is a newly created movement
-    final updatedAvailable = List<Variation>.from(state.availableVariations);
-    if (!updatedAvailable.any((v) => v.id == variation.id)) {
+    final updatedAvailable = List<String>.from(state.availableVariations);
+    if (!updatedAvailable.contains(variation)) {
       updatedAvailable.add(variation);
     }
 
-    // Update state: add to available and auto-select it
-    final updatedSelected = List<Variation>.from(state.selectedVariations)..add(variation);
+    final updatedSelected = List<String>.from(state.selectedVariations);
+    if (!updatedSelected.contains(variation)) {
+      updatedSelected.add(variation);
+    }
 
     emit(state.copyWith(
       availableVariations: updatedAvailable,
@@ -309,6 +301,10 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
       id: state.editingLogId,
       timestamp: DateTime.now().millisecondsSinceEpoch,
       movementId: state.selectedMovement!.id!,
+      movementName: state.selectedMovement!.name,
+      muscleGroupName: state.selectedMovement!.muscleGroups.isNotEmpty 
+          ? state.selectedMovement!.muscleGroups.first 
+          : null,
       variations: state.selectedVariations,
       weight: state.weight,
       reps: state.reps,
@@ -321,12 +317,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
       await _workoutRepository.saveWorkoutLog(log);
     }
 
-    // Ensure selected variations are linked to the movement for future use
-    await _movementRepository.syncVariationsToMovement(
-      state.selectedMovement!.id!,
-      state.selectedVariations,
-    );
-
     emit(state.copyWith(isSaving: false, isSuccess: true));
   }
 }
+

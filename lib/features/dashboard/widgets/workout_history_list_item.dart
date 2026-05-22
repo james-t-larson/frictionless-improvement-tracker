@@ -222,7 +222,7 @@ class _GroupedWorkoutLogRowState extends State<GroupedWorkoutLogRow> with Ticker
                           if (widget.group.variations.isNotEmpty) ...[
                             const SizedBox(height: 4),
                             Text(
-                              widget.group.variations.map((v) => v.name).join(', ').toUpperCase(),
+                              widget.group.variations.join(', ').toUpperCase(),
                               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                 color: const Color(0xFF71717A),
                               ),
@@ -488,7 +488,7 @@ class _WorkoutLogRowState extends State<WorkoutLogRow> with SingleTickerProvider
                     if (widget.log.variations.isNotEmpty) ...[
                       const SizedBox(height: 4),
                       Text(
-                        widget.log.variations.map((v) => v.name).join(', ').toUpperCase(),
+                        widget.log.variations.join(', ').toUpperCase(),
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: const Color(0xFF71717A),
                         ),

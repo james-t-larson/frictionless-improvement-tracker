@@ -1,15 +1,15 @@
-import 'package:simple_gym_tracker/data/models/variation.dart';
+import 'dart:convert';
 
 class WorkoutLog {
   final int? id;
-  final int movementId;
+  final String movementId;
   final double weight;
   final int reps;
   final int timestamp; // Unix timestamp
   final bool painFelt;
-  final List<Variation> variations;
+  final List<String> variations;
   
-  // Joined data
+  // Denormalized data
   final String? movementName;
   final String? muscleGroupName;
 
@@ -25,39 +25,53 @@ class WorkoutLog {
     this.muscleGroupName,
   });
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
-      if (id != null) 'id': id,
-      'movement_id': movementId,
+      'movementId': movementId,
       'weight': weight,
       'reps': reps,
       'timestamp': timestamp,
-      'pain_felt': painFelt ? 1 : 0,
+      'painFelt': painFelt,
+      'variations': variations,
+      if (movementName != null) 'movementName': movementName,
+      if (muscleGroupName != null) 'muscleGroupName': muscleGroupName,
     };
   }
 
-  factory WorkoutLog.fromMap(Map<String, dynamic> map, {List<Variation> variations = const []}) {
+  factory WorkoutLog.fromJson(Map<String, dynamic> json, {int? id}) {
     return WorkoutLog(
-      id: map['id'] as int?,
-      movementId: map['movement_id'] as int,
-      weight: (map['weight'] as num).toDouble(),
-      reps: map['reps'] as int,
-      timestamp: map['timestamp'] as int? ?? 0,
-      painFelt: (map['pain_felt'] as int? ?? 0) == 1,
-      movementName: map['movement_name'] as String?,
-      muscleGroupName: map['muscle_group_name'] as String?,
-      variations: variations,
+      id: id,
+      movementId: json['movementId'] as String,
+      weight: (json['weight'] as num).toDouble(),
+      reps: json['reps'] as int,
+      timestamp: json['timestamp'] as int,
+      painFelt: json['painFelt'] as bool? ?? false,
+      variations: List<String>.from(json['variations'] ?? []),
+      movementName: json['movementName'] as String?,
+      muscleGroupName: json['muscleGroupName'] as String?,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      if (id != null) 'id': id,
+      'data': jsonEncode(toJson()),
+    };
+  }
+
+  factory WorkoutLog.fromMap(Map<String, dynamic> map) {
+    final data = jsonDecode(map['data'] as String);
+    return WorkoutLog.fromJson(data, id: map['id'] as int?);
   }
 
   WorkoutLog copyWith({
     int? id,
-    int? movementId,
+    String? movementId,
     double? weight,
     int? reps,
     DateTime? timestamp,
     bool? painFelt,
-    List<Variation>? variations,
+    List<String>? variations,
     String? movementName,
     String? muscleGroupName,
   }) {

@@ -1,7 +1,6 @@
+
 import 'package:sqflite/sqflite.dart';
 import '../models/movement.dart';
-import '../models/variation.dart';
-import '../models/muscle_group.dart';
 import '../sources/exercise_data_source.dart';
 
 class MovementRepository {
@@ -17,195 +16,72 @@ class MovementRepository {
 
     if (count == 0 || count == null) {
       final List<dynamic> data = await _dataSource.getExercises();
-      Map<String, int> variationCache = {};
-      Map<String, int> muscleCache = {};
-      Map<String, int> groupCache = {};
 
       await _db.transaction((txn) async {
         for (var json in data) {
-          final movement = Movement.fromJson(json);
-          final movementId = await txn.insert('movements', movement.toMap());
-
-          // Handle Variations
-          List<String> movementVariations = List<String>.from(
-            json['movementVariations'] ?? [],
-          );
-          List<String> equipment = List<String>.from(json['equipment'] ?? []);
-          List<String> variations = {
-            ...movementVariations,
-            ...equipment,
-          }.toList();
-          for (var vName in variations) {
-            int variationId;
-            if (variationCache.containsKey(vName)) {
-              variationId = variationCache[vName]!;
-            } else {
-              variationId = await txn.insert('variations', {'name': vName});
-              variationCache[vName] = variationId;
-            }
-            await txn.insert('movement_variations', {
-              'movement_id': movementId,
-              'variation_id': variationId,
-            });
-          }
-
-          // Handle Muscle Groups
-          Future<void> linkMuscles(List<String> muscles, int isPrimary) async {
-            final uniqueMuscles = muscles.toSet().toList();
-            for (var mName in uniqueMuscles) {
-              int muscleId;
-              if (muscleCache.containsKey(mName)) {
-                muscleId = muscleCache[mName]!;
-              } else {
-                muscleId = await txn.insert('muscles', {'name': mName});
-                muscleCache[mName] = muscleId;
-              }
-              await txn.insert('movement_muscles', {
-                'movement_id': movementId,
-                'muscle_id': muscleId,
-                'is_primary': isPrimary,
-              });
-            }
-          }
-
-          await linkMuscles(movement.primaryMuscles, 1);
-          await linkMuscles(movement.secondaryMuscles, 0);
-
-          // Handle Muscle Groups (formerly Workout Groups)
-          final groups = movement.muscleGroups.toSet().toList();
-          for (var gName in groups) {
-            int groupId;
-            if (groupCache.containsKey(gName)) {
-              groupId = groupCache[gName]!;
-            } else {
-              groupId = await txn.insert('muscle_groups', {'name': gName});
-              groupCache[gName] = groupId;
-            }
-            await txn.insert('movement_muscle_groups', {
-              'movement_id': movementId,
-              'muscle_group_id': groupId,
-            });
+          final movement = Movement.fromJson(json as Map<String, dynamic>);
+          if (movement.id != null) {
+            await txn.insert('movements', movement.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
           }
         }
       });
     }
   }
 
-  Future<List<Movement>> searchMovements(String query) async {
-    final List<Map<String, dynamic>> maps = await _db.query(
-      'movements',
-      where: 'name LIKE ?',
-      whereArgs: ['%$query%'],
-    );
+  Future<List<Movement>> _getAllMovements() async {
+    final List<Map<String, dynamic>> maps = await _db.query('movements');
+    return maps.map((map) => Movement.fromMap(map)).toList();
+  }
 
-    List<Movement> movements = maps
-        .map((map) => Movement.fromMap(map))
-        .toList();
-    for (var i = 0; i < movements.length; i++) {
-      movements[i] = await _withMuscles(movements[i]);
-    }
-    return movements;
+  Future<List<Movement>> searchMovements(String query) async {
+    final all = await _getAllMovements();
+    final lowerQuery = query.toLowerCase();
+    return all.where((m) => m.name.toLowerCase().contains(lowerQuery)).toList();
   }
 
   Future<List<Movement>> getTopMovements() async {
-    final List<Map<String, dynamic>> maps = await _db.rawQuery('''
-      SELECT m.*, COUNT(w.id) as usage_count
-      FROM movements m
-      LEFT JOIN workouts w ON m.id = w.movement_id
-      GROUP BY m.id
-      ORDER BY usage_count DESC, m.name ASC
+    final all = await _getAllMovements();
+    final usageMaps = await _db.rawQuery('''
+      SELECT json_extract(data, '\$.movementId') as mId, COUNT(id) as c
+      FROM logs GROUP BY mId
     ''');
+    final usage = {for (var row in usageMaps) row['mId'] as String: row['c'] as int};
 
-    List<Movement> movements = maps
-        .map((map) => Movement.fromMap(map))
-        .toList();
-    for (var i = 0; i < movements.length; i++) {
-      movements[i] = await _withMuscles(movements[i]);
-    }
-    return movements;
+    all.sort((a, b) {
+      int aUsage = usage[a.id] ?? 0;
+      int bUsage = usage[b.id] ?? 0;
+      if (aUsage != bUsage) return bUsage.compareTo(aUsage);
+      return a.name.compareTo(b.name);
+    });
+    return all;
   }
 
-  /// Returns movements relevant to a given session, ranked by all-time usage.
-  ///
-  /// If [muscleGroupIds] is empty (no lifts logged today), falls back to
-  /// [getTopMovements] — the user's all-time most common movements.
-  ///
-  /// Otherwise, returns ALL movements in the database sorted so that movements
-  /// sharing a muscle group with today's session surface first (is_relevant = 1),
-  /// then remaining movements by frequency. This ensures every movement is
-  /// reachable without searching, regardless of the day's split.
-  Future<List<Movement>> getSuggestedMovements(Set<int> muscleGroupIds) async {
-    if (muscleGroupIds.isEmpty) return getTopMovements();
+  Future<List<Movement>> getSuggestedMovements(Set<String> muscleGroups) async {
+    if (muscleGroups.isEmpty) return getTopMovements();
 
-    final placeholders = muscleGroupIds.map((_) => '?').join(', ');
-    final List<Map<String, dynamic>> maps = await _db.rawQuery('''
-      SELECT m.*, COUNT(DISTINCT w.id) as usage_count,
-        MAX(CASE WHEN mmg.muscle_group_id IN ($placeholders) THEN 1 ELSE 0 END) as is_relevant
-      FROM movements m
-      LEFT JOIN movement_muscle_groups mmg ON m.id = mmg.movement_id
-      LEFT JOIN workouts w ON m.id = w.movement_id
-      GROUP BY m.id
-      ORDER BY is_relevant DESC, usage_count DESC, m.name ASC
-    ''', muscleGroupIds.toList());
+    final all = await _getAllMovements();
+    final usageMaps = await _db.rawQuery('''
+      SELECT json_extract(data, '\$.movementId') as mId, COUNT(id) as c
+      FROM logs GROUP BY mId
+    ''');
+    final usage = {for (var row in usageMaps) row['mId'] as String: row['c'] as int};
 
-    List<Movement> movements = maps
-        .map((map) => Movement.fromMap(map))
-        .toList();
-    for (var i = 0; i < movements.length; i++) {
-      movements[i] = await _withMuscles(movements[i]);
-    }
-    return movements;
+    all.sort((a, b) {
+      bool aRelevant = a.muscleGroups.any((g) => muscleGroups.contains(g));
+      bool bRelevant = b.muscleGroups.any((g) => muscleGroups.contains(g));
+      if (aRelevant && !bRelevant) return -1;
+      if (!aRelevant && bRelevant) return 1;
+      
+      int aUsage = usage[a.id] ?? 0;
+      int bUsage = usage[b.id] ?? 0;
+      if (aUsage != bUsage) return bUsage.compareTo(aUsage);
+      
+      return a.name.compareTo(b.name);
+    });
+    return all;
   }
 
-  Future<Movement> _withMuscles(Movement movement) async {
-    if (movement.id == null) return movement;
-
-    final muscles = await _db.rawQuery(
-      '''
-      SELECT mg.name, mm.is_primary
-      FROM muscles mg
-      JOIN movement_muscles mm ON mg.id = mm.muscle_id
-      WHERE mm.movement_id = ?
-    ''',
-      [movement.id],
-    );
-
-    final primary = muscles
-        .where((m) => m['is_primary'] == 1)
-        .map((m) => m['name'] as String)
-        .toList();
-    final secondary = muscles
-        .where((m) => m['is_primary'] == 0)
-        .map((m) => m['name'] as String)
-        .toList();
-
-    final groupRows = await _db.rawQuery(
-      '''
-      SELECT wg.name
-      FROM muscle_groups wg
-      JOIN movement_muscle_groups mg ON wg.id = mg.muscle_group_id
-      WHERE mg.movement_id = ?
-    ''',
-      [movement.id],
-    );
-    final groups = groupRows.map((r) => r['name'] as String).toList();
-
-    return Movement(
-      id: movement.id,
-      name: movement.name,
-      primaryMuscles: primary,
-      secondaryMuscles: secondary,
-      muscleGroups: groups,
-    );
-  }
-
-  Future<Movement> createMovement(String name) async {
-    final movement = Movement(name: name);
-    final id = await _db.insert('movements', movement.toMap());
-    return Movement(id: id, name: name);
-  }
-
-  Future<Movement?> getMovementById(int id) async {
+  Future<Movement?> getMovementById(String id) async {
     final List<Map<String, dynamic>> maps = await _db.query(
       'movements',
       where: 'id = ?',
@@ -213,139 +89,23 @@ class MovementRepository {
       limit: 1,
     );
     if (maps.isEmpty) return null;
-    return await _withMuscles(Movement.fromMap(maps.first));
+    return Movement.fromMap(maps.first);
   }
 
-  Future<List<Variation>> getVariationsForMovement(int movementId) async {
-    final List<Map<String, dynamic>> maps = await _db.rawQuery(
-      '''
-      SELECT v.* 
-      FROM variations v
-      JOIN movement_variations mv ON v.id = mv.variation_id
-      WHERE mv.movement_id = ?
-    ''',
-      [movementId],
-    );
-    return maps.map((map) => Variation.fromMap(map)).toList();
-  }
-
-  Future<List<Variation>> getAllVariations() async {
-    final List<Map<String, dynamic>> maps = await _db.query(
-      'variations',
-      orderBy: 'name ASC',
-    );
-    return maps.map((map) => Variation.fromMap(map)).toList();
-  }
-
-  Future<Variation> createVariationForMovement(
-    int movementId,
-    String name,
-  ) async {
-    // Check if variation exists globally
-    final List<Map<String, dynamic>> results = await _db.query(
-      'variations',
-      where: 'LOWER(name) = ?',
-      whereArgs: [name.toLowerCase()],
-      limit: 1,
-    );
-
-    int variationId;
-    if (results.isEmpty) {
-      variationId = await _db.insert('variations', {'name': name});
-    } else {
-      variationId = results.first['id'] as int;
+  Future<List<String>> getMuscleGroups() async {
+    final all = await _getAllMovements();
+    final Set<String> groups = {};
+    for (var m in all) {
+      groups.addAll(m.muscleGroups);
     }
-
-    // Link it to the movement if not already linked
-    final List<Map<String, dynamic>> linkResults = await _db.query(
-      'movement_variations',
-      where: 'movement_id = ? AND variation_id = ?',
-      whereArgs: [movementId, variationId],
-    );
-
-    if (linkResults.isEmpty) {
-      await _db.insert('movement_variations', {
-        'movement_id': movementId,
-        'variation_id': variationId,
-      });
-    }
-
-    return Variation(id: variationId, name: name);
-  }
-
-  Future<void> syncVariationsToMovement(
-    int movementId,
-    List<Variation> variations,
-  ) async {
-    await _db.transaction((txn) async {
-      for (var variation in variations) {
-        if (variation.id == null) continue;
-
-        // Link it to the movement if not already linked
-        final List<Map<String, dynamic>> linkResults = await txn.query(
-          'movement_variations',
-          where: 'movement_id = ? AND variation_id = ?',
-          whereArgs: [movementId, variation.id],
-        );
-
-        if (linkResults.isEmpty) {
-          await txn.insert('movement_variations', {
-            'movement_id': movementId,
-            'variation_id': variation.id,
-          });
-        }
-      }
-    });
-  }
-
-  Future<List<MuscleGroup>> getMuscleGroups() async {
-    final List<Map<String, dynamic>> maps = await _db.query(
-      'muscle_groups',
-      orderBy: 'name ASC',
-    );
-    return maps.map((map) => MuscleGroup.fromMap(map)).toList();
-  }
-
-  Future<List<Movement>> getMovementsByMuscleGroup(int muscleGroupId) async {
-    final List<Map<String, dynamic>> maps = await _db.rawQuery(
-      '''
-      SELECT m.*
-      FROM movements m
-      JOIN movement_muscle_groups mmg ON m.id = mmg.movement_id
-      WHERE mmg.muscle_group_id = ?
-      ORDER BY m.name ASC
-    ''',
-      [muscleGroupId],
-    );
-
-    List<Movement> movements = maps
-        .map((map) => Movement.fromMap(map))
-        .toList();
-    for (var i = 0; i < movements.length; i++) {
-      movements[i] = await _withMuscles(movements[i]);
-    }
-    return movements;
+    final sorted = groups.toList()..sort();
+    return sorted;
   }
 
   Future<List<Movement>> getMovementsByMuscleGroupName(String groupName) async {
-    final List<Map<String, dynamic>> maps = await _db.rawQuery(
-      '''
-      SELECT m.*
-      FROM movements m
-      JOIN movement_muscle_groups mg ON m.id = mg.movement_id
-      JOIN muscle_groups wg ON wg.id = mg.muscle_group_id
-      WHERE wg.name = ?
-      ORDER BY m.name ASC
-    ''',
-      [groupName],
-    );
-
-    List<Movement> movements = maps
-        .map((map) => Movement.fromMap(map))
-        .toList();
-    for (var i = 0; i < movements.length; i++) {
-      movements[i] = await _withMuscles(movements[i]);
-    }
-    return movements;
+    final all = await _getAllMovements();
+    final filtered = all.where((m) => m.muscleGroups.contains(groupName)).toList();
+    filtered.sort((a, b) => a.name.compareTo(b.name));
+    return filtered;
   }
 }

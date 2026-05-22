@@ -179,9 +179,9 @@ class MainDashboardScreen extends StatelessWidget {
 
   void _openNewLiftDialog(BuildContext context) {
     final dashState = context.read<DashboardBloc>().state;
-    final todaysMuscleGroupIds = dashState is DashboardLoaded
+    final Set<String> todaysMuscleGroupIds = dashState is DashboardLoaded
         ? dashState.todaysMuscleGroupIds
-        : const <int>{};
+        : const <String>{};
 
     showModalBottomSheet(
       context: context,

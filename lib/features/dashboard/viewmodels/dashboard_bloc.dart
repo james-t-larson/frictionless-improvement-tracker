@@ -298,8 +298,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     if (a.movementId != b.movementId) return false;
     if (a.variations.length != b.variations.length) return false;
 
-    final aVars = a.variations.map((e) => e.id).toList()..sort();
-    final bVars = b.variations.map((e) => e.id).toList()..sort();
+      final aVars = a.variations.toList()..sort();
+      final bVars = b.variations.toList()..sort();
     for (int k = 0; k < aVars.length; k++) {
       if (aVars[k] != bVars[k]) return false;
     }

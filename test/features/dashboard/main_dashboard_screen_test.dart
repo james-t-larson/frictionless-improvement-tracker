@@ -59,7 +59,7 @@ void main() {
 
   testWidgets('Buttons take up available horizontal width on mobile when logs exist', (tester) async {
     when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded(const {}, [
-      WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: DateTime.now().millisecondsSinceEpoch, painFelt: false, variations: [], movementName: 'Bench Press')
+      WorkoutLog(id: 1, movementId: '1', weight: 100, reps: 10, timestamp: DateTime.now().millisecondsSinceEpoch, painFelt: false, variations: [], movementName: 'Bench Press')
     ], query: ''));
 
     const screenWidth = 400.0;
@@ -88,7 +88,7 @@ void main() {
 
   testWidgets('Buttons are positioned at the bottom of the screen when logs exist', (tester) async {
     when(() => mockDashboardBloc.state).thenReturn(DashboardLoaded(const {}, [
-      WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: DateTime.now().millisecondsSinceEpoch, painFelt: false, variations: [], movementName: 'Bench Press')
+      WorkoutLog(id: 1, movementId: '1', weight: 100, reps: 10, timestamp: DateTime.now().millisecondsSinceEpoch, painFelt: false, variations: [], movementName: 'Bench Press')
     ], query: ''));
 
     const screenHeight = 800.0;
@@ -145,7 +145,7 @@ void main() {
     // Provide a state with logs so the search bar is visible
     when(() => mockDashboardBloc.state).thenReturn(
       DashboardLoaded(const {}, [
-        WorkoutLog(id: 1, movementId: 1, weight: 100, reps: 10, timestamp: DateTime.now().millisecondsSinceEpoch, painFelt: false, variations: [], movementName: 'Bench Press')
+        WorkoutLog(id: 1, movementId: '1', weight: 100, reps: 10, timestamp: DateTime.now().millisecondsSinceEpoch, painFelt: false, variations: [], movementName: 'Bench Press')
       ], query: '')
     );
 

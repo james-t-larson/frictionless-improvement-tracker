@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 import '../../../data/models/movement.dart';
-import '../../../data/models/muscle_group.dart';
-import '../../../data/models/variation.dart';
 import '../../../data/models/workout_log.dart';
 
 sealed class LogExerciseEvent extends Equatable {
@@ -12,7 +10,7 @@ sealed class LogExerciseEvent extends Equatable {
 }
 
 class InitializeFlow extends LogExerciseEvent {
-  final Set<int> todaysMuscleGroupIds;
+  final Set<String> todaysMuscleGroupIds;
   const InitializeFlow({this.todaysMuscleGroupIds = const {}});
 
   @override
@@ -20,7 +18,7 @@ class InitializeFlow extends LogExerciseEvent {
 }
 
 class MuscleGroupSelected extends LogExerciseEvent {
-  final MuscleGroup group;
+  final String group;
   const MuscleGroupSelected(this.group);
 
   @override
@@ -60,7 +58,7 @@ class CreateAndSelectMovement extends LogExerciseEvent {
 }
 
 class ToggleVariation extends LogExerciseEvent {
-  final Variation variation;
+  final String variation;
   const ToggleVariation(this.variation);
 
   @override
@@ -112,7 +110,7 @@ class ManualSlideChanged extends LogExerciseEvent {
 
 class InitializeWithPreviousLog extends LogExerciseEvent {
   final Movement movement;
-  final List<Variation> selectedVariations;
+  final List<String> selectedVariations;
 
   const InitializeWithPreviousLog({
     required this.movement,

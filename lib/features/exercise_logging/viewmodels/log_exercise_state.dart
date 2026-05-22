@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 import '../../../data/models/movement.dart';
-import '../../../data/models/muscle_group.dart';
-import '../../../data/models/variation.dart';
 
 enum ExerciseLogStep {
   movement(0),
@@ -14,8 +12,8 @@ enum ExerciseLogStep {
 
 class LogExerciseState extends Equatable {
   final ExerciseLogStep currentStep;
-  final List<MuscleGroup> muscleGroups;
-  final MuscleGroup? selectedMuscleGroup;
+  final List<String> muscleGroups;
+  final String? selectedMuscleGroup;
   
   final String movementQuery;
   final List<Movement> movementSearchResults;
@@ -23,8 +21,8 @@ class LogExerciseState extends Equatable {
   final String? lastPerformanceHint;
   
   final String variationQuery;
-  final List<Variation> selectedVariations;
-  final List<Variation> availableVariations;
+  final List<String> selectedVariations;
+  final List<String> availableVariations;
   
   final double weight;
   final int reps;
@@ -39,7 +37,7 @@ class LogExerciseState extends Equatable {
 
   /// Muscle group IDs from today's lifts. Stored in state so the BLoC can
   /// restore the right suggestions when a search query is cleared.
-  final Set<int> todaysMuscleGroupIds;
+  final Set<String> todaysMuscleGroupIds;
 
   const LogExerciseState({
     this.currentStep = ExerciseLogStep.movement,
@@ -64,15 +62,15 @@ class LogExerciseState extends Equatable {
 
   LogExerciseState copyWith({
     ExerciseLogStep? currentStep,
-    List<MuscleGroup>? muscleGroups,
-    MuscleGroup? selectedMuscleGroup,
+    List<String>? muscleGroups,
+    String? selectedMuscleGroup,
     String? movementQuery,
     List<Movement>? movementSearchResults,
     Movement? selectedMovement,
     String? lastPerformanceHint,
     String? variationQuery,
-    List<Variation>? selectedVariations,
-    List<Variation>? availableVariations,
+    List<String>? selectedVariations,
+    List<String>? availableVariations,
     double? weight,
     int? reps,
     bool? isSaving,
@@ -80,7 +78,7 @@ class LogExerciseState extends Equatable {
     bool? painFelt,
     int? editingLogId,
     String? suggestionLabel,
-    Set<int>? todaysMuscleGroupIds,
+    Set<String>? todaysMuscleGroupIds,
   }) {
     // Note: To clear selected fields, we'd need a more complex copyWith or just handle it in the BLoC.
     // For now, simple copyWith is usually enough if we pass null explicitly for nullable fields.
@@ -147,3 +145,4 @@ class LogExerciseState extends Equatable {
         todaysMuscleGroupIds,
       ];
 }
+
