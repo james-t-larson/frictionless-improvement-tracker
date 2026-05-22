@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
   static const _databaseName = "gym_tracker.db";
-  static const _databaseVersion = 4;
+  static const _databaseVersion = 5;
 
   static Future<Database> initDb() async {
     final documentsDirectory = await getApplicationDocumentsDirectory();
@@ -15,7 +15,7 @@ class DatabaseHelper {
       version: _databaseVersion,
       onCreate: onCreate,
       onUpgrade: (db, oldVersion, newVersion) async {
-        if (oldVersion < 4) {
+        if (oldVersion < 5) {
           // Simplest upgrade: Drop all and recreate for now
           // In a production app, we would write migrations.
           await db.execute("DROP TABLE IF EXISTS workout_variations");
@@ -23,6 +23,8 @@ class DatabaseHelper {
           await db.execute("DROP TABLE IF EXISTS movement_variations");
           await db.execute("DROP TABLE IF EXISTS variations");
           await db.execute("DROP TABLE IF EXISTS movement_muscles");
+          await db.execute("DROP TABLE IF EXISTS muscles");
+          await db.execute("DROP TABLE IF EXISTS movement_muscle_groups");
           await db.execute("DROP TABLE IF EXISTS muscle_groups");
           await db.execute("DROP TABLE IF EXISTS movement_groups");
           await db.execute("DROP TABLE IF EXISTS workout_groups");
@@ -50,7 +52,7 @@ class DatabaseHelper {
     ''');
 
     await db.execute('''
-      CREATE TABLE muscle_groups (
+      CREATE TABLE muscles (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL UNIQUE
       )
@@ -63,7 +65,7 @@ class DatabaseHelper {
         is_primary INTEGER NOT NULL DEFAULT 0,
         PRIMARY KEY (movement_id, muscle_id),
         FOREIGN KEY (movement_id) REFERENCES movements (id) ON DELETE CASCADE,
-        FOREIGN KEY (muscle_id) REFERENCES muscle_groups (id) ON DELETE CASCADE
+        FOREIGN KEY (muscle_id) REFERENCES muscles (id) ON DELETE CASCADE
       )
     ''');
 
@@ -107,19 +109,19 @@ class DatabaseHelper {
     ''');
 
     await db.execute('''
-      CREATE TABLE workout_groups (
+      CREATE TABLE muscle_groups (
         id   INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL UNIQUE
       )
     ''');
 
     await db.execute('''
-      CREATE TABLE movement_groups (
+      CREATE TABLE movement_muscle_groups (
         movement_id INTEGER NOT NULL,
-        group_id    INTEGER NOT NULL,
-        PRIMARY KEY (movement_id, group_id),
+        muscle_group_id    INTEGER NOT NULL,
+        PRIMARY KEY (movement_id, muscle_group_id),
         FOREIGN KEY (movement_id) REFERENCES movements (id) ON DELETE CASCADE,
-        FOREIGN KEY (group_id)    REFERENCES workout_groups (id) ON DELETE CASCADE
+        FOREIGN KEY (muscle_group_id)    REFERENCES muscle_groups (id) ON DELETE CASCADE
       )
     ''');
 

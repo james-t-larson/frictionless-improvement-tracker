@@ -83,7 +83,7 @@ class _GroupedWorkoutLogRowState extends State<GroupedWorkoutLogRow> with Ticker
     final dashboardBloc = context.read<DashboardBloc>();
     dashboardBloc.add(const RecordSwipeAction());
     final logIds = widget.group.logs.map((log) => log.id!).toList();
-    dashboardBloc.add(DashboardWorkoutGroupDeleted(logIds));
+    dashboardBloc.add(DashboardLogGroupDeleted(logIds));
     AppToast.show(context, 'Group deleted');
   }
 

@@ -32,9 +32,9 @@ class DashboardWorkoutUpdated extends DashboardEvent {
   List<Object?> get props => [updatedLog];
 }
 
-class DashboardWorkoutGroupDeleted extends DashboardEvent {
+class DashboardLogGroupDeleted extends DashboardEvent {
   final List<int> logIds;
-  const DashboardWorkoutGroupDeleted(this.logIds);
+  const DashboardLogGroupDeleted(this.logIds);
   @override
   List<Object?> get props => [logIds];
 }

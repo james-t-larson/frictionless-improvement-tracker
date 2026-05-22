@@ -57,7 +57,7 @@ class MovementRepository {
               if (muscleCache.containsKey(mName)) {
                 muscleId = muscleCache[mName]!;
               } else {
-                muscleId = await txn.insert('muscle_groups', {'name': mName});
+                muscleId = await txn.insert('muscles', {'name': mName});
                 muscleCache[mName] = muscleId;
               }
               await txn.insert('movement_muscles', {
@@ -71,19 +71,19 @@ class MovementRepository {
           await linkMuscles(movement.primaryMuscles, 1);
           await linkMuscles(movement.secondaryMuscles, 0);
 
-          // Handle Workout Groups
-          final groups = movement.workoutGroups.toSet().toList();
+          // Handle Muscle Groups (formerly Workout Groups)
+          final groups = movement.muscleGroups.toSet().toList();
           for (var gName in groups) {
             int groupId;
             if (groupCache.containsKey(gName)) {
               groupId = groupCache[gName]!;
             } else {
-              groupId = await txn.insert('workout_groups', {'name': gName});
+              groupId = await txn.insert('muscle_groups', {'name': gName});
               groupCache[gName] = groupId;
             }
-            await txn.insert('movement_groups', {
+            await txn.insert('movement_muscle_groups', {
               'movement_id': movementId,
-              'group_id': groupId,
+              'muscle_group_id': groupId,
             });
           }
         }
@@ -140,9 +140,9 @@ class MovementRepository {
     final placeholders = muscleGroupIds.map((_) => '?').join(', ');
     final List<Map<String, dynamic>> maps = await _db.rawQuery('''
       SELECT m.*, COUNT(DISTINCT w.id) as usage_count,
-        MAX(CASE WHEN mm.muscle_id IN ($placeholders) THEN 1 ELSE 0 END) as is_relevant
+        MAX(CASE WHEN mmg.muscle_group_id IN ($placeholders) THEN 1 ELSE 0 END) as is_relevant
       FROM movements m
-      LEFT JOIN movement_muscles mm ON m.id = mm.movement_id
+      LEFT JOIN movement_muscle_groups mmg ON m.id = mmg.movement_id
       LEFT JOIN workouts w ON m.id = w.movement_id
       GROUP BY m.id
       ORDER BY is_relevant DESC, usage_count DESC, m.name ASC
@@ -163,7 +163,7 @@ class MovementRepository {
     final muscles = await _db.rawQuery(
       '''
       SELECT mg.name, mm.is_primary
-      FROM muscle_groups mg
+      FROM muscles mg
       JOIN movement_muscles mm ON mg.id = mm.muscle_id
       WHERE mm.movement_id = ?
     ''',
@@ -182,8 +182,8 @@ class MovementRepository {
     final groupRows = await _db.rawQuery(
       '''
       SELECT wg.name
-      FROM workout_groups wg
-      JOIN movement_groups mg ON wg.id = mg.group_id
+      FROM muscle_groups wg
+      JOIN movement_muscle_groups mg ON wg.id = mg.muscle_group_id
       WHERE mg.movement_id = ?
     ''',
       [movement.id],
@@ -195,7 +195,7 @@ class MovementRepository {
       name: movement.name,
       primaryMuscles: primary,
       secondaryMuscles: secondary,
-      workoutGroups: groups,
+      muscleGroups: groups,
     );
   }
 
@@ -311,8 +311,8 @@ class MovementRepository {
       '''
       SELECT m.*
       FROM movements m
-      JOIN movement_muscles mm ON m.id = mm.movement_id
-      WHERE mm.muscle_id = ?
+      JOIN movement_muscle_groups mmg ON m.id = mmg.movement_id
+      WHERE mmg.muscle_group_id = ?
       ORDER BY m.name ASC
     ''',
       [muscleGroupId],
@@ -327,13 +327,13 @@ class MovementRepository {
     return movements;
   }
 
-  Future<List<Movement>> getMovementsByWorkoutGroup(String groupName) async {
+  Future<List<Movement>> getMovementsByMuscleGroupName(String groupName) async {
     final List<Map<String, dynamic>> maps = await _db.rawQuery(
       '''
       SELECT m.*
       FROM movements m
-      JOIN movement_groups mg ON m.id = mg.movement_id
-      JOIN workout_groups wg ON wg.id = mg.group_id
+      JOIN movement_muscle_groups mg ON m.id = mg.movement_id
+      JOIN muscle_groups wg ON wg.id = mg.muscle_group_id
       WHERE wg.name = ?
       ORDER BY m.name ASC
     ''',

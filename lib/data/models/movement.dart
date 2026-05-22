@@ -3,14 +3,14 @@ class Movement {
   final String name;
   final List<String> primaryMuscles;
   final List<String> secondaryMuscles;
-  final List<String> workoutGroups;
+  final List<String> muscleGroups;
 
   Movement({
     this.id,
     required this.name,
     this.primaryMuscles = const [],
     this.secondaryMuscles = const [],
-    this.workoutGroups = const [],
+    this.muscleGroups = const [],
   });
 
   // Getter for backward compatibility or simple display
@@ -27,10 +27,10 @@ class Movement {
     return Movement(
       id: map['id'] as int?,
       name: map['name'] as String,
-      // Note: muscle groups and workout groups are loaded via joins in the repository
+      // Note: muscle groups and anatomical muscles are loaded via joins in the repository
       primaryMuscles: [],
       secondaryMuscles: [],
-      workoutGroups: [],
+      muscleGroups: [],
     );
   }
 
@@ -39,7 +39,7 @@ class Movement {
       name: json['name'] ?? '',
       primaryMuscles: List<String>.from(json['primaryMuscles'] ?? []),
       secondaryMuscles: List<String>.from(json['secondaryMuscles'] ?? []),
-      workoutGroups: List<String>.from(json['workoutGroups'] ?? []),
+      muscleGroups: List<String>.from(json['muscleGroups'] ?? []),
     );
   }
 }

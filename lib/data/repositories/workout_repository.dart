@@ -10,10 +10,10 @@ class WorkoutRepository {
   Future<List<WorkoutLog>> getAllLogs() async {
     final List<Map<String, dynamic>> maps = await _db.rawQuery('''
       SELECT w.*, m.name as movement_name,
-        (SELECT wg.name FROM workout_groups wg
-         JOIN movement_groups mg ON wg.id = mg.group_id
+        (SELECT wg.name FROM muscle_groups wg
+         JOIN movement_muscle_groups mg ON wg.id = mg.muscle_group_id
          WHERE mg.movement_id = m.id
-         ORDER BY wg.name ASC LIMIT 1) as workout_group_name
+         ORDER BY wg.name ASC LIMIT 1) as muscle_group_name
       FROM workouts w
       JOIN movements m ON w.movement_id = m.id
       ORDER BY w.timestamp DESC
@@ -79,13 +79,13 @@ class WorkoutRepository {
         .millisecondsSinceEpoch;
 
     final rows = await _db.rawQuery('''
-      SELECT DISTINCT mm.muscle_id
+      SELECT DISTINCT mm.muscle_group_id
       FROM workouts w
-      JOIN movement_muscles mm ON w.movement_id = mm.movement_id
+      JOIN movement_muscle_groups mm ON w.movement_id = mm.movement_id
       WHERE w.timestamp >= ?
     ''', [midnightMs]);
 
-    return rows.map((r) => r['muscle_id'] as int).toSet();
+    return rows.map((r) => r['muscle_group_id'] as int).toSet();
   }
 
   Future<void> deleteWorkoutLog(int id) async {
