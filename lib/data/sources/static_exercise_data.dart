@@ -6,13 +6,13 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "lat"
+      "latissimus dorsi"
     ],
     "secondaryMuscles": [
-      "bicep",
-      "forearm - inner",
-      "rotator cuff - back",
-      "shoulder - back"
+      "biceps brachii",
+      "wrist flexors",
+      "infraspinatus",
+      "posterior deltoid"
     ],
     "movementVariations": [
       "bodyweight",
@@ -42,13 +42,13 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "glute",
-      "lower back",
-      "quad",
-      "thigh - inner"
+      "gluteus maximus",
+      "erector spinae",
+      "quadriceps femoris",
+      "hip adductors"
     ],
     "secondaryMuscles": [
-      "calf"
+      "gastrocnemius"
     ],
     "movementVariations": [
       "pause",
@@ -88,12 +88,12 @@ const String staticExerciseJson = r'''[
       "Chest"
     ],
     "primaryMuscles": [
-      "chest",
-      "shoulder - front",
-      "tricep"
+      "pectoralis major",
+      "anterior deltoid",
+      "triceps brachii"
     ],
     "secondaryMuscles": [
-      "abdominal"
+      "rectus abdominis"
     ],
     "movementVariations": [
       "standard",
@@ -130,13 +130,13 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "rotator cuff - back",
-      "trap",
-      "shoulder - back"
+      "infraspinatus",
+      "trapezius",
+      "posterior deltoid"
     ],
     "secondaryMuscles": [
-      "shoulder - side",
-      "forearm - outer"
+      "lateral deltoid",
+      "wrist extensors"
     ],
     "movementVariations": [
       "single-arm",
@@ -162,11 +162,11 @@ const String staticExerciseJson = r'''[
       "Chest"
     ],
     "primaryMuscles": [
-      "chest",
-      "shoulder - front"
+      "pectoralis major",
+      "anterior deltoid"
     ],
     "secondaryMuscles": [
-      "tricep"
+      "triceps brachii"
     ],
     "movementVariations": [
       "incline",
@@ -203,16 +203,16 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "glute",
-      "hamstring",
-      "lower back"
+      "gluteus maximus",
+      "hamstrings",
+      "erector spinae"
     ],
     "secondaryMuscles": [
-      "calf",
-      "forearm - inner",
-      "forearm - outer",
-      "trap",
-      "quad"
+      "gastrocnemius",
+      "wrist flexors",
+      "wrist extensors",
+      "trapezius",
+      "quadriceps femoris"
     ],
     "movementVariations": [
       "sumo",
@@ -242,12 +242,12 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "glute",
-      "quad",
-      "thigh - inner"
+      "gluteus maximus",
+      "quadriceps femoris",
+      "hip adductors"
     ],
     "secondaryMuscles": [
-      "hamstring"
+      "hamstrings"
     ],
     "movementVariations": [
       "hack squat",
@@ -273,10 +273,10 @@ const String staticExerciseJson = r'''[
       "Arms"
     ],
     "primaryMuscles": [
-      "bicep"
+      "biceps brachii"
     ],
     "secondaryMuscles": [
-      "forearm - inner"
+      "wrist flexors"
     ],
     "movementVariations": [
       "bodyweight",
@@ -314,11 +314,11 @@ const String staticExerciseJson = r'''[
       "Glutes"
     ],
     "primaryMuscles": [
-      "glute"
+      "gluteus maximus"
     ],
     "secondaryMuscles": [
-      "hamstring",
-      "thigh - inner"
+      "hamstrings",
+      "hip adductors"
     ],
     "movementVariations": [
       "single-leg",
@@ -339,10 +339,10 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "oblique"
+      "external obliques"
     ],
     "secondaryMuscles": [
-      "abdominal"
+      "rectus abdominis"
     ],
     "movementVariations": [
       "single-leg",
@@ -363,12 +363,12 @@ const String staticExerciseJson = r'''[
       "Triceps"
     ],
     "primaryMuscles": [
-      "chest",
-      "tricep"
+      "pectoralis major",
+      "triceps brachii"
     ],
     "secondaryMuscles": [
-      "rotator cuff - front",
-      "shoulder - front"
+      "subscapularis",
+      "anterior deltoid"
     ],
     "movementVariations": [
       "bodyweight",
@@ -394,8 +394,8 @@ const String staticExerciseJson = r'''[
       "Shoulders"
     ],
     "primaryMuscles": [
-      "shoulder - back",
-      "shoulder - side"
+      "posterior deltoid",
+      "lateral deltoid"
     ],
     "secondaryMuscles": [],
     "movementVariations": [
@@ -417,12 +417,12 @@ const String staticExerciseJson = r'''[
       "Glutes"
     ],
     "primaryMuscles": [
-      "glute",
-      "hamstring",
-      "lower back"
+      "gluteus maximus",
+      "hamstrings",
+      "erector spinae"
     ],
     "secondaryMuscles": [
-      "abdominal"
+      "rectus abdominis"
     ],
     "movementVariations": [
       "floor",
@@ -447,11 +447,11 @@ const String staticExerciseJson = r'''[
       "Glutes"
     ],
     "primaryMuscles": [
-      "glute",
-      "hamstring"
+      "gluteus maximus",
+      "hamstrings"
     ],
     "secondaryMuscles": [
-      "thigh - inner"
+      "hip adductors"
     ],
     "movementVariations": [
       "single-leg",
@@ -474,12 +474,12 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "abdominal",
-      "forearm - inner",
-      "forearm - outer"
+      "rectus abdominis",
+      "wrist flexors",
+      "wrist extensors"
     ],
     "secondaryMuscles": [
-      "oblique"
+      "external obliques"
     ],
     "movementVariations": [
       "hanging",
@@ -506,15 +506,15 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "chest",
-      "glute",
-      "quad",
-      "shoulder - front",
-      "shoulder - side"
+      "pectoralis major",
+      "gluteus maximus",
+      "quadriceps femoris",
+      "anterior deltoid",
+      "lateral deltoid"
     ],
     "secondaryMuscles": [
-      "abdominal",
-      "trap"
+      "rectus abdominis",
+      "trapezius"
     ],
     "movementVariations": [
       "single-leg",
@@ -538,7 +538,7 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "quad"
+      "quadriceps femoris"
     ],
     "secondaryMuscles": [],
     "movementVariations": [
@@ -562,10 +562,10 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "thigh - outer"
+      "hip abductors"
     ],
     "secondaryMuscles": [
-      "glute"
+      "gluteus maximus"
     ],
     "movementVariations": [
       "single-leg",
@@ -589,12 +589,12 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "abdominal",
-      "lower back"
+      "rectus abdominis",
+      "erector spinae"
     ],
     "secondaryMuscles": [
-      "oblique",
-      "shoulder - front"
+      "external obliques",
+      "anterior deltoid"
     ],
     "movementVariations": [
       "forearm",
@@ -621,11 +621,11 @@ const String staticExerciseJson = r'''[
       "Glutes"
     ],
     "primaryMuscles": [
-      "glute"
+      "gluteus maximus"
     ],
     "secondaryMuscles": [
-      "hamstring",
-      "thigh - inner"
+      "hamstrings",
+      "hip adductors"
     ],
     "movementVariations": [
       "single-leg",
@@ -648,12 +648,12 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "glute",
-      "quad",
-      "thigh - inner"
+      "gluteus maximus",
+      "quadriceps femoris",
+      "hip adductors"
     ],
     "secondaryMuscles": [
-      "calf"
+      "gastrocnemius"
     ],
     "movementVariations": [
       "walking",
@@ -689,11 +689,11 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "oblique"
+      "external obliques"
     ],
     "secondaryMuscles": [
-      "abdominal",
-      "shoulder - front"
+      "rectus abdominis",
+      "anterior deltoid"
     ],
     "movementVariations": [
       "rotational",
@@ -716,16 +716,16 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "lat",
-      "shoulder - back",
-      "trap"
+      "latissimus dorsi",
+      "posterior deltoid",
+      "trapezius"
     ],
     "secondaryMuscles": [
-      "bicep",
-      "forearm - inner",
-      "lower back",
-      "rotator cuff - back",
-      "rotator cuff - front"
+      "biceps brachii",
+      "wrist flexors",
+      "erector spinae",
+      "infraspinatus",
+      "subscapularis"
     ],
     "movementVariations": [
       "t-bar",
@@ -760,11 +760,11 @@ const String staticExerciseJson = r'''[
       "Shoulders"
     ],
     "primaryMuscles": [
-      "shoulder - front"
+      "anterior deltoid"
     ],
     "secondaryMuscles": [
-      "shoulder - side",
-      "tricep"
+      "lateral deltoid",
+      "triceps brachii"
     ],
     "movementVariations": [
       "single-arm",
@@ -794,12 +794,12 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "shoulder - side"
+      "lateral deltoid"
     ],
     "secondaryMuscles": [
-      "bicep",
-      "shoulder - front",
-      "trap"
+      "biceps brachii",
+      "anterior deltoid",
+      "trapezius"
     ],
     "movementVariations": [
       "wide-grip",
@@ -827,14 +827,14 @@ const String staticExerciseJson = r'''[
       "Shoulders"
     ],
     "primaryMuscles": [
-      "shoulder - back",
-      "trap"
+      "posterior deltoid",
+      "trapezius"
     ],
     "secondaryMuscles": [
-      "forearm - inner",
-      "rotator cuff - back",
-      "shoulder - side",
-      "lat"
+      "wrist flexors",
+      "infraspinatus",
+      "lateral deltoid",
+      "latissimus dorsi"
     ],
     "movementVariations": [
       "single-arm",
@@ -863,14 +863,14 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "shoulder - back",
-      "trap"
+      "posterior deltoid",
+      "trapezius"
     ],
     "secondaryMuscles": [
-      "forearm - inner",
-      "rotator cuff - back",
-      "shoulder - side",
-      "lat"
+      "wrist flexors",
+      "infraspinatus",
+      "lateral deltoid",
+      "latissimus dorsi"
     ],
     "movementVariations": [
       "single-arm",
@@ -895,14 +895,14 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "shoulder - back",
-      "trap"
+      "posterior deltoid",
+      "trapezius"
     ],
     "secondaryMuscles": [
-      "forearm - inner",
-      "rotator cuff - back",
-      "shoulder - side",
-      "lat"
+      "wrist flexors",
+      "infraspinatus",
+      "lateral deltoid",
+      "latissimus dorsi"
     ],
     "movementVariations": [
       "single-arm",
@@ -930,14 +930,14 @@ const String staticExerciseJson = r'''[
       "Shoulders"
     ],
     "primaryMuscles": [
-      "shoulder - back",
-      "trap"
+      "posterior deltoid",
+      "trapezius"
     ],
     "secondaryMuscles": [
-      "forearm - inner",
-      "rotator cuff - back",
-      "shoulder - side",
-      "lat"
+      "wrist flexors",
+      "infraspinatus",
+      "lateral deltoid",
+      "latissimus dorsi"
     ],
     "movementVariations": [
       "single-arm",
@@ -962,14 +962,14 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "shoulder - back",
-      "trap"
+      "posterior deltoid",
+      "trapezius"
     ],
     "secondaryMuscles": [
-      "forearm - inner",
-      "rotator cuff - back",
-      "shoulder - side",
-      "lat"
+      "wrist flexors",
+      "infraspinatus",
+      "lateral deltoid",
+      "latissimus dorsi"
     ],
     "movementVariations": [
       "single-arm",
@@ -994,11 +994,11 @@ const String staticExerciseJson = r'''[
       "Chest"
     ],
     "primaryMuscles": [
-      "chest",
-      "shoulder - front"
+      "pectoralis major",
+      "anterior deltoid"
     ],
     "secondaryMuscles": [
-      "tricep"
+      "triceps brachii"
     ],
     "movementVariations": [
       "single-arm",
@@ -1020,14 +1020,14 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "glute",
-      "lower back"
+      "gluteus maximus",
+      "erector spinae"
     ],
     "secondaryMuscles": [
-      "forearm - outer",
-      "hamstring",
-      "thigh - inner",
-      "trap"
+      "wrist extensors",
+      "hamstrings",
+      "hip adductors",
+      "trapezius"
     ],
     "movementVariations": [
       "hang",
@@ -1057,7 +1057,7 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "abdominal"
+      "rectus abdominis"
     ],
     "secondaryMuscles": [],
     "movementVariations": [
@@ -1079,15 +1079,15 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "quad"
+      "quadriceps femoris"
     ],
     "secondaryMuscles": [
-      "calf",
-      "forearm - inner",
-      "glute",
-      "lower back",
-      "thigh - inner",
-      "trap"
+      "gastrocnemius",
+      "wrist flexors",
+      "gluteus maximus",
+      "erector spinae",
+      "hip adductors",
+      "trapezius"
     ],
     "movementVariations": [
       "reverse",
@@ -1112,12 +1112,12 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "lat"
+      "latissimus dorsi"
     ],
     "secondaryMuscles": [
-      "rotator cuff - back",
-      "rotator cuff - front",
-      "shoulder - back"
+      "infraspinatus",
+      "subscapularis",
+      "posterior deltoid"
     ],
     "movementVariations": [
       "straight arm",
@@ -1147,14 +1147,14 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "glute",
-      "thigh - outer"
+      "gluteus maximus",
+      "hip abductors"
     ],
     "secondaryMuscles": [
-      "calf",
-      "hamstring",
-      "quad",
-      "thigh - inner"
+      "gastrocnemius",
+      "hamstrings",
+      "quadriceps femoris",
+      "hip adductors"
     ],
     "movementVariations": [
       "wide-stance",
@@ -1177,10 +1177,10 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "abdominal"
+      "rectus abdominis"
     ],
     "secondaryMuscles": [
-      "oblique"
+      "external obliques"
     ],
     "movementVariations": [
       "standard",
@@ -1206,12 +1206,12 @@ const String staticExerciseJson = r'''[
       "Chest"
     ],
     "primaryMuscles": [
-      "chest"
+      "pectoralis major"
     ],
     "secondaryMuscles": [
-      "bicep",
-      "forearm - inner",
-      "shoulder - front"
+      "biceps brachii",
+      "wrist flexors",
+      "anterior deltoid"
     ],
     "movementVariations": [
       "incline",
@@ -1235,10 +1235,10 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "abdominal"
+      "rectus abdominis"
     ],
     "secondaryMuscles": [
-      "oblique"
+      "external obliques"
     ],
     "movementVariations": [
       "slow",
@@ -1259,7 +1259,7 @@ const String staticExerciseJson = r'''[
       "Triceps"
     ],
     "primaryMuscles": [
-      "tricep"
+      "triceps brachii"
     ],
     "secondaryMuscles": [],
     "movementVariations": [
@@ -1286,14 +1286,14 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "lat"
+      "latissimus dorsi"
     ],
     "secondaryMuscles": [
-      "bicep",
-      "forearm - inner",
-      "rotator cuff - back",
-      "rotator cuff - front",
-      "shoulder - back"
+      "biceps brachii",
+      "wrist flexors",
+      "infraspinatus",
+      "subscapularis",
+      "posterior deltoid"
     ],
     "movementVariations": [
       "single-arm",
@@ -1317,7 +1317,7 @@ const String staticExerciseJson = r'''[
       "Arms"
     ],
     "primaryMuscles": [
-      "forearm - inner"
+      "wrist flexors"
     ],
     "secondaryMuscles": [],
     "movementVariations": [
@@ -1344,13 +1344,13 @@ const String staticExerciseJson = r'''[
       "Shoulders"
     ],
     "primaryMuscles": [
-      "shoulder - front",
-      "shoulder - side"
+      "anterior deltoid",
+      "lateral deltoid"
     ],
     "secondaryMuscles": [
-      "tricep",
-      "trap",
-      "rotator cuff - front"
+      "triceps brachii",
+      "trapezius",
+      "subscapularis"
     ],
     "movementVariations": [
       "push press",
@@ -1381,11 +1381,11 @@ const String staticExerciseJson = r'''[
       "Glutes"
     ],
     "primaryMuscles": [
-      "glute"
+      "gluteus maximus"
     ],
     "secondaryMuscles": [
-      "hamstring",
-      "thigh - inner"
+      "hamstrings",
+      "hip adductors"
     ],
     "movementVariations": [
       "single-leg",
@@ -1413,12 +1413,12 @@ const String staticExerciseJson = r'''[
       "Glutes"
     ],
     "primaryMuscles": [
-      "hamstring",
-      "glute"
+      "hamstrings",
+      "gluteus maximus"
     ],
     "secondaryMuscles": [
-      "lower back",
-      "calf"
+      "erector spinae",
+      "gastrocnemius"
     ],
     "movementVariations": [
       "single-leg",
@@ -1445,11 +1445,11 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "hamstring"
+      "hamstrings"
     ],
     "secondaryMuscles": [
-      "glute",
-      "calf"
+      "gluteus maximus",
+      "gastrocnemius"
     ],
     "movementVariations": [
       "bodyweight",
@@ -1472,12 +1472,12 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "hamstring",
-      "lower back"
+      "hamstrings",
+      "erector spinae"
     ],
     "secondaryMuscles": [
-      "glute",
-      "abdominal"
+      "gluteus maximus",
+      "rectus abdominis"
     ],
     "movementVariations": [
       "seated",
@@ -1503,12 +1503,12 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "glute",
-      "quad"
+      "gluteus maximus",
+      "quadriceps femoris"
     ],
     "secondaryMuscles": [
-      "hamstring",
-      "calf"
+      "hamstrings",
+      "gastrocnemius"
     ],
     "movementVariations": [
       "bodyweight",
@@ -1535,11 +1535,11 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "hamstring"
+      "hamstrings"
     ],
     "secondaryMuscles": [
-      "calf",
-      "glute"
+      "gastrocnemius",
+      "gluteus maximus"
     ],
     "movementVariations": [
       "single-leg",
@@ -1566,7 +1566,7 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "calf"
+      "gastrocnemius"
     ],
     "secondaryMuscles": [],
     "movementVariations": [
@@ -1597,13 +1597,13 @@ const String staticExerciseJson = r'''[
       "Biceps"
     ],
     "primaryMuscles": [
-      "lat",
-      "bicep"
+      "latissimus dorsi",
+      "biceps brachii"
     ],
     "secondaryMuscles": [
-      "forearm - inner",
-      "shoulder - back",
-      "rotator cuff - back"
+      "wrist flexors",
+      "posterior deltoid",
+      "infraspinatus"
     ],
     "movementVariations": [
       "bodyweight",
@@ -1629,13 +1629,13 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "lat",
-      "shoulder - back"
+      "latissimus dorsi",
+      "posterior deltoid"
     ],
     "secondaryMuscles": [
-      "bicep",
-      "trap",
-      "forearm - inner"
+      "biceps brachii",
+      "trapezius",
+      "wrist flexors"
     ],
     "movementVariations": [
       "bodyweight",
@@ -1662,13 +1662,13 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "lat",
-      "shoulder - back"
+      "latissimus dorsi",
+      "posterior deltoid"
     ],
     "secondaryMuscles": [
-      "bicep",
-      "trap",
-      "rotator cuff - back"
+      "biceps brachii",
+      "trapezius",
+      "infraspinatus"
     ],
     "movementVariations": [
       "wide-grip",
@@ -1690,13 +1690,13 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "lat",
-      "shoulder - back"
+      "latissimus dorsi",
+      "posterior deltoid"
     ],
     "secondaryMuscles": [
-      "bicep",
-      "trap",
-      "forearm - inner"
+      "biceps brachii",
+      "trapezius",
+      "wrist flexors"
     ],
     "movementVariations": [
       "single-arm",
@@ -1720,14 +1720,14 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "lat",
-      "shoulder - back"
+      "latissimus dorsi",
+      "posterior deltoid"
     ],
     "secondaryMuscles": [
-      "bicep",
-      "trap",
-      "lower back",
-      "forearm - inner"
+      "biceps brachii",
+      "trapezius",
+      "erector spinae",
+      "wrist flexors"
     ],
     "movementVariations": [
       "seated",
@@ -1755,11 +1755,11 @@ const String staticExerciseJson = r'''[
       "Arms"
     ],
     "primaryMuscles": [
-      "bicep"
+      "biceps brachii"
     ],
     "secondaryMuscles": [
-      "forearm - outer",
-      "forearm - inner"
+      "wrist extensors",
+      "wrist flexors"
     ],
     "movementVariations": [
       "single-arm",
@@ -1786,7 +1786,7 @@ const String staticExerciseJson = r'''[
       "Triceps"
     ],
     "primaryMuscles": [
-      "tricep"
+      "triceps brachii"
     ],
     "secondaryMuscles": [],
     "movementVariations": [
@@ -1814,7 +1814,7 @@ const String staticExerciseJson = r'''[
       "Triceps"
     ],
     "primaryMuscles": [
-      "tricep"
+      "triceps brachii"
     ],
     "secondaryMuscles": [],
     "movementVariations": [
@@ -1840,7 +1840,7 @@ const String staticExerciseJson = r'''[
       "Arms"
     ],
     "primaryMuscles": [
-      "forearm - outer"
+      "wrist extensors"
     ],
     "secondaryMuscles": [],
     "movementVariations": [
@@ -1866,13 +1866,13 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "forearm - inner",
-      "trap"
+      "wrist flexors",
+      "trapezius"
     ],
     "secondaryMuscles": [
-      "lower back",
-      "shoulder - side",
-      "glute"
+      "erector spinae",
+      "lateral deltoid",
+      "gluteus maximus"
     ],
     "movementVariations": [
       "single-arm",
@@ -1898,15 +1898,15 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "glute",
-      "hamstring",
-      "lower back"
+      "gluteus maximus",
+      "hamstrings",
+      "erector spinae"
     ],
     "secondaryMuscles": [
-      "trap",
-      "shoulder - front",
-      "quad",
-      "forearm - outer"
+      "trapezius",
+      "anterior deltoid",
+      "quadriceps femoris",
+      "wrist extensors"
     ],
     "movementVariations": [
       "hang",
@@ -1933,14 +1933,14 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "glute",
-      "hamstring",
-      "lower back"
+      "gluteus maximus",
+      "hamstrings",
+      "erector spinae"
     ],
     "secondaryMuscles": [
-      "trap",
-      "quad",
-      "forearm - outer"
+      "trapezius",
+      "quadriceps femoris",
+      "wrist extensors"
     ],
     "movementVariations": [
       "hang",
@@ -1968,13 +1968,13 @@ const String staticExerciseJson = r'''[
       "Glutes"
     ],
     "primaryMuscles": [
-      "glute",
-      "hamstring"
+      "gluteus maximus",
+      "hamstrings"
     ],
     "secondaryMuscles": [
-      "lower back",
-      "shoulder - front",
-      "forearm - inner"
+      "erector spinae",
+      "anterior deltoid",
+      "wrist flexors"
     ],
     "movementVariations": [
       "two-hand",
@@ -1999,12 +1999,12 @@ const String staticExerciseJson = r'''[
       "Chest"
     ],
     "primaryMuscles": [
-      "shoulder - front",
-      "chest"
+      "anterior deltoid",
+      "pectoralis major"
     ],
     "secondaryMuscles": [
-      "tricep",
-      "shoulder - side"
+      "triceps brachii",
+      "lateral deltoid"
     ],
     "movementVariations": [
       "single-arm",
@@ -2028,12 +2028,12 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "chest",
-      "lat"
+      "pectoralis major",
+      "latissimus dorsi"
     ],
     "secondaryMuscles": [
-      "tricep",
-      "shoulder - back"
+      "triceps brachii",
+      "posterior deltoid"
     ],
     "movementVariations": [
       "decline",
@@ -2057,13 +2057,13 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "lat",
-      "shoulder - back"
+      "latissimus dorsi",
+      "posterior deltoid"
     ],
     "secondaryMuscles": [
-      "bicep",
-      "forearm - inner",
-      "trap"
+      "biceps brachii",
+      "wrist flexors",
+      "trapezius"
     ],
     "movementVariations": [
       "overhand",
@@ -2084,12 +2084,12 @@ const String staticExerciseJson = r'''[
       "Shoulders"
     ],
     "primaryMuscles": [
-      "shoulder - back",
-      "rotator cuff - back"
+      "posterior deltoid",
+      "infraspinatus"
     ],
     "secondaryMuscles": [
-      "trap",
-      "shoulder - side"
+      "trapezius",
+      "lateral deltoid"
     ],
     "movementVariations": [
       "overhand",
@@ -2109,10 +2109,10 @@ const String staticExerciseJson = r'''[
       "Shoulders"
     ],
     "primaryMuscles": [
-      "rotator cuff - back"
+      "infraspinatus"
     ],
     "secondaryMuscles": [
-      "shoulder - back"
+      "posterior deltoid"
     ],
     "movementVariations": [
       "standing",
@@ -2135,10 +2135,10 @@ const String staticExerciseJson = r'''[
       "Shoulders"
     ],
     "primaryMuscles": [
-      "rotator cuff - front"
+      "subscapularis"
     ],
     "secondaryMuscles": [
-      "shoulder - front"
+      "anterior deltoid"
     ],
     "movementVariations": [
       "standing",
@@ -2161,13 +2161,13 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "lower back",
-      "glute"
+      "erector spinae",
+      "gluteus maximus"
     ],
     "secondaryMuscles": [
-      "trap",
-      "hamstring",
-      "forearm - inner"
+      "trapezius",
+      "hamstrings",
+      "wrist flexors"
     ],
     "movementVariations": [
       "below-knee",
@@ -2192,10 +2192,10 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "thigh - inner"
+      "hip adductors"
     ],
     "secondaryMuscles": [
-      "glute"
+      "gluteus maximus"
     ],
     "movementVariations": [
       "seated",
@@ -2218,12 +2218,12 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "glute",
-      "quad"
+      "gluteus maximus",
+      "quadriceps femoris"
     ],
     "secondaryMuscles": [
-      "hamstring",
-      "calf"
+      "hamstrings",
+      "gastrocnemius"
     ],
     "movementVariations": [
       "standard",
@@ -2248,11 +2248,11 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "quad"
+      "quadriceps femoris"
     ],
     "secondaryMuscles": [
-      "glute",
-      "hamstring"
+      "gluteus maximus",
+      "hamstrings"
     ],
     "movementVariations": [
       "bodyweight",
@@ -2274,11 +2274,11 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "abdominal"
+      "rectus abdominis"
     ],
     "secondaryMuscles": [
-      "oblique",
-      "lower back"
+      "external obliques",
+      "erector spinae"
     ],
     "movementVariations": [
       "bodyweight",
@@ -2300,12 +2300,12 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "oblique",
-      "abdominal"
+      "external obliques",
+      "rectus abdominis"
     ],
     "secondaryMuscles": [
-      "shoulder - front",
-      "lower back"
+      "anterior deltoid",
+      "erector spinae"
     ],
     "movementVariations": [
       "kneeling",
@@ -2330,12 +2330,12 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "abdominal"
+      "rectus abdominis"
     ],
     "secondaryMuscles": [
-      "oblique",
-      "lower back",
-      "shoulder - front"
+      "external obliques",
+      "erector spinae",
+      "anterior deltoid"
     ],
     "movementVariations": [
       "kneeling",
@@ -2357,10 +2357,10 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "oblique"
+      "external obliques"
     ],
     "secondaryMuscles": [
-      "abdominal"
+      "rectus abdominis"
     ],
     "movementVariations": [
       "bodyweight",
@@ -2383,12 +2383,12 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "abdominal"
+      "rectus abdominis"
     ],
     "secondaryMuscles": [
-      "oblique",
-      "forearm - inner",
-      "hip flexor"
+      "external obliques",
+      "wrist flexors",
+      "iliopsoas"
     ],
     "movementVariations": [
       "hanging",
@@ -2414,12 +2414,12 @@ const String staticExerciseJson = r'''[
       "Shoulders"
     ],
     "primaryMuscles": [
-      "oblique"
+      "external obliques"
     ],
     "secondaryMuscles": [
-      "abdominal",
-      "shoulder - front",
-      "lower back"
+      "rectus abdominis",
+      "anterior deltoid",
+      "erector spinae"
     ],
     "movementVariations": [
       "standing",
@@ -2440,10 +2440,10 @@ const String staticExerciseJson = r'''[
       "Core"
     ],
     "primaryMuscles": [
-      "abdominal"
+      "rectus abdominis"
     ],
     "secondaryMuscles": [
-      "oblique"
+      "external obliques"
     ],
     "movementVariations": [
       "kneeling",
@@ -2467,9 +2467,9 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "glute",
-      "hamstring",
-      "lower back"
+      "gluteus maximus",
+      "hamstrings",
+      "erector spinae"
     ],
     "secondaryMuscles": [],
     "movementVariations": [
@@ -2493,13 +2493,13 @@ const String staticExerciseJson = r'''[
       "Legs"
     ],
     "primaryMuscles": [
-      "glute",
-      "quad"
+      "gluteus maximus",
+      "quadriceps femoris"
     ],
     "secondaryMuscles": [
-      "hamstring",
-      "calf",
-      "shoulder - front"
+      "hamstrings",
+      "gastrocnemius",
+      "anterior deltoid"
     ],
     "movementVariations": [
       "loaded",
@@ -2524,12 +2524,12 @@ const String staticExerciseJson = r'''[
       "Back"
     ],
     "primaryMuscles": [
-      "hamstring",
-      "glute"
+      "hamstrings",
+      "gluteus maximus"
     ],
     "secondaryMuscles": [
-      "lower back",
-      "forearm - inner"
+      "erector spinae",
+      "wrist flexors"
     ],
     "movementVariations": [
       "strap",
@@ -2546,5 +2546,4 @@ const String staticExerciseJson = r'''[
       "rope"
     ]
   }
-]
-''';
+]''';
