@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart';
+
 import '../../../data/models/workout_log.dart';
 import '../../../data/models/movement.dart';
 import '../../../data/repositories/movement_repository.dart';
@@ -21,9 +21,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     on<SearchMovement>(_onSearchMovement);
     on<SearchVariation>(_onSearchVariation);
     on<SelectMovement>(_onSelectMovement);
-    on<CreateAndSelectMovement>(_onCreateAndSelectMovement);
     on<ToggleVariation>(_onToggleVariation);
-    on<CreateAndSelectVariation>(_onCreateAndSelectVariation);
     on<AdvanceFromVariations>(_onAdvanceFromVariations);
     on<UpdateMetrics>(_onUpdateMetrics);
     on<TogglePain>(_onTogglePain);
@@ -76,7 +74,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     final movement = event.movement ?? await _movementRepository.getMovementById(event.log.movementId);
     if (movement == null) return;
 
-    List<String> variations = movement.movementVariations;
+    List<String> variations = _getAvailableVariations(movement, event.log.variations);
 
     emit(state.copyWith(
       editingLogId: event.log.id,
@@ -100,7 +98,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     
     List<String> variations = [];
     if (event.movement.id != null) {
-      variations = event.movement.movementVariations;
+      variations = _getAvailableVariations(event.movement, event.selectedVariations);
     }
 
     emit(state.copyWith(
@@ -179,7 +177,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
   ) async {
     List<String> variations = [];
     if (event.movement.id != null) {
-      variations = event.movement.movementVariations;
+      variations = event.movement.variations.keys.toList();
     }
     
     emit(
@@ -194,30 +192,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     }
   }
 
-  Future<void> _onCreateAndSelectMovement(
-    CreateAndSelectMovement event,
-    Emitter<LogExerciseState> emit,
-  ) async {
-    final newId = const Uuid().v4();
-    final movement = Movement(
-      id: newId,
-      name: event.name,
-      primaryMuscles: [],
-      secondaryMuscles: [],
-      muscleGroups: [],
-      movementVariations: [],
-      equipment: [],
-    );
 
-    // Note: To fully save it, you would inject the Database and insert it into 'movements'.
-    // Since we're doing a simplified schema, we can just use the object in memory for this log.
-
-    emit(state.copyWith(
-      selectedMovement: movement, 
-      currentStep: ExerciseLogStep.variation,
-      availableVariations: [],
-    ));
-  }
 
   Future<void> _fetchLastPerformance(
     String movementId,
@@ -242,37 +217,39 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     ToggleVariation event,
     Emitter<LogExerciseState> emit,
   ) {
+    if (state.selectedMovement == null) return;
+    
     final updated = List<String>.from(state.selectedVariations);
     if (updated.contains(event.variation)) {
       updated.remove(event.variation);
     } else {
       updated.add(event.variation);
     }
-    emit(state.copyWith(selectedVariations: updated));
+    
+    final available = _getAvailableVariations(state.selectedMovement!, updated);
+    
+    emit(state.copyWith(
+      selectedVariations: updated,
+      availableVariations: available,
+    ));
   }
 
-  Future<void> _onCreateAndSelectVariation(
-    CreateAndSelectVariation event,
-    Emitter<LogExerciseState> emit,
-  ) async {
-    if (state.selectedMovement == null || state.selectedMovement!.id == null) return;
-
-    final variation = event.name;
-
-    final updatedAvailable = List<String>.from(state.availableVariations);
-    if (!updatedAvailable.contains(variation)) {
-      updatedAvailable.add(variation);
+  List<String> _getAvailableVariations(Movement movement, List<String> selectedVariations) {
+    if (selectedVariations.isEmpty) {
+      return movement.variations.keys.toList();
     }
-
-    final updatedSelected = List<String>.from(state.selectedVariations);
-    if (!updatedSelected.contains(variation)) {
-      updatedSelected.add(variation);
+    
+    Set<String>? intersection;
+    for (final v in selectedVariations) {
+      final compat = movement.variations[v]?.toSet() ?? <String>{};
+      if (intersection == null) {
+        intersection = compat;
+      } else {
+        intersection = intersection.intersection(compat);
+      }
     }
-
-    emit(state.copyWith(
-      availableVariations: updatedAvailable,
-      selectedVariations: updatedSelected,
-    ));
+    
+    return intersection?.toList() ?? [];
   }
 
   void _onAdvanceFromVariations(

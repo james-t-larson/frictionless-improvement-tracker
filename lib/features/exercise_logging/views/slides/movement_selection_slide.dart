@@ -39,9 +39,6 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
         Expanded(
           child: BlocBuilder<LogExerciseBloc, LogExerciseState>(
             builder: (context, state) {
-              final isNew = state.movementQuery.isNotEmpty && 
-                  !state.movementSearchResults.any((m) => m.name.toLowerCase() == state.movementQuery.toLowerCase());
-
               return ListView(
                 children: [
                   if (state.movementQuery.isEmpty && state.movementSearchResults.isNotEmpty)
@@ -61,12 +58,7 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
                     title: Text(m.name, style: const TextStyle(color: Color(0xFFFAFAFA))),
                     onTap: () => context.read<LogExerciseBloc>().add(SelectMovement(m)),
                   )),
-                  if (isNew)
-                    ListTile(
-                      leading: const Icon(Icons.add, color: Color(0xFFFAFAFA)),
-                      title: Text('Add "${state.movementQuery}"', style: const TextStyle(color: Color(0xFFFAFAFA))),
-                      onTap: () => context.read<LogExerciseBloc>().add(CreateAndSelectMovement(state.movementQuery)),
-                    ),
+
                 ],
               );
             },

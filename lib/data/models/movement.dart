@@ -6,8 +6,7 @@ class Movement {
   final List<String> primaryMuscles;
   final List<String> secondaryMuscles;
   final List<String> muscleGroups;
-  final List<String> movementVariations;
-  final List<String> equipment;
+  final Map<String, List<String>> variations;
 
   Movement({
     this.id,
@@ -15,8 +14,7 @@ class Movement {
     this.primaryMuscles = const [],
     this.secondaryMuscles = const [],
     this.muscleGroups = const [],
-    this.movementVariations = const [],
-    this.equipment = const [],
+    this.variations = const {},
   });
 
   String? get muscleGroup => primaryMuscles.isNotEmpty ? primaryMuscles.first : null;
@@ -28,8 +26,7 @@ class Movement {
       'primaryMuscles': primaryMuscles,
       'secondaryMuscles': secondaryMuscles,
       'muscleGroups': muscleGroups,
-      'movementVariations': movementVariations,
-      'equipment': equipment,
+      'variations': variations,
     };
   }
 
@@ -40,8 +37,10 @@ class Movement {
       primaryMuscles: List<String>.from(json['primaryMuscles'] ?? []),
       secondaryMuscles: List<String>.from(json['secondaryMuscles'] ?? []),
       muscleGroups: List<String>.from(json['muscleGroups'] ?? []),
-      movementVariations: List<String>.from(json['movementVariations'] ?? []),
-      equipment: List<String>.from(json['equipment'] ?? []),
+      variations: (json['variations'] as Map?)?.map(
+            (key, value) => MapEntry(key.toString(), List<String>.from(value as Iterable)),
+          ) ??
+          {},
     );
   }
 
@@ -63,8 +62,7 @@ class Movement {
     List<String>? primaryMuscles,
     List<String>? secondaryMuscles,
     List<String>? muscleGroups,
-    List<String>? movementVariations,
-    List<String>? equipment,
+    Map<String, List<String>>? variations,
   }) {
     return Movement(
       id: id ?? this.id,
@@ -72,8 +70,7 @@ class Movement {
       primaryMuscles: primaryMuscles ?? this.primaryMuscles,
       secondaryMuscles: secondaryMuscles ?? this.secondaryMuscles,
       muscleGroups: muscleGroups ?? this.muscleGroups,
-      movementVariations: movementVariations ?? this.movementVariations,
-      equipment: equipment ?? this.equipment,
+      variations: variations ?? this.variations,
     );
   }
 }

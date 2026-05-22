@@ -49,13 +49,7 @@ class SelectMovement extends LogExerciseEvent {
   List<Object?> get props => [movement];
 }
 
-class CreateAndSelectMovement extends LogExerciseEvent {
-  final String name;
-  const CreateAndSelectMovement(this.name);
 
-  @override
-  List<Object?> get props => [name];
-}
 
 class ToggleVariation extends LogExerciseEvent {
   final String variation;
@@ -65,13 +59,7 @@ class ToggleVariation extends LogExerciseEvent {
   List<Object?> get props => [variation];
 }
 
-class CreateAndSelectVariation extends LogExerciseEvent {
-  final String name;
-  const CreateAndSelectVariation(this.name);
 
-  @override
-  List<Object?> get props => [name];
-}
 
 class AdvanceFromVariations extends LogExerciseEvent {
   const AdvanceFromVariations();
