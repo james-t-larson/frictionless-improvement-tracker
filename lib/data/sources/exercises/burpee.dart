@@ -12,64 +12,101 @@ const Map<String, dynamic> burpee = {
   "secondaryMuscles": ["rectus abdominis", "trapezius"],
   "variations": {
     "single-leg": {
-      "excludedVariations": ["half", "no-jump", "pull-up", "push-up", "tuck"],
+      "excludedVariations": [
+        "box jump", 
+        "bosu"
+      ],
     },
     "pull-up": {
       "excludedVariations": [
-        "half",
         "no-jump",
-        "push-up",
-        "single-leg",
         "tuck",
+        "box jump",
+        "broad jump",
+        "lateral",
+        "bosu",
+        "dumbbell"
       ],
     },
     "no-jump": {
       "excludedVariations": [
-        "half",
         "pull-up",
-        "push-up",
-        "single-leg",
         "tuck",
+        "box jump",
+        "broad jump",
+        "lateral"
       ],
     },
     "push-up": {
       "excludedVariations": [
-        "half",
-        "no-jump",
-        "pull-up",
-        "single-leg",
-        "tuck",
+        "half"
       ],
     },
     "tuck": {
       "excludedVariations": [
-        "half",
         "no-jump",
         "pull-up",
-        "push-up",
-        "single-leg",
+        "box jump",
+        "broad jump",
+        "lateral"
       ],
     },
     "half": {
       "excludedVariations": [
-        "no-jump",
-        "pull-up",
-        "push-up",
-        "single-leg",
-        "tuck",
+        "push-up"
       ],
     },
     "bosu": {
-      "excludedVariations": ["box jump", "dumbbell", "weighted"],
+      "excludedVariations": [
+        "pull-up",
+        "box jump",
+        "broad jump",
+        "lateral",
+        "dumbbell",
+        "single-leg"
+      ],
     },
     "weighted": {
-      "excludedVariations": ["bosu", "box jump", "dumbbell"],
+      "excludedVariations": [],
     },
     "box jump": {
-      "excludedVariations": ["bosu", "dumbbell", "weighted"],
+      "excludedVariations": [
+        "no-jump",
+        "tuck",
+        "pull-up",
+        "broad jump",
+        "lateral",
+        "bosu",
+        "dumbbell",
+        "single-leg"
+      ],
     },
     "dumbbell": {
-      "excludedVariations": ["bosu", "box jump", "weighted"],
+      "excludedVariations": [
+        "pull-up",
+        "box jump",
+        "bosu"
+      ],
     },
+    "broad jump": {
+      "excludedVariations": [
+        "no-jump",
+        "tuck",
+        "pull-up",
+        "box jump",
+        "lateral",
+        "bosu"
+      ],
+    },
+    "lateral": {
+      "excludedVariations": [
+        "no-jump",
+        "tuck",
+        "pull-up",
+        "box jump",
+        "broad jump",
+        "bosu"
+      ],
+    }
   },
 };
