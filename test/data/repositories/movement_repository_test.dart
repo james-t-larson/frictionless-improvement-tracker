@@ -4,7 +4,6 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:simple_gym_tracker/core/database/database_helper.dart';
 import 'package:simple_gym_tracker/data/repositories/movement_repository.dart';
 import 'package:simple_gym_tracker/data/sources/exercise_data_source.dart';
-import 'package:simple_gym_tracker/data/sources/static_exercise_data.dart';
 import 'dart:convert';
 
 void main() {
@@ -33,8 +32,8 @@ void main() {
     // Assert
     final movements = await db.query('movements');
     
-    // Convert static JSON string to list to count unique PKs
-    final decodedList = jsonDecode(staticExerciseJson) as List;
+    // Convert data source elements to list to count unique PKs
+    final decodedList = await dataSource.getExercises();
     final Set<String> uniquePks = {};
     for (var m in decodedList) {
       if (m['pk'] != null) {
