@@ -7,70 +7,47 @@ const Map<String, dynamic> cableCrunch = {
   "variations": {
     "kneeling": {
       "excludedVariations": [
-        "oblique",
+        "lying",
         "reverse",
         "seated",
-        "side-lying",
-        "single-arm",
         "standing",
       ],
     },
     "standing": {
       "excludedVariations": [
         "kneeling",
-        "oblique",
+        "lying",
         "reverse",
         "seated",
-        "side-lying",
-        "single-arm",
-      ],
-    },
-    "single-arm": {
-      "excludedVariations": [
-        "kneeling",
-        "oblique",
-        "reverse",
-        "seated",
-        "side-lying",
-        "standing",
-      ],
-    },
-    "oblique": {
-      "excludedVariations": [
-        "kneeling",
-        "reverse",
-        "seated",
-        "side-lying",
-        "single-arm",
-        "standing",
-      ],
-    },
-    "reverse": {
-      "excludedVariations": [
-        "kneeling",
-        "oblique",
-        "seated",
-        "side-lying",
-        "single-arm",
-        "standing",
-      ],
-    },
-    "side-lying": {
-      "excludedVariations": [
-        "kneeling",
-        "oblique",
-        "reverse",
-        "seated",
-        "single-arm",
-        "standing",
       ],
     },
     "seated": {
       "excludedVariations": [
         "kneeling",
-        "oblique",
+        "lying",
         "reverse",
-        "side-lying",
+        "standing",
+      ],
+    },
+    "lying": {
+      "excludedVariations": [
+        "kneeling",
+        "seated",
+        "standing",
+      ],
+    },
+    "single-arm": {
+      "excludedVariations": [
+        "reverse",
+      ],
+    },
+    "oblique": {
+      "excludedVariations": [],
+    },
+    "reverse": {
+      "excludedVariations": [
+        "kneeling",
+        "seated",
         "single-arm",
         "standing",
       ],
