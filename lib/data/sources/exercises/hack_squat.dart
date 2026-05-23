@@ -14,50 +14,34 @@ const Map<String, dynamic> hackSquat = {
   "variations": {
     "reverse": {
       "excludedVariations": [
+        "barbell",
+        "dumbbell",
         "heel-elevated",
-        "narrow-stance",
-        "paused",
-        "wide-stance",
       ],
     },
     "narrow-stance": {
       "excludedVariations": [
-        "heel-elevated",
-        "paused",
-        "reverse",
         "wide-stance",
       ],
     },
     "wide-stance": {
       "excludedVariations": [
-        "heel-elevated",
         "narrow-stance",
-        "paused",
-        "reverse",
       ],
     },
     "paused": {
-      "excludedVariations": [
-        "heel-elevated",
-        "narrow-stance",
-        "reverse",
-        "wide-stance",
-      ],
+      "excludedVariations": [],
     },
     "heel-elevated": {
       "excludedVariations": [
-        "narrow-stance",
-        "paused",
         "reverse",
-        "wide-stance",
       ],
     },
     "barbell": {
       "excludedVariations": [
-        "banded",
         "dumbbell",
         "machine",
-        "safety bar",
+        "reverse",
         "smith machine",
       ],
     },
@@ -66,44 +50,27 @@ const Map<String, dynamic> hackSquat = {
         "banded",
         "barbell",
         "machine",
-        "safety bar",
+        "reverse",
         "smith machine",
       ],
     },
     "machine": {
       "excludedVariations": [
-        "banded",
         "barbell",
         "dumbbell",
-        "safety bar",
         "smith machine",
       ],
     },
     "smith machine": {
       "excludedVariations": [
-        "banded",
         "barbell",
         "dumbbell",
         "machine",
-        "safety bar",
       ],
     },
     "banded": {
       "excludedVariations": [
-        "barbell",
         "dumbbell",
-        "machine",
-        "safety bar",
-        "smith machine",
-      ],
-    },
-    "safety bar": {
-      "excludedVariations": [
-        "banded",
-        "barbell",
-        "dumbbell",
-        "machine",
-        "smith machine",
       ],
     },
   },
