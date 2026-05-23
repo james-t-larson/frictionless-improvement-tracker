@@ -7,110 +7,74 @@ const Map<String, dynamic> chinUp = {
   "variations": {
     "bodyweight": {
       "excludedVariations": [
-        "L-sit",
-        "close-grip",
-        "neutral-grip",
-        "typewriter",
-        "wide-grip",
+        "weighted",
+        "assisted",
+        "band-resisted",
       ],
     },
     "close-grip": {
       "excludedVariations": [
-        "L-sit",
-        "bodyweight",
         "neutral-grip",
-        "typewriter",
-        "wide-grip",
+        "ring",
       ],
     },
     "neutral-grip": {
       "excludedVariations": [
-        "L-sit",
-        "bodyweight",
         "close-grip",
-        "typewriter",
-        "wide-grip",
-      ],
-    },
-    "wide-grip": {
-      "excludedVariations": [
-        "L-sit",
-        "bodyweight",
-        "close-grip",
-        "neutral-grip",
-        "typewriter",
+        "ring",
       ],
     },
     "L-sit": {
       "excludedVariations": [
-        "bodyweight",
-        "close-grip",
-        "neutral-grip",
-        "typewriter",
-        "wide-grip",
-      ],
-    },
-    "typewriter": {
-      "excludedVariations": [
-        "L-sit",
-        "bodyweight",
-        "close-grip",
-        "neutral-grip",
-        "wide-grip",
+        "assisted",
+        "kipping",
       ],
     },
     "weighted": {
       "excludedVariations": [
+        "bodyweight",
         "assisted",
         "band-resisted",
         "kipping",
-        "ring",
-        "supinated",
       ],
     },
     "assisted": {
       "excludedVariations": [
+        "bodyweight",
+        "weighted",
         "band-resisted",
         "kipping",
-        "ring",
-        "supinated",
-        "weighted",
+        "L-sit",
+        "negative",
       ],
     },
     "ring": {
       "excludedVariations": [
-        "assisted",
-        "band-resisted",
-        "kipping",
-        "supinated",
-        "weighted",
+        "close-grip",
+        "neutral-grip",
       ],
     },
     "band-resisted": {
       "excludedVariations": [
+        "bodyweight",
+        "weighted",
         "assisted",
         "kipping",
-        "ring",
-        "supinated",
-        "weighted",
       ],
     },
     "kipping": {
       "excludedVariations": [
+        "weighted",
         "assisted",
         "band-resisted",
-        "ring",
-        "supinated",
-        "weighted",
+        "L-sit",
+        "negative",
       ],
     },
-    "supinated": {
+    "negative": {
       "excludedVariations": [
         "assisted",
-        "band-resisted",
         "kipping",
-        "ring",
-        "weighted",
       ],
     },
   },
