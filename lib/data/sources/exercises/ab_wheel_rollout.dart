@@ -10,33 +10,34 @@ const Map<String, dynamic> abWheelRollout = {
   ],
   "variations": {
     "kneeling": {
-      "excludedVariations": ["feet-elevated", "pike", "single-arm", "standing"],
+      "excludedVariations": ["feet-elevated", "pike", "standing"],
     },
     "standing": {
-      "excludedVariations": ["feet-elevated", "kneeling", "pike", "single-arm"],
-    },
-    "single-arm": {
-      "excludedVariations": ["feet-elevated", "kneeling", "pike", "standing"],
-    },
-    "pike": {
-      "excludedVariations": [
-        "feet-elevated",
-        "kneeling",
-        "single-arm",
-        "standing",
-      ],
+      "excludedVariations": ["feet-elevated", "kneeling", "pike"],
     },
     "feet-elevated": {
-      "excludedVariations": ["kneeling", "pike", "single-arm", "standing"],
+      "excludedVariations": ["kneeling", "standing", "pike"],
+    },
+    "pike": {
+      "excludedVariations": ["kneeling", "standing", "feet-elevated", "weighted", "band-assisted", "single-arm", "twisting"],
+    },
+    "single-arm": {
+      "excludedVariations": ["pike"],
+    },
+    "twisting": {
+      "excludedVariations": ["pike"],
     },
     "barbell": {
       "excludedVariations": ["band-assisted", "weighted"],
     },
     "band-assisted": {
-      "excludedVariations": ["barbell", "weighted"],
+      "excludedVariations": ["barbell", "weighted", "pike"],
     },
     "weighted": {
-      "excludedVariations": ["band-assisted", "barbell"],
+      "excludedVariations": ["band-assisted", "barbell", "pike"],
+    },
+    "ramp": {
+      "excludedVariations": ["kneeling", "feet-elevated", "pike"],
     },
   },
 };
