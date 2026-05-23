@@ -7,72 +7,51 @@ const Map<String, dynamic> bandPullApart = {
   "variations": {
     "overhand": {
       "excludedVariations": [
-        "chest-level",
-        "narrow-grip",
-        "overhead",
-        "single-arm",
         "underhand",
-        "wide-grip",
       ],
     },
     "underhand": {
       "excludedVariations": [
-        "chest-level",
-        "narrow-grip",
         "overhand",
-        "overhead",
-        "single-arm",
-        "wide-grip",
-      ],
-    },
-    "wide-grip": {
-      "excludedVariations": [
-        "chest-level",
-        "narrow-grip",
-        "overhand",
-        "overhead",
-        "single-arm",
-        "underhand",
-      ],
-    },
-    "narrow-grip": {
-      "excludedVariations": [
-        "chest-level",
-        "overhand",
-        "overhead",
-        "single-arm",
-        "underhand",
-        "wide-grip",
       ],
     },
     "chest-level": {
       "excludedVariations": [
-        "narrow-grip",
-        "overhand",
         "overhead",
-        "single-arm",
-        "underhand",
-        "wide-grip",
+        "diagonal",
       ],
     },
     "overhead": {
       "excludedVariations": [
         "chest-level",
-        "narrow-grip",
-        "overhand",
-        "single-arm",
-        "underhand",
-        "wide-grip",
+        "diagonal",
+      ],
+    },
+    "diagonal": {
+      "excludedVariations": [
+        "chest-level",
+        "overhead",
       ],
     },
     "single-arm": {
+      "excludedVariations": [],
+    },
+    "supine": {
       "excludedVariations": [
-        "chest-level",
-        "narrow-grip",
-        "overhand",
-        "overhead",
-        "underhand",
-        "wide-grip",
+        "seated",
+        "bent-over",
+      ],
+    },
+    "seated": {
+      "excludedVariations": [
+        "supine",
+        "bent-over",
+      ],
+    },
+    "bent-over": {
+      "excludedVariations": [
+        "supine",
+        "seated",
       ],
     },
   },
