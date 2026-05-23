@@ -7,92 +7,63 @@ const Map<String, dynamic> kettlebellSwing = {
   "variations": {
     "two-hand": {
       "excludedVariations": [
-        "American",
-        "ballistic",
-        "dead swing",
-        "high pull",
         "single-arm",
-        "snatch-grip",
-        "sumo",
-      ],
+        "alternating",
+        "double"
+      ]
     },
     "single-arm": {
       "excludedVariations": [
-        "American",
-        "ballistic",
-        "dead swing",
-        "high pull",
-        "snatch-grip",
-        "sumo",
         "two-hand",
-      ],
+        "alternating",
+        "double",
+        "American"
+      ]
+    },
+    "alternating": {
+      "excludedVariations": [
+        "two-hand",
+        "single-arm",
+        "double",
+        "American",
+        "banded"
+      ]
+    },
+    "double": {
+      "excludedVariations": [
+        "two-hand",
+        "single-arm",
+        "alternating",
+        "American",
+        "banded"
+      ]
     },
     "American": {
       "excludedVariations": [
-        "ballistic",
-        "dead swing",
-        "high pull",
         "single-arm",
-        "snatch-grip",
-        "sumo",
-        "two-hand",
-      ],
+        "alternating",
+        "double",
+        "high pull",
+        "banded"
+      ]
     },
     "sumo": {
-      "excludedVariations": [
-        "American",
-        "ballistic",
-        "dead swing",
-        "high pull",
-        "single-arm",
-        "snatch-grip",
-        "two-hand",
-      ],
+      "excludedVariations": []
     },
     "high pull": {
       "excludedVariations": [
-        "American",
-        "ballistic",
-        "dead swing",
-        "single-arm",
-        "snatch-grip",
-        "sumo",
-        "two-hand",
-      ],
+        "American"
+      ]
     },
     "dead swing": {
-      "excludedVariations": [
-        "American",
-        "ballistic",
-        "high pull",
-        "single-arm",
-        "snatch-grip",
-        "sumo",
-        "two-hand",
-      ],
+      "excludedVariations": []
     },
-    "ballistic": {
+    "banded": {
       "excludedVariations": [
-        "American",
-        "dead swing",
-        "high pull",
-        "single-arm",
-        "snatch-grip",
-        "sumo",
-        "two-hand",
-      ],
-    },
-    "snatch-grip": {
-      "excludedVariations": [
-        "American",
-        "ballistic",
-        "dead swing",
-        "high pull",
-        "single-arm",
-        "sumo",
-        "two-hand",
-      ],
-    },
-    "banded": {"excludedVariations": []},
-  },
+        "alternating",
+        "double",
+        "American"
+      ]
+    }
+  }
 };
