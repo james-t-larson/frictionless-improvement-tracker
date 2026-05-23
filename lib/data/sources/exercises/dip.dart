@@ -7,107 +7,84 @@ const Map<String, dynamic> dip = {
   "variations": {
     "bodyweight": {
       "excludedVariations": [
-        "chest-forward",
-        "korean",
-        "single-arm",
-        "upright",
+        "assisted",
+        "banded",
+        "weighted",
       ],
     },
     "chest-forward": {
-      "excludedVariations": ["bodyweight", "korean", "single-arm", "upright"],
+      "excludedVariations": [
+        "bench",
+        "upright",
+      ],
     },
     "upright": {
       "excludedVariations": [
-        "bodyweight",
         "chest-forward",
-        "korean",
-        "single-arm",
-      ],
-    },
-    "korean": {
-      "excludedVariations": [
-        "bodyweight",
-        "chest-forward",
-        "single-arm",
-        "upright",
-      ],
-    },
-    "single-arm": {
-      "excludedVariations": [
-        "bodyweight",
-        "chest-forward",
-        "korean",
-        "upright",
       ],
     },
     "weighted": {
       "excludedVariations": [
         "assisted",
         "banded",
-        "bench",
-        "machine",
-        "parallel bars",
-        "rings",
+        "bodyweight",
       ],
     },
     "assisted": {
       "excludedVariations": [
         "banded",
-        "bench",
-        "machine",
-        "parallel bars",
-        "rings",
-        "weighted",
-      ],
-    },
-    "rings": {
-      "excludedVariations": [
-        "assisted",
-        "banded",
-        "bench",
-        "machine",
-        "parallel bars",
-        "weighted",
-      ],
-    },
-    "bench": {
-      "excludedVariations": [
-        "assisted",
-        "banded",
-        "machine",
-        "parallel bars",
-        "rings",
-        "weighted",
-      ],
-    },
-    "machine": {
-      "excludedVariations": [
-        "assisted",
-        "banded",
-        "bench",
-        "parallel bars",
-        "rings",
-        "weighted",
-      ],
-    },
-    "parallel bars": {
-      "excludedVariations": [
-        "assisted",
-        "banded",
-        "bench",
-        "machine",
-        "rings",
+        "bodyweight",
         "weighted",
       ],
     },
     "banded": {
       "excludedVariations": [
         "assisted",
+        "bodyweight",
+        "machine",
+        "weighted",
+      ],
+    },
+    "straight bar": {
+      "excludedVariations": [
         "bench",
         "machine",
         "parallel bars",
         "rings",
-        "weighted",
+      ],
+    },
+    "parallel bars": {
+      "excludedVariations": [
+        "bench",
+        "machine",
+        "rings",
+        "straight bar",
+      ],
+    },
+    "rings": {
+      "excludedVariations": [
+        "bench",
+        "machine",
+        "parallel bars",
+        "straight bar",
+      ],
+    },
+    "bench": {
+      "excludedVariations": [
+        "chest-forward",
+        "machine",
+        "parallel bars",
+        "rings",
+        "straight bar",
+      ],
+    },
+    "machine": {
+      "excludedVariations": [
+        "banded",
+        "bench",
+        "parallel bars",
+        "rings",
+        "straight bar",
       ],
     },
   },
