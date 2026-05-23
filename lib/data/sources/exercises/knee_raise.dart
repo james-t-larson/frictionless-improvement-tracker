@@ -7,86 +7,100 @@ const Map<String, dynamic> kneeRaise = {
   "variations": {
     "hanging": {
       "excludedVariations": [
-        "bodyweight",
-        "incline",
         "lying",
-        "straight-leg",
-        "toes-to-bar",
+        "incline",
+        "captain's chair",
+        "parallel bars",
+        "standing",
+        "cable",
+        "band",
       ],
     },
     "bodyweight": {
       "excludedVariations": [
-        "hanging",
-        "incline",
-        "lying",
-        "straight-leg",
-        "toes-to-bar",
-      ],
-    },
-    "straight-leg": {
-      "excludedVariations": [
-        "bodyweight",
-        "hanging",
-        "incline",
-        "lying",
-        "toes-to-bar",
-      ],
-    },
-    "toes-to-bar": {
-      "excludedVariations": [
-        "bodyweight",
-        "hanging",
-        "incline",
-        "lying",
-        "straight-leg",
+        "weighted",
+        "cable",
+        "band",
       ],
     },
     "lying": {
       "excludedVariations": [
-        "bodyweight",
         "hanging",
         "incline",
-        "straight-leg",
-        "toes-to-bar",
+        "captain's chair",
+        "parallel bars",
+        "standing",
       ],
     },
     "incline": {
       "excludedVariations": [
-        "bodyweight",
         "hanging",
         "lying",
-        "straight-leg",
-        "toes-to-bar",
+        "captain's chair",
+        "parallel bars",
+        "standing",
+        "cable",
+        "band",
       ],
     },
     "weighted": {
       "excludedVariations": [
-        "band",
+        "bodyweight",
         "cable",
+        "band",
+      ],
+    },
+    "captain's chair": {
+      "excludedVariations": [
+        "hanging",
+        "lying",
+        "incline",
+        "parallel bars",
+        "standing",
+        "cable",
+        "band",
+      ],
+    },
+    "parallel bars": {
+      "excludedVariations": [
+        "hanging",
+        "lying",
+        "incline",
+        "captain's chair",
+        "standing",
+        "cable",
+        "band",
+      ],
+    },
+    "standing": {
+      "excludedVariations": [
+        "hanging",
+        "lying",
+        "incline",
         "captain's chair",
         "parallel bars",
       ],
     },
-    "captain's chair": {
-      "excludedVariations": ["band", "cable", "parallel bars", "weighted"],
-    },
-    "parallel bars": {
-      "excludedVariations": ["band", "cable", "captain's chair", "weighted"],
-    },
     "cable": {
       "excludedVariations": [
+        "bodyweight",
+        "weighted",
         "band",
+        "hanging",
+        "incline",
         "captain's chair",
         "parallel bars",
-        "weighted",
       ],
     },
     "band": {
       "excludedVariations": [
+        "bodyweight",
+        "weighted",
         "cable",
+        "hanging",
+        "incline",
         "captain's chair",
         "parallel bars",
-        "weighted",
       ],
     },
   },
