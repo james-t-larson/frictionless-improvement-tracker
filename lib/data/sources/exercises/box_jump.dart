@@ -7,67 +7,57 @@ const Map<String, dynamic> boxJump = {
   "variations": {
     "standard": {
       "excludedVariations": [
-        "broad jump",
+        "box jump over",
         "depth jump",
         "lateral",
         "rotational",
+        "seated",
         "single-leg",
-        "step-down",
       ],
     },
     "depth jump": {
       "excludedVariations": [
-        "broad jump",
+        "box jump over",
         "lateral",
         "rotational",
+        "seated",
         "single-leg",
         "standard",
-        "step-down",
       ],
     },
     "single-leg": {
       "excludedVariations": [
-        "broad jump",
+        "box jump over",
         "depth jump",
         "lateral",
         "rotational",
+        "seated",
         "standard",
-        "step-down",
       ],
     },
     "lateral": {
       "excludedVariations": [
-        "broad jump",
+        "box jump over",
         "depth jump",
         "rotational",
+        "seated",
         "single-leg",
         "standard",
-        "step-down",
       ],
     },
     "rotational": {
       "excludedVariations": [
-        "broad jump",
+        "box jump over",
         "depth jump",
         "lateral",
+        "seated",
         "single-leg",
         "standard",
-        "step-down",
       ],
     },
-    "broad jump": {
+    "seated": {
       "excludedVariations": [
-        "depth jump",
-        "lateral",
-        "rotational",
-        "single-leg",
-        "standard",
-        "step-down",
-      ],
-    },
-    "step-down": {
-      "excludedVariations": [
-        "broad jump",
+        "box jump over",
         "depth jump",
         "lateral",
         "rotational",
@@ -75,14 +65,15 @@ const Map<String, dynamic> boxJump = {
         "standard",
       ],
     },
-    "weighted": {
-      "excludedVariations": ["banded", "hurdle"],
-    },
-    "banded": {
-      "excludedVariations": ["hurdle", "weighted"],
-    },
-    "hurdle": {
-      "excludedVariations": ["banded", "weighted"],
+    "box jump over": {
+      "excludedVariations": [
+        "depth jump",
+        "lateral",
+        "rotational",
+        "seated",
+        "single-leg",
+        "standard",
+      ],
     },
   },
 };
