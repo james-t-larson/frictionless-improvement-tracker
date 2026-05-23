@@ -1,30 +1,29 @@
 const Map<String, dynamic> lateralRaise = {
-  "pk": "162433b9-39f3-4e3e-aad6-81736d44c1cf",
+  "pk": "12d21baa-3b60-414a-bf91-eb0e11e9c56e",
   "name": "Lateral Raise",
   "alternativeNames": ["Lateral Delt Fly", "Lateral Fly", "Lateral Delt Raise"],
   "muscleGroups": ["Shoulders"],
-  "primaryMuscles": ["posterior deltoid", "trapezius"],
+  "primaryMuscles": ["lateral deltoid"],
   "secondaryMuscles": [
-    "wrist flexors",
-    "infraspinatus",
-    "lateral deltoid",
-    "latissimus dorsi",
+    "anterior deltoid",
+    "trapezius",
+    "supraspinatus"
   ],
   "variations": {
     "single-arm": {
-      "excludedVariations": ["leaning", "lying", "partial", "seated"],
+      "excludedVariations": [],
     },
     "seated": {
-      "excludedVariations": ["leaning", "lying", "partial", "single-arm"],
+      "excludedVariations": ["leaning", "lying"],
     },
     "lying": {
-      "excludedVariations": ["leaning", "partial", "seated", "single-arm"],
+      "excludedVariations": ["leaning", "seated", "machine"],
     },
     "leaning": {
-      "excludedVariations": ["lying", "partial", "seated", "single-arm"],
+      "excludedVariations": ["lying", "seated", "machine"],
     },
     "partial": {
-      "excludedVariations": ["leaning", "lying", "seated", "single-arm"],
+      "excludedVariations": ["lying"],
     },
     "dumbbell": {
       "excludedVariations": [
@@ -51,6 +50,8 @@ const Map<String, dynamic> lateralRaise = {
         "cable",
         "dumbbell",
         "kettlebell",
+        "leaning",
+        "lying",
       ],
     },
     "band": {
