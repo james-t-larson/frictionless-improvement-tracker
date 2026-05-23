@@ -7,92 +7,40 @@ const Map<String, dynamic> cableExternalRotation = {
   "variations": {
     "standing": {
       "excludedVariations": [
-        "90-degree abduction",
-        "doorway",
-        "lying",
-        "prone",
         "seated",
-        "side-lying",
-        "single-arm",
+        "knee-supported"
       ],
     },
     "seated": {
       "excludedVariations": [
-        "90-degree abduction",
-        "doorway",
-        "lying",
-        "prone",
-        "side-lying",
-        "single-arm",
-        "standing",
+        "standing"
       ],
     },
     "single-arm": {
       "excludedVariations": [
-        "90-degree abduction",
-        "doorway",
-        "lying",
-        "prone",
-        "seated",
-        "side-lying",
-        "standing",
+        "bilateral"
       ],
     },
-    "lying": {
+    "bilateral": {
       "excludedVariations": [
-        "90-degree abduction",
-        "doorway",
-        "prone",
-        "seated",
-        "side-lying",
         "single-arm",
-        "standing",
+        "knee-supported"
       ],
     },
     "90-degree abduction": {
       "excludedVariations": [
-        "doorway",
-        "lying",
-        "prone",
-        "seated",
-        "side-lying",
-        "single-arm",
-        "standing",
+        "knee-supported"
       ],
     },
-    "side-lying": {
+    "knee-supported": {
       "excludedVariations": [
-        "90-degree abduction",
-        "doorway",
-        "lying",
-        "prone",
-        "seated",
-        "single-arm",
         "standing",
+        "bilateral",
+        "90-degree abduction"
       ],
     },
-    "prone": {
-      "excludedVariations": [
-        "90-degree abduction",
-        "doorway",
-        "lying",
-        "seated",
-        "side-lying",
-        "single-arm",
-        "standing",
-      ],
+    "band": {
+      "excludedVariations": []
     },
-    "doorway": {
-      "excludedVariations": [
-        "90-degree abduction",
-        "lying",
-        "prone",
-        "seated",
-        "side-lying",
-        "single-arm",
-        "standing",
-      ],
-    },
-    "band": {"excludedVariations": []},
   },
 };
