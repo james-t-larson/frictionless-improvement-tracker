@@ -8,39 +8,19 @@ const Map<String, dynamic> hipThrust = {
     "single-leg": {
       "excludedVariations": [
         "B-stance",
-        "american",
-        "feet-elevated",
         "narrow-stance",
-        "paused",
         "wide-stance",
       ],
     },
     "paused": {
-      "excludedVariations": [
-        "B-stance",
-        "american",
-        "feet-elevated",
-        "narrow-stance",
-        "single-leg",
-        "wide-stance",
-      ],
+      "excludedVariations": [],
     },
     "feet-elevated": {
-      "excludedVariations": [
-        "B-stance",
-        "american",
-        "narrow-stance",
-        "paused",
-        "single-leg",
-        "wide-stance",
-      ],
+      "excludedVariations": [],
     },
     "narrow-stance": {
       "excludedVariations": [
         "B-stance",
-        "american",
-        "feet-elevated",
-        "paused",
         "single-leg",
         "wide-stance",
       ],
@@ -48,36 +28,22 @@ const Map<String, dynamic> hipThrust = {
     "wide-stance": {
       "excludedVariations": [
         "B-stance",
-        "american",
-        "feet-elevated",
         "narrow-stance",
-        "paused",
         "single-leg",
       ],
     },
     "american": {
-      "excludedVariations": [
-        "B-stance",
-        "feet-elevated",
-        "narrow-stance",
-        "paused",
-        "single-leg",
-        "wide-stance",
-      ],
+      "excludedVariations": [],
     },
     "B-stance": {
       "excludedVariations": [
-        "american",
-        "feet-elevated",
         "narrow-stance",
-        "paused",
         "single-leg",
         "wide-stance",
       ],
     },
     "barbell": {
       "excludedVariations": [
-        "banded",
         "dumbbell",
         "machine",
         "plate",
@@ -86,7 +52,6 @@ const Map<String, dynamic> hipThrust = {
     },
     "dumbbell": {
       "excludedVariations": [
-        "banded",
         "barbell",
         "machine",
         "plate",
@@ -94,17 +59,10 @@ const Map<String, dynamic> hipThrust = {
       ],
     },
     "banded": {
-      "excludedVariations": [
-        "barbell",
-        "dumbbell",
-        "machine",
-        "plate",
-        "smith machine",
-      ],
+      "excludedVariations": [],
     },
     "machine": {
       "excludedVariations": [
-        "banded",
         "barbell",
         "dumbbell",
         "plate",
@@ -113,7 +71,6 @@ const Map<String, dynamic> hipThrust = {
     },
     "smith machine": {
       "excludedVariations": [
-        "banded",
         "barbell",
         "dumbbell",
         "machine",
@@ -122,7 +79,6 @@ const Map<String, dynamic> hipThrust = {
     },
     "plate": {
       "excludedVariations": [
-        "banded",
         "barbell",
         "dumbbell",
         "machine",
