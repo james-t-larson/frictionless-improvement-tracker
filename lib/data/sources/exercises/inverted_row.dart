@@ -7,123 +7,79 @@ const Map<String, dynamic> invertedRow = {
   "variations": {
     "bodyweight": {
       "excludedVariations": [
-        "close-grip",
-        "feet-elevated",
-        "neutral",
-        "overhand",
-        "pronated",
-        "single-arm",
-        "underhand",
-        "wide-grip",
+        "weighted"
+      ],
+    },
+    "weighted": {
+      "excludedVariations": [
+        "bodyweight"
       ],
     },
     "wide-grip": {
       "excludedVariations": [
-        "bodyweight",
         "close-grip",
-        "feet-elevated",
-        "neutral",
-        "overhand",
-        "pronated",
-        "single-arm",
-        "underhand",
+        "single-arm"
       ],
     },
     "close-grip": {
       "excludedVariations": [
-        "bodyweight",
-        "feet-elevated",
-        "neutral",
-        "overhand",
-        "pronated",
         "single-arm",
-        "underhand",
-        "wide-grip",
-      ],
-    },
-    "underhand": {
-      "excludedVariations": [
-        "bodyweight",
-        "close-grip",
-        "feet-elevated",
-        "neutral",
-        "overhand",
-        "pronated",
-        "single-arm",
-        "wide-grip",
-      ],
-    },
-    "feet-elevated": {
-      "excludedVariations": [
-        "bodyweight",
-        "close-grip",
-        "neutral",
-        "overhand",
-        "pronated",
-        "single-arm",
-        "underhand",
-        "wide-grip",
-      ],
-    },
-    "overhand": {
-      "excludedVariations": [
-        "bodyweight",
-        "close-grip",
-        "feet-elevated",
-        "neutral",
-        "pronated",
-        "single-arm",
-        "underhand",
-        "wide-grip",
-      ],
-    },
-    "neutral": {
-      "excludedVariations": [
-        "bodyweight",
-        "close-grip",
-        "feet-elevated",
-        "overhand",
-        "pronated",
-        "single-arm",
-        "underhand",
-        "wide-grip",
-      ],
-    },
-    "pronated": {
-      "excludedVariations": [
-        "bodyweight",
-        "close-grip",
-        "feet-elevated",
-        "neutral",
-        "overhand",
-        "single-arm",
-        "underhand",
-        "wide-grip",
+        "wide-grip"
       ],
     },
     "single-arm": {
       "excludedVariations": [
-        "bodyweight",
         "close-grip",
-        "feet-elevated",
-        "neutral",
-        "overhand",
-        "pronated",
-        "underhand",
-        "wide-grip",
+        "wide-grip"
       ],
     },
-    "weighted": {
-      "excludedVariations": ["barbell", "rings", "suspension trainer"],
+    "underhand": {
+      "excludedVariations": [
+        "neutral",
+        "overhand"
+      ],
+    },
+    "overhand": {
+      "excludedVariations": [
+        "neutral",
+        "underhand"
+      ],
+    },
+    "neutral": {
+      "excludedVariations": [
+        "barbell",
+        "overhand",
+        "underhand"
+      ],
+    },
+    "feet-elevated": {
+      "excludedVariations": [
+        "bent-knee"
+      ],
+    },
+    "bent-knee": {
+      "excludedVariations": [
+        "feet-elevated"
+      ],
     },
     "suspension trainer": {
-      "excludedVariations": ["barbell", "rings", "weighted"],
+      "excludedVariations": [
+        "barbell",
+        "rings"
+      ],
     },
     "barbell": {
-      "excludedVariations": ["rings", "suspension trainer", "weighted"],
+      "excludedVariations": [
+        "neutral",
+        "rings",
+        "suspension trainer"
+      ],
     },
     "rings": {
-      "excludedVariations": ["barbell", "suspension trainer", "weighted"],
+      "excludedVariations": [
+        "barbell",
+        "suspension trainer"
+      ],
     },
   },
 };
