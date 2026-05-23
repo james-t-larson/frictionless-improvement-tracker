@@ -3,15 +3,15 @@ const Map<String, dynamic> hipAdduction = {
   "name": "Hip Adduction",
   "muscleGroups": ["Legs"],
   "primaryMuscles": ["hip adductors"],
-  "secondaryMuscles": ["gluteus maximus"],
+  "secondaryMuscles": ["gracilis", "pectineus"],
   "variations": {
     "seated": {
       "excludedVariations": [
         "Copenhagen plank",
         "lying",
         "side-lying",
-        "single-leg",
         "standing",
+        "cable"
       ],
     },
     "standing": {
@@ -20,7 +20,7 @@ const Map<String, dynamic> hipAdduction = {
         "lying",
         "seated",
         "side-lying",
-        "single-leg",
+        "machine"
       ],
     },
     "lying": {
@@ -28,8 +28,9 @@ const Map<String, dynamic> hipAdduction = {
         "Copenhagen plank",
         "seated",
         "side-lying",
-        "single-leg",
         "standing",
+        "machine",
+        "cable"
       ],
     },
     "Copenhagen plank": {
@@ -37,8 +38,10 @@ const Map<String, dynamic> hipAdduction = {
         "lying",
         "seated",
         "side-lying",
-        "single-leg",
         "standing",
+        "machine",
+        "cable",
+        "banded"
       ],
     },
     "side-lying": {
@@ -46,27 +49,41 @@ const Map<String, dynamic> hipAdduction = {
         "Copenhagen plank",
         "lying",
         "seated",
-        "single-leg",
         "standing",
+        "machine"
       ],
     },
     "single-leg": {
       "excludedVariations": [
-        "Copenhagen plank",
-        "lying",
-        "seated",
-        "side-lying",
-        "standing",
+        "Copenhagen plank", 
+        "lying"
       ],
     },
     "machine": {
-      "excludedVariations": ["banded", "cable"],
+      "excludedVariations": [
+        "banded", 
+        "cable",
+        "standing",
+        "lying",
+        "side-lying",
+        "Copenhagen plank"
+      ],
     },
     "cable": {
-      "excludedVariations": ["banded", "machine"],
+      "excludedVariations": [
+        "banded", 
+        "machine",
+        "seated",
+        "lying",
+        "Copenhagen plank"
+      ],
     },
     "banded": {
-      "excludedVariations": ["cable", "machine"],
+      "excludedVariations": [
+        "cable", 
+        "machine",
+        "Copenhagen plank"
+      ],
     },
   },
 };
