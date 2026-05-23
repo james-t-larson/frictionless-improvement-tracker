@@ -1,33 +1,39 @@
 const Map<String, dynamic> floorPress = {
   "pk": "c5116ba3-8a9d-4318-80e5-678a927cf916",
   "name": "Floor Press",
-  "muscleGroups": ["Push", "Chest"],
+  "muscleGroups": ["Chest"],
   "primaryMuscles": ["pectoralis major", "anterior deltoid"],
   "secondaryMuscles": ["triceps brachii"],
   "variations": {
     "single-arm": {
-      "excludedVariations": ["close-grip", "neutral-grip", "paused"],
+      "excludedVariations": ["close-grip", "barbell", "alternating"],
     },
     "close-grip": {
-      "excludedVariations": ["neutral-grip", "paused", "single-arm"],
+      "excludedVariations": ["single-arm", "alternating"],
     },
     "paused": {
-      "excludedVariations": ["close-grip", "neutral-grip", "single-arm"],
+      "excludedVariations": [],
     },
     "neutral-grip": {
-      "excludedVariations": ["close-grip", "paused", "single-arm"],
+      "excludedVariations": ["barbell"],
     },
     "dumbbell": {
-      "excludedVariations": ["banded", "barbell", "kettlebell"],
+      "excludedVariations": ["barbell", "kettlebell"],
     },
     "barbell": {
-      "excludedVariations": ["banded", "dumbbell", "kettlebell"],
+      "excludedVariations": ["dumbbell", "kettlebell", "single-arm", "neutral-grip", "alternating"],
     },
     "kettlebell": {
-      "excludedVariations": ["banded", "barbell", "dumbbell"],
+      "excludedVariations": ["barbell", "dumbbell"],
     },
     "banded": {
-      "excludedVariations": ["barbell", "dumbbell", "kettlebell"],
+      "excludedVariations": [],
+    },
+    "alternating": {
+      "excludedVariations": ["barbell", "close-grip", "single-arm"],
+    },
+    "bridge": {
+      "excludedVariations": [],
     },
   },
 };
