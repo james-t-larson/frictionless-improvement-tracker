@@ -7,86 +7,53 @@ const Map<String, dynamic> facePull = {
   "secondaryMuscles": ["lateral deltoid", "wrist extensors"],
   "variations": {
     "single-arm": {
-      "excludedVariations": [
-        "chest-level",
-        "high-pulley",
-        "kneeling",
-        "low-pulley",
-        "pronated",
-        "seated",
-      ],
+      "excludedVariations": ["dual-rope"],
     },
     "high-pulley": {
-      "excludedVariations": [
-        "chest-level",
-        "kneeling",
-        "low-pulley",
-        "pronated",
-        "seated",
-        "single-arm",
-      ],
+      "excludedVariations": ["chest-level", "low-pulley", "suspension"],
     },
     "low-pulley": {
-      "excludedVariations": [
-        "chest-level",
-        "high-pulley",
-        "kneeling",
-        "pronated",
-        "seated",
-        "single-arm",
-      ],
+      "excludedVariations": ["chest-level", "high-pulley", "suspension"],
     },
     "kneeling": {
-      "excludedVariations": [
-        "chest-level",
-        "high-pulley",
-        "low-pulley",
-        "pronated",
-        "seated",
-        "single-arm",
-      ],
+      "excludedVariations": ["seated", "suspension"],
     },
     "seated": {
-      "excludedVariations": [
-        "chest-level",
-        "high-pulley",
-        "kneeling",
-        "low-pulley",
-        "pronated",
-        "single-arm",
-      ],
+      "excludedVariations": ["kneeling", "suspension"],
     },
     "chest-level": {
-      "excludedVariations": [
-        "high-pulley",
-        "kneeling",
-        "low-pulley",
-        "pronated",
-        "seated",
-        "single-arm",
-      ],
+      "excludedVariations": ["high-pulley", "low-pulley", "suspension"],
     },
     "pronated": {
+      "excludedVariations": ["supinated"],
+    },
+    "supinated": {
+      "excludedVariations": ["pronated"],
+    },
+    "cable": {
+      "excludedVariations": ["band", "suspension"],
+    },
+    "band": {
+      "excludedVariations": ["cable", "dual-rope", "rope", "suspension"],
+    },
+    "rope": {
+      "excludedVariations": ["band", "dual-rope", "suspension"],
+    },
+    "dual-rope": {
+      "excludedVariations": ["band", "rope", "single-arm", "suspension"],
+    },
+    "suspension": {
       "excludedVariations": [
+        "band",
+        "cable",
         "chest-level",
+        "dual-rope",
         "high-pulley",
         "kneeling",
         "low-pulley",
-        "seated",
-        "single-arm",
+        "rope",
+        "seated"
       ],
-    },
-    "cable": {
-      "excludedVariations": ["band", "rope", "supinated"],
-    },
-    "band": {
-      "excludedVariations": ["cable", "rope", "supinated"],
-    },
-    "rope": {
-      "excludedVariations": ["band", "cable", "supinated"],
-    },
-    "supinated": {
-      "excludedVariations": ["band", "cable", "rope"],
     },
   },
 };
