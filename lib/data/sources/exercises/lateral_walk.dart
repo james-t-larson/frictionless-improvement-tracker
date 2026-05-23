@@ -11,66 +11,32 @@ const Map<String, dynamic> lateralWalk = {
   ],
   "variations": {
     "wide-stance": {
-      "excludedVariations": ["hip-level", "squat position"],
+      "excludedVariations": [],
     },
     "squat position": {
-      "excludedVariations": ["hip-level", "wide-stance"],
-    },
-    "hip-level": {
-      "excludedVariations": ["squat position", "wide-stance"],
+      "excludedVariations": [],
     },
     "band": {
       "excludedVariations": [
         "ankle weights",
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "weighted vest",
       ],
     },
     "dumbbell": {
       "excludedVariations": [
-        "ankle weights",
-        "band",
-        "barbell",
         "kettlebell",
-        "weighted vest",
       ],
     },
     "kettlebell": {
       "excludedVariations": [
-        "ankle weights",
-        "band",
-        "barbell",
         "dumbbell",
-        "weighted vest",
-      ],
-    },
-    "barbell": {
-      "excludedVariations": [
-        "ankle weights",
-        "band",
-        "dumbbell",
-        "kettlebell",
-        "weighted vest",
       ],
     },
     "weighted vest": {
-      "excludedVariations": [
-        "ankle weights",
-        "band",
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-      ],
+      "excludedVariations": [],
     },
     "ankle weights": {
       "excludedVariations": [
         "band",
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "weighted vest",
       ],
     },
   },
