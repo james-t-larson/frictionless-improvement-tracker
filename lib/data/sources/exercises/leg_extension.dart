@@ -7,66 +7,59 @@ const Map<String, dynamic> legExtension = {
   "variations": {
     "single-leg": {
       "excludedVariations": [
-        "lying",
-        "paused",
-        "seated",
-        "sissy squat",
-        "tempo",
+        "sissy squat"
       ],
     },
     "seated": {
       "excludedVariations": [
         "lying",
-        "paused",
-        "single-leg",
-        "sissy squat",
-        "tempo",
+        "sissy squat"
       ],
     },
     "lying": {
       "excludedVariations": [
-        "paused",
         "seated",
-        "single-leg",
-        "sissy squat",
-        "tempo",
+        "sissy squat"
       ],
     },
     "sissy squat": {
       "excludedVariations": [
         "lying",
-        "paused",
         "seated",
         "single-leg",
-        "tempo",
+        "machine",
+        "cable"
       ],
     },
     "tempo": {
       "excludedVariations": [
-        "lying",
-        "paused",
-        "seated",
-        "single-leg",
-        "sissy squat",
+        "paused"
       ],
     },
     "paused": {
       "excludedVariations": [
-        "lying",
-        "seated",
-        "single-leg",
-        "sissy squat",
-        "tempo",
+        "tempo"
       ],
     },
     "machine": {
-      "excludedVariations": ["band", "cable"],
+      "excludedVariations": [
+        "band", 
+        "cable",
+        "sissy squat"
+      ],
     },
     "cable": {
-      "excludedVariations": ["band", "machine"],
+      "excludedVariations": [
+        "band", 
+        "machine",
+        "sissy squat"
+      ],
     },
     "band": {
-      "excludedVariations": ["cable", "machine"],
+      "excludedVariations": [
+        "cable", 
+        "machine"
+      ],
     },
   },
 };
