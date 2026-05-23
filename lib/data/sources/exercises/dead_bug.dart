@@ -6,28 +6,37 @@ const Map<String, dynamic> deadBug = {
   "secondaryMuscles": ["external obliques", "erector spinae"],
   "variations": {
     "bodyweight": {
-      "excludedVariations": ["contralateral", "single-arm", "single-leg"],
-    },
-    "single-arm": {
-      "excludedVariations": ["bodyweight", "contralateral", "single-leg"],
-    },
-    "single-leg": {
-      "excludedVariations": ["bodyweight", "contralateral", "single-arm"],
-    },
-    "contralateral": {
-      "excludedVariations": ["bodyweight", "single-arm", "single-leg"],
-    },
-    "weighted": {
-      "excludedVariations": ["band", "dumbbell", "stability ball"],
+      "excludedVariations": ["band", "dumbbell", "kettlebell", "medicine ball", "stability ball"],
     },
     "band": {
-      "excludedVariations": ["dumbbell", "stability ball", "weighted"],
-    },
-    "stability ball": {
-      "excludedVariations": ["band", "dumbbell", "weighted"],
+      "excludedVariations": ["bodyweight", "dumbbell", "kettlebell", "medicine ball", "stability ball"],
     },
     "dumbbell": {
-      "excludedVariations": ["band", "stability ball", "weighted"],
+      "excludedVariations": ["band", "bodyweight", "kettlebell", "medicine ball", "stability ball"],
+    },
+    "kettlebell": {
+      "excludedVariations": ["band", "bodyweight", "dumbbell", "medicine ball", "stability ball"],
+    },
+    "medicine ball": {
+      "excludedVariations": ["band", "bodyweight", "dumbbell", "kettlebell", "stability ball"],
+    },
+    "stability ball": {
+      "excludedVariations": ["band", "bodyweight", "dumbbell", "kettlebell", "medicine ball"],
+    },
+    "contralateral": {
+      "excludedVariations": ["double-leg", "ipsilateral", "single-arm", "single-leg"],
+    },
+    "ipsilateral": {
+      "excludedVariations": ["contralateral", "double-leg", "single-arm", "single-leg"],
+    },
+    "single-arm": {
+      "excludedVariations": ["contralateral", "double-leg", "ipsilateral", "single-leg"],
+    },
+    "single-leg": {
+      "excludedVariations": ["contralateral", "double-leg", "ipsilateral", "single-arm"],
+    },
+    "double-leg": {
+      "excludedVariations": ["contralateral", "ipsilateral", "single-arm", "single-leg"],
     },
   },
 };
