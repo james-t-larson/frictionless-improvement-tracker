@@ -6,92 +6,16 @@ const Map<String, dynamic> meadowsRow = {
   "secondaryMuscles": ["biceps brachii", "wrist flexors", "trapezius"],
   "variations": {
     "overhand": {
-      "excludedVariations": [
-        "chest-supported",
-        "heavy",
-        "kneeling",
-        "neutral-grip",
-        "single-arm",
-        "staggered-stance",
-        "underhand",
-      ],
-    },
-    "underhand": {
-      "excludedVariations": [
-        "chest-supported",
-        "heavy",
-        "kneeling",
-        "neutral-grip",
-        "overhand",
-        "single-arm",
-        "staggered-stance",
-      ],
-    },
-    "neutral-grip": {
-      "excludedVariations": [
-        "chest-supported",
-        "heavy",
-        "kneeling",
-        "overhand",
-        "single-arm",
-        "staggered-stance",
-        "underhand",
-      ],
-    },
-    "kneeling": {
-      "excludedVariations": [
-        "chest-supported",
-        "heavy",
-        "neutral-grip",
-        "overhand",
-        "single-arm",
-        "staggered-stance",
-        "underhand",
-      ],
-    },
-    "chest-supported": {
-      "excludedVariations": [
-        "heavy",
-        "kneeling",
-        "neutral-grip",
-        "overhand",
-        "single-arm",
-        "staggered-stance",
-        "underhand",
-      ],
+      "excludedVariations": [],
     },
     "staggered-stance": {
-      "excludedVariations": [
-        "chest-supported",
-        "heavy",
-        "kneeling",
-        "neutral-grip",
-        "overhand",
-        "single-arm",
-        "underhand",
-      ],
+      "excludedVariations": [],
     },
     "heavy": {
-      "excludedVariations": [
-        "chest-supported",
-        "kneeling",
-        "neutral-grip",
-        "overhand",
-        "single-arm",
-        "staggered-stance",
-        "underhand",
-      ],
+      "excludedVariations": [],
     },
     "single-arm": {
-      "excludedVariations": [
-        "chest-supported",
-        "heavy",
-        "kneeling",
-        "neutral-grip",
-        "overhand",
-        "staggered-stance",
-        "underhand",
-      ],
+      "excludedVariations": [],
     },
   },
 };
