@@ -5,36 +5,51 @@ const Map<String, dynamic> frogPumps = {
   "primaryMuscles": ["gluteus maximus"],
   "secondaryMuscles": ["hamstrings", "hip adductors"],
   "variations": {
-    "single-leg": {
-      "excludedVariations": ["feet-elevated"],
-    },
     "feet-elevated": {
-      "excludedVariations": ["single-leg"],
+      "excludedVariations": [],
     },
     "banded": {
+      "excludedVariations": [],
+    },
+    "weighted": {
       "excludedVariations": [
         "barbell",
         "dumbbell",
         "plate-weighted",
-        "weighted",
+        "smith-machine"
       ],
     },
-    "weighted": {
-      "excludedVariations": ["banded", "barbell", "dumbbell", "plate-weighted"],
-    },
     "plate-weighted": {
-      "excludedVariations": ["banded", "barbell", "dumbbell", "weighted"],
+      "excludedVariations": [
+        "barbell",
+        "dumbbell",
+        "smith-machine",
+        "weighted"
+      ],
     },
     "barbell": {
       "excludedVariations": [
-        "banded",
         "dumbbell",
         "plate-weighted",
-        "weighted",
+        "smith-machine",
+        "weighted"
       ],
     },
     "dumbbell": {
-      "excludedVariations": ["banded", "barbell", "plate-weighted", "weighted"],
+      "excludedVariations": [
+        "barbell",
+        "plate-weighted",
+        "smith-machine",
+        "weighted"
+      ],
+    },
+    "smith-machine": {
+      "excludedVariations": [
+        "barbell",
+        "dumbbell",
+        "plate-weighted",
+        "weighted"
+      ],
     },
   },
 };
