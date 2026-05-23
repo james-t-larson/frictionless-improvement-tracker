@@ -6,17 +6,22 @@ const Map<String, dynamic> gluteBridge = {
   "secondaryMuscles": ["hip adductors"],
   "variations": {
     "single-leg": {
-      "excludedVariations": ["double-leg", "feet-elevated"],
+      "excludedVariations": ["double-leg", "b-stance", "marching"],
     },
     "feet-elevated": {
-      "excludedVariations": ["double-leg", "single-leg"],
+      "excludedVariations": [],
     },
     "double-leg": {
-      "excludedVariations": ["feet-elevated", "single-leg"],
+      "excludedVariations": ["single-leg", "b-stance", "marching"],
+    },
+    "b-stance": {
+      "excludedVariations": ["single-leg", "double-leg", "marching"],
+    },
+    "marching": {
+      "excludedVariations": ["single-leg", "double-leg", "b-stance"],
     },
     "weighted": {
       "excludedVariations": [
-        "banded",
         "barbell",
         "dumbbell",
         "kettlebell",
@@ -24,17 +29,10 @@ const Map<String, dynamic> gluteBridge = {
       ],
     },
     "banded": {
-      "excludedVariations": [
-        "barbell",
-        "dumbbell",
-        "kettlebell",
-        "plate",
-        "weighted",
-      ],
+      "excludedVariations": [],
     },
     "barbell": {
       "excludedVariations": [
-        "banded",
         "dumbbell",
         "kettlebell",
         "plate",
@@ -43,7 +41,6 @@ const Map<String, dynamic> gluteBridge = {
     },
     "plate": {
       "excludedVariations": [
-        "banded",
         "barbell",
         "dumbbell",
         "kettlebell",
@@ -52,7 +49,6 @@ const Map<String, dynamic> gluteBridge = {
     },
     "dumbbell": {
       "excludedVariations": [
-        "banded",
         "barbell",
         "kettlebell",
         "plate",
@@ -61,7 +57,6 @@ const Map<String, dynamic> gluteBridge = {
     },
     "kettlebell": {
       "excludedVariations": [
-        "banded",
         "barbell",
         "dumbbell",
         "plate",
