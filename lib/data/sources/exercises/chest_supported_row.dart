@@ -7,69 +7,85 @@ const Map<String, dynamic> chestSupportedRow = {
   "variations": {
     "single-arm": {
       "excludedVariations": [
-        "close-grip",
-        "incline",
-        "neutral-grip",
-        "prone",
-        "wide-grip",
+        "alternating",
+        "barbell"
+      ],
+    },
+    "alternating": {
+      "excludedVariations": [
+        "barbell",
+        "single-arm"
       ],
     },
     "wide-grip": {
       "excludedVariations": [
         "close-grip",
-        "incline",
         "neutral-grip",
-        "prone",
-        "single-arm",
+        "underhand-grip"
       ],
     },
     "close-grip": {
       "excludedVariations": [
-        "incline",
         "neutral-grip",
-        "prone",
-        "single-arm",
-        "wide-grip",
+        "underhand-grip",
+        "wide-grip"
       ],
     },
     "neutral-grip": {
       "excludedVariations": [
+        "barbell",
         "close-grip",
-        "incline",
-        "prone",
-        "single-arm",
-        "wide-grip",
+        "underhand-grip",
+        "wide-grip"
+      ],
+    },
+    "underhand-grip": {
+      "excludedVariations": [
+        "close-grip",
+        "neutral-grip",
+        "wide-grip"
       ],
     },
     "prone": {
       "excludedVariations": [
-        "close-grip",
-        "incline",
-        "neutral-grip",
-        "single-arm",
-        "wide-grip",
+        "incline"
       ],
     },
     "incline": {
       "excludedVariations": [
-        "close-grip",
-        "neutral-grip",
-        "prone",
-        "single-arm",
-        "wide-grip",
+        "prone"
       ],
     },
     "dumbbell": {
-      "excludedVariations": ["barbell", "cable", "machine"],
+      "excludedVariations": [
+        "barbell",
+        "cable",
+        "machine"
+      ],
     },
     "barbell": {
-      "excludedVariations": ["cable", "dumbbell", "machine"],
+      "excludedVariations": [
+        "alternating",
+        "cable",
+        "dumbbell",
+        "machine",
+        "neutral-grip",
+        "single-arm"
+      ],
     },
     "machine": {
-      "excludedVariations": ["barbell", "cable", "dumbbell"],
+      "excludedVariations": [
+        "barbell",
+        "cable",
+        "dumbbell"
+      ],
     },
     "cable": {
-      "excludedVariations": ["barbell", "dumbbell", "machine"],
+      "excludedVariations": [
+        "barbell",
+        "dumbbell",
+        "machine"
+      ],
     },
   },
 };
