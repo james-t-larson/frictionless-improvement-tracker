@@ -7,52 +7,36 @@ const Map<String, dynamic> internalRotation = {
   "variations": {
     "standing": {
       "excludedVariations": [
-        "90-degree abduction",
+        "dumbbell",
         "lying",
         "prone",
         "seated",
         "side-lying",
-        "single-arm",
       ],
     },
     "seated": {
       "excludedVariations": [
-        "90-degree abduction",
+        "dumbbell",
         "lying",
         "prone",
         "side-lying",
-        "single-arm",
         "standing",
       ],
     },
     "single-arm": {
-      "excludedVariations": [
-        "90-degree abduction",
-        "lying",
-        "prone",
-        "seated",
-        "side-lying",
-        "standing",
-      ],
+      "excludedVariations": [],
     },
     "lying": {
       "excludedVariations": [
-        "90-degree abduction",
         "prone",
         "seated",
         "side-lying",
-        "single-arm",
         "standing",
       ],
     },
     "90-degree abduction": {
       "excludedVariations": [
-        "lying",
-        "prone",
-        "seated",
         "side-lying",
-        "single-arm",
-        "standing",
       ],
     },
     "side-lying": {
@@ -61,25 +45,30 @@ const Map<String, dynamic> internalRotation = {
         "lying",
         "prone",
         "seated",
-        "single-arm",
         "standing",
       ],
     },
     "prone": {
       "excludedVariations": [
-        "90-degree abduction",
         "lying",
         "seated",
         "side-lying",
-        "single-arm",
         "standing",
       ],
     },
     "cable": {
-      "excludedVariations": ["band"],
+      "excludedVariations": ["band", "dumbbell"],
     },
     "band": {
-      "excludedVariations": ["cable"],
+      "excludedVariations": ["cable", "dumbbell"],
+    },
+    "dumbbell": {
+      "excludedVariations": [
+        "band",
+        "cable",
+        "seated",
+        "standing",
+      ],
     },
   },
 };
