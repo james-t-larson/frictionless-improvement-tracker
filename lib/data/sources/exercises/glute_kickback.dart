@@ -5,58 +5,42 @@ const Map<String, dynamic> gluteKickback = {
   "primaryMuscles": ["gluteus maximus"],
   "secondaryMuscles": ["hamstrings", "hip adductors"],
   "variations": {
-    "single-leg": {
+    "standing": {
       "excludedVariations": [
-        "bent-knee",
-        "donkey kick",
         "floor",
         "quadruped",
-        "straight-leg",
+        "donkey kick",
       ],
     },
     "floor": {
       "excludedVariations": [
-        "bent-knee",
-        "donkey kick",
         "quadruped",
-        "single-leg",
-        "straight-leg",
+        "standing",
+      ],
+    },
+    "quadruped": {
+      "excludedVariations": [
+        "floor",
+        "standing",
       ],
     },
     "donkey kick": {
       "excludedVariations": [
         "bent-knee",
-        "floor",
-        "quadruped",
-        "single-leg",
         "straight-leg",
-      ],
-    },
-    "quadruped": {
-      "excludedVariations": [
-        "bent-knee",
-        "donkey kick",
-        "floor",
-        "single-leg",
-        "straight-leg",
+        "standing",
       ],
     },
     "straight-leg": {
       "excludedVariations": [
         "bent-knee",
         "donkey kick",
-        "floor",
-        "quadruped",
-        "single-leg",
       ],
     },
     "bent-knee": {
       "excludedVariations": [
-        "donkey kick",
-        "floor",
-        "quadruped",
-        "single-leg",
         "straight-leg",
+        "donkey kick",
       ],
     },
     "machine": {
