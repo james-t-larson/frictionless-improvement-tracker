@@ -5,114 +5,100 @@ const Map<String, dynamic> farmersCarry = {
   "primaryMuscles": ["wrist flexors", "trapezius"],
   "secondaryMuscles": ["erector spinae", "lateral deltoid", "gluteus maximus"],
   "variations": {
-    "single-arm": {
-      "excludedVariations": [
-        "mixed-grip",
-        "overhead",
-        "suitcase carry",
-        "waiter's carry",
-      ],
-    },
     "overhead": {
       "excludedVariations": [
         "mixed-grip",
-        "single-arm",
         "suitcase carry",
         "waiter's carry",
+        "trap bar",
+        "farmer's handles",
       ],
     },
     "waiter's carry": {
       "excludedVariations": [
         "mixed-grip",
         "overhead",
-        "single-arm",
         "suitcase carry",
+        "trap bar",
+        "farmer's handles",
       ],
     },
     "suitcase carry": {
       "excludedVariations": [
         "mixed-grip",
         "overhead",
-        "single-arm",
         "waiter's carry",
+        "trap bar",
       ],
     },
     "mixed-grip": {
       "excludedVariations": [
         "overhead",
-        "single-arm",
         "suitcase carry",
         "waiter's carry",
+        "trap bar",
+        "farmer's handles",
       ],
     },
     "dumbbell": {
       "excludedVariations": [
         "axle bar",
         "barbell",
-        "double kettlebell",
+        "farmer's handles",
         "kettlebell",
         "trap bar",
-        "yoke",
       ],
     },
     "barbell": {
       "excludedVariations": [
         "axle bar",
-        "double kettlebell",
         "dumbbell",
+        "farmer's handles",
         "kettlebell",
         "trap bar",
-        "yoke",
       ],
     },
     "kettlebell": {
       "excludedVariations": [
         "axle bar",
         "barbell",
-        "double kettlebell",
         "dumbbell",
+        "farmer's handles",
         "trap bar",
-        "yoke",
       ],
     },
     "trap bar": {
       "excludedVariations": [
         "axle bar",
         "barbell",
-        "double kettlebell",
         "dumbbell",
+        "farmer's handles",
         "kettlebell",
-        "yoke",
-      ],
-    },
-    "yoke": {
-      "excludedVariations": [
-        "axle bar",
-        "barbell",
-        "double kettlebell",
-        "dumbbell",
-        "kettlebell",
-        "trap bar",
+        "mixed-grip",
+        "overhead",
+        "suitcase carry",
+        "waiter's carry",
       ],
     },
     "axle bar": {
       "excludedVariations": [
         "barbell",
-        "double kettlebell",
         "dumbbell",
+        "farmer's handles",
         "kettlebell",
         "trap bar",
-        "yoke",
       ],
     },
-    "double kettlebell": {
+    "farmer's handles": {
       "excludedVariations": [
         "axle bar",
         "barbell",
         "dumbbell",
         "kettlebell",
+        "mixed-grip",
+        "overhead",
         "trap bar",
-        "yoke",
+        "waiter's carry",
       ],
     },
   },
