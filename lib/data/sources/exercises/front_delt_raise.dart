@@ -1,27 +1,29 @@
 const Map<String, dynamic> frontDeltRaise = {
-  "pk": "e8dc87a4-79e1-4114-90a4-418a4b67359f",
+  "pk": "861b30bb-f1d1-4904-acd7-570ccaff52ee",
   "name": "Front Delt Raise",
-  "alternativeNames": ["Front Delt Fly"],
   "muscleGroups": ["Shoulders"],
-  "primaryMuscles": ["posterior deltoid", "trapezius"],
+  "primaryMuscles": ["anterior deltoid"],
   "secondaryMuscles": [
-    "wrist flexors",
-    "infraspinatus",
     "lateral deltoid",
-    "latissimus dorsi",
+    "pectoralis major",
+    "trapezius",
+    "serratus anterior"
   ],
   "variations": {
     "single-arm": {
-      "excludedVariations": ["incline", "prone", "seated"],
+      "excludedVariations": ["alternating", "barbell", "plate"],
+    },
+    "alternating": {
+      "excludedVariations": ["single-arm", "barbell", "machine", "plate"],
     },
     "incline": {
-      "excludedVariations": ["prone", "seated", "single-arm"],
+      "excludedVariations": ["prone", "seated"],
     },
     "prone": {
-      "excludedVariations": ["incline", "seated", "single-arm"],
+      "excludedVariations": ["incline", "seated"],
     },
     "seated": {
-      "excludedVariations": ["incline", "prone", "single-arm"],
+      "excludedVariations": ["incline", "prone"],
     },
     "dumbbell": {
       "excludedVariations": ["band", "barbell", "cable", "machine", "plate"],
@@ -30,13 +32,13 @@ const Map<String, dynamic> frontDeltRaise = {
       "excludedVariations": ["band", "barbell", "dumbbell", "machine", "plate"],
     },
     "machine": {
-      "excludedVariations": ["band", "barbell", "cable", "dumbbell", "plate"],
+      "excludedVariations": ["alternating", "band", "barbell", "cable", "dumbbell", "plate"],
     },
     "barbell": {
-      "excludedVariations": ["band", "cable", "dumbbell", "machine", "plate"],
+      "excludedVariations": ["alternating", "band", "cable", "dumbbell", "machine", "plate", "single-arm"],
     },
     "plate": {
-      "excludedVariations": ["band", "barbell", "cable", "dumbbell", "machine"],
+      "excludedVariations": ["alternating", "band", "barbell", "cable", "dumbbell", "machine", "single-arm"],
     },
     "band": {
       "excludedVariations": [
