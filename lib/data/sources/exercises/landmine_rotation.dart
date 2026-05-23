@@ -11,79 +11,45 @@ const Map<String, dynamic> landmineRotation = {
   "variations": {
     "standing": {
       "excludedVariations": [
-        "bilateral",
-        "chop",
         "half-kneeling",
         "kneeling",
-        "lift",
-        "rotational push-press",
-        "single-arm",
       ],
     },
     "kneeling": {
       "excludedVariations": [
-        "bilateral",
-        "chop",
         "half-kneeling",
-        "lift",
         "rotational push-press",
-        "single-arm",
         "standing",
       ],
     },
     "half-kneeling": {
       "excludedVariations": [
-        "bilateral",
-        "chop",
         "kneeling",
-        "lift",
         "rotational push-press",
-        "single-arm",
         "standing",
       ],
     },
     "single-arm": {
       "excludedVariations": [
         "bilateral",
-        "chop",
-        "half-kneeling",
-        "kneeling",
-        "lift",
-        "rotational push-press",
-        "standing",
       ],
     },
     "bilateral": {
       "excludedVariations": [
-        "chop",
-        "half-kneeling",
-        "kneeling",
-        "lift",
         "rotational push-press",
         "single-arm",
-        "standing",
       ],
     },
     "chop": {
       "excludedVariations": [
-        "bilateral",
-        "half-kneeling",
-        "kneeling",
         "lift",
         "rotational push-press",
-        "single-arm",
-        "standing",
       ],
     },
     "lift": {
       "excludedVariations": [
-        "bilateral",
         "chop",
-        "half-kneeling",
-        "kneeling",
         "rotational push-press",
-        "single-arm",
-        "standing",
       ],
     },
     "rotational push-press": {
@@ -93,8 +59,6 @@ const Map<String, dynamic> landmineRotation = {
         "half-kneeling",
         "kneeling",
         "lift",
-        "single-arm",
-        "standing",
       ],
     },
   },
