@@ -1,0 +1,123 @@
+const Map<String, dynamic> legPress = {
+  "pk": "859b2211-9bb0-462b-987c-620a3e37d688",
+  "name": "Leg Press",
+  "muscleGroups": ["Legs"],
+  "primaryMuscles": ["gluteus maximus", "quadriceps femoris", "hip adductors"],
+  "secondaryMuscles": ["hamstrings"],
+  "variations": {
+    "hack squat": {
+      "excludedVariations": [
+        "heel-elevated",
+        "high-foot",
+        "low-foot",
+        "narrow-stance",
+        "paused",
+        "single-leg",
+        "toe-elevated",
+        "wide-stance",
+      ],
+    },
+    "single-leg": {
+      "excludedVariations": [
+        "hack squat",
+        "heel-elevated",
+        "high-foot",
+        "low-foot",
+        "narrow-stance",
+        "paused",
+        "toe-elevated",
+        "wide-stance",
+      ],
+    },
+    "paused": {
+      "excludedVariations": [
+        "hack squat",
+        "heel-elevated",
+        "high-foot",
+        "low-foot",
+        "narrow-stance",
+        "single-leg",
+        "toe-elevated",
+        "wide-stance",
+      ],
+    },
+    "heel-elevated": {
+      "excludedVariations": [
+        "hack squat",
+        "high-foot",
+        "low-foot",
+        "narrow-stance",
+        "paused",
+        "single-leg",
+        "toe-elevated",
+        "wide-stance",
+      ],
+    },
+    "toe-elevated": {
+      "excludedVariations": [
+        "hack squat",
+        "heel-elevated",
+        "high-foot",
+        "low-foot",
+        "narrow-stance",
+        "paused",
+        "single-leg",
+        "wide-stance",
+      ],
+    },
+    "wide-stance": {
+      "excludedVariations": [
+        "hack squat",
+        "heel-elevated",
+        "high-foot",
+        "low-foot",
+        "narrow-stance",
+        "paused",
+        "single-leg",
+        "toe-elevated",
+      ],
+    },
+    "narrow-stance": {
+      "excludedVariations": [
+        "hack squat",
+        "heel-elevated",
+        "high-foot",
+        "low-foot",
+        "paused",
+        "single-leg",
+        "toe-elevated",
+        "wide-stance",
+      ],
+    },
+    "high-foot": {
+      "excludedVariations": [
+        "hack squat",
+        "heel-elevated",
+        "low-foot",
+        "narrow-stance",
+        "paused",
+        "single-leg",
+        "toe-elevated",
+        "wide-stance",
+      ],
+    },
+    "low-foot": {
+      "excludedVariations": [
+        "hack squat",
+        "heel-elevated",
+        "high-foot",
+        "narrow-stance",
+        "paused",
+        "single-leg",
+        "toe-elevated",
+        "wide-stance",
+      ],
+    },
+    "machine": {
+      "excludedVariations": ["banded"],
+    },
+    "banded": {
+      "excludedVariations": ["machine"],
+    },
+  },
+};

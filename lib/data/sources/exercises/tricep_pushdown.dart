@@ -1,0 +1,126 @@
+const Map<String, dynamic> tricepPushdown = {
+  "pk": "edb21df1-0a7a-49f8-94e3-fa47138af935",
+  "name": "Tricep Pushdown",
+  "muscleGroups": ["Triceps"],
+  "primaryMuscles": ["triceps brachii"],
+  "secondaryMuscles": [],
+  "variations": {
+    "single-arm": {
+      "excludedVariations": [
+        "bar",
+        "close-grip",
+        "kneeling",
+        "neutral-grip",
+        "overhand-grip",
+        "standing",
+        "underhand-grip",
+        "wide-grip",
+      ],
+    },
+    "standing": {
+      "excludedVariations": [
+        "bar",
+        "close-grip",
+        "kneeling",
+        "neutral-grip",
+        "overhand-grip",
+        "single-arm",
+        "underhand-grip",
+        "wide-grip",
+      ],
+    },
+    "kneeling": {
+      "excludedVariations": [
+        "bar",
+        "close-grip",
+        "neutral-grip",
+        "overhand-grip",
+        "single-arm",
+        "standing",
+        "underhand-grip",
+        "wide-grip",
+      ],
+    },
+    "wide-grip": {
+      "excludedVariations": [
+        "bar",
+        "close-grip",
+        "kneeling",
+        "neutral-grip",
+        "overhand-grip",
+        "single-arm",
+        "standing",
+        "underhand-grip",
+      ],
+    },
+    "close-grip": {
+      "excludedVariations": [
+        "bar",
+        "kneeling",
+        "neutral-grip",
+        "overhand-grip",
+        "single-arm",
+        "standing",
+        "underhand-grip",
+        "wide-grip",
+      ],
+    },
+    "neutral-grip": {
+      "excludedVariations": [
+        "bar",
+        "close-grip",
+        "kneeling",
+        "overhand-grip",
+        "single-arm",
+        "standing",
+        "underhand-grip",
+        "wide-grip",
+      ],
+    },
+    "overhand-grip": {
+      "excludedVariations": [
+        "bar",
+        "close-grip",
+        "kneeling",
+        "neutral-grip",
+        "single-arm",
+        "standing",
+        "underhand-grip",
+        "wide-grip",
+      ],
+    },
+    "underhand-grip": {
+      "excludedVariations": [
+        "bar",
+        "close-grip",
+        "kneeling",
+        "neutral-grip",
+        "overhand-grip",
+        "single-arm",
+        "standing",
+        "wide-grip",
+      ],
+    },
+    "bar": {
+      "excludedVariations": [
+        "close-grip",
+        "kneeling",
+        "neutral-grip",
+        "overhand-grip",
+        "single-arm",
+        "standing",
+        "underhand-grip",
+        "wide-grip",
+      ],
+    },
+    "cable": {
+      "excludedVariations": ["band", "rope"],
+    },
+    "rope": {
+      "excludedVariations": ["band", "cable"],
+    },
+    "band": {
+      "excludedVariations": ["cable", "rope"],
+    },
+  },
+};

@@ -1,0 +1,126 @@
+const Map<String, dynamic> sitUp = {
+  "pk": "13ce59d9-4fd0-4aea-857a-3afc186c3074",
+  "name": "Sit-Up",
+  "muscleGroups": ["Core"],
+  "primaryMuscles": ["rectus abdominis"],
+  "secondaryMuscles": ["external obliques"],
+  "variations": {
+    "standard": {
+      "excludedVariations": [
+        "GHD",
+        "anchor",
+        "crossed-arms",
+        "decline",
+        "hands-behind-head",
+        "incline",
+        "janda",
+        "twisting",
+      ],
+    },
+    "decline": {
+      "excludedVariations": [
+        "GHD",
+        "anchor",
+        "crossed-arms",
+        "hands-behind-head",
+        "incline",
+        "janda",
+        "standard",
+        "twisting",
+      ],
+    },
+    "incline": {
+      "excludedVariations": [
+        "GHD",
+        "anchor",
+        "crossed-arms",
+        "decline",
+        "hands-behind-head",
+        "janda",
+        "standard",
+        "twisting",
+      ],
+    },
+    "anchor": {
+      "excludedVariations": [
+        "GHD",
+        "crossed-arms",
+        "decline",
+        "hands-behind-head",
+        "incline",
+        "janda",
+        "standard",
+        "twisting",
+      ],
+    },
+    "crossed-arms": {
+      "excludedVariations": [
+        "GHD",
+        "anchor",
+        "decline",
+        "hands-behind-head",
+        "incline",
+        "janda",
+        "standard",
+        "twisting",
+      ],
+    },
+    "hands-behind-head": {
+      "excludedVariations": [
+        "GHD",
+        "anchor",
+        "crossed-arms",
+        "decline",
+        "incline",
+        "janda",
+        "standard",
+        "twisting",
+      ],
+    },
+    "twisting": {
+      "excludedVariations": [
+        "GHD",
+        "anchor",
+        "crossed-arms",
+        "decline",
+        "hands-behind-head",
+        "incline",
+        "janda",
+        "standard",
+      ],
+    },
+    "janda": {
+      "excludedVariations": [
+        "GHD",
+        "anchor",
+        "crossed-arms",
+        "decline",
+        "hands-behind-head",
+        "incline",
+        "standard",
+        "twisting",
+      ],
+    },
+    "GHD": {
+      "excludedVariations": [
+        "anchor",
+        "crossed-arms",
+        "decline",
+        "hands-behind-head",
+        "incline",
+        "janda",
+        "standard",
+        "twisting",
+      ],
+    },
+    "weighted": {
+      "excludedVariations": ["band-resisted", "feet-in-rings"],
+    },
+    "band-resisted": {
+      "excludedVariations": ["feet-in-rings", "weighted"],
+    },
+    "feet-in-rings": {
+      "excludedVariations": ["band-resisted", "weighted"],
+    },
+  },
+};

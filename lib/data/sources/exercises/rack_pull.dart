@@ -1,0 +1,123 @@
+const Map<String, dynamic> rackPull = {
+  "pk": "d6e59f6d-7a8b-4d30-c1e6-8f3b4d7e0a52",
+  "name": "Rack Pull",
+  "muscleGroups": ["Back"],
+  "primaryMuscles": ["erector spinae", "gluteus maximus"],
+  "secondaryMuscles": ["trapezius", "hamstrings", "wrist flexors"],
+  "variations": {
+    "below-knee": {
+      "excludedVariations": [
+        "above-knee",
+        "deficit",
+        "mixed-grip",
+        "overhand",
+        "paused",
+        "snatch-grip",
+        "sumo",
+        "wide-grip",
+      ],
+    },
+    "above-knee": {
+      "excludedVariations": [
+        "below-knee",
+        "deficit",
+        "mixed-grip",
+        "overhand",
+        "paused",
+        "snatch-grip",
+        "sumo",
+        "wide-grip",
+      ],
+    },
+    "sumo": {
+      "excludedVariations": [
+        "above-knee",
+        "below-knee",
+        "deficit",
+        "mixed-grip",
+        "overhand",
+        "paused",
+        "snatch-grip",
+        "wide-grip",
+      ],
+    },
+    "wide-grip": {
+      "excludedVariations": [
+        "above-knee",
+        "below-knee",
+        "deficit",
+        "mixed-grip",
+        "overhand",
+        "paused",
+        "snatch-grip",
+        "sumo",
+      ],
+    },
+    "snatch-grip": {
+      "excludedVariations": [
+        "above-knee",
+        "below-knee",
+        "deficit",
+        "mixed-grip",
+        "overhand",
+        "paused",
+        "sumo",
+        "wide-grip",
+      ],
+    },
+    "mixed-grip": {
+      "excludedVariations": [
+        "above-knee",
+        "below-knee",
+        "deficit",
+        "overhand",
+        "paused",
+        "snatch-grip",
+        "sumo",
+        "wide-grip",
+      ],
+    },
+    "overhand": {
+      "excludedVariations": [
+        "above-knee",
+        "below-knee",
+        "deficit",
+        "mixed-grip",
+        "paused",
+        "snatch-grip",
+        "sumo",
+        "wide-grip",
+      ],
+    },
+    "deficit": {
+      "excludedVariations": [
+        "above-knee",
+        "below-knee",
+        "mixed-grip",
+        "overhand",
+        "paused",
+        "snatch-grip",
+        "sumo",
+        "wide-grip",
+      ],
+    },
+    "paused": {
+      "excludedVariations": [
+        "above-knee",
+        "below-knee",
+        "deficit",
+        "mixed-grip",
+        "overhand",
+        "snatch-grip",
+        "sumo",
+        "wide-grip",
+      ],
+    },
+    "barbell": {
+      "excludedVariations": ["straps"],
+    },
+    "straps": {
+      "excludedVariations": ["barbell"],
+    },
+  },
+};

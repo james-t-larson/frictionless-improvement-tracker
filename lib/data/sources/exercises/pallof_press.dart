@@ -1,0 +1,123 @@
+const Map<String, dynamic> pallofPress = {
+  "pk": "c1d04e1c-2f3a-4c85-b6d1-3e8a9c2c5f07",
+  "name": "Pallof Press",
+  "muscleGroups": ["Core"],
+  "primaryMuscles": ["external obliques", "rectus abdominis"],
+  "secondaryMuscles": ["anterior deltoid", "erector spinae"],
+  "variations": {
+    "kneeling": {
+      "excludedVariations": [
+        "half-kneeling",
+        "isometric",
+        "overhead",
+        "push",
+        "rotation",
+        "single-arm",
+        "split-stance",
+        "standing",
+      ],
+    },
+    "standing": {
+      "excludedVariations": [
+        "half-kneeling",
+        "isometric",
+        "kneeling",
+        "overhead",
+        "push",
+        "rotation",
+        "single-arm",
+        "split-stance",
+      ],
+    },
+    "half-kneeling": {
+      "excludedVariations": [
+        "isometric",
+        "kneeling",
+        "overhead",
+        "push",
+        "rotation",
+        "single-arm",
+        "split-stance",
+        "standing",
+      ],
+    },
+    "single-arm": {
+      "excludedVariations": [
+        "half-kneeling",
+        "isometric",
+        "kneeling",
+        "overhead",
+        "push",
+        "rotation",
+        "split-stance",
+        "standing",
+      ],
+    },
+    "push": {
+      "excludedVariations": [
+        "half-kneeling",
+        "isometric",
+        "kneeling",
+        "overhead",
+        "rotation",
+        "single-arm",
+        "split-stance",
+        "standing",
+      ],
+    },
+    "overhead": {
+      "excludedVariations": [
+        "half-kneeling",
+        "isometric",
+        "kneeling",
+        "push",
+        "rotation",
+        "single-arm",
+        "split-stance",
+        "standing",
+      ],
+    },
+    "rotation": {
+      "excludedVariations": [
+        "half-kneeling",
+        "isometric",
+        "kneeling",
+        "overhead",
+        "push",
+        "single-arm",
+        "split-stance",
+        "standing",
+      ],
+    },
+    "isometric": {
+      "excludedVariations": [
+        "half-kneeling",
+        "kneeling",
+        "overhead",
+        "push",
+        "rotation",
+        "single-arm",
+        "split-stance",
+        "standing",
+      ],
+    },
+    "split-stance": {
+      "excludedVariations": [
+        "half-kneeling",
+        "isometric",
+        "kneeling",
+        "overhead",
+        "push",
+        "rotation",
+        "single-arm",
+        "standing",
+      ],
+    },
+    "cable": {
+      "excludedVariations": ["band"],
+    },
+    "band": {
+      "excludedVariations": ["cable"],
+    },
+  },
+};
