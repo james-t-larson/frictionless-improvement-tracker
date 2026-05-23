@@ -5,84 +5,97 @@ const Map<String, dynamic> hipAbduction = {
   "primaryMuscles": ["hip abductors"],
   "secondaryMuscles": ["gluteus maximus"],
   "variations": {
-    "single-leg": {
-      "excludedVariations": [
-        "clamshell",
-        "fire hydrant",
-        "lying",
-        "seated",
-        "side-lying",
-        "standing",
-      ],
-    },
     "standing": {
       "excludedVariations": [
         "clamshell",
         "fire hydrant",
-        "lying",
         "seated",
         "side-lying",
-        "single-leg",
+        "dumbbell"
       ],
     },
     "seated": {
       "excludedVariations": [
         "clamshell",
         "fire hydrant",
-        "lying",
         "side-lying",
-        "single-leg",
         "standing",
-      ],
-    },
-    "lying": {
-      "excludedVariations": [
-        "clamshell",
-        "fire hydrant",
-        "seated",
-        "side-lying",
-        "single-leg",
-        "standing",
+        "ankle weight",
+        "dumbbell"
       ],
     },
     "fire hydrant": {
       "excludedVariations": [
         "clamshell",
-        "lying",
         "seated",
         "side-lying",
-        "single-leg",
         "standing",
+        "machine"
       ],
     },
     "clamshell": {
       "excludedVariations": [
         "fire hydrant",
-        "lying",
         "seated",
         "side-lying",
-        "single-leg",
         "standing",
+        "machine"
       ],
     },
     "side-lying": {
       "excludedVariations": [
         "clamshell",
         "fire hydrant",
-        "lying",
         "seated",
-        "single-leg",
         "standing",
+        "machine"
       ],
     },
     "machine": {
-      "excludedVariations": ["banded", "cable"],
+      "excludedVariations": [
+        "banded",
+        "cable",
+        "ankle weight",
+        "dumbbell",
+        "clamshell",
+        "fire hydrant",
+        "side-lying"
+      ],
     },
     "cable": {
-      "excludedVariations": ["banded", "machine"],
+      "excludedVariations": [
+        "banded", 
+        "machine", 
+        "ankle weight", 
+        "dumbbell"
+      ],
     },
     "banded": {
-      "excludedVariations": ["cable", "machine"],
+      "excludedVariations": [
+        "cable", 
+        "machine", 
+        "ankle weight", 
+        "dumbbell"
+      ],
     },
+    "ankle weight": {
+      "excludedVariations": [
+        "banded", 
+        "cable", 
+        "machine", 
+        "dumbbell", 
+        "seated"
+      ],
+    },
+    "dumbbell": {
+      "excludedVariations": [
+        "banded", 
+        "cable", 
+        "machine", 
+        "ankle weight", 
+        "seated", 
+        "standing"
+      ],
+    }
   },
 };
