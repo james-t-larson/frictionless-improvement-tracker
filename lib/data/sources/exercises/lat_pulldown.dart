@@ -7,195 +7,91 @@ const Map<String, dynamic> latPulldown = {
   "variations": {
     "straight arm": {
       "excludedVariations": [
-        "bar",
-        "bent-arm",
-        "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
-        "seated",
-        "single-arm",
-        "standing",
-        "underhand-grip",
-        "wide-grip",
+        "underhand-grip"
       ],
     },
     "single-arm": {
       "excludedVariations": [
-        "bar",
-        "bent-arm",
-        "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
-        "seated",
-        "standing",
-        "straight arm",
-        "underhand-grip",
         "wide-grip",
+        "close-grip",
+        "bar",
+        "rope"
       ],
     },
     "seated": {
       "excludedVariations": [
-        "bar",
-        "bent-arm",
-        "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
-        "single-arm",
         "standing",
-        "straight arm",
-        "underhand-grip",
-        "wide-grip",
+        "kneeling"
       ],
     },
     "standing": {
       "excludedVariations": [
-        "bar",
-        "bent-arm",
-        "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
         "seated",
-        "single-arm",
-        "straight arm",
-        "underhand-grip",
-        "wide-grip",
+        "kneeling"
       ],
     },
     "kneeling": {
       "excludedVariations": [
-        "bar",
-        "bent-arm",
-        "close-grip",
-        "neutral-grip",
-        "overhand-grip",
         "seated",
-        "single-arm",
-        "standing",
-        "straight arm",
-        "underhand-grip",
-        "wide-grip",
-      ],
-    },
-    "bent-arm": {
-      "excludedVariations": [
-        "bar",
-        "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
-        "seated",
-        "single-arm",
-        "standing",
-        "straight arm",
-        "underhand-grip",
-        "wide-grip",
+        "standing"
       ],
     },
     "wide-grip": {
       "excludedVariations": [
-        "bar",
-        "bent-arm",
         "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
-        "seated",
         "single-arm",
-        "standing",
-        "straight arm",
-        "underhand-grip",
+        "rope"
       ],
     },
     "close-grip": {
       "excludedVariations": [
-        "bar",
-        "bent-arm",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
-        "seated",
-        "single-arm",
-        "standing",
-        "straight arm",
-        "underhand-grip",
         "wide-grip",
+        "single-arm"
       ],
     },
     "neutral-grip": {
       "excludedVariations": [
-        "bar",
-        "bent-arm",
-        "close-grip",
-        "kneeling",
         "overhand-grip",
-        "seated",
-        "single-arm",
-        "standing",
-        "straight arm",
-        "underhand-grip",
-        "wide-grip",
+        "underhand-grip"
       ],
     },
     "overhand-grip": {
       "excludedVariations": [
-        "bar",
-        "bent-arm",
-        "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "seated",
-        "single-arm",
-        "standing",
-        "straight arm",
         "underhand-grip",
-        "wide-grip",
+        "neutral-grip"
       ],
     },
     "underhand-grip": {
       "excludedVariations": [
-        "bar",
-        "bent-arm",
-        "close-grip",
-        "kneeling",
-        "neutral-grip",
         "overhand-grip",
-        "seated",
-        "single-arm",
-        "standing",
+        "neutral-grip",
         "straight arm",
-        "wide-grip",
+        "rope"
       ],
     },
     "bar": {
       "excludedVariations": [
-        "bent-arm",
-        "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
-        "seated",
-        "single-arm",
-        "standing",
-        "straight arm",
-        "underhand-grip",
-        "wide-grip",
+        "rope",
+        "single-arm"
       ],
     },
     "cable": {
-      "excludedVariations": ["band", "dumbbell", "rope"],
-    },
-    "dumbbell": {
-      "excludedVariations": ["band", "cable", "rope"],
+      "excludedVariations": [
+        "band"
+      ],
     },
     "band": {
-      "excludedVariations": ["cable", "dumbbell", "rope"],
+      "excludedVariations": [
+        "cable"
+      ],
     },
     "rope": {
-      "excludedVariations": ["band", "cable", "dumbbell"],
-    },
+      "excludedVariations": [
+        "bar",
+        "single-arm",
+        "wide-grip",
+        "underhand-grip"
+      ],
+    }
   },
 };
