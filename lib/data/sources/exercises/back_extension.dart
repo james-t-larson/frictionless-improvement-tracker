@@ -6,29 +6,38 @@ const Map<String, dynamic> backExtension = {
   "secondaryMuscles": ["rectus abdominis"],
   "variations": {
     "floor": {
-      "excludedVariations": ["45-degree", "GHD", "reverse", "single-leg"],
+      "excludedVariations": ["45-degree", "GHD", "machine", "swiss-ball"],
     },
     "single-leg": {
-      "excludedVariations": ["45-degree", "GHD", "floor", "reverse"],
+      "excludedVariations": ["machine"],
     },
     "45-degree": {
-      "excludedVariations": ["GHD", "floor", "reverse", "single-leg"],
+      "excludedVariations": ["floor", "GHD", "machine", "swiss-ball"],
     },
     "GHD": {
-      "excludedVariations": ["45-degree", "floor", "reverse", "single-leg"],
+      "excludedVariations": ["floor", "45-degree", "machine", "swiss-ball"],
+    },
+    "swiss-ball": {
+      "excludedVariations": ["floor", "45-degree", "GHD", "machine"],
     },
     "reverse": {
-      "excludedVariations": ["45-degree", "GHD", "floor", "single-leg"],
+      "excludedVariations": ["machine"],
     },
     "weighted": {
       "excludedVariations": ["band", "barbell", "dumbbell", "machine", "plate"],
     },
     "machine": {
       "excludedVariations": [
+        "45-degree",
         "band",
         "barbell",
         "dumbbell",
+        "floor",
+        "GHD",
         "plate",
+        "reverse",
+        "single-leg",
+        "swiss-ball",
         "weighted",
       ],
     },
