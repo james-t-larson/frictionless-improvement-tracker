@@ -1,7 +1,7 @@
 const Map<String, dynamic> goodMorning = {
   "pk": "e7f04a19-2b3c-4e85-d6f1-3a8c9e2d5b07",
   "name": "Good Morning",
-  "muscleGroups": ["Glutes", "Back"],
+  "muscleGroups": ["Legs", "Back"],
   "primaryMuscles": ["hamstrings", "erector spinae"],
   "secondaryMuscles": ["gluteus maximus", "rectus abdominis"],
   "variations": {

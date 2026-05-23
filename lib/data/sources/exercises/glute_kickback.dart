@@ -1,7 +1,7 @@
 const Map<String, dynamic> gluteKickback = {
   "pk": "dee8ca71-a01b-4ffd-b85e-426080e92f1e",
   "name": "Glute Kickback",
-  "muscleGroups": ["Glutes"],
+  "muscleGroups": ["Legs"],
   "primaryMuscles": ["gluteus maximus"],
   "secondaryMuscles": ["hamstrings", "hip adductors"],
   "variations": {

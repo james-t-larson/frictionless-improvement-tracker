@@ -1,7 +1,7 @@
 const Map<String, dynamic> dip = {
   "pk": "102850fa-8459-4cd0-81b5-88cc982d5de4",
   "name": "Dip",
-  "muscleGroups": ["Push", "Chest", "Triceps"],
+  "muscleGroups": ["Chest", "Arms"],
   "primaryMuscles": ["pectoralis major", "triceps brachii"],
   "secondaryMuscles": ["subscapularis", "anterior deltoid"],
   "variations": {

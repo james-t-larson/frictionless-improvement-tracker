@@ -1,7 +1,7 @@
 const Map<String, dynamic> landminePress = {
   "pk": "b2c15d2a-3e4f-4b96-a7c2-4d9f0b3e6a18",
   "name": "Landmine Press",
-  "muscleGroups": ["Push", "Shoulders", "Chest"],
+  "muscleGroups": ["Shoulders", "Chest"],
   "primaryMuscles": ["anterior deltoid", "pectoralis major"],
   "secondaryMuscles": ["triceps brachii", "lateral deltoid"],
   "variations": {

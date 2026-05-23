@@ -1,7 +1,7 @@
 const Map<String, dynamic> shrugs = {
   "pk": "e8dc87a4-79e1-4114-90a4-418a4b67359f",
   "name": "Shrugs",
-  "muscleGroups": ["Shoulders", "Back"],
+  "muscleGroups": ["Shoulders"],
   "primaryMuscles": ["posterior deltoid", "trapezius"],
   "secondaryMuscles": [
     "wrist flexors",

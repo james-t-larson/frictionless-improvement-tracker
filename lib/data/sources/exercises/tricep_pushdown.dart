@@ -1,7 +1,7 @@
 const Map<String, dynamic> tricepPushdown = {
   "pk": "edb21df1-0a7a-49f8-94e3-fa47138af935",
   "name": "Tricep Pushdown",
-  "muscleGroups": ["Triceps"],
+  "muscleGroups": ["Arms"],
   "primaryMuscles": ["triceps brachii"],
   "secondaryMuscles": [],
   "variations": {

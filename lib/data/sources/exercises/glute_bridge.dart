@@ -1,7 +1,7 @@
 const Map<String, dynamic> gluteBridge = {
   "pk": "ab0da03b-dd54-4a7f-bb06-40c866dfa88c",
   "name": "Glute Bridge",
-  "muscleGroups": ["Glutes"],
+  "muscleGroups": ["Legs"],
   "primaryMuscles": ["gluteus maximus", "hamstrings"],
   "secondaryMuscles": ["hip adductors"],
   "variations": {

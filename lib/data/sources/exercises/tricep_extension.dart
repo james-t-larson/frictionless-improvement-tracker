@@ -1,7 +1,7 @@
 const Map<String, dynamic> tricepExtension = {
   "pk": "c1d04e1b-2f3a-4c85-b6d1-3e8a9c2b5f07",
   "name": "Tricep Extension",
-  "muscleGroups": ["Triceps"],
+  "muscleGroups": ["Arms"],
   "primaryMuscles": ["triceps brachii"],
   "secondaryMuscles": [],
   "variations": {

@@ -1,7 +1,7 @@
 const Map<String, dynamic> benchPress = {
   "pk": "23cf1e36-69e0-424b-8403-fc4e30de15da",
   "name": "Bench Press",
-  "muscleGroups": ["Push", "Chest"],
+  "muscleGroups": ["Chest"],
   "primaryMuscles": ["pectoralis major", "anterior deltoid"],
   "secondaryMuscles": ["triceps brachii"],
   "variations": {

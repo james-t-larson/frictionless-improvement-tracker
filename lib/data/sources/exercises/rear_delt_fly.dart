@@ -2,7 +2,7 @@ const Map<String, dynamic> rearDeltFly = {
   "pk": "162433b9-39f3-4e3e-aad6-81736d44c1cf",
   "name": "Rear Delt Fly",
   "alternativeNames": ["Rear Delt Raise"],
-  "muscleGroups": ["Shoulders", "Back"],
+  "muscleGroups": ["Shoulders"],
   "primaryMuscles": ["posterior deltoid", "trapezius"],
   "secondaryMuscles": [
     "wrist flexors",

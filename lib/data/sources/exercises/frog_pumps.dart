@@ -1,7 +1,7 @@
 const Map<String, dynamic> frogPumps = {
   "pk": "8a96a73c-0c69-4102-a2c9-f103c8497e7e",
   "name": "Frog Pumps",
-  "muscleGroups": ["Glutes"],
+  "muscleGroups": ["Legs"],
   "primaryMuscles": ["gluteus maximus"],
   "secondaryMuscles": ["hamstrings", "hip adductors"],
   "variations": {

@@ -2,7 +2,7 @@ const Map<String, dynamic> pushUp = {
   "pk": "7a971512-0265-490a-8ac0-871c0e1013de",
   "name": "Push-Up",
   "slug": "push-up",
-  "muscleGroups": ["Push", "Chest"],
+  "muscleGroups": ["Chest"],
   "primaryMuscles": ["pectoralis major", "anterior deltoid", "triceps brachii"],
   "secondaryMuscles": ["rectus abdominis"],
   "variations": {

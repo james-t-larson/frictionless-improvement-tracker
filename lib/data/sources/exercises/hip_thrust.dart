@@ -1,7 +1,7 @@
 const Map<String, dynamic> hipThrust = {
   "pk": "b9e2a547-3c68-4f10-a1d7-5c8b0e3d2f94",
   "name": "Hip Thrust",
-  "muscleGroups": ["Glutes"],
+  "muscleGroups": ["Legs"],
   "primaryMuscles": ["gluteus maximus"],
   "secondaryMuscles": ["hamstrings", "hip adductors"],
   "variations": {

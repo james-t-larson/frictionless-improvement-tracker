@@ -1,7 +1,7 @@
 const Map<String, dynamic> chinUp = {
   "pk": "c5d48e5b-6f7a-4c29-b0d5-7e2a3c6b9f41",
   "name": "Chin-Up",
-  "muscleGroups": ["Back", "Biceps"],
+  "muscleGroups": ["Back", "Arms"],
   "primaryMuscles": ["latissimus dorsi", "biceps brachii"],
   "secondaryMuscles": ["wrist flexors", "posterior deltoid", "infraspinatus"],
   "variations": {

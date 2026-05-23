@@ -1,7 +1,7 @@
 const Map<String, dynamic> kettlebellSwing = {
   "pk": "a1b04c1f-2d3e-4a85-f6b1-3c8e9a2d5f07",
   "name": "Kettlebell Swing",
-  "muscleGroups": ["Back", "Glutes"],
+  "muscleGroups": ["Back", "Legs"],
   "primaryMuscles": ["gluteus maximus", "hamstrings"],
   "secondaryMuscles": ["erector spinae", "anterior deltoid", "wrist flexors"],
   "variations": {

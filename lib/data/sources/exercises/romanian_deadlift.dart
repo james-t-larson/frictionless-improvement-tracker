@@ -1,7 +1,7 @@
 const Map<String, dynamic> romanianDeadlift = {
   "pk": "c1d83b6a-7f29-4e5c-b2a8-9d0e5f7c3b21",
   "name": "Romanian Deadlift",
-  "muscleGroups": ["Legs", "Glutes"],
+  "muscleGroups": ["Legs"],
   "primaryMuscles": ["hamstrings", "gluteus maximus"],
   "secondaryMuscles": ["erector spinae", "gastrocnemius"],
   "variations": {

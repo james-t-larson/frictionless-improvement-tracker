@@ -1,7 +1,7 @@
 const Map<String, dynamic> shoulderPress = {
   "pk": "64c75731-36c2-45ae-b8c1-c8b481f34144",
   "name": "Shoulder Press",
-  "muscleGroups": ["Push", "Shoulders"],
+  "muscleGroups": ["Shoulders"],
   "primaryMuscles": ["anterior deltoid"],
   "secondaryMuscles": ["lateral deltoid", "triceps brachii"],
   "variations": {
