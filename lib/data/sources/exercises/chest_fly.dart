@@ -9,67 +9,41 @@ const Map<String, dynamic> chestFly = {
       "excludedVariations": [
         "decline",
         "flat",
-        "overhand-grip",
         "pec-dec",
-        "underhand-grip",
       ],
     },
     "decline": {
       "excludedVariations": [
         "flat",
         "incline",
-        "overhand-grip",
         "pec-dec",
-        "underhand-grip",
       ],
     },
     "flat": {
       "excludedVariations": [
         "decline",
         "incline",
-        "overhand-grip",
-        "pec-dec",
-        "underhand-grip",
-      ],
-    },
-    "overhand-grip": {
-      "excludedVariations": [
-        "decline",
-        "flat",
-        "incline",
-        "pec-dec",
-        "underhand-grip",
-      ],
-    },
-    "underhand-grip": {
-      "excludedVariations": [
-        "decline",
-        "flat",
-        "incline",
-        "overhand-grip",
         "pec-dec",
       ],
     },
     "pec-dec": {
       "excludedVariations": [
         "band",
-        "cable crossover",
+        "cable",
         "decline",
         "dumbbell",
         "flat",
         "incline",
-        "overhand-grip",
-        "underhand-grip",
       ],
     },
     "dumbbell": {
-      "excludedVariations": ["band", "cable crossover", "pec-dec"],
+      "excludedVariations": ["band", "cable", "pec-dec"],
     },
-    "cable crossover": {
+    "cable": {
       "excludedVariations": ["band", "dumbbell", "pec-dec"],
     },
     "band": {
-      "excludedVariations": ["cable crossover", "dumbbell", "pec-dec"],
+      "excludedVariations": ["cable", "dumbbell", "pec-dec"],
     },
   },
 };
