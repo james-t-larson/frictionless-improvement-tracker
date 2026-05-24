@@ -12,54 +12,74 @@ const Map<String, dynamic> rearDeltFly = {
   ],
   "variations": {
     "single-arm": {
-      "excludedVariations": [
-        "bent-over",
-        "lying",
-        "reverse pec deck",
-        "seated",
-      ],
+      "excludedVariations": [],
     },
     "bent-over": {
       "excludedVariations": [
         "lying",
         "reverse pec deck",
-        "seated",
-        "single-arm",
       ],
     },
     "seated": {
       "excludedVariations": [
-        "bent-over",
         "lying",
-        "reverse pec deck",
-        "single-arm",
       ],
     },
     "reverse pec deck": {
-      "excludedVariations": ["bent-over", "lying", "seated", "single-arm"],
+      "excludedVariations": [
+        "band",
+        "bent-over",
+        "cable",
+        "dumbbell",
+        "incline bench",
+        "lying",
+      ],
     },
     "lying": {
       "excludedVariations": [
         "bent-over",
         "reverse pec deck",
         "seated",
-        "single-arm",
       ],
     },
     "dumbbell": {
-      "excludedVariations": ["band", "cable", "incline bench", "machine"],
+      "excludedVariations": [
+        "band", 
+        "cable", 
+        "machine", 
+        "reverse pec deck",
+      ],
     },
     "cable": {
-      "excludedVariations": ["band", "dumbbell", "incline bench", "machine"],
+      "excludedVariations": [
+        "band", 
+        "dumbbell", 
+        "machine", 
+        "reverse pec deck",
+      ],
     },
     "machine": {
-      "excludedVariations": ["band", "cable", "dumbbell", "incline bench"],
+      "excludedVariations": [
+        "band", 
+        "cable", 
+        "dumbbell", 
+        "incline bench", 
+        "reverse pec deck",
+      ],
     },
     "incline bench": {
-      "excludedVariations": ["band", "cable", "dumbbell", "machine"],
+      "excludedVariations": [
+        "machine", 
+        "reverse pec deck",
+      ],
     },
     "band": {
-      "excludedVariations": ["cable", "dumbbell", "incline bench", "machine"],
+      "excludedVariations": [
+        "cable", 
+        "dumbbell", 
+        "machine", 
+        "reverse pec deck",
+      ],
     },
   },
 };
