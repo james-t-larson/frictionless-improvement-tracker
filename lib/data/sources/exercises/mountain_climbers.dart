@@ -6,25 +6,28 @@ const Map<String, dynamic> mountainClimbers = {
   "secondaryMuscles": ["external obliques"],
   "variations": {
     "slow": {
-      "excludedVariations": ["cross-body", "elevated"],
+      "excludedVariations": [],
     },
     "cross-body": {
-      "excludedVariations": ["elevated", "slow"],
+      "excludedVariations": ["spiderman"],
+    },
+    "spiderman": {
+      "excludedVariations": ["cross-body"],
     },
     "elevated": {
-      "excludedVariations": ["cross-body", "slow"],
+      "excludedVariations": ["slider"],
     },
     "resistance band": {
-      "excludedVariations": ["bosu", "slider", "weighted vest"],
+      "excludedVariations": ["bosu", "slider"],
     },
     "slider": {
-      "excludedVariations": ["bosu", "resistance band", "weighted vest"],
+      "excludedVariations": ["bosu", "resistance band", "elevated"],
     },
     "bosu": {
-      "excludedVariations": ["resistance band", "slider", "weighted vest"],
+      "excludedVariations": ["resistance band", "slider"],
     },
     "weighted vest": {
-      "excludedVariations": ["bosu", "resistance band", "slider"],
+      "excludedVariations": [],
     },
   },
 };
