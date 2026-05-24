@@ -6,66 +6,97 @@ const Map<String, dynamic> russianTwist = {
   "secondaryMuscles": ["rectus abdominis"],
   "variations": {
     "bodyweight": {
-      "excludedVariations": ["decline", "feet-elevated"],
+      "excludedVariations": [
+        "band-resisted",
+        "cable",
+        "dumbbell",
+        "kettlebell",
+        "medicine ball",
+        "plate",
+        "weighted"
+      ],
     },
     "feet-elevated": {
-      "excludedVariations": ["bodyweight", "decline"],
+      "excludedVariations": ["decline"],
     },
     "decline": {
-      "excludedVariations": ["bodyweight", "feet-elevated"],
+      "excludedVariations": ["feet-elevated"],
     },
     "weighted": {
       "excludedVariations": [
         "band-resisted",
+        "bodyweight",
+        "cable",
+        "dumbbell",
+        "kettlebell",
+        "medicine ball",
+        "plate"
+      ],
+    },
+    "dumbbell": {
+      "excludedVariations": [
+        "band-resisted",
+        "bodyweight",
         "cable",
         "kettlebell",
         "medicine ball",
         "plate",
+        "weighted"
       ],
     },
     "medicine ball": {
       "excludedVariations": [
         "band-resisted",
+        "bodyweight",
         "cable",
+        "dumbbell",
         "kettlebell",
         "plate",
-        "weighted",
+        "weighted"
       ],
     },
     "cable": {
       "excludedVariations": [
         "band-resisted",
+        "bodyweight",
+        "dumbbell",
         "kettlebell",
         "medicine ball",
         "plate",
-        "weighted",
+        "weighted"
       ],
     },
     "plate": {
       "excludedVariations": [
         "band-resisted",
+        "bodyweight",
         "cable",
+        "dumbbell",
         "kettlebell",
         "medicine ball",
-        "weighted",
+        "weighted"
       ],
     },
     "kettlebell": {
       "excludedVariations": [
         "band-resisted",
+        "bodyweight",
         "cable",
+        "dumbbell",
         "medicine ball",
         "plate",
-        "weighted",
+        "weighted"
       ],
     },
     "band-resisted": {
       "excludedVariations": [
+        "bodyweight",
         "cable",
+        "dumbbell",
         "kettlebell",
         "medicine ball",
         "plate",
-        "weighted",
+        "weighted"
       ],
     },
   },
