@@ -7,90 +7,50 @@ const Map<String, dynamic> shoulderPress = {
   "variations": {
     "single-arm": {
       "excludedVariations": [
-        "Bradford",
         "alternating",
-        "behind-the-neck",
-        "paused",
-        "push press",
-        "seated",
-        "standing",
+        "barbell",
+        "smith machine",
+        "pin"
       ],
     },
     "seated": {
       "excludedVariations": [
-        "Bradford",
-        "alternating",
-        "behind-the-neck",
-        "paused",
-        "push press",
-        "single-arm",
         "standing",
+        "push press"
       ],
     },
     "standing": {
       "excludedVariations": [
-        "Bradford",
-        "alternating",
-        "behind-the-neck",
-        "paused",
-        "push press",
-        "seated",
-        "single-arm",
+        "seated"
       ],
     },
     "push press": {
       "excludedVariations": [
-        "Bradford",
-        "alternating",
-        "behind-the-neck",
-        "paused",
         "seated",
-        "single-arm",
-        "standing",
-      ],
-    },
-    "behind-the-neck": {
-      "excludedVariations": [
-        "Bradford",
-        "alternating",
-        "paused",
-        "push press",
-        "seated",
-        "single-arm",
-        "standing",
+        "machine",
+        "pin"
       ],
     },
     "paused": {
       "excludedVariations": [
-        "Bradford",
-        "alternating",
-        "behind-the-neck",
-        "push press",
-        "seated",
-        "single-arm",
-        "standing",
-      ],
-    },
-    "Bradford": {
-      "excludedVariations": [
-        "alternating",
-        "behind-the-neck",
-        "paused",
-        "push press",
-        "seated",
-        "single-arm",
-        "standing",
+        "pin"
       ],
     },
     "alternating": {
       "excludedVariations": [
-        "Bradford",
-        "behind-the-neck",
-        "paused",
-        "push press",
-        "seated",
         "single-arm",
-        "standing",
+        "barbell",
+        "smith machine",
+        "pin"
+      ],
+    },
+    "Arnold": {
+      "excludedVariations": [
+        "barbell",
+        "smith machine",
+        "machine",
+        "pin",
+        "cable"
       ],
     },
     "dumbbell": {
@@ -100,7 +60,7 @@ const Map<String, dynamic> shoulderPress = {
         "kettlebell",
         "machine",
         "pin",
-        "smith machine",
+        "smith machine"
       ],
     },
     "barbell": {
@@ -109,8 +69,10 @@ const Map<String, dynamic> shoulderPress = {
         "dumbbell",
         "kettlebell",
         "machine",
-        "pin",
         "smith machine",
+        "alternating",
+        "single-arm",
+        "Arnold"
       ],
     },
     "smith machine": {
@@ -120,7 +82,9 @@ const Map<String, dynamic> shoulderPress = {
         "dumbbell",
         "kettlebell",
         "machine",
-        "pin",
+        "alternating",
+        "single-arm",
+        "Arnold"
       ],
     },
     "machine": {
@@ -131,6 +95,8 @@ const Map<String, dynamic> shoulderPress = {
         "kettlebell",
         "pin",
         "smith machine",
+        "push press",
+        "Arnold"
       ],
     },
     "kettlebell": {
@@ -140,17 +106,20 @@ const Map<String, dynamic> shoulderPress = {
         "dumbbell",
         "machine",
         "pin",
-        "smith machine",
+        "smith machine"
       ],
     },
     "pin": {
       "excludedVariations": [
-        "barbell",
-        "cable",
         "dumbbell",
+        "cable",
         "kettlebell",
         "machine",
-        "smith machine",
+        "alternating",
+        "single-arm",
+        "push press",
+        "paused",
+        "Arnold"
       ],
     },
     "cable": {
@@ -161,6 +130,7 @@ const Map<String, dynamic> shoulderPress = {
         "machine",
         "pin",
         "smith machine",
+        "Arnold"
       ],
     },
   },
