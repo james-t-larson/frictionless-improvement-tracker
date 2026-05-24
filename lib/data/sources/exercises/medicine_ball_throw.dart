@@ -8,12 +8,9 @@ const Map<String, dynamic> medicineBallThrow = {
     "rotational": {
       "excludedVariations": [
         "chest pass",
-        "kneeling",
         "overhead",
-        "partner",
         "scoop toss",
         "side throw",
-        "slam",
         "squat throw",
         "wall ball",
       ],
@@ -21,36 +18,25 @@ const Map<String, dynamic> medicineBallThrow = {
     "overhead": {
       "excludedVariations": [
         "chest pass",
-        "kneeling",
-        "partner",
         "rotational",
         "scoop toss",
         "side throw",
-        "slam",
-        "squat throw",
         "wall ball",
       ],
     },
     "chest pass": {
       "excludedVariations": [
-        "kneeling",
         "overhead",
-        "partner",
         "rotational",
         "scoop toss",
         "side throw",
         "slam",
-        "squat throw",
         "wall ball",
       ],
     },
     "slam": {
       "excludedVariations": [
         "chest pass",
-        "kneeling",
-        "overhead",
-        "partner",
-        "rotational",
         "scoop toss",
         "side throw",
         "squat throw",
@@ -72,10 +58,7 @@ const Map<String, dynamic> medicineBallThrow = {
     },
     "squat throw": {
       "excludedVariations": [
-        "chest pass",
         "kneeling",
-        "overhead",
-        "partner",
         "rotational",
         "scoop toss",
         "side throw",
@@ -85,36 +68,19 @@ const Map<String, dynamic> medicineBallThrow = {
     },
     "kneeling": {
       "excludedVariations": [
-        "chest pass",
-        "overhead",
-        "partner",
-        "rotational",
-        "scoop toss",
-        "side throw",
-        "slam",
         "squat throw",
         "wall ball",
       ],
     },
     "partner": {
       "excludedVariations": [
-        "chest pass",
-        "kneeling",
-        "overhead",
-        "rotational",
-        "scoop toss",
-        "side throw",
-        "slam",
-        "squat throw",
         "wall ball",
       ],
     },
     "side throw": {
       "excludedVariations": [
         "chest pass",
-        "kneeling",
         "overhead",
-        "partner",
         "rotational",
         "scoop toss",
         "slam",
@@ -125,9 +91,7 @@ const Map<String, dynamic> medicineBallThrow = {
     "scoop toss": {
       "excludedVariations": [
         "chest pass",
-        "kneeling",
         "overhead",
-        "partner",
         "rotational",
         "side throw",
         "slam",
