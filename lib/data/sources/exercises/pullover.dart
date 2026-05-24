@@ -6,44 +6,46 @@ const Map<String, dynamic> pullover = {
   "secondaryMuscles": ["triceps brachii", "posterior deltoid"],
   "variations": {
     "decline": {
-      "excludedVariations": [
-        "EZ-bar",
-        "bent-arm",
-        "single-arm",
-        "straight-arm",
-      ],
+      "excludedVariations": ["flat bench", "machine", "stability ball"],
     },
     "single-arm": {
-      "excludedVariations": ["EZ-bar", "bent-arm", "decline", "straight-arm"],
+      "excludedVariations": ["barbell", "EZ-bar", "machine"],
     },
     "EZ-bar": {
-      "excludedVariations": [
-        "bent-arm",
-        "decline",
-        "single-arm",
-        "straight-arm",
-      ],
+      "excludedVariations": ["dumbbell", "barbell", "cable", "machine", "single-arm"],
     },
     "straight-arm": {
-      "excludedVariations": ["EZ-bar", "bent-arm", "decline", "single-arm"],
+      "excludedVariations": ["bent-arm"],
     },
     "bent-arm": {
-      "excludedVariations": ["EZ-bar", "decline", "single-arm", "straight-arm"],
+      "excludedVariations": ["straight-arm"],
     },
     "dumbbell": {
-      "excludedVariations": ["barbell", "cable", "flat bench", "machine"],
+      "excludedVariations": ["barbell", "EZ-bar", "cable", "machine"],
     },
     "flat bench": {
-      "excludedVariations": ["barbell", "cable", "dumbbell", "machine"],
+      "excludedVariations": ["decline", "machine", "stability ball"],
     },
     "cable": {
-      "excludedVariations": ["barbell", "dumbbell", "flat bench", "machine"],
+      "excludedVariations": ["dumbbell", "barbell", "EZ-bar", "machine"],
     },
     "barbell": {
-      "excludedVariations": ["cable", "dumbbell", "flat bench", "machine"],
+      "excludedVariations": ["dumbbell", "EZ-bar", "cable", "machine", "single-arm"],
     },
     "machine": {
-      "excludedVariations": ["barbell", "cable", "dumbbell", "flat bench"],
+      "excludedVariations": [
+        "dumbbell", 
+        "barbell", 
+        "EZ-bar", 
+        "cable", 
+        "flat bench", 
+        "decline", 
+        "single-arm", 
+        "stability ball"
+      ],
+    },
+    "stability ball": {
+      "excludedVariations": ["flat bench", "decline", "machine"],
     },
   },
 };
