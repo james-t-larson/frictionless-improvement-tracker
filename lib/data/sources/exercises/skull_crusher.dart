@@ -6,86 +6,37 @@ const Map<String, dynamic> skullCrusher = {
   "secondaryMuscles": [],
   "variations": {
     "EZ-bar": {
-      "excludedVariations": ["floor", "neutral-grip", "single-arm"],
+      "excludedVariations": ["barbell", "dumbbell", "cable", "band", "single-arm", "neutral-grip"],
     },
     "single-arm": {
-      "excludedVariations": ["EZ-bar", "floor", "neutral-grip"],
+      "excludedVariations": ["EZ-bar", "barbell"],
     },
     "floor": {
-      "excludedVariations": ["EZ-bar", "neutral-grip", "single-arm"],
+      "excludedVariations": ["flat bench", "incline bench", "decline bench"],
     },
     "neutral-grip": {
-      "excludedVariations": ["EZ-bar", "floor", "single-arm"],
+      "excludedVariations": ["EZ-bar", "barbell"],
     },
     "barbell": {
-      "excludedVariations": [
-        "band",
-        "cable",
-        "decline bench",
-        "dumbbell",
-        "flat bench",
-        "incline bench",
-      ],
+      "excludedVariations": ["EZ-bar", "dumbbell", "cable", "band", "single-arm", "neutral-grip"],
     },
     "dumbbell": {
-      "excludedVariations": [
-        "band",
-        "barbell",
-        "cable",
-        "decline bench",
-        "flat bench",
-        "incline bench",
-      ],
+      "excludedVariations": ["EZ-bar", "barbell", "cable", "band"],
     },
     "cable": {
-      "excludedVariations": [
-        "band",
-        "barbell",
-        "decline bench",
-        "dumbbell",
-        "flat bench",
-        "incline bench",
-      ],
+      "excludedVariations": ["EZ-bar", "barbell", "dumbbell", "band"],
     },
     "band": {
-      "excludedVariations": [
-        "barbell",
-        "cable",
-        "decline bench",
-        "dumbbell",
-        "flat bench",
-        "incline bench",
-      ],
+      "excludedVariations": ["EZ-bar", "barbell", "dumbbell", "cable"],
     },
     "flat bench": {
-      "excludedVariations": [
-        "band",
-        "barbell",
-        "cable",
-        "decline bench",
-        "dumbbell",
-        "incline bench",
-      ],
+      "excludedVariations": ["incline bench", "decline bench", "floor"],
     },
     "incline bench": {
-      "excludedVariations": [
-        "band",
-        "barbell",
-        "cable",
-        "decline bench",
-        "dumbbell",
-        "flat bench",
-      ],
+      "excludedVariations": ["flat bench", "decline bench", "floor"],
     },
     "decline bench": {
-      "excludedVariations": [
-        "band",
-        "barbell",
-        "cable",
-        "dumbbell",
-        "flat bench",
-        "incline bench",
-      ],
+      "excludedVariations": ["flat bench", "incline bench", "floor"],
     },
   },
 };
