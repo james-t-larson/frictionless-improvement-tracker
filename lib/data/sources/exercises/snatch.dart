@@ -12,123 +12,118 @@ const Map<String, dynamic> snatch = {
   "variations": {
     "hang": {
       "excludedVariations": [
+        "block",
         "drop snatch",
-        "muscle snatch",
         "overhead squat",
-        "paused",
-        "power",
-        "snatch balance",
-        "squat",
-        "wide-grip",
+        "snatch balance"
       ],
     },
     "power": {
       "excludedVariations": [
         "drop snatch",
-        "hang",
         "muscle snatch",
         "overhead squat",
-        "paused",
         "snatch balance",
-        "squat",
-        "wide-grip",
+        "squat"
       ],
     },
     "squat": {
       "excludedVariations": [
         "drop snatch",
-        "hang",
         "muscle snatch",
         "overhead squat",
-        "paused",
         "power",
-        "snatch balance",
-        "wide-grip",
+        "snatch balance"
       ],
     },
     "muscle snatch": {
       "excludedVariations": [
         "drop snatch",
-        "hang",
         "overhead squat",
-        "paused",
         "power",
         "snatch balance",
-        "squat",
-        "wide-grip",
+        "squat"
       ],
     },
     "overhead squat": {
       "excludedVariations": [
+        "block",
         "drop snatch",
         "hang",
         "muscle snatch",
-        "paused",
         "power",
         "snatch balance",
-        "squat",
-        "wide-grip",
+        "squat"
       ],
     },
     "snatch balance": {
       "excludedVariations": [
+        "block",
         "drop snatch",
+        "dumbbell",
         "hang",
+        "kettlebell",
         "muscle snatch",
         "overhead squat",
-        "paused",
         "power",
-        "squat",
-        "wide-grip",
+        "squat"
       ],
     },
     "drop snatch": {
       "excludedVariations": [
+        "block",
+        "dumbbell",
         "hang",
+        "kettlebell",
         "muscle snatch",
         "overhead squat",
-        "paused",
         "power",
         "snatch balance",
-        "squat",
-        "wide-grip",
+        "squat"
       ],
     },
     "paused": {
       "excludedVariations": [
         "drop snatch",
-        "hang",
-        "muscle snatch",
-        "overhead squat",
-        "power",
-        "snatch balance",
-        "squat",
-        "wide-grip",
-      ],
-    },
-    "wide-grip": {
-      "excludedVariations": [
-        "drop snatch",
-        "hang",
-        "muscle snatch",
-        "overhead squat",
-        "paused",
-        "power",
-        "snatch balance",
-        "squat",
+        "snatch balance"
       ],
     },
     "barbell": {
-      "excludedVariations": ["block", "dumbbell", "kettlebell"],
+      "excludedVariations": [
+        "dumbbell",
+        "kettlebell"
+      ],
     },
     "dumbbell": {
-      "excludedVariations": ["barbell", "block", "kettlebell"],
+      "excludedVariations": [
+        "barbell",
+        "block",
+        "drop snatch",
+        "kettlebell",
+        "overhead squat",
+        "snatch balance"
+      ],
     },
     "kettlebell": {
-      "excludedVariations": ["barbell", "block", "dumbbell"],
+      "excludedVariations": [
+        "barbell",
+        "block",
+        "drop snatch",
+        "dumbbell",
+        "overhead squat",
+        "paused",
+        "snatch balance"
+      ],
     },
     "block": {
-      "excludedVariations": ["barbell", "dumbbell", "kettlebell"],
+      "excludedVariations": [
+        "drop snatch",
+        "dumbbell",
+        "hang",
+        "kettlebell",
+        "overhead squat",
+        "snatch balance"
+      ],
     },
   },
 };
