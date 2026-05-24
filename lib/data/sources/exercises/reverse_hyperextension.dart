@@ -6,67 +6,25 @@ const Map<String, dynamic> reverseHyperextension = {
   "secondaryMuscles": [],
   "variations": {
     "GHD": {
-      "excludedVariations": ["hip extension", "single-leg"],
+      "excludedVariations": ["flat bench", "machine", "swiss ball"],
     },
     "single-leg": {
-      "excludedVariations": ["GHD", "hip extension"],
-    },
-    "hip extension": {
-      "excludedVariations": ["GHD", "single-leg"],
+      "excludedVariations": [],
     },
     "machine": {
-      "excludedVariations": [
-        "banded",
-        "flat bench",
-        "parallel bars",
-        "swiss ball",
-        "weighted",
-      ],
+      "excludedVariations": ["GHD", "flat bench", "swiss ball"],
     },
     "flat bench": {
-      "excludedVariations": [
-        "banded",
-        "machine",
-        "parallel bars",
-        "swiss ball",
-        "weighted",
-      ],
+      "excludedVariations": ["GHD", "machine", "swiss ball"],
     },
     "weighted": {
-      "excludedVariations": [
-        "banded",
-        "flat bench",
-        "machine",
-        "parallel bars",
-        "swiss ball",
-      ],
+      "excludedVariations": [],
     },
     "banded": {
-      "excludedVariations": [
-        "flat bench",
-        "machine",
-        "parallel bars",
-        "swiss ball",
-        "weighted",
-      ],
+      "excludedVariations": [],
     },
     "swiss ball": {
-      "excludedVariations": [
-        "banded",
-        "flat bench",
-        "machine",
-        "parallel bars",
-        "weighted",
-      ],
-    },
-    "parallel bars": {
-      "excludedVariations": [
-        "banded",
-        "flat bench",
-        "machine",
-        "swiss ball",
-        "weighted",
-      ],
+      "excludedVariations": ["GHD", "flat bench", "machine"],
     },
   },
 };
