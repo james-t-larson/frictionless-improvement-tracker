@@ -1,6 +1,4 @@
 const Map<String, dynamic> romanianDeadlift = {
-  "pk": "c1d83b6a-7f29-4e5c-b2a8-9d0e5f7c3b21",
-  "name": "Romanian Deadlift",
   "muscleGroups": ["Legs"],
   "primaryMuscles": ["hamstrings", "gluteus maximus"],
   "secondaryMuscles": ["erector spinae", "gastrocnemius"],
@@ -8,81 +6,42 @@ const Map<String, dynamic> romanianDeadlift = {
     "single-leg": {
       "excludedVariations": [
         "B-stance",
-        "deficit",
-        "paused",
-        "snatch-grip",
-        "stiff-leg",
-        "wide-grip",
-      ],
+        "snatch-grip"
+      ]
     },
     "paused": {
-      "excludedVariations": [
-        "B-stance",
-        "deficit",
-        "single-leg",
-        "snatch-grip",
-        "stiff-leg",
-        "wide-grip",
-      ],
+      "excludedVariations": []
     },
     "stiff-leg": {
-      "excludedVariations": [
-        "B-stance",
-        "deficit",
-        "paused",
-        "single-leg",
-        "snatch-grip",
-        "wide-grip",
-      ],
-    },
-    "wide-grip": {
-      "excludedVariations": [
-        "B-stance",
-        "deficit",
-        "paused",
-        "single-leg",
-        "snatch-grip",
-        "stiff-leg",
-      ],
+      "excludedVariations": []
     },
     "snatch-grip": {
       "excludedVariations": [
         "B-stance",
-        "deficit",
-        "paused",
-        "single-leg",
-        "stiff-leg",
-        "wide-grip",
-      ],
-    },
-    "B-stance": {
-      "excludedVariations": [
-        "deficit",
-        "paused",
-        "single-leg",
-        "snatch-grip",
-        "stiff-leg",
-        "wide-grip",
-      ],
-    },
-    "deficit": {
-      "excludedVariations": [
-        "B-stance",
-        "paused",
-        "single-leg",
-        "snatch-grip",
-        "stiff-leg",
-        "wide-grip",
-      ],
-    },
-    "barbell": {
-      "excludedVariations": [
-        "banded",
         "cable",
         "dumbbell",
         "kettlebell",
-        "trap bar",
-      ],
+        "single-leg",
+        "trap bar"
+      ]
+    },
+    "B-stance": {
+      "excludedVariations": [
+        "single-leg",
+        "snatch-grip"
+      ]
+    },
+    "deficit": {
+      "excludedVariations": []
+    },
+    "barbell": {
+      "excludedVariations": [
+        "cable",
+        "dumbbell",
+        "kettlebell",
+        "Smith machine",
+        "trap bar"
+      ]
     },
     "dumbbell": {
       "excludedVariations": [
@@ -90,8 +49,10 @@ const Map<String, dynamic> romanianDeadlift = {
         "barbell",
         "cable",
         "kettlebell",
-        "trap bar",
-      ],
+        "Smith machine",
+        "snatch-grip",
+        "trap bar"
+      ]
     },
     "kettlebell": {
       "excludedVariations": [
@@ -99,8 +60,10 @@ const Map<String, dynamic> romanianDeadlift = {
         "barbell",
         "cable",
         "dumbbell",
-        "trap bar",
-      ],
+        "Smith machine",
+        "snatch-grip",
+        "trap bar"
+      ]
     },
     "cable": {
       "excludedVariations": [
@@ -108,8 +71,10 @@ const Map<String, dynamic> romanianDeadlift = {
         "barbell",
         "dumbbell",
         "kettlebell",
-        "trap bar",
-      ],
+        "Smith machine",
+        "snatch-grip",
+        "trap bar"
+      ]
     },
     "trap bar": {
       "excludedVariations": [
@@ -118,16 +83,28 @@ const Map<String, dynamic> romanianDeadlift = {
         "cable",
         "dumbbell",
         "kettlebell",
-      ],
+        "Smith machine",
+        "snatch-grip"
+      ]
     },
     "banded": {
       "excludedVariations": [
+        "cable",
+        "dumbbell",
+        "kettlebell",
+        "Smith machine",
+        "trap bar"
+      ]
+    },
+    "Smith machine": {
+      "excludedVariations": [
+        "banded",
         "barbell",
         "cable",
         "dumbbell",
         "kettlebell",
-        "trap bar",
-      ],
-    },
-  },
-};
+        "trap bar"
+      ]
+    }
+  }
+}
