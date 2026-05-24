@@ -7,120 +7,80 @@ const Map<String, dynamic> stepUp = {
   "variations": {
     "bodyweight": {
       "excludedVariations": [
-        "Bulgarian",
-        "crossover",
-        "deficit",
-        "explosive",
-        "lateral",
-        "paused",
-        "single-leg",
+        "barbell",
+        "dumbbell",
+        "goblet",
+        "kettlebell",
+        "weighted vest"
       ],
     },
     "lateral": {
       "excludedVariations": [
-        "Bulgarian",
-        "bodyweight",
-        "crossover",
-        "deficit",
-        "explosive",
-        "paused",
-        "single-leg",
-      ],
-    },
-    "single-leg": {
-      "excludedVariations": [
-        "Bulgarian",
-        "bodyweight",
-        "crossover",
-        "deficit",
-        "explosive",
-        "lateral",
-        "paused",
+        "crossover"
       ],
     },
     "crossover": {
       "excludedVariations": [
-        "Bulgarian",
-        "bodyweight",
-        "deficit",
         "explosive",
-        "lateral",
-        "paused",
-        "single-leg",
+        "lateral"
       ],
     },
     "explosive": {
       "excludedVariations": [
-        "Bulgarian",
-        "bodyweight",
+        "barbell",
         "crossover",
-        "deficit",
-        "lateral",
-        "paused",
-        "single-leg",
-      ],
-    },
-    "deficit": {
-      "excludedVariations": [
-        "Bulgarian",
-        "bodyweight",
-        "crossover",
-        "explosive",
-        "lateral",
-        "paused",
-        "single-leg",
-      ],
-    },
-    "Bulgarian": {
-      "excludedVariations": [
-        "bodyweight",
-        "crossover",
-        "deficit",
-        "explosive",
-        "lateral",
-        "paused",
-        "single-leg",
+        "paused"
       ],
     },
     "paused": {
       "excludedVariations": [
-        "Bulgarian",
-        "bodyweight",
-        "crossover",
-        "deficit",
-        "explosive",
-        "lateral",
-        "single-leg",
+        "explosive"
       ],
     },
     "dumbbell": {
       "excludedVariations": [
         "barbell",
+        "bodyweight",
         "goblet",
         "kettlebell",
-        "weighted vest",
+        "weighted vest"
       ],
     },
     "barbell": {
       "excludedVariations": [
+        "bodyweight",
         "dumbbell",
+        "explosive",
         "goblet",
         "kettlebell",
-        "weighted vest",
+        "weighted vest"
       ],
     },
     "weighted vest": {
-      "excludedVariations": ["barbell", "dumbbell", "goblet", "kettlebell"],
+      "excludedVariations": [
+        "barbell",
+        "bodyweight",
+        "dumbbell",
+        "goblet",
+        "kettlebell"
+      ],
     },
     "kettlebell": {
-      "excludedVariations": ["barbell", "dumbbell", "goblet", "weighted vest"],
+      "excludedVariations": [
+        "barbell",
+        "bodyweight",
+        "dumbbell",
+        "goblet",
+        "weighted vest"
+      ],
     },
     "goblet": {
       "excludedVariations": [
         "barbell",
+        "bodyweight",
         "dumbbell",
         "kettlebell",
-        "weighted vest",
+        "weighted vest"
       ],
     },
   },
