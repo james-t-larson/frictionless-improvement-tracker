@@ -12,22 +12,19 @@ const Map<String, dynamic> sealRow = {
       "excludedVariations": ["neutral-grip", "single-arm", "wide-grip"],
     },
     "neutral-grip": {
-      "excludedVariations": ["close-grip", "single-arm", "wide-grip"],
+      "excludedVariations": ["close-grip", "wide-grip"],
     },
     "single-arm": {
-      "excludedVariations": ["close-grip", "neutral-grip", "wide-grip"],
+      "excludedVariations": ["close-grip", "wide-grip"],
     },
     "barbell": {
-      "excludedVariations": ["cable", "dumbbell", "machine"],
+      "excludedVariations": ["dumbbell", "machine"],
     },
     "dumbbell": {
-      "excludedVariations": ["barbell", "cable", "machine"],
+      "excludedVariations": ["barbell", "machine"],
     },
     "machine": {
-      "excludedVariations": ["barbell", "cable", "dumbbell"],
-    },
-    "cable": {
-      "excludedVariations": ["barbell", "dumbbell", "machine"],
+      "excludedVariations": ["barbell", "dumbbell"],
     },
   },
 };
