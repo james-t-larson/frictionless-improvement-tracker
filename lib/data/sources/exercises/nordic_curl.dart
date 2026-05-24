@@ -6,28 +6,25 @@ const Map<String, dynamic> nordicCurl = {
   "secondaryMuscles": ["gluteus maximus", "gastrocnemius"],
   "variations": {
     "bodyweight": {
-      "excludedVariations": ["GHD", "eccentric", "feet-anchored"],
+      "excludedVariations": ["band-assisted", "weighted"],
     },
     "eccentric": {
-      "excludedVariations": ["GHD", "bodyweight", "feet-anchored"],
+      "excludedVariations": [],
     },
     "GHD": {
-      "excludedVariations": ["bodyweight", "eccentric", "feet-anchored"],
-    },
-    "feet-anchored": {
-      "excludedVariations": ["GHD", "bodyweight", "eccentric"],
+      "excludedVariations": ["machine", "partner-assisted"],
     },
     "weighted": {
-      "excludedVariations": ["band-assisted", "machine", "partner-assisted"],
+      "excludedVariations": ["band-assisted", "bodyweight"],
     },
     "partner-assisted": {
-      "excludedVariations": ["band-assisted", "machine", "weighted"],
+      "excludedVariations": ["GHD", "machine"],
     },
     "machine": {
-      "excludedVariations": ["band-assisted", "partner-assisted", "weighted"],
+      "excludedVariations": ["GHD", "partner-assisted"],
     },
     "band-assisted": {
-      "excludedVariations": ["machine", "partner-assisted", "weighted"],
+      "excludedVariations": ["bodyweight", "weighted"],
     },
   },
 };
