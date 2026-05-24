@@ -7,120 +7,76 @@ const Map<String, dynamic> sitUp = {
   "variations": {
     "standard": {
       "excludedVariations": [
-        "GHD",
-        "anchor",
-        "crossed-arms",
         "decline",
-        "hands-behind-head",
-        "incline",
+        "butterfly",
+        "straight-leg",
         "janda",
-        "twisting",
       ],
     },
     "decline": {
       "excludedVariations": [
-        "GHD",
-        "anchor",
-        "crossed-arms",
-        "hands-behind-head",
-        "incline",
-        "janda",
         "standard",
-        "twisting",
+        "anchor",
+        "butterfly",
+        "straight-leg",
+        "janda",
       ],
     },
-    "incline": {
+    "butterfly": {
       "excludedVariations": [
-        "GHD",
-        "anchor",
-        "crossed-arms",
-        "decline",
-        "hands-behind-head",
-        "janda",
         "standard",
-        "twisting",
+        "decline",
+        "anchor",
+        "straight-leg",
+        "janda",
       ],
     },
-    "anchor": {
+    "straight-leg": {
       "excludedVariations": [
-        "GHD",
-        "crossed-arms",
-        "decline",
-        "hands-behind-head",
-        "incline",
-        "janda",
         "standard",
-        "twisting",
-      ],
-    },
-    "crossed-arms": {
-      "excludedVariations": [
-        "GHD",
-        "anchor",
         "decline",
-        "hands-behind-head",
-        "incline",
+        "butterfly",
         "janda",
-        "standard",
-        "twisting",
-      ],
-    },
-    "hands-behind-head": {
-      "excludedVariations": [
-        "GHD",
-        "anchor",
-        "crossed-arms",
-        "decline",
-        "incline",
-        "janda",
-        "standard",
-        "twisting",
-      ],
-    },
-    "twisting": {
-      "excludedVariations": [
-        "GHD",
-        "anchor",
-        "crossed-arms",
-        "decline",
-        "hands-behind-head",
-        "incline",
-        "janda",
-        "standard",
       ],
     },
     "janda": {
       "excludedVariations": [
-        "GHD",
-        "anchor",
-        "crossed-arms",
-        "decline",
-        "hands-behind-head",
-        "incline",
         "standard",
-        "twisting",
+        "decline",
+        "anchor",
+        "butterfly",
+        "straight-leg",
       ],
     },
-    "GHD": {
+    "anchor": {
       "excludedVariations": [
-        "anchor",
-        "crossed-arms",
         "decline",
-        "hands-behind-head",
-        "incline",
+        "butterfly",
         "janda",
-        "standard",
-        "twisting",
       ],
+    },
+    "crossed-arms": {
+      "excludedVariations": [
+        "hands-behind-head",
+      ],
+    },
+    "hands-behind-head": {
+      "excludedVariations": [
+        "crossed-arms",
+      ],
+    },
+    "twisting": {
+      "excludedVariations": [],
     },
     "weighted": {
-      "excludedVariations": ["band-resisted", "feet-in-rings"],
+      "excludedVariations": [
+        "band-resisted",
+      ],
     },
     "band-resisted": {
-      "excludedVariations": ["feet-in-rings", "weighted"],
-    },
-    "feet-in-rings": {
-      "excludedVariations": ["band-resisted", "weighted"],
+      "excludedVariations": [
+        "weighted",
+      ],
     },
   },
 };
