@@ -11,16 +11,13 @@ const Map<String, dynamic> rearDeltRow = {
   ],
   "variations": {
     "single-arm": {
-      "excludedVariations": ["close-grip", "prone", "wide-grip"],
+      "excludedVariations": ["prone", "wide-grip", "barbell"],
     },
     "prone": {
-      "excludedVariations": ["close-grip", "single-arm", "wide-grip"],
+      "excludedVariations": ["single-arm"],
     },
     "wide-grip": {
-      "excludedVariations": ["close-grip", "prone", "single-arm"],
-    },
-    "close-grip": {
-      "excludedVariations": ["prone", "single-arm", "wide-grip"],
+      "excludedVariations": ["single-arm", "dumbbell", "kettlebell"],
     },
     "dumbbell": {
       "excludedVariations": [
@@ -29,6 +26,7 @@ const Map<String, dynamic> rearDeltRow = {
         "cable",
         "kettlebell",
         "machine",
+        "wide-grip",
       ],
     },
     "barbell": {
@@ -38,6 +36,7 @@ const Map<String, dynamic> rearDeltRow = {
         "dumbbell",
         "kettlebell",
         "machine",
+        "single-arm",
       ],
     },
     "cable": {
@@ -68,7 +67,14 @@ const Map<String, dynamic> rearDeltRow = {
       ],
     },
     "kettlebell": {
-      "excludedVariations": ["band", "barbell", "cable", "dumbbell", "machine"],
+      "excludedVariations": [
+        "band",
+        "barbell",
+        "cable",
+        "dumbbell",
+        "machine",
+        "wide-grip",
+      ],
     },
   },
 };
