@@ -8,11 +8,6 @@ const Map<String, dynamic> pallofPress = {
     "kneeling": {
       "excludedVariations": [
         "half-kneeling",
-        "isometric",
-        "overhead",
-        "push",
-        "rotation",
-        "single-arm",
         "split-stance",
         "standing",
       ],
@@ -20,83 +15,13 @@ const Map<String, dynamic> pallofPress = {
     "standing": {
       "excludedVariations": [
         "half-kneeling",
-        "isometric",
         "kneeling",
-        "overhead",
-        "push",
-        "rotation",
-        "single-arm",
         "split-stance",
       ],
     },
     "half-kneeling": {
       "excludedVariations": [
-        "isometric",
         "kneeling",
-        "overhead",
-        "push",
-        "rotation",
-        "single-arm",
-        "split-stance",
-        "standing",
-      ],
-    },
-    "single-arm": {
-      "excludedVariations": [
-        "half-kneeling",
-        "isometric",
-        "kneeling",
-        "overhead",
-        "push",
-        "rotation",
-        "split-stance",
-        "standing",
-      ],
-    },
-    "push": {
-      "excludedVariations": [
-        "half-kneeling",
-        "isometric",
-        "kneeling",
-        "overhead",
-        "rotation",
-        "single-arm",
-        "split-stance",
-        "standing",
-      ],
-    },
-    "overhead": {
-      "excludedVariations": [
-        "half-kneeling",
-        "isometric",
-        "kneeling",
-        "push",
-        "rotation",
-        "single-arm",
-        "split-stance",
-        "standing",
-      ],
-    },
-    "rotation": {
-      "excludedVariations": [
-        "half-kneeling",
-        "isometric",
-        "kneeling",
-        "overhead",
-        "push",
-        "single-arm",
-        "split-stance",
-        "standing",
-      ],
-    },
-    "isometric": {
-      "excludedVariations": [
-        "half-kneeling",
-        "kneeling",
-        "overhead",
-        "push",
-        "rotation",
-        "single-arm",
         "split-stance",
         "standing",
       ],
@@ -104,13 +29,30 @@ const Map<String, dynamic> pallofPress = {
     "split-stance": {
       "excludedVariations": [
         "half-kneeling",
-        "isometric",
         "kneeling",
+        "standing",
+      ],
+    },
+    "single-arm": {
+      "excludedVariations": [
         "overhead",
-        "push",
+      ],
+    },
+    "overhead": {
+      "excludedVariations": [
         "rotation",
         "single-arm",
-        "standing",
+      ],
+    },
+    "rotation": {
+      "excludedVariations": [
+        "isometric",
+        "overhead",
+      ],
+    },
+    "isometric": {
+      "excludedVariations": [
+        "rotation",
       ],
     },
     "cable": {
