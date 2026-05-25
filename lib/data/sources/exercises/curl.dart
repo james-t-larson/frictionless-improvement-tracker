@@ -10,9 +10,11 @@ const Map<String, dynamic> curl = {
         "EZ-bar",
         "alternating",
         "close-grip",
+        "concentration",
         "cross-body",
         "decline",
         "drag",
+        "hammer",
         "incline",
         "preacher",
         "reverse",
@@ -22,10 +24,40 @@ const Map<String, dynamic> curl = {
         "zottman",
       ],
     },
-    "preacher": {
+    "hammer": {
+      "excludedVariations": [
+        "EZ-bar",
+        "barbell",
+        "bodyweight",
+        "close-grip",
+        "reverse",
+        "wide-grip",
+        "zottman",
+      ],
+    },
+    "concentration": {
       "excludedVariations": [
         "alternating",
+        "EZ-bar",
+        "barbell",
         "bodyweight",
+        "close-grip",
+        "cross-body",
+        "decline",
+        "drag",
+        "incline",
+        "preacher",
+        "rope",
+        "spider",
+        "standing",
+        "wide-grip",
+        "zottman",
+      ],
+    },
+    "preacher": {
+      "excludedVariations": [
+        "bodyweight",
+        "concentration",
         "cross-body",
         "decline",
         "drag",
@@ -39,6 +71,7 @@ const Map<String, dynamic> curl = {
         "EZ-bar",
         "bodyweight",
         "close-grip",
+        "concentration",
         "decline",
         "drag",
         "incline",
@@ -61,6 +94,7 @@ const Map<String, dynamic> curl = {
     "incline": {
       "excludedVariations": [
         "bodyweight",
+        "concentration",
         "decline",
         "drag",
         "preacher",
@@ -71,6 +105,7 @@ const Map<String, dynamic> curl = {
     "decline": {
       "excludedVariations": [
         "bodyweight",
+        "concentration",
         "cross-body",
         "drag",
         "incline",
@@ -84,7 +119,9 @@ const Map<String, dynamic> curl = {
       "excludedVariations": [
         "alternating",
         "bodyweight",
+        "concentration",
         "cross-body",
+        "hammer",
         "single-arm",
         "wide-grip",
         "zottman",
@@ -95,7 +132,9 @@ const Map<String, dynamic> curl = {
         "alternating",
         "bodyweight",
         "close-grip",
+        "concentration",
         "cross-body",
+        "hammer",
         "single-arm",
         "zottman",
       ],
@@ -104,7 +143,9 @@ const Map<String, dynamic> curl = {
       "excludedVariations": [
         "alternating",
         "bodyweight",
+        "concentration",
         "cross-body",
+        "hammer",
         "single-arm",
         "zottman",
       ],
@@ -114,9 +155,11 @@ const Map<String, dynamic> curl = {
         "EZ-bar",
         "bodyweight",
         "close-grip",
+        "concentration",
         "cross-body",
         "decline",
         "drag",
+        "hammer",
         "preacher",
         "spider",
         "wide-grip",
@@ -125,6 +168,7 @@ const Map<String, dynamic> curl = {
     "spider": {
       "excludedVariations": [
         "bodyweight",
+        "concentration",
         "cross-body",
         "drag",
         "incline",
@@ -146,6 +190,7 @@ const Map<String, dynamic> curl = {
     "standing": {
       "excludedVariations": [
         "bodyweight",
+        "concentration",
         "decline",
         "incline",
         "seated",
@@ -155,6 +200,7 @@ const Map<String, dynamic> curl = {
     "reverse": {
       "excludedVariations": [
         "bodyweight",
+        "hammer",
         "zottman",
       ],
     },
@@ -162,6 +208,7 @@ const Map<String, dynamic> curl = {
       "excludedVariations": [
         "alternating",
         "bodyweight",
+        "concentration",
         "cross-body",
         "decline",
         "incline",
@@ -176,6 +223,7 @@ const Map<String, dynamic> curl = {
         "EZ-bar",
         "bodyweight",
         "close-grip",
+        "concentration",
         "drag",
         "single-arm",
         "wide-grip",
@@ -185,7 +233,9 @@ const Map<String, dynamic> curl = {
       "excludedVariations": [
         "band",
         "cable",
+        "concentration",
         "dumbbell",
+        "hammer",
         "kettlebell",
         "machine",
         "rope",
@@ -205,7 +255,7 @@ const Map<String, dynamic> curl = {
       "excludedVariations": [
         "band",
         "barbell",
-        "cable",
+        "concentration",
         "dumbbell",
         "kettlebell",
         "machine",
@@ -218,7 +268,6 @@ const Map<String, dynamic> curl = {
         "dumbbell",
         "kettlebell",
         "machine",
-        "rope",
       ],
     },
     "machine": {
