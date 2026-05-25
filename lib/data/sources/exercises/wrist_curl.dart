@@ -8,84 +8,88 @@ const Map<String, dynamic> wristCurl = {
     "single-arm": {
       "excludedVariations": [
         "EZ-bar",
-        "behind-the-back",
-        "pronated",
-        "reverse",
-        "seated",
-        "standing",
+        "barbell",
+        "behind-the-back"
       ],
     },
     "behind-the-back": {
       "excludedVariations": [
         "EZ-bar",
+        "band",
+        "dumbbell",
         "pronated",
         "reverse",
         "seated",
-        "single-arm",
-        "standing",
+        "single-arm"
       ],
     },
     "seated": {
       "excludedVariations": [
-        "EZ-bar",
         "behind-the-back",
-        "pronated",
-        "reverse",
-        "single-arm",
-        "standing",
+        "standing"
       ],
     },
     "standing": {
       "excludedVariations": [
-        "EZ-bar",
-        "behind-the-back",
-        "pronated",
-        "reverse",
-        "seated",
-        "single-arm",
+        "seated"
       ],
     },
     "EZ-bar": {
       "excludedVariations": [
+        "band",
+        "barbell",
         "behind-the-back",
-        "pronated",
-        "reverse",
-        "seated",
-        "single-arm",
-        "standing",
+        "cable",
+        "dumbbell",
+        "single-arm"
       ],
     },
     "reverse": {
       "excludedVariations": [
-        "EZ-bar",
         "behind-the-back",
-        "pronated",
-        "seated",
-        "single-arm",
-        "standing",
+        "pronated"
       ],
     },
     "pronated": {
       "excludedVariations": [
-        "EZ-bar",
         "behind-the-back",
-        "reverse",
-        "seated",
-        "single-arm",
-        "standing",
+        "reverse"
       ],
     },
     "barbell": {
-      "excludedVariations": ["band", "cable", "dumbbell"],
+      "excludedVariations": [
+        "EZ-bar",
+        "band",
+        "cable",
+        "dumbbell",
+        "single-arm"
+      ],
     },
     "dumbbell": {
-      "excludedVariations": ["band", "barbell", "cable"],
+      "excludedVariations": [
+        "EZ-bar",
+        "band",
+        "barbell",
+        "behind-the-back",
+        "cable"
+      ],
     },
     "cable": {
-      "excludedVariations": ["band", "barbell", "dumbbell"],
+      "excludedVariations": [
+        "EZ-bar",
+        "band",
+        "barbell",
+        "dumbbell"
+      ],
     },
     "band": {
-      "excludedVariations": ["barbell", "cable", "dumbbell"],
+      "excludedVariations": [
+        "EZ-bar",
+        "barbell",
+        "behind-the-back",
+        "cable",
+        "dumbbell"
+      ],
     },
   },
 };
