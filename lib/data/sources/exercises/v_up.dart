@@ -6,19 +6,22 @@ const Map<String, dynamic> vUp = {
   "secondaryMuscles": [],
   "variations": {
     "single-leg": {
-      "excludedVariations": ["bent-knee", "full", "hollow body", "tuck"],
+      "excludedVariations": ["bent-knee", "full", "straddle", "tuck"],
     },
     "bent-knee": {
-      "excludedVariations": ["full", "hollow body", "single-leg", "tuck"],
+      "excludedVariations": ["full", "single-leg", "straddle", "tuck"],
     },
     "hollow body": {
-      "excludedVariations": ["bent-knee", "full", "single-leg", "tuck"],
+      "excludedVariations": [],
     },
     "tuck": {
-      "excludedVariations": ["bent-knee", "full", "hollow body", "single-leg"],
+      "excludedVariations": ["bent-knee", "full", "single-leg", "straddle"],
     },
     "full": {
-      "excludedVariations": ["bent-knee", "hollow body", "single-leg", "tuck"],
+      "excludedVariations": ["bent-knee", "single-leg", "straddle", "tuck"],
+    },
+    "straddle": {
+      "excludedVariations": ["bent-knee", "full", "single-leg", "tuck"],
     },
     "weighted": {
       "excludedVariations": ["band-resisted"],
