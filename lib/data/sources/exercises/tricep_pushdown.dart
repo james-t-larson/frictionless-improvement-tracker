@@ -7,120 +7,88 @@ const Map<String, dynamic> tricepPushdown = {
   "variations": {
     "single-arm": {
       "excludedVariations": [
-        "bar",
-        "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
-        "standing",
-        "underhand-grip",
         "wide-grip",
+        "close-grip",
+        "bar",
+        "v-bar",
+        "rope"
       ],
     },
     "standing": {
-      "excludedVariations": [
-        "bar",
-        "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
-        "single-arm",
-        "underhand-grip",
-        "wide-grip",
-      ],
+      "excludedVariations": ["kneeling"],
     },
     "kneeling": {
-      "excludedVariations": [
-        "bar",
-        "close-grip",
-        "neutral-grip",
-        "overhand-grip",
-        "single-arm",
-        "standing",
-        "underhand-grip",
-        "wide-grip",
-      ],
+      "excludedVariations": ["standing"],
     },
     "wide-grip": {
       "excludedVariations": [
-        "bar",
         "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
         "single-arm",
-        "standing",
-        "underhand-grip",
+        "rope",
+        "v-bar",
+        "neutral-grip"
       ],
     },
     "close-grip": {
       "excludedVariations": [
-        "bar",
-        "kneeling",
-        "neutral-grip",
-        "overhand-grip",
-        "single-arm",
-        "standing",
-        "underhand-grip",
         "wide-grip",
+        "single-arm",
+        "rope",
+        "v-bar"
       ],
     },
     "neutral-grip": {
       "excludedVariations": [
-        "bar",
-        "close-grip",
-        "kneeling",
         "overhand-grip",
-        "single-arm",
-        "standing",
         "underhand-grip",
-        "wide-grip",
+        "bar",
+        "wide-grip"
       ],
     },
     "overhand-grip": {
-      "excludedVariations": [
-        "bar",
-        "close-grip",
-        "kneeling",
-        "neutral-grip",
-        "single-arm",
-        "standing",
-        "underhand-grip",
-        "wide-grip",
-      ],
+      "excludedVariations": ["neutral-grip", "underhand-grip"],
     },
     "underhand-grip": {
       "excludedVariations": [
-        "bar",
-        "close-grip",
-        "kneeling",
         "neutral-grip",
         "overhand-grip",
-        "single-arm",
-        "standing",
-        "wide-grip",
+        "rope",
+        "v-bar"
       ],
     },
     "bar": {
       "excludedVariations": [
-        "close-grip",
-        "kneeling",
+        "rope",
+        "v-bar",
         "neutral-grip",
-        "overhand-grip",
-        "single-arm",
-        "standing",
-        "underhand-grip",
+        "single-arm"
+      ],
+    },
+    "v-bar": {
+      "excludedVariations": [
+        "bar",
+        "rope",
         "wide-grip",
+        "close-grip",
+        "single-arm",
+        "underhand-grip"
+      ],
+    },
+    "rope": {
+      "excludedVariations": [
+        "bar",
+        "v-bar",
+        "wide-grip",
+        "close-grip",
+        "single-arm",
+        "underhand-grip"
       ],
     },
     "cable": {
-      "excludedVariations": ["band", "rope"],
-    },
-    "rope": {
-      "excludedVariations": ["band", "cable"],
+      "excludedVariations": ["band"],
     },
     "band": {
-      "excludedVariations": ["cable", "rope"],
+      "excludedVariations": ["cable"],
     },
   },
 };
