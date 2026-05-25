@@ -5,18 +5,20 @@ const Map<String, dynamic> windshieldWiper = {
   "primaryMuscles": ["external obliques"],
   "secondaryMuscles": ["rectus abdominis"],
   "variations": {
+    "lying": {
+      "excludedVariations": ["hanging"],
+    },
+    "hanging": {
+      "excludedVariations": ["lying"],
+    },
     "single-leg": {
-      "excludedVariations": ["bent-knee", "decline", "feet-elevated"],
+      "excludedVariations": [],
     },
     "bent-knee": {
-      "excludedVariations": ["decline", "feet-elevated", "single-leg"],
+      "excludedVariations": [],
     },
-    "feet-elevated": {
-      "excludedVariations": ["bent-knee", "decline", "single-leg"],
+    "weighted": {
+      "excludedVariations": [],
     },
-    "decline": {
-      "excludedVariations": ["bent-knee", "feet-elevated", "single-leg"],
-    },
-    "weighted": {"excludedVariations": []},
   },
 };
