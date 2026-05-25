@@ -7,106 +7,71 @@ const Map<String, dynamic> tricepExtension = {
   "variations": {
     "EZ-bar": {
       "excludedVariations": [
-        "behind-the-head",
-        "kickback",
-        "lying",
-        "overhead",
-        "seated",
-        "single-arm",
-        "standing",
+        "barbell", "cable", "dumbbell", "rope", "band", "machine",
+        "single-arm", "kickback"
       ],
     },
     "single-arm": {
       "excludedVariations": [
-        "EZ-bar",
-        "behind-the-head",
-        "kickback",
-        "lying",
-        "overhead",
-        "seated",
-        "standing",
+        "EZ-bar", "barbell", "machine"
       ],
     },
     "overhead": {
       "excludedVariations": [
-        "EZ-bar",
-        "behind-the-head",
-        "kickback",
-        "lying",
-        "seated",
-        "single-arm",
-        "standing",
+        "kickback"
       ],
     },
     "lying": {
       "excludedVariations": [
-        "EZ-bar",
-        "behind-the-head",
-        "kickback",
-        "overhead",
-        "seated",
-        "single-arm",
-        "standing",
+        "seated", "standing", "kickback", "machine"
       ],
     },
     "seated": {
       "excludedVariations": [
-        "EZ-bar",
-        "behind-the-head",
-        "kickback",
-        "lying",
-        "overhead",
-        "single-arm",
-        "standing",
+        "lying", "standing"
       ],
     },
     "standing": {
       "excludedVariations": [
-        "EZ-bar",
-        "behind-the-head",
-        "kickback",
-        "lying",
-        "overhead",
-        "seated",
-        "single-arm",
+        "lying", "seated", "machine"
       ],
     },
     "kickback": {
       "excludedVariations": [
-        "EZ-bar",
-        "behind-the-head",
-        "lying",
-        "overhead",
-        "seated",
-        "single-arm",
-        "standing",
-      ],
-    },
-    "behind-the-head": {
-      "excludedVariations": [
-        "EZ-bar",
-        "kickback",
-        "lying",
-        "overhead",
-        "seated",
-        "single-arm",
-        "standing",
+        "overhead", "lying", "EZ-bar", "barbell", "machine"
       ],
     },
     "cable": {
-      "excludedVariations": ["band", "barbell", "dumbbell", "rope"],
+      "excludedVariations": [
+        "EZ-bar", "dumbbell", "barbell", "band", "machine"
+      ],
     },
     "dumbbell": {
-      "excludedVariations": ["band", "barbell", "cable", "rope"],
+      "excludedVariations": [
+        "EZ-bar", "cable", "barbell", "rope", "band", "machine"
+      ],
     },
     "barbell": {
-      "excludedVariations": ["band", "cable", "dumbbell", "rope"],
+      "excludedVariations": [
+        "EZ-bar", "cable", "dumbbell", "rope", "band", "machine",
+        "single-arm", "kickback"
+      ],
     },
     "rope": {
-      "excludedVariations": ["band", "barbell", "cable", "dumbbell"],
+      "excludedVariations": [
+        "EZ-bar", "dumbbell", "barbell", "band", "machine"
+      ],
     },
     "band": {
-      "excludedVariations": ["barbell", "cable", "dumbbell", "rope"],
+      "excludedVariations": [
+        "EZ-bar", "cable", "dumbbell", "barbell", "rope", "machine"
+      ],
     },
+    "machine": {
+      "excludedVariations": [
+        "EZ-bar", "cable", "dumbbell", "barbell", "rope", "band", 
+        "single-arm", "lying", "standing", "kickback"
+      ],
+    }
   },
 };
