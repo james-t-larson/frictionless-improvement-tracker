@@ -7,52 +7,46 @@ const Map<String, dynamic> wallSit = {
   "variations": {
     "bodyweight": {
       "excludedVariations": [
-        "heels-elevated",
-        "overhead hold",
-        "single-leg",
         "with press",
       ],
     },
     "single-leg": {
       "excludedVariations": [
-        "bodyweight",
         "heels-elevated",
-        "overhead hold",
-        "with press",
+        "marching",
       ],
     },
     "heels-elevated": {
       "excludedVariations": [
-        "bodyweight",
-        "overhead hold",
+        "marching",
         "single-leg",
-        "with press",
       ],
     },
     "with press": {
       "excludedVariations": [
         "bodyweight",
-        "heels-elevated",
         "overhead hold",
-        "single-leg",
       ],
     },
     "overhead hold": {
       "excludedVariations": [
-        "bodyweight",
-        "heels-elevated",
-        "single-leg",
         "with press",
       ],
     },
     "weighted": {
-      "excludedVariations": ["banded", "stability ball"],
+      "excludedVariations": ["banded"],
     },
     "banded": {
-      "excludedVariations": ["stability ball", "weighted"],
+      "excludedVariations": ["weighted"],
     },
     "stability ball": {
-      "excludedVariations": ["banded", "weighted"],
+      "excludedVariations": [],
+    },
+    "marching": {
+      "excludedVariations": [
+        "heels-elevated",
+        "single-leg",
+      ],
     },
   },
 };
