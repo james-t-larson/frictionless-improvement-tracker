@@ -6,21 +6,20 @@ const Map<String, dynamic> uprightRow = {
   "secondaryMuscles": ["biceps brachii", "anterior deltoid", "trapezius"],
   "variations": {
     "wide-grip": {
-      "excludedVariations": ["narrow-grip", "single-arm"],
-    },
-    "narrow-grip": {
-      "excludedVariations": ["single-arm", "wide-grip"],
+      "excludedVariations": ["single-arm"],
     },
     "single-arm": {
-      "excludedVariations": ["narrow-grip", "wide-grip"],
+      "excludedVariations": ["wide-grip", "barbell", "ez-bar"],
     },
     "barbell": {
       "excludedVariations": [
         "band",
         "cable",
         "dumbbell",
+        "ez-bar",
         "kettlebell",
         "smith machine",
+        "single-arm",
       ],
     },
     "dumbbell": {
@@ -28,6 +27,7 @@ const Map<String, dynamic> uprightRow = {
         "band",
         "barbell",
         "cable",
+        "ez-bar",
         "kettlebell",
         "smith machine",
       ],
@@ -37,6 +37,7 @@ const Map<String, dynamic> uprightRow = {
         "band",
         "barbell",
         "dumbbell",
+        "ez-bar",
         "kettlebell",
         "smith machine",
       ],
@@ -47,6 +48,7 @@ const Map<String, dynamic> uprightRow = {
         "barbell",
         "cable",
         "dumbbell",
+        "ez-bar",
         "smith machine",
       ],
     },
@@ -56,6 +58,7 @@ const Map<String, dynamic> uprightRow = {
         "barbell",
         "cable",
         "dumbbell",
+        "ez-bar",
         "kettlebell",
       ],
     },
@@ -64,8 +67,20 @@ const Map<String, dynamic> uprightRow = {
         "barbell",
         "cable",
         "dumbbell",
+        "ez-bar",
         "kettlebell",
         "smith machine",
+      ],
+    },
+    "ez-bar": {
+      "excludedVariations": [
+        "band",
+        "barbell",
+        "cable",
+        "dumbbell",
+        "kettlebell",
+        "smith machine",
+        "single-arm",
       ],
     },
   },
