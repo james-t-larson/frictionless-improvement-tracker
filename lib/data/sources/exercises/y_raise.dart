@@ -14,5 +14,14 @@ const Map<String, dynamic> yRaise = {
     "band": {
       "excludedVariations": [],
     },
+    "bodyweight": {
+      "excludedVariations": [],
+    },
+    "single-handed": {
+      "excludedVariations": [],
+    },
+    "suspension": {
+      "excludedVariations": [],
+    },
   },
 };
