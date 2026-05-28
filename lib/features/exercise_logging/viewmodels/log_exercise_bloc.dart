@@ -185,6 +185,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
         selectedMovement: event.movement, 
         currentStep: ExerciseLogStep.variation,
         availableVariations: variations,
+        selectedVariations: const [],
       ),
     );
     if (event.movement.id != null) {

@@ -64,3 +64,7 @@ const Map<String, dynamic> sledPull = {
         "backward drag",
         "lateral drag",
         "hip harness",
+      ],
+    },
+  },
+};

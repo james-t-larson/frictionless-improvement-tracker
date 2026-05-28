@@ -107,4 +107,5 @@ const Map<String, dynamic> romanianDeadlift = {
       ]
     }
   }
-}
+};
+
