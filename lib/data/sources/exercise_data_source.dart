@@ -79,6 +79,7 @@ import 'exercises/cable_crunch.dart';
 import 'exercises/reverse_hyperextension.dart';
 import 'exercises/sled_push.dart';
 import 'exercises/sled_pull.dart';
+import 'exercises/y_raise.dart';
 
 class ExerciseDataSource {
   Future<List<dynamic>> getExercises() async {
@@ -164,6 +165,7 @@ class ExerciseDataSource {
       reverseHyperextension,
       sledPush,
       sledPull,
+      yRaise,
     ];
   }
 }
