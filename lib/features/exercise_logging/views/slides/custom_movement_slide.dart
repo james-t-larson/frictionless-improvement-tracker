@@ -13,6 +13,12 @@ class _CustomMovementSlideState extends State<CustomMovementSlide> {
   final TextEditingController _controller = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _controller.text = context.read<LogExerciseBloc>().state.movementQuery;
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();

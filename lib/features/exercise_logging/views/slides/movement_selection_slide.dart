@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../viewmodels/log_exercise_bloc.dart';
 import '../../../../core/widgets/app_search_bar.dart';
+import '../log_exercise_dialog.dart';
 
 class MovementSelectionSlide extends StatefulWidget {
   const MovementSelectionSlide({super.key});
@@ -66,7 +67,17 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
                         'Add workout',
                         style: TextStyle(color: Color(0xFFFAFAFA), fontStyle: FontStyle.italic),
                       ),
-                      onTap: () => context.read<LogExerciseBloc>().add(BeginAddCustomMovement()),
+                      onTap: () {
+                        final query = state.movementQuery.trim();
+                        Navigator.pop(context);
+                        showDialog(
+                          context: context,
+                          builder: (context) => LogExerciseDialog(
+                            createCustom: true,
+                            initialEvent: BeginAddCustomMovement(query),
+                          ),
+                        );
+                      },
                     ),
 
                 ],

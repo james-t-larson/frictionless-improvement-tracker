@@ -341,7 +341,10 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     BeginAddCustomMovement event,
     Emitter<LogExerciseState> emit,
   ) {
-    emit(state.copyWith(currentStep: ExerciseLogStep.customMovementName));
+    emit(state.copyWith(
+      currentStep: ExerciseLogStep.customMovementName,
+      movementQuery: event.initialName,
+    ));
   }
 
   Future<void> _onAddCustomVariation(

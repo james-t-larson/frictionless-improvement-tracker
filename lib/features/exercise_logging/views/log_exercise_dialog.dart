@@ -16,12 +16,14 @@ class LogExerciseDialog extends StatefulWidget {
   /// When true, only the Metrics slide is rendered and the back button is hidden.
   /// Use this when the movement is already known (e.g. "Add Set").
   final bool metricsOnly;
+  final bool createCustom;
 
   const LogExerciseDialog({
     super.key,
     this.initialPage = 0,
     this.initialEvent,
     this.metricsOnly = false,
+    this.createCustom = false,
   });
 
   @override
@@ -30,6 +32,31 @@ class LogExerciseDialog extends StatefulWidget {
 
 class _LogExerciseDialogState extends State<LogExerciseDialog> {
   late final PageController _pageController;
+
+  List<Widget> get _pages {
+    if (widget.metricsOnly) return const [MetricsAndFeedbackSlide()];
+    if (widget.createCustom) return const [CustomMovementSlide(), MetricsAndFeedbackSlide()];
+    return const [
+      MovementSelectionSlide(),
+      VariationSelectionSlide(),
+      MetricsAndFeedbackSlide(),
+    ];
+  }
+
+  int _getPageIndex(ExerciseLogStep step) {
+    if (widget.metricsOnly) return 0;
+    if (widget.createCustom) {
+      if (step == ExerciseLogStep.customMovementName) return 0;
+      if (step == ExerciseLogStep.details) return 1;
+      return 0;
+    }
+    switch (step) {
+      case ExerciseLogStep.movement: return 0;
+      case ExerciseLogStep.variation: return 1;
+      case ExerciseLogStep.details: return 2;
+      default: return 0;
+    }
+  }
 
   @override
   void initState() {
@@ -60,7 +87,7 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
               FocusScope.of(context).unfocus();
             }
             _pageController.animateToPage(
-              state.currentStep.slideIndex,
+              _getPageIndex(state.currentStep),
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
             );
@@ -103,7 +130,7 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                           children: [
                             Row(
                               children: [
-                                if (!widget.metricsOnly && state.currentStep.slideIndex > 0)
+                                if (!widget.metricsOnly && _getPageIndex(state.currentStep) > 0)
                                   IconButton(
                                     icon: const Icon(Icons.chevron_left, color: Color(0xFFA1A1AA), size: 28),
                                     onPressed: () => context.read<LogExerciseBloc>().add(PreviousStepRequested()),
@@ -135,18 +162,11 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                       },
                     ),
                     Expanded(
-                      child: widget.metricsOnly
-                          ? const MetricsAndFeedbackSlide()
-                          : PageView(
-                              controller: _pageController,
-                              physics: const NeverScrollableScrollPhysics(),
-                              children: const [
-                                MovementSelectionSlide(),
-                                VariationSelectionSlide(),
-                                MetricsAndFeedbackSlide(),
-                                CustomMovementSlide(),
-                              ],
-                            ),
+                      child: PageView(
+                        controller: _pageController,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: _pages,
+                      ),
                     ),
                   ],
                 ),
