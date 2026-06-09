@@ -14,8 +14,19 @@ class MovementRepository {
 
     await _db.transaction((txn) async {
       for (var json in data) {
-        final movement = Movement.fromJson(json as Map<String, dynamic>);
+        var movement = Movement.fromJson(json as Map<String, dynamic>);
         if (movement.id != null) {
+          final existingMaps = await txn.query('movements', where: 'id = ?', whereArgs: [movement.id]);
+          if (existingMaps.isNotEmpty) {
+            final existingMovement = Movement.fromMap(existingMaps.first);
+            final mergedVariations = Map<String, List<String>>.from(movement.variations);
+            for (var entry in existingMovement.variations.entries) {
+              if (!mergedVariations.containsKey(entry.key)) {
+                mergedVariations[entry.key] = entry.value;
+              }
+            }
+            movement = movement.copyWith(variations: mergedVariations);
+          }
           await txn.insert('movements', movement.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
         }
       }
@@ -101,5 +112,9 @@ class MovementRepository {
     final filtered = all.where((m) => m.muscleGroups.contains(groupName)).toList();
     filtered.sort((a, b) => a.name.compareTo(b.name));
     return filtered;
+  }
+
+  Future<void> saveMovement(Movement movement) async {
+    await _db.insert('movements', movement.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 }

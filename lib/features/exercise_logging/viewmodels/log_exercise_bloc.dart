@@ -30,6 +30,8 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     on<ManualSlideChanged>(_onManualSlideChanged);
     on<InitializeWithPreviousLog>(_onInitializeWithPreviousLog);
     on<InitializeFlowForEdit>(_onInitializeFlowForEdit);
+    on<AddCustomMovement>(_onAddCustomMovement);
+    on<AddCustomVariation>(_onAddCustomVariation);
   }
 
   Future<void> _onInitialize(
@@ -119,7 +121,11 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
   ) {
     switch (state.currentStep) {
       case ExerciseLogStep.details:
-        emit(state.copyWith(currentStep: ExerciseLogStep.variation));
+        if (state.selectedMovement?.variations.isEmpty ?? true) {
+          emit(state.copyWith(currentStep: ExerciseLogStep.movement));
+        } else {
+          emit(state.copyWith(currentStep: ExerciseLogStep.variation));
+        }
         break;
       case ExerciseLogStep.variation:
         emit(state.copyWith(currentStep: ExerciseLogStep.movement));
@@ -180,10 +186,12 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
       variations = event.movement.variations.keys.toList();
     }
     
+    final nextStep = variations.isEmpty ? ExerciseLogStep.details : ExerciseLogStep.variation;
+
     emit(
       state.copyWith(
         selectedMovement: event.movement, 
-        currentStep: ExerciseLogStep.variation,
+        currentStep: nextStep,
         availableVariations: variations,
         selectedVariations: const [],
       ),
@@ -300,6 +308,52 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     }
 
     emit(state.copyWith(isSaving: false, isSuccess: true));
+  }
+
+  Future<void> _onAddCustomMovement(
+    AddCustomMovement event,
+    Emitter<LogExerciseState> emit,
+  ) async {
+    final customId = 'custom_${DateTime.now().millisecondsSinceEpoch}';
+    final movement = Movement(
+      id: customId,
+      name: event.name,
+      muscleGroups: state.selectedMuscleGroup != null ? [state.selectedMuscleGroup!] : [],
+      primaryMuscles: state.selectedMuscleGroup != null ? [state.selectedMuscleGroup!] : [],
+      variations: const {},
+    );
+    await _movementRepository.saveMovement(movement);
+    
+    emit(state.copyWith(
+      selectedMovement: movement,
+      currentStep: ExerciseLogStep.details,
+      availableVariations: const [],
+      selectedVariations: const [],
+      movementQuery: '',
+    ));
+  }
+
+  Future<void> _onAddCustomVariation(
+    AddCustomVariation event,
+    Emitter<LogExerciseState> emit,
+  ) async {
+    if (state.selectedMovement == null || state.selectedMovement!.id == null) return;
+
+    final updatedVariations = Map<String, List<String>>.from(state.selectedMovement!.variations);
+    updatedVariations[event.name] = const []; // No exclusions for custom variations
+
+    final updatedMovement = state.selectedMovement!.copyWith(variations: updatedVariations);
+    await _movementRepository.saveMovement(updatedMovement);
+
+    final newSelected = List<String>.from(state.selectedVariations)..add(event.name);
+    final newAvailable = _getAvailableVariations(updatedMovement, newSelected);
+
+    emit(state.copyWith(
+      selectedMovement: updatedMovement,
+      selectedVariations: newSelected,
+      availableVariations: newAvailable,
+      variationQuery: '',
+    ));
   }
 }
 

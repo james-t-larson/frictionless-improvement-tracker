@@ -56,19 +56,46 @@ class _VariationSelectionSlideState extends State<VariationSelectionSlide> {
                       ? allVariations 
                       : allVariations.where((v) => v.toLowerCase().contains(query)).toList();
 
+                  Widget content;
                   if (variations.isEmpty && allVariations.isNotEmpty) {
-                    return const Center(
+                    content = const Center(
                       child: Text('No variations match your search.', style: TextStyle(color: Color(0xFFA1A1AA))),
                     );
                   } else if (variations.isEmpty) {
-                    return const Center(
+                    content = const Center(
                       child: Text('No variations available.', style: TextStyle(color: Color(0xFFA1A1AA))),
+                    );
+                  } else {
+                    content = _AnimatedVariationsGrid(
+                      variations: variations,
+                      selectedVariations: state.selectedVariations,
                     );
                   }
 
-                  return _AnimatedVariationsGrid(
-                    variations: variations,
-                    selectedVariations: state.selectedVariations,
+                  return Column(
+                    children: [
+                      if (state.variationQuery.trim().isNotEmpty && 
+                          !allVariations.any((v) => v.toLowerCase() == state.variationQuery.trim().toLowerCase()))
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 16),
+                          child: ListTile(
+                            leading: const Icon(Icons.add, color: Color(0xFFFAFAFA)),
+                            title: Text(
+                              'Add "${state.variationQuery.trim()}"',
+                              style: const TextStyle(color: Color(0xFFFAFAFA), fontStyle: FontStyle.italic),
+                            ),
+                            tileColor: const Color(0xFF27272A),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            onTap: () {
+                              context.read<LogExerciseBloc>().add(AddCustomVariation(state.variationQuery.trim()));
+                              _controller.clear();
+                            },
+                          ),
+                        ),
+                      Expanded(
+                        child: content,
+                      ),
+                    ],
                   );
                 },
               ),
