@@ -62,11 +62,11 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
                       !state.movementSearchResults.any((m) => m.name.toLowerCase() == state.movementQuery.trim().toLowerCase()))
                     ListTile(
                       leading: const Icon(Icons.add, color: Color(0xFFFAFAFA)),
-                      title: Text(
-                        'Add "${state.movementQuery.trim()}"',
-                        style: const TextStyle(color: Color(0xFFFAFAFA), fontStyle: FontStyle.italic),
+                      title: const Text(
+                        'Add workout',
+                        style: TextStyle(color: Color(0xFFFAFAFA), fontStyle: FontStyle.italic),
                       ),
-                      onTap: () => context.read<LogExerciseBloc>().add(AddCustomMovement(state.movementQuery.trim())),
+                      onTap: () => context.read<LogExerciseBloc>().add(BeginAddCustomMovement()),
                     ),
 
                 ],

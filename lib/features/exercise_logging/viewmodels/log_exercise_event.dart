@@ -59,6 +59,8 @@ class ToggleVariation extends LogExerciseEvent {
   List<Object?> get props => [variation];
 }
 
+class BeginAddCustomMovement extends LogExerciseEvent {}
+
 class AddCustomMovement extends LogExerciseEvent {
   final String name;
   const AddCustomMovement(this.name);

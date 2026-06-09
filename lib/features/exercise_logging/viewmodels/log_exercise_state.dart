@@ -4,7 +4,8 @@ import '../../../data/models/movement.dart';
 enum ExerciseLogStep {
   movement(0),
   variation(1),
-  details(2);
+  details(2),
+  customMovementName(3);
 
   final int slideIndex;
   const ExerciseLogStep(this.slideIndex);
@@ -117,6 +118,12 @@ class LogExerciseState extends Equatable {
         return copyWith(
           selectedVariations: [],
           variationQuery: '',
+        );
+      case ExerciseLogStep.customMovementName:
+        return copyWith(
+          selectedMovement: null,
+          selectedVariations: [],
+          availableVariations: [],
         );
       case ExerciseLogStep.details:
         return this;

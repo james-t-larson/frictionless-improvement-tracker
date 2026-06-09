@@ -80,9 +80,9 @@ class _VariationSelectionSlideState extends State<VariationSelectionSlide> {
                           padding: const EdgeInsets.only(bottom: 16),
                           child: ListTile(
                             leading: const Icon(Icons.add, color: Color(0xFFFAFAFA)),
-                            title: Text(
-                              'Add "${state.variationQuery.trim()}"',
-                              style: const TextStyle(color: Color(0xFFFAFAFA), fontStyle: FontStyle.italic),
+                            title: const Text(
+                              'Add variation',
+                              style: TextStyle(color: Color(0xFFFAFAFA), fontStyle: FontStyle.italic),
                             ),
                             tileColor: const Color(0xFF27272A),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

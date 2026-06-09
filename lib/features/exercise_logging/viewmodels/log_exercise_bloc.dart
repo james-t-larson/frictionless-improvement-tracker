@@ -32,6 +32,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     on<InitializeFlowForEdit>(_onInitializeFlowForEdit);
     on<AddCustomMovement>(_onAddCustomMovement);
     on<AddCustomVariation>(_onAddCustomVariation);
+    on<BeginAddCustomMovement>(_onBeginAddCustomMovement);
   }
 
   Future<void> _onInitialize(
@@ -120,6 +121,9 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     Emitter<LogExerciseState> emit,
   ) {
     switch (state.currentStep) {
+      case ExerciseLogStep.customMovementName:
+        emit(state.copyWith(currentStep: ExerciseLogStep.movement));
+        break;
       case ExerciseLogStep.details:
         if (state.selectedMovement?.variations.isEmpty ?? true) {
           emit(state.copyWith(currentStep: ExerciseLogStep.movement));
@@ -331,6 +335,13 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
       selectedVariations: const [],
       movementQuery: '',
     ));
+  }
+
+  void _onBeginAddCustomMovement(
+    BeginAddCustomMovement event,
+    Emitter<LogExerciseState> emit,
+  ) {
+    emit(state.copyWith(currentStep: ExerciseLogStep.customMovementName));
   }
 
   Future<void> _onAddCustomVariation(

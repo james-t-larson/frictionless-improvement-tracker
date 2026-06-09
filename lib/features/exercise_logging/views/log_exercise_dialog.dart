@@ -7,6 +7,7 @@ import '../viewmodels/log_exercise_bloc.dart';
 import 'slides/metrics_and_feedback_slide.dart';
 import 'slides/movement_selection_slide.dart';
 import 'slides/variation_selection_slide.dart';
+import 'slides/custom_movement_slide.dart';
 
 class LogExerciseDialog extends StatefulWidget {
   final int initialPage;
@@ -92,6 +93,9 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                           case ExerciseLogStep.details:
                             title = 'METRICS';
                             break;
+                          case ExerciseLogStep.customMovementName:
+                            title = 'ADD WORKOUT';
+                            break;
                         }
 
                         return Column(
@@ -140,6 +144,7 @@ class _LogExerciseDialogState extends State<LogExerciseDialog> {
                                 MovementSelectionSlide(),
                                 VariationSelectionSlide(),
                                 MetricsAndFeedbackSlide(),
+                                CustomMovementSlide(),
                               ],
                             ),
                     ),
