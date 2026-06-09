@@ -38,7 +38,7 @@ void main() {
     // 3. Seed the database
     final dataSource = ExerciseDataSource();
     final repository = MovementRepository(db, dataSource);
-    await repository.seedMovementsIfEmpty();
+    await repository.syncMovements();
 
     // 4. Get the PKs from the database
     final result = await db.rawQuery('SELECT COUNT(*) FROM movements');

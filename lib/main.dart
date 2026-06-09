@@ -12,8 +12,8 @@ void main() async {
   // Setup DI and wait for DB
   await setupLocator();
   
-  // Seed movements if empty
-  await getIt<MovementRepository>().seedMovementsIfEmpty();
+  // Sync movements from data source
+  await getIt<MovementRepository>().syncMovements();
 
   runApp(const FrictionlessApp());
 }

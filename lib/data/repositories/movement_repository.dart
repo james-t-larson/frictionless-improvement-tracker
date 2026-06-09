@@ -9,23 +9,17 @@ class MovementRepository {
 
   MovementRepository(this._db, this._dataSource);
 
-  Future<void> seedMovementsIfEmpty() async {
-    final count = Sqflite.firstIntValue(
-      await _db.rawQuery('SELECT COUNT(*) FROM movements'),
-    );
+  Future<void> syncMovements() async {
+    final List<dynamic> data = await _dataSource.getExercises();
 
-    if (count == 0 || count == null) {
-      final List<dynamic> data = await _dataSource.getExercises();
-
-      await _db.transaction((txn) async {
-        for (var json in data) {
-          final movement = Movement.fromJson(json as Map<String, dynamic>);
-          if (movement.id != null) {
-            await txn.insert('movements', movement.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
-          }
+    await _db.transaction((txn) async {
+      for (var json in data) {
+        final movement = Movement.fromJson(json as Map<String, dynamic>);
+        if (movement.id != null) {
+          await txn.insert('movements', movement.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
         }
-      });
-    }
+      }
+    });
   }
 
   Future<List<Movement>> _getAllMovements() async {

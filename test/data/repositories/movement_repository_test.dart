@@ -25,9 +25,9 @@ void main() {
     await db.close();
   });
 
-  test('seedMovementsIfEmpty should import all data from staticExerciseJson', () async {
+  test('syncMovements should import all data from staticExerciseJson', () async {
     // Act
-    await repository.seedMovementsIfEmpty();
+    await repository.syncMovements();
 
     // Assert
     final movements = await db.query('movements');
@@ -67,20 +67,20 @@ void main() {
     expect(secondaryMuscles, containsAll(['biceps brachii', 'wrist flexors', 'infraspinatus', 'posterior deltoid']));
   });
 
-  test('seedMovementsIfEmpty should not duplicate data if already seeded', () async {
+  test('syncMovements should not duplicate data if already seeded', () async {
     // Seed once
-    await repository.seedMovementsIfEmpty();
+    await repository.syncMovements();
     final firstCount = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM movements'));
 
     // Seed again
-    await repository.seedMovementsIfEmpty();
+    await repository.syncMovements();
     final secondCount = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM movements'));
 
     expect(secondCount, firstCount);
   });
 
   test('searchMovements should return results from seeded data', () async {
-    await repository.seedMovementsIfEmpty();
+    await repository.syncMovements();
     
     final results = await repository.searchMovements('Bench');
     
