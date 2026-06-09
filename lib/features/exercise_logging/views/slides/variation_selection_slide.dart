@@ -19,6 +19,18 @@ class _VariationSelectionSlideState extends State<VariationSelectionSlide> {
     super.dispose();
   }
 
+  void _showAddVariationSheet(BuildContext context, LogExerciseBloc bloc) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF18181B),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) => _AddVariationForm(bloc: bloc),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LogExerciseBloc, LogExerciseState>(
@@ -72,35 +84,26 @@ class _VariationSelectionSlideState extends State<VariationSelectionSlide> {
                     );
                   }
 
-                  return Column(
-                    children: [
-                      if (state.variationQuery.trim().isNotEmpty && 
-                          !allVariations.any((v) => v.toLowerCase() == state.variationQuery.trim().toLowerCase()))
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: ListTile(
-                            leading: const Icon(Icons.add, color: Color(0xFFFAFAFA)),
-                            title: const Text(
-                              'Add variation',
-                              style: TextStyle(color: Color(0xFFFAFAFA), fontStyle: FontStyle.italic),
-                            ),
-                            tileColor: const Color(0xFF27272A),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                            onTap: () {
-                              context.read<LogExerciseBloc>().add(AddCustomVariation(state.variationQuery.trim()));
-                              _controller.clear();
-                            },
-                          ),
-                        ),
-                      Expanded(
-                        child: content,
-                      ),
-                    ],
-                  );
+                  return content;
                 },
               ),
             ),
             const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: OutlinedButton.icon(
+                onPressed: () => _showAddVariationSheet(context, context.read<LogExerciseBloc>()),
+                icon: const Icon(Icons.add, size: 18),
+                label: const Text('CREATE CUSTOM VARIATION', style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1)),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: const Color(0xFFFAFAFA),
+                  side: const BorderSide(color: Color(0xFF3F3F46)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
               height: 56,
@@ -254,6 +257,102 @@ class _SelectedMovementLabel extends StatelessWidget {
               letterSpacing: 0.3,
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AddVariationForm extends StatefulWidget {
+  final LogExerciseBloc bloc;
+  const _AddVariationForm({required this.bloc});
+
+  @override
+  State<_AddVariationForm> createState() => _AddVariationFormState();
+}
+
+class _AddVariationFormState extends State<_AddVariationForm> {
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 50), () {
+      if (mounted) {
+        _focusNode.requestFocus();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        left: 16,
+        right: 16,
+        top: 24,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Add Custom Variation',
+            style: TextStyle(
+              color: Color(0xFFFAFAFA),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextField(
+            controller: _controller,
+            focusNode: _focusNode,
+            style: const TextStyle(color: Color(0xFFFAFAFA)),
+            decoration: const InputDecoration(
+              hintText: 'Variation Name (e.g., Decline)',
+              hintStyle: TextStyle(color: Color(0xFFA1A1AA)),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFF3F3F46)),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFFFAFAFA)),
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          SizedBox(
+            width: double.infinity,
+            height: 48,
+            child: ElevatedButton(
+              onPressed: () {
+                final name = _controller.text.trim();
+                if (name.isNotEmpty) {
+                  _focusNode.unfocus();
+                  widget.bloc.add(AddCustomVariation(name));
+                  Navigator.pop(context);
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFFAFAFA),
+                foregroundColor: const Color(0xFF09090B),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text('SAVE', style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          ),
+          const SizedBox(height: 16),
         ],
       ),
     );
