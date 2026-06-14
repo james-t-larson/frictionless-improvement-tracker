@@ -59,26 +59,24 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
                     title: Text(m.name, style: const TextStyle(color: Color(0xFFFAFAFA))),
                     onTap: () => context.read<LogExerciseBloc>().add(SelectMovement(m)),
                   )),
-                  if (state.movementQuery.trim().isNotEmpty && 
-                      !state.movementSearchResults.any((m) => m.name.toLowerCase() == state.movementQuery.trim().toLowerCase()))
-                    ListTile(
-                      leading: const Icon(Icons.add, color: Color(0xFFFAFAFA)),
-                      title: const Text(
-                        'Add workout',
-                        style: TextStyle(color: Color(0xFFFAFAFA), fontStyle: FontStyle.italic),
-                      ),
-                      onTap: () {
-                        final query = state.movementQuery.trim();
-                        Navigator.pop(context);
-                        showDialog(
-                          context: context,
-                          builder: (context) => LogExerciseDialog(
-                            createCustom: true,
-                            initialEvent: BeginAddCustomMovement(query),
-                          ),
-                        );
-                      },
+                  ListTile(
+                    leading: const Icon(Icons.add, color: Color(0xFFFAFAFA)),
+                    title: const Text(
+                      'Add custom workout',
+                      style: TextStyle(color: Color(0xFFFAFAFA), fontStyle: FontStyle.italic),
                     ),
+                    onTap: () {
+                      final query = state.movementQuery.trim();
+                      Navigator.pop(context);
+                      showDialog(
+                        context: context,
+                        builder: (context) => LogExerciseDialog(
+                          createCustom: true,
+                          initialEvent: BeginAddCustomMovement(query),
+                        ),
+                      );
+                    },
+                  ),
 
                 ],
               );
