@@ -116,11 +116,11 @@ class WorkoutHistoryTable extends StatelessWidget {
                                   }
                                   return const SizedBox.shrink();
                                 }),
-                                const Divider(indent: 16, endIndent: 16, color: Color(0xFF27272A)),
                               ],
                             )
                           : const SizedBox.shrink(),
                     ),
+                    const Divider(indent: 16, endIndent: 16, color: Color(0xFF27272A)),
                   ],
                 );
               },
