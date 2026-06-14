@@ -141,6 +141,7 @@ const Map<String, dynamic> curl = {
     },
     "EZ-bar": {
       "excludedVariations": [
+        "barbell",
         "alternating",
         "bodyweight",
         "concentration",
@@ -231,6 +232,7 @@ const Map<String, dynamic> curl = {
     },
     "barbell": {
       "excludedVariations": [
+        "EZ-bar",
         "band",
         "cable",
         "concentration",
