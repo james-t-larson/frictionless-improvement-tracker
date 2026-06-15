@@ -94,31 +94,34 @@ class WorkoutHistoryTable extends StatelessWidget {
                       curve: Curves.easeInOut,
                       alignment: Alignment.topCenter,
                       child: isExpanded
-                          ? Column(
-                              children: [
-                                ...logs.asMap().entries.map((entry) {
-                                  final itemIndex = entry.key;
-                                  final item = entry.value;
-                                  // Only bounce the very first item of the very first date
-                                  final shouldBounce = !state.hasSwipedBefore && index == 0 && itemIndex == 0;
-                                  
-                                  if (item is SingleLogItem) {
-                                    return WorkoutLogRow(
-                                      log: item.log,
-                                      shouldBounce: shouldBounce,
-                                      showCopyAction: true,
-                                    );
-                                  } else if (item is GroupedLogsItem) {
-                                    return GroupedWorkoutLogRow(
-                                      group: item,
-                                      shouldBounce: shouldBounce,
-                                    );
-                                  }
-                                  return const SizedBox.shrink();
-                                }),
-                              ],
+                          ? SizedBox(
+                              width: double.infinity,
+                              child: Column(
+                                children: [
+                                  ...logs.asMap().entries.map((entry) {
+                                    final itemIndex = entry.key;
+                                    final item = entry.value;
+                                    // Only bounce the very first item of the very first date
+                                    final shouldBounce = !state.hasSwipedBefore && index == 0 && itemIndex == 0;
+                                    
+                                    if (item is SingleLogItem) {
+                                      return WorkoutLogRow(
+                                        log: item.log,
+                                        shouldBounce: shouldBounce,
+                                        showCopyAction: true,
+                                      );
+                                    } else if (item is GroupedLogsItem) {
+                                      return GroupedWorkoutLogRow(
+                                        group: item,
+                                        shouldBounce: shouldBounce,
+                                      );
+                                    }
+                                    return const SizedBox.shrink();
+                                  }),
+                                ],
+                              ),
                             )
-                          : const SizedBox.shrink(),
+                          : const SizedBox(width: double.infinity, height: 0),
                     ),
                     const Divider(indent: 16, endIndent: 16, color: Color(0xFF27272A)),
                   ],

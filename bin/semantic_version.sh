@@ -110,18 +110,19 @@ fi
 
 # Commit and Tag
 if command -v git >/dev/null 2>&1; then
+  TAG_VERSION="${NEW_VERSION%+*}"
   # Check if tag already exists
-  if git rev-parse "v$NEW_VERSION" >/dev/null 2>&1; then
-    echo "Tag v$NEW_VERSION already exists. Skipping git tag."
+  if git rev-parse "v$TAG_VERSION" >/dev/null 2>&1; then
+    echo "Tag v$TAG_VERSION already exists. Skipping git tag."
   else
     if [ "$BUMP_TYPE" != "none" ]; then
       git add "$PUBSPEC_FILE"
-      git commit -m "chore: bump version to $NEW_VERSION"
+      git commit --amend --no-edit
     fi
     # Only tag if we actually bumped or explicitly requested a tag
-    if [ "$BUMP_TYPE" != "none" ] || ! git rev-parse "v$NEW_VERSION" >/dev/null 2>&1; then
-      git tag "v$NEW_VERSION"
-      echo "Git tag v$NEW_VERSION created successfully."
+    if [ "$BUMP_TYPE" != "none" ] || ! git rev-parse "v$TAG_VERSION" >/dev/null 2>&1; then
+      git tag "v$TAG_VERSION"
+      echo "Git tag v$TAG_VERSION created successfully."
     fi
   fi
 else
