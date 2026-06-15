@@ -2,9 +2,12 @@
 
 # build_ipa.sh
 # A script to build a Flutter IPA with full cache clearing and dependency updates.
+# Usage: ./bin/build_ipa.sh [major|minor|patch|build|none]
 
 # Exit on any error
 set -e
+
+BUMP_TYPE=${1:-auto}
 
 # Function to check if a command exists
 command_exists() {
@@ -22,6 +25,14 @@ fi
 if ! command_exists pod; then
   echo "Error: cocoapods (pod) is not installed."
   exit 1
+fi
+
+# 0. Versioning and Tagging
+echo "Running semantic versioning..."
+if [ -f "bin/semantic_version.sh" ]; then
+  ./bin/semantic_version.sh "$BUMP_TYPE"
+else
+  echo "Warning: bin/semantic_version.sh not found. Skipping version bump."
 fi
 
 # 1. Clean the project
