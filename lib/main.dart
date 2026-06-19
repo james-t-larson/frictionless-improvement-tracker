@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'core/di/service_locator.dart';
 import 'data/repositories/movement_repository.dart';
 import 'features/dashboard/views/main_dashboard_screen.dart';
 import 'features/dashboard/viewmodels/dashboard_bloc.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   
   // Setup DI and wait for DB
   await setupLocator();
@@ -15,6 +17,7 @@ void main() async {
   // Sync movements from data source
   await getIt<MovementRepository>().syncMovements();
 
+  FlutterNativeSplash.remove();
   runApp(const FrictionlessApp());
 }
 
