@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../core/di/service_locator.dart';
 import '../../../data/models/workout_log.dart';
 import '../../../data/repositories/movement_repository.dart';
@@ -44,10 +45,12 @@ class MainDashboardScreen extends StatelessWidget {
                     backgroundColor: const Color(0xFF09090B),
                     title: Text(
                       'FRICTIONLESS',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            letterSpacing: 2,
-                            fontWeight: FontWeight.w900,
-                          ),
+                      style: GoogleFonts.montserrat(
+                        textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              letterSpacing: 2,
+                              fontWeight: FontWeight.w900,
+                            ),
+                      ),
                     ),
                     centerTitle: false,
                   ),
