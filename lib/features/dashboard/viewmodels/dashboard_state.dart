@@ -42,6 +42,8 @@ class DashboardLoaded extends DashboardState {
   final bool hasSwipedBefore;
   final Set<String> expandedDates;
   final Map<String, List<String>> commonMuscleGroups;
+  final Set<String> selectedFilters;
+  final List<String> availableMuscleGroups;
 
   /// Distinct muscle group IDs from workouts logged today.
   /// Passed into InitializeFlow when the user opens "New Lift" to drive
@@ -56,6 +58,8 @@ class DashboardLoaded extends DashboardState {
     this.expandedDates = const {},
     this.commonMuscleGroups = const {},
     this.todaysMuscleGroupIds = const {},
+    this.selectedFilters = const {},
+    this.availableMuscleGroups = const [],
   });
 
   DashboardLoaded copyWith({
@@ -66,6 +70,8 @@ class DashboardLoaded extends DashboardState {
     Set<String>? expandedDates,
     Map<String, List<String>>? commonMuscleGroups,
     Set<String>? todaysMuscleGroupIds,
+    Set<String>? selectedFilters,
+    List<String>? availableMuscleGroups,
   }) {
     return DashboardLoaded(
       groupedLogs ?? this.groupedLogs,
@@ -75,11 +81,13 @@ class DashboardLoaded extends DashboardState {
       expandedDates: expandedDates ?? this.expandedDates,
       commonMuscleGroups: commonMuscleGroups ?? this.commonMuscleGroups,
       todaysMuscleGroupIds: todaysMuscleGroupIds ?? this.todaysMuscleGroupIds,
+      selectedFilters: selectedFilters ?? this.selectedFilters,
+      availableMuscleGroups: availableMuscleGroups ?? this.availableMuscleGroups,
     );
   }
 
   @override
-  List<Object?> get props => [groupedLogs, allLogs, query, hasSwipedBefore, expandedDates, commonMuscleGroups, todaysMuscleGroupIds];
+  List<Object?> get props => [groupedLogs, allLogs, query, hasSwipedBefore, expandedDates, commonMuscleGroups, todaysMuscleGroupIds, selectedFilters, availableMuscleGroups];
 }
 
 class DashboardError extends DashboardState {}

@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/models/workout_log.dart';
 import '../../../data/repositories/workout_repository.dart';
 import '../../../data/repositories/settings_repository.dart';
+import '../../../data/repositories/movement_repository.dart';
 import '../../../core/utils/date_formatters.dart';
 import 'dashboard_event.dart';
 import 'dashboard_state.dart';
@@ -12,10 +13,12 @@ export 'dashboard_state.dart';
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final WorkoutRepository _repository;
   final SettingsRepository _settingsRepository;
+  final MovementRepository _movementRepository;
 
-  DashboardBloc(this._repository, this._settingsRepository) : super(DashboardLoading()) {
+  DashboardBloc(this._repository, this._settingsRepository, this._movementRepository) : super(DashboardLoading()) {
     on<LoadDashboardLogs>(_onLoadLogs);
     on<SearchDashboardLogs>(_onSearchLogs);
+    on<ToggleDashboardFilters>(_onToggleFilters);
     on<DashboardWorkoutDeleted>(_onWorkoutDeleted);
     on<DashboardWorkoutUpdated>(_onWorkoutUpdated);
     on<DashboardLogGroupDeleted>(_onLogGroupDeleted);
@@ -29,6 +32,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     try {
       final logs = await _repository.getAllLogs();
       final hasSwiped = await _settingsRepository.getHasSwiped();
+      final availableMuscleGroups = await _movementRepository.getMuscleGroups();
+      
       final grouped = _groupLogs(logs);
       
       final expandedDates = <String>{};
@@ -39,18 +44,33 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       final commonMuscleGroups = _computeCommonMuscleGroups(logs);
       final todaysMuscleGroupIds = await _repository.getTodaysMuscleGroupIds();
 
-      emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates, commonMuscleGroups: commonMuscleGroups, todaysMuscleGroupIds: todaysMuscleGroupIds));
+      emit(DashboardLoaded(
+        grouped, 
+        logs, 
+        hasSwipedBefore: hasSwiped, 
+        expandedDates: expandedDates, 
+        commonMuscleGroups: commonMuscleGroups, 
+        todaysMuscleGroupIds: todaysMuscleGroupIds,
+        availableMuscleGroups: availableMuscleGroups,
+      ));
     } catch (e) {
       emit(DashboardError());
     }
   }
 
+  List<WorkoutLog> _applyFilters(List<WorkoutLog> logs, String query, Set<String> selectedFilters) {
+    return logs.where((log) {
+      final matchesQuery = log.movementName?.toLowerCase().contains(query.toLowerCase()) ?? false;
+      final matchesFilter = selectedFilters.isEmpty || 
+          (log.muscleGroupName != null && selectedFilters.contains(log.muscleGroupName));
+      return matchesQuery && matchesFilter;
+    }).toList();
+  }
+
   void _onSearchLogs(SearchDashboardLogs event, Emitter<DashboardState> emit) {
     if (state is DashboardLoaded) {
       final currentState = state as DashboardLoaded;
-      final filtered = currentState.allLogs.where((log) {
-        return log.movementName?.toLowerCase().contains(event.query.toLowerCase()) ?? false;
-      }).toList();
+      final filtered = _applyFilters(currentState.allLogs, event.query, currentState.selectedFilters);
       final grouped = _groupLogs(filtered);
       final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
 
@@ -58,17 +78,38 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       // When the query is cleared, revert to only the first date — matching
       // the initial load behavior from _onLoadLogs.
       final Set<String> expandedDates;
-      if (event.query.isEmpty) {
+      if (event.query.isEmpty && currentState.selectedFilters.isEmpty) {
         expandedDates = grouped.isNotEmpty ? {grouped.keys.first} : {};
       } else {
         expandedDates = grouped.keys.toSet();
       }
 
-      emit(DashboardLoaded(
-        grouped,
-        currentState.allLogs,
+      emit(currentState.copyWith(
+        groupedLogs: grouped,
         query: event.query,
-        hasSwipedBefore: currentState.hasSwipedBefore,
+        expandedDates: expandedDates,
+        commonMuscleGroups: commonMuscleGroups,
+      ));
+    }
+  }
+
+  void _onToggleFilters(ToggleDashboardFilters event, Emitter<DashboardState> emit) {
+    if (state is DashboardLoaded) {
+      final currentState = state as DashboardLoaded;
+      final filtered = _applyFilters(currentState.allLogs, currentState.query, event.filters);
+      final grouped = _groupLogs(filtered);
+      final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
+
+      final Set<String> expandedDates;
+      if (currentState.query.isEmpty && event.filters.isEmpty) {
+        expandedDates = grouped.isNotEmpty ? {grouped.keys.first} : {};
+      } else {
+        expandedDates = grouped.keys.toSet();
+      }
+
+      emit(currentState.copyWith(
+        groupedLogs: grouped,
+        selectedFilters: event.filters,
         expandedDates: expandedDates,
         commonMuscleGroups: commonMuscleGroups,
       ));
@@ -81,17 +122,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       if (state is DashboardLoaded) {
         final currentState = state as DashboardLoaded;
         final updatedLogs = currentState.allLogs.where((log) => log.id != event.logId).toList();
-        final filtered = updatedLogs.where((log) {
-          return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
-        }).toList();
+        final filtered = _applyFilters(updatedLogs, currentState.query, currentState.selectedFilters);
         final grouped = _groupLogs(filtered);
         final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
-        emit(DashboardLoaded(
-          grouped,
-          updatedLogs,
-          query: currentState.query,
-          hasSwipedBefore: currentState.hasSwipedBefore,
-          expandedDates: currentState.expandedDates,
+        emit(currentState.copyWith(
+          groupedLogs: grouped,
+          allLogs: updatedLogs,
           commonMuscleGroups: commonMuscleGroups,
         ));
       }
@@ -107,17 +143,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       final todaysMuscleGroupIds = await _repository.getTodaysMuscleGroupIds();
       if (state is DashboardLoaded) {
         final currentState = state as DashboardLoaded;
-        final filtered = logs.where((log) {
-          return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
-        }).toList();
+        final filtered = _applyFilters(logs, currentState.query, currentState.selectedFilters);
         final grouped = _groupLogs(filtered);
         final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
-        emit(DashboardLoaded(
-          grouped,
-          logs,
-          query: currentState.query,
-          hasSwipedBefore: currentState.hasSwipedBefore,
-          expandedDates: currentState.expandedDates,
+        emit(currentState.copyWith(
+          groupedLogs: grouped,
+          allLogs: logs,
           commonMuscleGroups: commonMuscleGroups,
           todaysMuscleGroupIds: todaysMuscleGroupIds,
         ));
@@ -125,11 +156,20 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         final grouped = _groupLogs(logs);
         final commonMuscleGroups = _computeCommonMuscleGroups(logs);
         final hasSwiped = await _settingsRepository.getHasSwiped();
+        final availableMuscleGroups = await _movementRepository.getMuscleGroups();
         final expandedDates = <String>{};
         if (grouped.isNotEmpty) {
           expandedDates.add(grouped.keys.first);
         }
-        emit(DashboardLoaded(grouped, logs, hasSwipedBefore: hasSwiped, expandedDates: expandedDates, commonMuscleGroups: commonMuscleGroups, todaysMuscleGroupIds: todaysMuscleGroupIds));
+        emit(DashboardLoaded(
+          grouped, 
+          logs, 
+          hasSwipedBefore: hasSwiped, 
+          expandedDates: expandedDates, 
+          commonMuscleGroups: commonMuscleGroups, 
+          todaysMuscleGroupIds: todaysMuscleGroupIds,
+          availableMuscleGroups: availableMuscleGroups,
+        ));
       }
     } catch (e) {
       emit(DashboardError());
@@ -145,17 +185,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       final todaysMuscleGroupIds = await _repository.getTodaysMuscleGroupIds();
       if (state is DashboardLoaded) {
         final currentState = state as DashboardLoaded;
-        final filtered = logs.where((log) {
-          return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
-        }).toList();
+        final filtered = _applyFilters(logs, currentState.query, currentState.selectedFilters);
         final grouped = _groupLogs(filtered);
         final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
-        emit(DashboardLoaded(
-          grouped,
-          logs,
-          query: currentState.query,
-          hasSwipedBefore: currentState.hasSwipedBefore,
-          expandedDates: currentState.expandedDates,
+        emit(currentState.copyWith(
+          groupedLogs: grouped,
+          allLogs: logs,
           commonMuscleGroups: commonMuscleGroups,
           todaysMuscleGroupIds: todaysMuscleGroupIds,
         ));
@@ -183,17 +218,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       final todaysMuscleGroupIds = await _repository.getTodaysMuscleGroupIds();
       if (state is DashboardLoaded) {
         final currentState = state as DashboardLoaded;
-        final filtered = logs.where((log) {
-          return log.movementName?.toLowerCase().contains(currentState.query.toLowerCase()) ?? false;
-        }).toList();
+        final filtered = _applyFilters(logs, currentState.query, currentState.selectedFilters);
         final grouped = _groupLogs(filtered);
         final commonMuscleGroups = _computeCommonMuscleGroups(filtered);
-        emit(DashboardLoaded(
-          grouped,
-          logs,
-          query: currentState.query,
-          hasSwipedBefore: currentState.hasSwipedBefore,
-          expandedDates: currentState.expandedDates,
+        emit(currentState.copyWith(
+          groupedLogs: grouped,
+          allLogs: logs,
           commonMuscleGroups: commonMuscleGroups,
           todaysMuscleGroupIds: todaysMuscleGroupIds,
         ));

@@ -7,7 +7,16 @@
 # Exit on any error
 set -e
 
-BUMP_TYPE=${1:-auto}
+if [ -z "$1" ]; then
+  read -p "Is this a release build? (y/n - yes will bump the build version): " is_release
+  if [[ "$is_release" =~ ^[Yy](es)?$ ]]; then
+    BUMP_TYPE="build"
+  else
+    BUMP_TYPE="none"
+  fi
+else
+  BUMP_TYPE="$1"
+fi
 
 # Function to check if a command exists
 command_exists() {

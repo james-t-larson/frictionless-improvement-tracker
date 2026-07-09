@@ -141,3 +141,11 @@ class InitializeFlowForEdit extends LogExerciseEvent {
   @override
   List<Object?> get props => [log, movement];
 }
+
+class ToggleMovementFilters extends LogExerciseEvent {
+  final Set<String> filters;
+  const ToggleMovementFilters(this.filters);
+
+  @override
+  List<Object?> get props => [filters];
+}

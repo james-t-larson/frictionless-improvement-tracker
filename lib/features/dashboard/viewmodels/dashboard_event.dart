@@ -56,3 +56,10 @@ class ToggleDateExpansion extends DashboardEvent {
   @override
   List<Object?> get props => [dateKey];
 }
+
+class ToggleDashboardFilters extends DashboardEvent {
+  final Set<String> filters;
+  const ToggleDashboardFilters(this.filters);
+  @override
+  List<Object?> get props => [filters];
+}

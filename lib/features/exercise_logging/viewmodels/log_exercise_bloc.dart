@@ -33,6 +33,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     on<AddCustomMovement>(_onAddCustomMovement);
     on<AddCustomVariation>(_onAddCustomVariation);
     on<BeginAddCustomMovement>(_onBeginAddCustomMovement);
+    on<ToggleMovementFilters>(_onToggleFilters);
   }
 
   Future<void> _onInitialize(
@@ -44,12 +45,14 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     final ids = event.todaysMuscleGroupIds;
     final suggested = await _movementRepository.getSuggestedMovements(ids);
     final label = ids.isNotEmpty ? 'TODAY\'S SPLIT' : 'MOST COMMON';
+    final availableMuscleGroups = await _movementRepository.getMuscleGroups();
 
     emit(state.copyWith(
       movementSearchResults: suggested,
       currentStep: ExerciseLogStep.movement,
       suggestionLabel: label,
       todaysMuscleGroupIds: ids,
+      availableMuscleGroups: availableMuscleGroups,
     ));
   }
 
@@ -151,27 +154,59 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     emit(state.copyWith(currentStep: newStep));
   }
 
+  List<Movement> _applyMovementFilters(List<Movement> movements, Set<String> filters) {
+    if (filters.isEmpty) return movements;
+    return movements.where((m) {
+      return m.muscleGroups.any((mg) => filters.contains(mg));
+    }).toList();
+  }
+
   Future<void> _onSearchMovement(
     SearchMovement event,
     Emitter<LogExerciseState> emit,
   ) async {
+    List<Movement> results;
     if (event.query.isEmpty) {
       if (state.selectedMuscleGroup != null) {
-        final movements = await _movementRepository.getMovementsByMuscleGroupName(state.selectedMuscleGroup!);
-        emit(state.copyWith(movementQuery: '', movementSearchResults: movements));
+        results = await _movementRepository.getMovementsByMuscleGroupName(state.selectedMuscleGroup!);
       } else {
-        final suggested = await _movementRepository.getSuggestedMovements(state.todaysMuscleGroupIds);
-        emit(state.copyWith(movementQuery: '', movementSearchResults: suggested));
+        results = await _movementRepository.getSuggestedMovements(state.todaysMuscleGroupIds);
       }
-      return;
+    } else {
+      results = await _movementRepository.searchMovements(event.query);
     }
-    final results = await _movementRepository.searchMovements(event.query);
+    
+    results = _applyMovementFilters(results, state.selectedMovementFilters);
+    
     emit(
       state.copyWith(
         movementQuery: event.query,
         movementSearchResults: results,
       ),
     );
+  }
+
+  Future<void> _onToggleFilters(
+    ToggleMovementFilters event,
+    Emitter<LogExerciseState> emit,
+  ) async {
+    List<Movement> results;
+    if (state.movementQuery.isEmpty) {
+      if (state.selectedMuscleGroup != null) {
+        results = await _movementRepository.getMovementsByMuscleGroupName(state.selectedMuscleGroup!);
+      } else {
+        results = await _movementRepository.getSuggestedMovements(state.todaysMuscleGroupIds);
+      }
+    } else {
+      results = await _movementRepository.searchMovements(state.movementQuery);
+    }
+    
+    results = _applyMovementFilters(results, event.filters);
+
+    emit(state.copyWith(
+      selectedMovementFilters: event.filters,
+      movementSearchResults: results,
+    ));
   }
 
   void _onSearchVariation(

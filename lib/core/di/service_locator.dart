@@ -36,7 +36,7 @@ Future<void> setupLocator() async {
 
   // BLoCs
   getIt.registerFactory<DashboardBloc>(
-    () => DashboardBloc(getIt<WorkoutRepository>(), getIt<SettingsRepository>()),
+    () => DashboardBloc(getIt<WorkoutRepository>(), getIt<SettingsRepository>(), getIt<MovementRepository>()),
   );
   getIt.registerFactory<DataManagementBloc>(
     () => DataManagementBloc(getIt<DataRepository>()),

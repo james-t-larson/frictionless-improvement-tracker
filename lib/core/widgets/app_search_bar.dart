@@ -9,6 +9,8 @@ class AppSearchBar extends StatefulWidget {
   final String hintText;
   final ValueChanged<String> onChanged;
   final VoidCallback? onClear;
+  final VoidCallback? onFilterTap;
+  final bool isFilterActive;
   final AppSearchBarStyle style;
   final bool autofocus;
   final TextEditingController? controller;
@@ -19,6 +21,8 @@ class AppSearchBar extends StatefulWidget {
     required this.hintText,
     required this.onChanged,
     this.onClear,
+    this.onFilterTap,
+    this.isFilterActive = false,
     this.style = AppSearchBarStyle.boxed,
     this.autofocus = false,
     this.controller,
@@ -86,12 +90,25 @@ class _AppSearchBarState extends State<AppSearchBar> {
             hintText: widget.hintText,
             hintStyle: const TextStyle(color: Color(0xFF71717A)),
             prefixIcon: const Icon(Icons.search, color: Color(0xFFA1A1AA), size: 20),
-            suffixIcon: _showClearButton
-                ? IconButton(
+            suffixIcon: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (_showClearButton)
+                  IconButton(
                     icon: const Icon(Icons.close_rounded, color: Color(0xFFA1A1AA), size: 20),
                     onPressed: _clear,
-                  )
-                : null,
+                  ),
+                if (widget.onFilterTap != null)
+                  IconButton(
+                    icon: Icon(
+                      Icons.tune_rounded, 
+                      color: widget.isFilterActive ? const Color(0xFFFAFAFA) : const Color(0xFFA1A1AA), 
+                      size: 20
+                    ),
+                    onPressed: widget.onFilterTap,
+                  ),
+              ],
+            ),
             border: InputBorder.none,
             contentPadding: const EdgeInsets.symmetric(vertical: 12),
           ),
@@ -107,12 +124,25 @@ class _AppSearchBarState extends State<AppSearchBar> {
         style: const TextStyle(color: Color(0xFFFAFAFA)),
         decoration: InputDecoration(
           hintText: widget.hintText,
-          suffixIcon: _showClearButton
-              ? IconButton(
+          suffixIcon: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (_showClearButton)
+                IconButton(
                   icon: const Icon(Icons.close_rounded, color: Color(0xFFA1A1AA), size: 20),
                   onPressed: _clear,
-                )
-              : null,
+                ),
+              if (widget.onFilterTap != null)
+                IconButton(
+                  icon: Icon(
+                    Icons.tune_rounded, 
+                    color: widget.isFilterActive ? const Color(0xFFFAFAFA) : const Color(0xFFA1A1AA), 
+                    size: 20
+                  ),
+                  onPressed: widget.onFilterTap,
+                ),
+            ],
+          ),
           border: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFF52525B))),
           enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFF52525B))),
           focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFFFAFAFA))),

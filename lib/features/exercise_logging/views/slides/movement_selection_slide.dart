@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../viewmodels/log_exercise_bloc.dart';
 import '../../../../core/widgets/app_search_bar.dart';
+import '../../../../core/widgets/filter_selection_sheet.dart';
 import '../log_exercise_dialog.dart';
 
 class MovementSelectionSlide extends StatefulWidget {
@@ -28,13 +29,36 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 8),
-          AppSearchBar(
-            controller: _controller,
-            focusNode: _focusNode,
-            autofocus: false,
-            onChanged: (val) => context.read<LogExerciseBloc>().add(SearchMovement(val)),
-            hintText: 'Bench Press, Squat...',
-            style: AppSearchBarStyle.underlined,
+          BlocBuilder<LogExerciseBloc, LogExerciseState>(
+            builder: (context, state) {
+              return AppSearchBar(
+                controller: _controller,
+                focusNode: _focusNode,
+                autofocus: false,
+                onChanged: (val) => context.read<LogExerciseBloc>().add(SearchMovement(val)),
+                hintText: 'Bench Press, Squat...',
+                style: AppSearchBarStyle.underlined,
+                isFilterActive: state.selectedMovementFilters.isNotEmpty,
+                onFilterTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: const Color(0xFF18181B),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                    ),
+                    builder: (_) => FilterSelectionSheet(
+                      title: 'Filter by Muscle Group',
+                      availableFilters: state.availableMuscleGroups,
+                      selectedFilters: state.selectedMovementFilters,
+                      onSelectionChanged: (filters) {
+                        context.read<LogExerciseBloc>().add(ToggleMovementFilters(filters));
+                      },
+                    ),
+                  );
+                },
+              );
+            },
           ),
           const SizedBox(height: 16),
         Expanded(
