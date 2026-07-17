@@ -33,17 +33,6 @@ class AppSidebar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: safeArea.top + 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
-                'SETTINGS',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      letterSpacing: 2,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 24,
-                    ),
-              ),
-            ),
             const SizedBox(height: 32),
             Expanded(
               child: SingleChildScrollView(
