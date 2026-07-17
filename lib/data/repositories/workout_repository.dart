@@ -91,4 +91,46 @@ class WorkoutRepository {
       whereArgs: [log.id],
     );
   }
+
+  /// Fetches the latest barbell workout logs for Bench Press, Squat, and Deadlift.
+  Future<Map<String, WorkoutLog?>> getLatestBarbellBigThree() async {
+    final Map<String, WorkoutLog?> results = {
+      'Bench Press': null,
+      'Squat': null,
+      'Deadlift': null,
+    };
+
+    final List<Map<String, dynamic>> maps = await _db.rawQuery('''
+      SELECT l.id, l.data as log_data, m.data as mov_data
+      FROM logs l
+      JOIN movements m ON json_extract(l.data, '\$.movementId') = m.id
+      WHERE json_extract(m.data, '\$.name') IN ('Bench Press', 'Squat', 'Deadlift')
+        AND (
+          json_extract(l.data, '\$.variations') LIKE '%barbell%'
+          OR json_extract(l.data, '\$.variations') LIKE '%"barbell"%'
+        )
+      ORDER BY json_extract(l.data, '\$.timestamp') DESC
+    ''');
+
+    for (var map in maps) {
+      final logMap = jsonDecode(map['log_data'] as String);
+      final movMap = jsonDecode(map['mov_data'] as String);
+      final name = movMap['name'] as String;
+
+      if (results[name] == null) {
+        final List<dynamic>? muscleGroups = movMap['muscleGroups'];
+        String? firstGroup;
+        if (muscleGroups != null && muscleGroups.isNotEmpty) {
+          firstGroup = muscleGroups.first.toString();
+        }
+
+        results[name] = WorkoutLog.fromJson(logMap, id: map['id'] as int).copyWith(
+          movementName: name,
+          muscleGroupName: firstGroup,
+        );
+      }
+    }
+
+    return results;
+  }
 }

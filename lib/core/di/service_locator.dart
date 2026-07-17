@@ -9,6 +9,7 @@ import '../database/database_helper.dart';
 import '../../features/dashboard/viewmodels/dashboard_bloc.dart';
 import '../../features/dashboard/viewmodels/data_management_bloc.dart';
 import '../../features/exercise_logging/viewmodels/log_exercise_bloc.dart';
+import '../../features/one_rep_max/viewmodels/one_rep_max_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -46,5 +47,8 @@ Future<void> setupLocator() async {
       getIt<MovementRepository>(),
       getIt<WorkoutRepository>(),
     ),
+  );
+  getIt.registerFactory<OneRepMaxBloc>(
+    () => OneRepMaxBloc(workoutRepository: getIt<WorkoutRepository>()),
   );
 }

@@ -4,6 +4,7 @@ import '../../../core/widgets/app_accordion.dart';
 import '../../../core/widgets/app_toast.dart';
 import '../viewmodels/data_management_bloc.dart';
 import '../viewmodels/dashboard_bloc.dart';
+import '../../one_rep_max/views/one_rep_max_screen.dart';
 
 class AppSidebar extends StatelessWidget {
   const AppSidebar({super.key});
@@ -48,6 +49,24 @@ class AppSidebar extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    AppAccordion(
+                      title: 'Tools',
+                      initialExpanded: true,
+                      children: [
+                        _SidebarActionTile(
+                          icon: Icons.calculate_rounded,
+                          label: '1RM Estimates',
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const OneRepMaxScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                     AppAccordion(
                       title: 'Data Management',
                       initialExpanded: true,
