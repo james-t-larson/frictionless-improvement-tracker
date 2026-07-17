@@ -125,7 +125,7 @@ class OneRepMaxScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              '${formatWeight(oneRepMax)}',
+              formatWeight(oneRepMax),
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Color(0xFFFAFAFA),
@@ -171,6 +171,14 @@ class OneRepMaxScreen extends StatelessWidget {
                           color: Color(0xFFFAFAFA),
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        '~${OneRepMaxCalculator.getEstimatedReps(entry.key / 100.0)} reps',
+                        style: const TextStyle(
+                          color: Color(0xFFA1A1AA),
+                          fontSize: 10,
                         ),
                       ),
                     ],

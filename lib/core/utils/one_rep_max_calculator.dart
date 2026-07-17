@@ -22,4 +22,11 @@ class OneRepMaxCalculator {
       65: oneRepMax * 0.65,
     };
   }
+
+  /// Calculates the estimated number of reps for a given percentage of 1RM
+  /// using the reverse Epley formula.
+  static int getEstimatedReps(double percentageFraction) {
+    if (percentageFraction >= 1.0) return 1;
+    return (30 * ((1.0 / percentageFraction) - 1)).round();
+  }
 }
