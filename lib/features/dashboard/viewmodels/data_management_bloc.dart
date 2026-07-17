@@ -14,8 +14,6 @@ abstract class DataManagementEvent extends Equatable {
 
 class ExportCsvRequested extends DataManagementEvent {}
 
-class ExportSqlRequested extends DataManagementEvent {}
-
 class ImportRequested extends DataManagementEvent {}
 
 // --- STATES ---
@@ -54,7 +52,6 @@ class DataManagementBloc extends Bloc<DataManagementEvent, DataManagementState> 
 
   DataManagementBloc(this._repository) : super(DataOperationInitial()) {
     on<ExportCsvRequested>(_onExportCsvRequested);
-    on<ExportSqlRequested>(_onExportSqlRequested);
     on<ImportRequested>(_onImportRequested);
   }
 
@@ -63,16 +60,6 @@ class DataManagementBloc extends Bloc<DataManagementEvent, DataManagementState> 
     try {
       await _repository.exportToCsv();
       emit(const DataOperationSuccess('CSV exported successfully'));
-    } catch (e) {
-      emit(DataOperationFailure('Export failed: $e'));
-    }
-  }
-
-  Future<void> _onExportSqlRequested(ExportSqlRequested event, Emitter<DataManagementState> emit) async {
-    emit(DataOperationInProgress());
-    try {
-      await _repository.exportToSql();
-      emit(const DataOperationSuccess('SQL backup exported successfully'));
     } catch (e) {
       emit(DataOperationFailure('Export failed: $e'));
     }
@@ -109,11 +96,8 @@ class DataManagementBloc extends Bloc<DataManagementEvent, DataManagementState> 
         if (extension == 'csv') {
           final count = await _repository.importCsv(path);
           emit(DataOperationSuccess('Successfully imported $count new logs'));
-        } else if (extension == 'sql') {
-          await _repository.importSql(path);
-          emit(const DataOperationSuccess('Full database restore complete'));
         } else {
-          emit(DataOperationFailure('Unsupported file: "$fileName". Expected .csv or .sql, got: .${extension ?? 'none'}'));
+          emit(DataOperationFailure('Unsupported file: "$fileName". Expected .csv, got: .${extension ?? 'none'}'));
         }
       }
     } catch (e) {

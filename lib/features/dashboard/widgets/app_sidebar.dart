@@ -61,14 +61,14 @@ class AppSidebar extends StatelessWidget {
                       children: [
                         _SidebarActionTile(
                           icon: Icons.storage_rounded,
-                          label: 'Export SQL',
+                          label: 'Export CSV',
                           onTap: () {
-                            context.read<DataManagementBloc>().add(ExportSqlRequested());
+                            context.read<DataManagementBloc>().add(ExportCsvRequested());
                           },
                         ),
                         _SidebarActionTile(
                           icon: Icons.download_rounded,
-                          label: 'Import Data',
+                          label: 'Import CSV',
                           onTap: () => _handleImport(context),
                           isDestructive: false,
                         ),
@@ -97,22 +97,13 @@ class AppSidebar extends StatelessWidget {
   }
 
   void _handleImport(BuildContext context) async {
-    // We don't know if it's SQL or CSV until they pick it, 
-    // but the Bloc handles the picking. 
-    // However, the spec says SQL import should have a "Destructive Action" warning.
-    // Since the Bloc handles picking, we can either:
-    // 1. Show warning AFTER picking if it's SQL (Bloc state change?)
-    // 2. Just warn that Import MIGHT be destructive if it's a backup.
-    
-    // Better: Add a generic warning that CSV merges and SQL restores.
     final proceed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: const Color(0xFF18181B),
-        title: const Text('Import Data', style: TextStyle(color: Color(0xFFFAFAFA))),
+        title: const Text('Import CSV', style: TextStyle(color: Color(0xFFFAFAFA))),
         content: const Text(
-          '• CSV files will be merged with your current data.\n'
-          '• SQL files will PERMANENTLY OVERWRITE your current database.\n\n'
+          '• CSV files will be merged with your current data.\n\n'
           'Do you want to proceed?',
           style: TextStyle(color: Color(0xFFA1A1AA)),
         ),
