@@ -1,7 +1,7 @@
 const Map<String, dynamic> deadlift = {
   "pk": "ba2387cd-2192-42d5-8895-4c8ad78b3607",
   "name": "Deadlift",
-  "muscleGroups": ["Back", "Legs"],
+  "muscleGroups": ["Legs"],
   "primaryMuscles": ["gluteus maximus", "hamstrings", "erector spinae"],
   "secondaryMuscles": [
     "gastrocnemius",

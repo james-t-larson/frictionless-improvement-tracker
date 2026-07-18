@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 import '../models/workout_log.dart';
+import '../../core/utils/one_rep_max_calculator.dart';
 
 class WorkoutRepository {
   final Database _db;
@@ -92,13 +93,17 @@ class WorkoutRepository {
     );
   }
 
-  /// Fetches the latest barbell workout logs for Bench Press, Squat, and Deadlift.
+  /// Fetches the best barbell workout logs for Bench Press, Squat, and Deadlift
+  /// from the most recent session for each movement.
   Future<Map<String, WorkoutLog?>> getLatestBarbellBigThree() async {
     final Map<String, WorkoutLog?> results = {
       'Bench Press': null,
       'Squat': null,
       'Deadlift': null,
     };
+
+    final Map<String, String> latestSessionDate = {};
+    final Map<String, double> bestSession1RM = {};
 
     final List<Map<String, dynamic>> maps = await _db.rawQuery('''
       SELECT l.id, l.data as log_data, m.data as mov_data
@@ -117,7 +122,18 @@ class WorkoutRepository {
       final movMap = jsonDecode(map['mov_data'] as String);
       final name = movMap['name'] as String;
 
-      if (results[name] == null) {
+      final timestamp = logMap['timestamp'] as int;
+      final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+      final dateStr = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+      
+      final weight = (logMap['weight'] as num).toDouble();
+      final reps = logMap['reps'] as int;
+      final estimated1RM = OneRepMaxCalculator.calculate1RM(weight, reps);
+
+      if (latestSessionDate[name] == null) {
+        latestSessionDate[name] = dateStr;
+        bestSession1RM[name] = estimated1RM;
+        
         final List<dynamic>? muscleGroups = movMap['muscleGroups'];
         String? firstGroup;
         if (muscleGroups != null && muscleGroups.isNotEmpty) {
@@ -128,6 +144,21 @@ class WorkoutRepository {
           movementName: name,
           muscleGroupName: firstGroup,
         );
+      } else if (latestSessionDate[name] == dateStr) {
+        if (estimated1RM > bestSession1RM[name]!) {
+          bestSession1RM[name] = estimated1RM;
+          
+          final List<dynamic>? muscleGroups = movMap['muscleGroups'];
+          String? firstGroup;
+          if (muscleGroups != null && muscleGroups.isNotEmpty) {
+            firstGroup = muscleGroups.first.toString();
+          }
+
+          results[name] = WorkoutLog.fromJson(logMap, id: map['id'] as int).copyWith(
+            movementName: name,
+            muscleGroupName: firstGroup,
+          );
+        }
       }
     }
 
