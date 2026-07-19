@@ -15,8 +15,7 @@ const Map<String, dynamic> deadlift = {
       "excludedVariations": [
         "deficit",
         "paused",
-        "rack-pull",
-        "romainian",
+        "romanian",
         "single-leg",
         "snatch-grip",
         "stiff-leg",
@@ -26,18 +25,16 @@ const Map<String, dynamic> deadlift = {
       "excludedVariations": [
         "deficit",
         "paused",
-        "rack-pull",
-        "romainian",
+        "romanian",
         "snatch-grip",
         "stiff-leg",
         "sumo",
       ],
     },
-    "romainian": {
+    "romanian": {
       "excludedVariations": [
         "deficit",
         "paused",
-        "rack-pull",
         "single-leg",
         "snatch-grip",
         "stiff-leg",
@@ -48,29 +45,16 @@ const Map<String, dynamic> deadlift = {
       "excludedVariations": [
         "deficit",
         "paused",
-        "rack-pull",
-        "romainian",
+        "romanian",
         "single-leg",
         "snatch-grip",
-        "sumo",
-      ],
-    },
-    "rack-pull": {
-      "excludedVariations": [
-        "deficit",
-        "paused",
-        "romainian",
-        "single-leg",
-        "snatch-grip",
-        "stiff-leg",
         "sumo",
       ],
     },
     "deficit": {
       "excludedVariations": [
         "paused",
-        "rack-pull",
-        "romainian",
+        "romanian",
         "single-leg",
         "snatch-grip",
         "stiff-leg",
@@ -80,8 +64,7 @@ const Map<String, dynamic> deadlift = {
     "paused": {
       "excludedVariations": [
         "deficit",
-        "rack-pull",
-        "romainian",
+        "romanian",
         "single-leg",
         "snatch-grip",
         "stiff-leg",
@@ -92,8 +75,7 @@ const Map<String, dynamic> deadlift = {
       "excludedVariations": [
         "deficit",
         "paused",
-        "rack-pull",
-        "romainian",
+        "romanian",
         "single-leg",
         "stiff-leg",
         "sumo",
@@ -188,4 +170,41 @@ const Map<String, dynamic> deadlift = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Romanian Deadlift",
+      "variations": ["romanian"],
+      "aliases": ["RDL"],
+    },
+    {
+      "name": "Sumo Deadlift",
+      "variations": ["sumo"],
+    },
+    {
+      "name": "Stiff-Leg Deadlift",
+      "variations": ["stiff-leg"],
+      "aliases": ["Stiff-Legged Deadlift"],
+    },
+    {
+      "name": "Single-Leg Deadlift",
+      "variations": ["single-leg"],
+    },
+    {
+      "name": "Deficit Deadlift",
+      "variations": ["deficit"],
+    },
+    {
+      "name": "Snatch-Grip Deadlift",
+      "variations": ["snatch-grip"],
+    },
+    {
+      "name": "Trap Bar Deadlift",
+      "variations": ["trap bar"],
+      "aliases": ["Hex Bar Deadlift"],
+    },
+    {
+      "name": "Paused Deadlift",
+      "variations": ["paused"],
+    },
+  ],
 };

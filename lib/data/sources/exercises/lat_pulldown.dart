@@ -94,4 +94,18 @@ const Map<String, dynamic> latPulldown = {
       ],
     }
   },
+  "namedVariations": [
+    {
+      "name": "Wide-Grip Lat Pulldown",
+      "variations": ["wide-grip"],
+    },
+    {
+      "name": "Close-Grip Lat Pulldown",
+      "variations": ["close-grip"],
+    },
+    {
+      "name": "Straight-Arm Pulldown",
+      "variations": ["straight arm"],
+    },
+  ],
 };

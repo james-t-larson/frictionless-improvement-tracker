@@ -13,18 +13,10 @@ const Map<String, dynamic> clean = {
         "tall clean",
       ],
     },
-    "power": {
-      "excludedVariations": [
-        "clean pull",
-        "clean shrug",
-        "squat",
-      ],
-    },
     "squat": {
       "excludedVariations": [
         "clean pull",
         "clean shrug",
-        "power",
       ],
     },
     "single-arm": {
@@ -37,7 +29,6 @@ const Map<String, dynamic> clean = {
     "clean pull": {
       "excludedVariations": [
         "clean shrug",
-        "power",
         "squat",
         "tall clean",
       ],
@@ -56,7 +47,6 @@ const Map<String, dynamic> clean = {
     "clean shrug": {
       "excludedVariations": [
         "clean pull",
-        "power",
         "squat",
         "tall clean",
       ],
@@ -99,4 +89,14 @@ const Map<String, dynamic> clean = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Hang Clean",
+      "variations": ["hang"],
+    },
+    {
+      "name": "Squat Clean",
+      "variations": ["squat"],
+    },
+  ],
 };

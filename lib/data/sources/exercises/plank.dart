@@ -112,4 +112,18 @@ const Map<String, dynamic> plank = {
       "excludedVariations": ["bosu", "weighted"],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Side Plank",
+      "variations": ["side"],
+    },
+    {
+      "name": "RKC Plank",
+      "variations": ["RKC"],
+    },
+    {
+      "name": "Reverse Plank",
+      "variations": ["reverse"],
+    },
+  ],
 };

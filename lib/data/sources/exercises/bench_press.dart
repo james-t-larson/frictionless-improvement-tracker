@@ -190,4 +190,47 @@ const Map<String, dynamic> benchPress = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Incline Bench Press",
+      "variations": ["incline"],
+    },
+    {
+      "name": "Decline Bench Press",
+      "variations": ["decline"],
+    },
+    {
+      "name": "Close-Grip Bench Press",
+      "variations": ["close-grip"],
+    },
+    {
+      "name": "Wide-Grip Bench Press",
+      "variations": ["wide-grip"],
+    },
+    {
+      "name": "Dumbbell Bench Press",
+      "variations": ["dumbbell"],
+      "aliases": ["Dumbbell Chest Press"],
+    },
+    {
+      "name": "Incline Dumbbell Press",
+      "variations": ["incline", "dumbbell"],
+    },
+    {
+      "name": "Paused Bench Press",
+      "variations": ["paused"],
+    },
+    {
+      "name": "Smith Machine Bench Press",
+      "variations": ["smith machine"],
+    },
+    {
+      "name": "Larsen Press",
+      "variations": ["larsen"],
+    },
+    {
+      "name": "Spoto Press",
+      "variations": ["spoto"],
+    },
+  ],
 };

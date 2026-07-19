@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/workout_log.dart';
 import '../../../data/models/movement.dart';
+import '../../../data/models/movement_search_result.dart';
 import '../../../data/repositories/movement_repository.dart';
 import '../../../data/repositories/workout_repository.dart';
 import 'log_exercise_event.dart';
@@ -48,7 +49,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     final availableMuscleGroups = await _movementRepository.getMuscleGroups();
 
     emit(state.copyWith(
-      movementSearchResults: suggested,
+      movementSearchResults: _asSearchResults(suggested),
       currentStep: ExerciseLogStep.movement,
       suggestionLabel: label,
       todaysMuscleGroupIds: ids,
@@ -63,7 +64,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     final movements = await _movementRepository.getMovementsByMuscleGroupName(event.group);
     emit(state.copyWith(
       selectedMuscleGroup: event.group,
-      movementSearchResults: movements,
+      movementSearchResults: _asSearchResults(movements),
       currentStep: ExerciseLogStep.movement,
       // Clear forward progress
       selectedMovement: null,
@@ -154,30 +155,33 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     emit(state.copyWith(currentStep: newStep));
   }
 
-  List<Movement> _applyMovementFilters(List<Movement> movements, Set<String> filters) {
-    if (filters.isEmpty) return movements;
-    return movements.where((m) {
-      return m.muscleGroups.any((mg) => filters.contains(mg));
+  List<MovementSearchResult> _asSearchResults(List<Movement> movements) {
+    return movements.map((m) => MovementSearchResult(m)).toList();
+  }
+
+  List<MovementSearchResult> _applyMovementFilters(List<MovementSearchResult> results, Set<String> filters) {
+    if (filters.isEmpty) return results;
+    return results.where((r) {
+      return r.movement.muscleGroups.any((mg) => filters.contains(mg));
     }).toList();
+  }
+
+  Future<List<MovementSearchResult>> _fetchResults(String query) async {
+    if (query.isEmpty) {
+      if (state.selectedMuscleGroup != null) {
+        return _asSearchResults(await _movementRepository.getMovementsByMuscleGroupName(state.selectedMuscleGroup!));
+      }
+      return _asSearchResults(await _movementRepository.getSuggestedMovements(state.todaysMuscleGroupIds));
+    }
+    return _movementRepository.searchMovements(query);
   }
 
   Future<void> _onSearchMovement(
     SearchMovement event,
     Emitter<LogExerciseState> emit,
   ) async {
-    List<Movement> results;
-    if (event.query.isEmpty) {
-      if (state.selectedMuscleGroup != null) {
-        results = await _movementRepository.getMovementsByMuscleGroupName(state.selectedMuscleGroup!);
-      } else {
-        results = await _movementRepository.getSuggestedMovements(state.todaysMuscleGroupIds);
-      }
-    } else {
-      results = await _movementRepository.searchMovements(event.query);
-    }
-    
-    results = _applyMovementFilters(results, state.selectedMovementFilters);
-    
+    final results = _applyMovementFilters(await _fetchResults(event.query), state.selectedMovementFilters);
+
     emit(
       state.copyWith(
         movementQuery: event.query,
@@ -190,18 +194,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     ToggleMovementFilters event,
     Emitter<LogExerciseState> emit,
   ) async {
-    List<Movement> results;
-    if (state.movementQuery.isEmpty) {
-      if (state.selectedMuscleGroup != null) {
-        results = await _movementRepository.getMovementsByMuscleGroupName(state.selectedMuscleGroup!);
-      } else {
-        results = await _movementRepository.getSuggestedMovements(state.todaysMuscleGroupIds);
-      }
-    } else {
-      results = await _movementRepository.searchMovements(state.movementQuery);
-    }
-    
-    results = _applyMovementFilters(results, event.filters);
+    final results = _applyMovementFilters(await _fetchResults(state.movementQuery), event.filters);
 
     emit(state.copyWith(
       selectedMovementFilters: event.filters,
@@ -220,19 +213,23 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     SelectMovement event,
     Emitter<LogExerciseState> emit,
   ) async {
+    final preselected = event.preselectedVariations
+        .where(event.movement.variations.containsKey)
+        .toList();
+
     List<String> variations = [];
     if (event.movement.id != null) {
-      variations = event.movement.variations.keys.toList();
+      variations = _getAvailableVariations(event.movement, preselected);
     }
-    
+
     final nextStep = variations.isEmpty ? ExerciseLogStep.details : ExerciseLogStep.variation;
 
     emit(
       state.copyWith(
-        selectedMovement: event.movement, 
+        selectedMovement: event.movement,
         currentStep: nextStep,
         availableVariations: variations,
-        selectedVariations: const [],
+        selectedVariations: preselected,
       ),
     );
     if (event.movement.id != null) {
@@ -326,11 +323,12 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
 
     emit(state.copyWith(isSaving: true));
 
+    final movement = state.selectedMovement!;
     final log = WorkoutLog(
       id: state.editingLogId,
       timestamp: DateTime.now().millisecondsSinceEpoch,
-      movementId: state.selectedMovement!.id!,
-      movementName: state.selectedMovement!.name,
+      movementId: movement.id!,
+      movementName: movement.resolveNamedVariation(state.selectedVariations)?.name ?? movement.name,
       muscleGroupName: state.selectedMovement!.muscleGroups.isNotEmpty 
           ? state.selectedMovement!.muscleGroups.first 
           : null,

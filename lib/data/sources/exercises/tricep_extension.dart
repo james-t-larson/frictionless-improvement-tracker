@@ -74,4 +74,18 @@ const Map<String, dynamic> tricepExtension = {
       ],
     }
   },
+  "namedVariations": [
+    {
+      "name": "Overhead Tricep Extension",
+      "variations": ["overhead"],
+    },
+    {
+      "name": "Tricep Kickback",
+      "variations": ["kickback"],
+    },
+    {
+      "name": "Lying Tricep Extension",
+      "variations": ["lying"],
+    },
+  ],
 };

@@ -53,4 +53,10 @@ const Map<String, dynamic> gluteKickback = {
       "excludedVariations": ["cable", "machine"],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Donkey Kick",
+      "variations": ["donkey kick"],
+    },
+  ],
 };

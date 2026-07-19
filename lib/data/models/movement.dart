@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'named_variation.dart';
+
 class Movement {
   final String? id;
   final String name;
@@ -7,6 +9,7 @@ class Movement {
   final List<String> secondaryMuscles;
   final List<String> muscleGroups;
   final Map<String, List<String>> variations;
+  final List<NamedVariation> namedVariations;
 
   Movement({
     this.id,
@@ -15,6 +18,7 @@ class Movement {
     this.secondaryMuscles = const [],
     this.muscleGroups = const [],
     this.variations = const {},
+    this.namedVariations = const [],
   });
 
   String? get muscleGroup => primaryMuscles.isNotEmpty ? primaryMuscles.first : null;
@@ -27,6 +31,8 @@ class Movement {
       'secondaryMuscles': secondaryMuscles,
       'muscleGroups': muscleGroups,
       'variations': variations.map((key, value) => MapEntry(key, {'excludedVariations': value})),
+      if (namedVariations.isNotEmpty)
+        'namedVariations': namedVariations.map((nv) => nv.toJson()).toList(),
     };
   }
 
@@ -41,6 +47,10 @@ class Movement {
             (key, value) => MapEntry(key.toString(), List<String>.from((value as Map)['excludedVariations'] as Iterable)),
           ) ??
           {},
+      namedVariations: (json['namedVariations'] as List?)
+              ?.map((nv) => NamedVariation.fromJson(Map<String, dynamic>.from(nv as Map)))
+              .toList() ??
+          [],
     );
   }
 
@@ -63,6 +73,7 @@ class Movement {
     List<String>? secondaryMuscles,
     List<String>? muscleGroups,
     Map<String, List<String>>? variations,
+    List<NamedVariation>? namedVariations,
   }) {
     return Movement(
       id: id ?? this.id,
@@ -71,7 +82,22 @@ class Movement {
       secondaryMuscles: secondaryMuscles ?? this.secondaryMuscles,
       muscleGroups: muscleGroups ?? this.muscleGroups,
       variations: variations ?? this.variations,
+      namedVariations: namedVariations ?? this.namedVariations,
     );
+  }
+
+  /// Finds the named variation that best describes [selectedVariations]:
+  /// the one whose keys are all selected, preferring the most specific match.
+  NamedVariation? resolveNamedVariation(List<String> selectedVariations) {
+    NamedVariation? best;
+    for (final nv in namedVariations) {
+      if (nv.matches(selectedVariations)) {
+        if (best == null || nv.variationKeys.length > best.variationKeys.length) {
+          best = nv;
+        }
+      }
+    }
+    return best;
   }
 }
 

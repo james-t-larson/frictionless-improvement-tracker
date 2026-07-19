@@ -303,4 +303,54 @@ const Map<String, dynamic> curl = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Barbell Curl",
+      "variations": ["barbell"],
+    },
+    {
+      "name": "Dumbbell Curl",
+      "variations": ["dumbbell"],
+    },
+    {
+      "name": "Hammer Curl",
+      "variations": ["hammer"],
+    },
+    {
+      "name": "Preacher Curl",
+      "variations": ["preacher"],
+    },
+    {
+      "name": "Concentration Curl",
+      "variations": ["concentration"],
+    },
+    {
+      "name": "EZ-Bar Curl",
+      "variations": ["EZ-bar"],
+    },
+    {
+      "name": "Cable Curl",
+      "variations": ["cable"],
+    },
+    {
+      "name": "Spider Curl",
+      "variations": ["spider"],
+    },
+    {
+      "name": "Zottman Curl",
+      "variations": ["zottman"],
+    },
+    {
+      "name": "Reverse Curl",
+      "variations": ["reverse"],
+    },
+    {
+      "name": "Drag Curl",
+      "variations": ["drag"],
+    },
+    {
+      "name": "Incline Dumbbell Curl",
+      "variations": ["incline", "dumbbell"],
+    },
+  ],
 };

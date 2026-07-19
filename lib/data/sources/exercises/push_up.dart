@@ -401,4 +401,26 @@ const Map<String, dynamic> pushUp = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Diamond Push-Up",
+      "variations": ["diamond"],
+    },
+    {
+      "name": "Decline Push-Up",
+      "variations": ["decline"],
+    },
+    {
+      "name": "Incline Push-Up",
+      "variations": ["incline"],
+    },
+    {
+      "name": "Pike Push-Up",
+      "variations": ["pike"],
+    },
+    {
+      "name": "Archer Push-Up",
+      "variations": ["archer"],
+    },
+  ],
 };

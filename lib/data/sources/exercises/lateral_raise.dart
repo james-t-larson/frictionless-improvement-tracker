@@ -82,4 +82,14 @@ const Map<String, dynamic> lateralRaise = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Cable Lateral Raise",
+      "variations": ["cable"],
+    },
+    {
+      "name": "Machine Lateral Raise",
+      "variations": ["machine"],
+    },
+  ],
 };

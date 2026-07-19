@@ -84,4 +84,10 @@ const Map<String, dynamic> stepUp = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Lateral Step-Up",
+      "variations": ["lateral"],
+    },
+  ],
 };

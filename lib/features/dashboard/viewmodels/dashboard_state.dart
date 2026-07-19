@@ -19,6 +19,7 @@ class GroupedLogsItem extends WorkoutHistoryItem {
   
   String get movementName => logs.first.movementName ?? 'Unknown';
   List<String> get variations => logs.first.variations;
+  List<String> get displayVariations => logs.first.displayVariations;
   double get maxWeight => logs.isEmpty ? 0 : logs.map((l) => l.weight).reduce((a, b) => a > b ? a : b);
   int get totalSets => logs.length;
   bool get painFelt => logs.any((l) => l.painFelt);

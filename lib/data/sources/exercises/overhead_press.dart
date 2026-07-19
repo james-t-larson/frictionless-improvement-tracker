@@ -10,7 +10,6 @@ const Map<String, dynamic> overheadPress = {
         "strict",
         "push jerk",
         "split jerk",
-        "Arnold",
         "seated",
         "Z-press",
         "machine"
@@ -21,7 +20,6 @@ const Map<String, dynamic> overheadPress = {
         "push press",
         "push jerk",
         "split jerk",
-        "Arnold"
       ],
     },
     "push jerk": {
@@ -29,7 +27,6 @@ const Map<String, dynamic> overheadPress = {
         "strict",
         "push press",
         "split jerk",
-        "Arnold",
         "seated",
         "Z-press",
         "machine",
@@ -41,7 +38,6 @@ const Map<String, dynamic> overheadPress = {
         "strict",
         "push press",
         "push jerk",
-        "Arnold",
         "seated",
         "Z-press",
         "single-arm",
@@ -52,20 +48,6 @@ const Map<String, dynamic> overheadPress = {
         "Smith machine",
         "landmine",
         "pin"
-      ],
-    },
-    "Arnold": {
-      "excludedVariations": [
-        "strict",
-        "push press",
-        "push jerk",
-        "split jerk",
-        "barbell",
-        "kettlebell",
-        "landmine",
-        "pin",
-        "Smith machine",
-        "machine"
       ],
     },
     "seated": {
@@ -127,7 +109,6 @@ const Map<String, dynamic> overheadPress = {
         "machine",
         "single-arm",
         "alternating",
-        "Arnold",
         "split jerk"
       ],
     },
@@ -140,7 +121,6 @@ const Map<String, dynamic> overheadPress = {
         "machine",
         "single-arm",
         "alternating",
-        "Arnold"
       ],
     },
     "dumbbell": {
@@ -162,7 +142,6 @@ const Map<String, dynamic> overheadPress = {
         "Smith machine",
         "machine",
         "pin",
-        "Arnold",
         "split jerk"
       ],
     },
@@ -176,7 +155,6 @@ const Map<String, dynamic> overheadPress = {
         "pin",
         "alternating",
         "split jerk",
-        "Arnold"
       ],
     },
     "Smith machine": {
@@ -190,7 +168,6 @@ const Map<String, dynamic> overheadPress = {
         "alternating",
         "push jerk",
         "split jerk",
-        "Arnold",
         "Z-press"
       ],
     },
@@ -207,10 +184,31 @@ const Map<String, dynamic> overheadPress = {
         "push press",
         "push jerk",
         "split jerk",
-        "Arnold",
         "standing",
         "Z-press"
       ],
     }
   },
+  "namedVariations": [
+    {
+      "name": "Push Press",
+      "variations": ["push press"],
+    },
+    {
+      "name": "Military Press",
+      "variations": ["strict", "standing"],
+    },
+    {
+      "name": "Z-Press",
+      "variations": ["Z-press"],
+    },
+    {
+      "name": "Push Jerk",
+      "variations": ["push jerk"],
+    },
+    {
+      "name": "Split Jerk",
+      "variations": ["split jerk"],
+    },
+  ],
 };

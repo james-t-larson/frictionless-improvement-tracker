@@ -88,4 +88,22 @@ const Map<String, dynamic> pullUp = {
       "excludedVariations": ["ring"],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Weighted Pull-Up",
+      "variations": ["weighted"],
+    },
+    {
+      "name": "Wide-Grip Pull-Up",
+      "variations": ["wide-grip"],
+    },
+    {
+      "name": "Neutral-Grip Pull-Up",
+      "variations": ["neutral-grip"],
+    },
+    {
+      "name": "Kipping Pull-Up",
+      "variations": ["kipping"],
+    },
+  ],
 };

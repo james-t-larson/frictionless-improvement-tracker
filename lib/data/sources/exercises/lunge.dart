@@ -168,4 +168,23 @@ const Map<String, dynamic> lunge = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Walking Lunge",
+      "variations": ["walking"],
+    },
+    {
+      "name": "Reverse Lunge",
+      "variations": ["reverse"],
+    },
+    {
+      "name": "Curtsy Lunge",
+      "variations": ["curtsy"],
+    },
+    {
+      "name": "Side Lunge",
+      "variations": ["side"],
+      "aliases": ["Lateral Lunge"],
+    },
+  ],
 };

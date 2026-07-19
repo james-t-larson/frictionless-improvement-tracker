@@ -62,4 +62,10 @@ const Map<String, dynamic> legExtension = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Sissy Squat",
+      "variations": ["sissy squat"],
+    },
+  ],
 };

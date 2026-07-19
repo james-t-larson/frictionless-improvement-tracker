@@ -47,6 +47,30 @@ void main() {
       expect(bloc.state.availableVariations, contains('neutral-grip'));
     });
 
+    test('SelectMovement with preselectedVariations selects them and applies exclusions', () async {
+      when(() => mockWorkoutRepository.getLastPerformance(any())).thenAnswer((_) async => null);
+
+      bloc.add(SelectMovement(movement, preselectedVariations: const ['bodyweight']));
+      await Future.delayed(Duration.zero);
+
+      expect(bloc.state.currentStep, ExerciseLogStep.variation);
+      expect(bloc.state.selectedVariations, ['bodyweight']);
+      // bodyweight excludes weighted and assisted
+      expect(bloc.state.availableVariations.length, 3);
+      expect(bloc.state.availableVariations, isNot(contains('weighted')));
+      expect(bloc.state.availableVariations, isNot(contains('assisted')));
+    });
+
+    test('SelectMovement ignores preselected keys the movement does not have', () async {
+      when(() => mockWorkoutRepository.getLastPerformance(any())).thenAnswer((_) async => null);
+
+      bloc.add(SelectMovement(movement, preselectedVariations: const ['nonexistent']));
+      await Future.delayed(Duration.zero);
+
+      expect(bloc.state.selectedVariations, isEmpty);
+      expect(bloc.state.availableVariations.length, 5);
+    });
+
     test('ToggleVariation filters availableVariations based on selection (single)', () async {
       when(() => mockWorkoutRepository.getLastPerformance(any())).thenAnswer((_) async => null);
       

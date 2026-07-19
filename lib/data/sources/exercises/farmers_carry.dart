@@ -102,4 +102,18 @@ const Map<String, dynamic> farmersCarry = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Suitcase Carry",
+      "variations": ["suitcase carry"],
+    },
+    {
+      "name": "Overhead Carry",
+      "variations": ["overhead"],
+    },
+    {
+      "name": "Waiter's Carry",
+      "variations": ["waiter's carry"],
+    },
+  ],
 };

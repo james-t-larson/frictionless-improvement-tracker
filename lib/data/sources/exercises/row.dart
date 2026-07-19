@@ -16,7 +16,6 @@ const Map<String, dynamic> row = {
     },
     "pendlay": {
       "excludedVariations": [
-        "chest-supported",
         "seated",
         "kroc",
         "yates",
@@ -26,9 +25,6 @@ const Map<String, dynamic> row = {
         "ring",
         "landmine"
       ],
-    },
-    "chest-supported": {
-      "excludedVariations": ["pendlay", "yates", "kroc", "standing"],
     },
     "seated": {
       "excludedVariations": ["standing", "pendlay", "yates", "kroc", "t-bar"],
@@ -63,7 +59,6 @@ const Map<String, dynamic> row = {
         "ring",
         "t-bar",
         "seated",
-        "chest-supported",
         "pendlay",
         "yates",
         "pause"
@@ -78,7 +73,6 @@ const Map<String, dynamic> row = {
         "ring",
         "t-bar",
         "seated",
-        "chest-supported",
         "pendlay",
         "kroc",
         "single-arm"
@@ -106,4 +100,35 @@ const Map<String, dynamic> row = {
       "excludedVariations": ["barbell", "cable", "dumbbell", "landmine", "machine", "kroc", "yates", "pendlay", "t-bar", "chest-supported"],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Barbell Row",
+      "variations": ["barbell"],
+      "aliases": ["Bent-Over Row", "Bent Over Row"],
+    },
+    {
+      "name": "Dumbbell Row",
+      "variations": ["dumbbell"],
+    },
+    {
+      "name": "Pendlay Row",
+      "variations": ["pendlay"],
+    },
+    {
+      "name": "T-Bar Row",
+      "variations": ["t-bar"],
+    },
+    {
+      "name": "Yates Row",
+      "variations": ["yates"],
+    },
+    {
+      "name": "Kroc Row",
+      "variations": ["kroc"],
+    },
+    {
+      "name": "Landmine Row",
+      "variations": ["landmine"],
+    },
+  ],
 };

@@ -79,4 +79,10 @@ const Map<String, dynamic> sitUp = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Decline Sit-Up",
+      "variations": ["decline"],
+    },
+  ],
 };

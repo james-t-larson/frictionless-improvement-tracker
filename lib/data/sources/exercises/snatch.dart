@@ -126,4 +126,22 @@ const Map<String, dynamic> snatch = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Power Snatch",
+      "variations": ["power"],
+    },
+    {
+      "name": "Hang Snatch",
+      "variations": ["hang"],
+    },
+    {
+      "name": "Muscle Snatch",
+      "variations": ["muscle snatch"],
+    },
+    {
+      "name": "Snatch Balance",
+      "variations": ["snatch balance"],
+    },
+  ],
 };

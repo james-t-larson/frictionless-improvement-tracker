@@ -64,6 +64,15 @@ class WorkoutLog {
     return WorkoutLog.fromJson(data, id: map['id'] as int?);
   }
 
+  /// Variations worth showing under the title: when [movementName] is a named
+  /// variation like "Romanian Deadlift", the consumed keys ("romanian") are
+  /// already part of the title and would be redundant.
+  List<String> get displayVariations {
+    final name = movementName?.toLowerCase();
+    if (name == null) return variations;
+    return variations.where((v) => !name.contains(v.toLowerCase())).toList();
+  }
+
   WorkoutLog copyWith({
     int? id,
     String? movementId,

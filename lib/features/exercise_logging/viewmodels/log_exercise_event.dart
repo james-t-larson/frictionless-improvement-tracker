@@ -43,10 +43,15 @@ class SearchVariation extends LogExerciseEvent {
 
 class SelectMovement extends LogExerciseEvent {
   final Movement movement;
-  const SelectMovement(this.movement);
+
+  /// Variation keys to pre-select, e.g. ["romanian"] when the user picked
+  /// the "Romanian Deadlift" search result.
+  final List<String> preselectedVariations;
+
+  const SelectMovement(this.movement, {this.preselectedVariations = const []});
 
   @override
-  List<Object?> get props => [movement];
+  List<Object?> get props => [movement, preselectedVariations];
 }
 
 

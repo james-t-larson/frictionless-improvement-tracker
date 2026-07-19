@@ -92,4 +92,10 @@ const Map<String, dynamic> wristCurl = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Reverse Wrist Curl",
+      "variations": ["reverse"],
+    },
+  ],
 };

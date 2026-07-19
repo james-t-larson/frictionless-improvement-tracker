@@ -65,5 +65,11 @@ const Map<String, dynamic> kettlebellSwing = {
         "American"
       ]
     }
-  }
+  },
+  "namedVariations": [
+    {
+      "name": "American Kettlebell Swing",
+      "variations": ["American"],
+    },
+  ],
 };

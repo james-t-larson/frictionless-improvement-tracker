@@ -27,19 +27,12 @@ const Map<String, dynamic> legRaise = {
         "flutter kick"
       ],
     },
-    "knee-raise": {
-      "excludedVariations": [
-        "toes-to-bar",
-        "flutter kick"
-      ],
-    },
     "toes-to-bar": {
       "excludedVariations": [
         "lying",
         "captain's chair",
         "bench",
         "incline bench",
-        "knee-raise",
         "flutter kick"
       ],
     },
@@ -47,7 +40,6 @@ const Map<String, dynamic> legRaise = {
       "excludedVariations": [
         "single-leg",
         "toes-to-bar",
-        "knee-raise"
       ],
     },
     "weighted": {
@@ -96,4 +88,18 @@ const Map<String, dynamic> legRaise = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Hanging Leg Raise",
+      "variations": ["hanging"],
+    },
+    {
+      "name": "Toes-to-Bar",
+      "variations": ["toes-to-bar"],
+    },
+    {
+      "name": "Lying Leg Raise",
+      "variations": ["lying"],
+    },
+  ],
 };

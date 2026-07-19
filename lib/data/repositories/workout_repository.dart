@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
+import '../models/movement.dart';
 import '../models/workout_log.dart';
 import '../../core/utils/one_rep_max_calculator.dart';
 
@@ -18,17 +19,16 @@ class WorkoutRepository {
 
     return resultMaps.map((map) {
       final logMap = jsonDecode(map['log_data'] as String);
-      final movMap = jsonDecode(map['mov_data'] as String);
-      
-      final List<dynamic>? muscleGroups = movMap['muscleGroups'];
-      String? firstGroup;
-      if (muscleGroups != null && muscleGroups.isNotEmpty) {
-        firstGroup = muscleGroups.first.toString();
-      }
+      final movement = Movement.fromJson(jsonDecode(map['mov_data'] as String));
 
-      return WorkoutLog.fromJson(logMap, id: map['id'] as int).copyWith(
-        movementName: movMap['name'] as String?,
-        muscleGroupName: firstGroup,
+      final log = WorkoutLog.fromJson(logMap, id: map['id'] as int);
+      // A named variation match (e.g. Deadlift + romanian) replaces the base
+      // movement name, so history reads "Romanian Deadlift".
+      final displayName = movement.resolveNamedVariation(log.variations)?.name ?? movement.name;
+
+      return log.copyWith(
+        movementName: displayName,
+        muscleGroupName: movement.muscleGroups.isNotEmpty ? movement.muscleGroups.first : null,
       );
     }).toList();
   }

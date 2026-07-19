@@ -125,4 +125,18 @@ const Map<String, dynamic> powerClean = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Hang Power Clean",
+      "variations": ["hang"],
+    },
+    {
+      "name": "Clean and Jerk",
+      "variations": ["clean and jerk"],
+    },
+    {
+      "name": "Clean and Press",
+      "variations": ["clean and press"],
+    },
+  ],
 };

@@ -86,4 +86,18 @@ const Map<String, dynamic> hipThrust = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Single-Leg Hip Thrust",
+      "variations": ["single-leg"],
+    },
+    {
+      "name": "Machine Hip Thrust",
+      "variations": ["machine"],
+    },
+    {
+      "name": "B-Stance Hip Thrust",
+      "variations": ["B-stance"],
+    },
+  ],
 };

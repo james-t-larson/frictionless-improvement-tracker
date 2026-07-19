@@ -114,4 +114,10 @@ const Map<String, dynamic> goodMorning = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Seated Good Morning",
+      "variations": ["seated"],
+    },
+  ],
 };

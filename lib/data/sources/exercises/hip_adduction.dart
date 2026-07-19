@@ -86,4 +86,10 @@ const Map<String, dynamic> hipAdduction = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Copenhagen Plank",
+      "variations": ["Copenhagen plank"],
+    },
+  ],
 };

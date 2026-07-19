@@ -57,4 +57,18 @@ const Map<String, dynamic> calfRaise = {
       "excludedVariations": ["machine", "barbell", "dumbbell", "band-resisted", "bodyweight"],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Standing Calf Raise",
+      "variations": ["standing"],
+    },
+    {
+      "name": "Seated Calf Raise",
+      "variations": ["seated"],
+    },
+    {
+      "name": "Donkey Calf Raise",
+      "variations": ["donkey"],
+    },
+  ],
 };

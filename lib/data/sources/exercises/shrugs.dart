@@ -162,4 +162,14 @@ const Map<String, dynamic> shrugs = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Barbell Shrug",
+      "variations": ["barbell"],
+    },
+    {
+      "name": "Dumbbell Shrug",
+      "variations": ["dumbbell"],
+    },
+  ],
 };

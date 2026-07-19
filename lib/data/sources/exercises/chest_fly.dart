@@ -46,4 +46,24 @@ const Map<String, dynamic> chestFly = {
       "excludedVariations": ["cable", "dumbbell", "pec-dec"],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Cable Fly",
+      "variations": ["cable"],
+      "aliases": ["Cable Crossover"],
+    },
+    {
+      "name": "Pec Deck",
+      "variations": ["pec-dec"],
+      "aliases": ["Machine Fly"],
+    },
+    {
+      "name": "Dumbbell Fly",
+      "variations": ["dumbbell"],
+    },
+    {
+      "name": "Incline Dumbbell Fly",
+      "variations": ["incline", "dumbbell"],
+    },
+  ],
 };

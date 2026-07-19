@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import '../../../data/models/movement.dart';
+import '../../../data/models/movement_search_result.dart';
 
 enum ExerciseLogStep {
   movement(0),
@@ -17,7 +18,7 @@ class LogExerciseState extends Equatable {
   final String? selectedMuscleGroup;
   
   final String movementQuery;
-  final List<Movement> movementSearchResults;
+  final List<MovementSearchResult> movementSearchResults;
   final Movement? selectedMovement;
   final String? lastPerformanceHint;
   
@@ -71,7 +72,7 @@ class LogExerciseState extends Equatable {
     List<String>? muscleGroups,
     String? selectedMuscleGroup,
     String? movementQuery,
-    List<Movement>? movementSearchResults,
+    List<MovementSearchResult>? movementSearchResults,
     Movement? selectedMovement,
     String? lastPerformanceHint,
     String? variationQuery,

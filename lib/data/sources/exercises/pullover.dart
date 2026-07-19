@@ -48,4 +48,10 @@ const Map<String, dynamic> pullover = {
       "excludedVariations": ["flat bench", "decline", "machine"],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Dumbbell Pullover",
+      "variations": ["dumbbell"],
+    },
+  ],
 };

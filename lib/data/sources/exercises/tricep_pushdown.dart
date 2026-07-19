@@ -91,4 +91,11 @@ const Map<String, dynamic> tricepPushdown = {
       "excludedVariations": ["cable"],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Rope Pushdown",
+      "variations": ["rope"],
+      "aliases": ["Rope Tricep Pushdown"],
+    },
+  ],
 };

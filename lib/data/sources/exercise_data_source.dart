@@ -61,7 +61,6 @@ import 'exercises/rack_pull.dart';
 import 'exercises/rear_delt_fly.dart';
 import 'exercises/rear_delt_row.dart';
 import 'exercises/reverse_hyperextension.dart';
-import 'exercises/romanian_deadlift.dart';
 import 'exercises/row.dart';
 import 'exercises/russian_twist.dart';
 import 'exercises/seal_row.dart';
@@ -147,7 +146,6 @@ class ExerciseDataSource {
       rearDeltFly,
       rearDeltRow,
       reverseHyperextension,
-      romanianDeadlift,
       row,
       russianTwist,
       sealRow,

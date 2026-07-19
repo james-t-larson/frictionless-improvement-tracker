@@ -328,4 +328,70 @@ const Map<String, dynamic> squat = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Front Squat",
+      "variations": ["front"],
+    },
+    {
+      "name": "Back Squat",
+      "variations": ["back"],
+    },
+    {
+      "name": "Bulgarian Split Squat",
+      "variations": ["Bulgarian split"],
+    },
+    {
+      "name": "Split Squat",
+      "variations": ["split"],
+    },
+    {
+      "name": "Goblet Squat",
+      "variations": ["goblet"],
+    },
+    {
+      "name": "Box Squat",
+      "variations": ["box"],
+    },
+    {
+      "name": "Overhead Squat",
+      "variations": ["overhead"],
+    },
+    {
+      "name": "Pistol Squat",
+      "variations": ["pistol"],
+    },
+    {
+      "name": "Zercher Squat",
+      "variations": ["zercher"],
+    },
+    {
+      "name": "Sumo Squat",
+      "variations": ["sumo"],
+    },
+    {
+      "name": "Jump Squat",
+      "variations": ["jump"],
+    },
+    {
+      "name": "Pause Squat",
+      "variations": ["pause"],
+    },
+    {
+      "name": "Smith Machine Squat",
+      "variations": ["smith machine"],
+    },
+    {
+      "name": "Safety Bar Squat",
+      "variations": ["safety bar"],
+    },
+    {
+      "name": "Landmine Squat",
+      "variations": ["landmine"],
+    },
+    {
+      "name": "Anderson Squat",
+      "variations": ["anderson"],
+    },
+  ],
 };

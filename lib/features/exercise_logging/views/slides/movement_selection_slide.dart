@@ -79,9 +79,21 @@ class _MovementSelectionSlideState extends State<MovementSelectionSlide> {
                         ),
                       ),
                     ),
-                  ...state.movementSearchResults.map((m) => ListTile(
-                    title: Text(m.name, style: const TextStyle(color: Color(0xFFFAFAFA))),
-                    onTap: () => context.read<LogExerciseBloc>().add(SelectMovement(m)),
+                  ...state.movementSearchResults.map((r) => ListTile(
+                    title: Text(r.displayName, style: const TextStyle(color: Color(0xFFFAFAFA))),
+                    subtitle: r.namedVariation != null
+                        ? Text(
+                            r.movement.name.toUpperCase(),
+                            style: const TextStyle(
+                              color: Color(0xFF71717A),
+                              fontSize: 11,
+                              letterSpacing: 1,
+                            ),
+                          )
+                        : null,
+                    onTap: () => context.read<LogExerciseBloc>().add(
+                          SelectMovement(r.movement, preselectedVariations: r.preselectedVariations),
+                        ),
                   )),
                   ListTile(
                     leading: const Icon(Icons.add, color: Color(0xFFFAFAFA)),

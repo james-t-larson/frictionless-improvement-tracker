@@ -93,4 +93,10 @@ const Map<String, dynamic> cableRow = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Seated Cable Row",
+      "variations": ["seated"],
+    },
+  ],
 };

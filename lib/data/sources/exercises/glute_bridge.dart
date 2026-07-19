@@ -64,4 +64,10 @@ const Map<String, dynamic> gluteBridge = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "Single-Leg Glute Bridge",
+      "variations": ["single-leg"],
+    },
+  ],
 };

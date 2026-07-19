@@ -98,4 +98,19 @@ const Map<String, dynamic> hipAbduction = {
       ],
     }
   },
+  "namedVariations": [
+    {
+      "name": "Machine Hip Abduction",
+      "variations": ["machine"],
+      "aliases": ["Hip Abduction Machine"],
+    },
+    {
+      "name": "Clamshell",
+      "variations": ["clamshell"],
+    },
+    {
+      "name": "Fire Hydrant",
+      "variations": ["fire hydrant"],
+    },
+  ],
 };

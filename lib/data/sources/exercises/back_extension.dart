@@ -20,9 +20,6 @@ const Map<String, dynamic> backExtension = {
     "swiss-ball": {
       "excludedVariations": ["floor", "45-degree", "GHD", "machine"],
     },
-    "reverse": {
-      "excludedVariations": ["machine"],
-    },
     "weighted": {
       "excludedVariations": ["band", "barbell", "dumbbell", "machine", "plate"],
     },
@@ -35,7 +32,6 @@ const Map<String, dynamic> backExtension = {
         "floor",
         "GHD",
         "plate",
-        "reverse",
         "single-leg",
         "swiss-ball",
         "weighted",
@@ -72,4 +68,11 @@ const Map<String, dynamic> backExtension = {
       ],
     },
   },
+  "namedVariations": [
+    {
+      "name": "45-Degree Back Extension",
+      "variations": ["45-degree"],
+      "aliases": ["Hyperextension"],
+    },
+  ],
 };
