@@ -13,11 +13,12 @@ class SetCounterLoading extends SetCounterState {}
 
 class SetCounterLoaded extends SetCounterState {
   final Map<String, int> setCounts;
+  final Map<String, Map<String, int>> muscleCounts;
 
-  const SetCounterLoaded({required this.setCounts});
+  const SetCounterLoaded({required this.setCounts, required this.muscleCounts});
 
   @override
-  List<Object?> get props => [setCounts];
+  List<Object?> get props => [setCounts, muscleCounts];
 }
 
 class SetCounterError extends SetCounterState {

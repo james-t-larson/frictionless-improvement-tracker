@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 import '../models/movement.dart';
 import '../models/workout_log.dart';
+import '../../core/utils/muscle_display_names.dart';
 import '../../core/utils/one_rep_max_calculator.dart';
 
 class WorkoutRepository {
@@ -113,6 +114,45 @@ class WorkoutRepository {
       if (parsed.isEmpty) continue;
       final primary = parsed.first.toString();
       counts[primary] = (counts[primary] ?? 0) + 1;
+    }
+    return counts;
+  }
+
+  /// Returns the number of sets logged in the last 7 days (a rolling window,
+  /// not the calendar week), grouped by each movement's primary muscle group
+  /// (the first entry in its muscleGroups list) and then by individual
+  /// primary muscle within that group (e.g. "Front Delts", "Rear Delts"
+  /// under "Shoulders"). A set can count toward multiple muscles when the
+  /// movement lists more than one primary muscle.
+  Future<Map<String, Map<String, int>>> getSetCountsByMuscleLast7Days() async {
+    final cutoffMs = DateTime.now()
+        .subtract(const Duration(days: 7))
+        .millisecondsSinceEpoch;
+
+    final rows = await _db.rawQuery('''
+      SELECT json_extract(m.data, '\$.muscleGroups') as groups,
+             json_extract(m.data, '\$.primaryMuscles') as muscles
+      FROM logs l
+      JOIN movements m ON json_extract(l.data, '\$.movementId') = m.id
+      WHERE json_extract(l.data, '\$.timestamp') >= ?
+    ''', [cutoffMs]);
+
+    final Map<String, Map<String, int>> counts = {};
+    for (var row in rows) {
+      final groupsStr = row['groups'] as String?;
+      final musclesStr = row['muscles'] as String?;
+      if (groupsStr == null || musclesStr == null) continue;
+
+      final List<dynamic> groups = jsonDecode(groupsStr);
+      final List<dynamic> muscles = jsonDecode(musclesStr);
+      if (groups.isEmpty || muscles.isEmpty) continue;
+
+      final primaryGroup = groups.first.toString();
+      final groupCounts = counts.putIfAbsent(primaryGroup, () => {});
+      for (final muscle in muscles) {
+        final label = muscleDisplayName(muscle.toString());
+        groupCounts[label] = (groupCounts[label] ?? 0) + 1;
+      }
     }
     return counts;
   }

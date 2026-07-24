@@ -17,7 +17,8 @@ class SetCounterBloc extends Bloc<SetCounterEvent, SetCounterState> {
     emit(SetCounterLoading());
     try {
       final counts = await _workoutRepository.getSetCountsByPrimaryMuscleGroupLast7Days();
-      emit(SetCounterLoaded(setCounts: counts));
+      final muscleCounts = await _workoutRepository.getSetCountsByMuscleLast7Days();
+      emit(SetCounterLoaded(setCounts: counts, muscleCounts: muscleCounts));
     } catch (e) {
       emit(SetCounterError('Failed to load set counts: $e'));
     }

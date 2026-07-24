@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:simple_gym_tracker/core/database/database_helper.dart';
+import 'package:simple_gym_tracker/data/models/movement.dart';
 import 'package:simple_gym_tracker/data/models/workout_log.dart';
 import 'package:simple_gym_tracker/data/repositories/workout_repository.dart';
 
@@ -34,6 +35,21 @@ void main() {
       timestamp: timestamp,
       variations: variations,
     ));
+  }
+
+  Future<void> saveMovement({
+    required String id,
+    required String name,
+    List<String> muscleGroups = const [],
+    List<String> primaryMuscles = const [],
+  }) async {
+    final movement = Movement(
+      id: id,
+      name: name,
+      muscleGroups: muscleGroups,
+      primaryMuscles: primaryMuscles,
+    );
+    await db.insert('movements', movement.toMap());
   }
 
   group('getLastPerformance', () {
@@ -87,6 +103,75 @@ void main() {
       final result = await repository.getLastPerformance('squat', variations: const ['barbell']);
 
       expect(result?.weight, 200);
+    });
+  });
+
+  group('getSetCountsByMuscleLast7Days', () {
+    final now = DateTime.now().millisecondsSinceEpoch;
+    final eightDaysAgo = DateTime.now().subtract(const Duration(days: 8)).millisecondsSinceEpoch;
+
+    test('groups sets by primary muscle group then by individual primary muscle', () async {
+      await saveMovement(
+        id: 'overhead-press',
+        name: 'Overhead Press',
+        muscleGroups: const ['Shoulders'],
+        primaryMuscles: const ['anterior deltoid', 'lateral deltoid'],
+      );
+      await saveMovement(
+        id: 'rear-delt-fly',
+        name: 'Rear Delt Fly',
+        muscleGroups: const ['Shoulders'],
+        primaryMuscles: const ['posterior deltoid'],
+      );
+
+      await saveLog(movementId: 'overhead-press', weight: 95, reps: 8, timestamp: now);
+      await saveLog(movementId: 'rear-delt-fly', weight: 15, reps: 12, timestamp: now);
+      await saveLog(movementId: 'rear-delt-fly', weight: 15, reps: 12, timestamp: now);
+
+      final result = await repository.getSetCountsByMuscleLast7Days();
+
+      expect(result['Shoulders'], {
+        'Front Delts': 1,
+        'Side Delts': 1,
+        'Rear Delts': 2,
+      });
+    });
+
+    test('excludes sets older than 7 days', () async {
+      await saveMovement(
+        id: 'lat-pulldown',
+        name: 'Lat Pulldown',
+        muscleGroups: const ['Back'],
+        primaryMuscles: const ['latissimus dorsi'],
+      );
+
+      await saveLog(movementId: 'lat-pulldown', weight: 120, reps: 8, timestamp: eightDaysAgo);
+
+      final result = await repository.getSetCountsByMuscleLast7Days();
+
+      expect(result['Back'], isNull);
+    });
+
+    test('merges muscles that share the same display name, like the rotator cuff', () async {
+      await saveMovement(
+        id: 'internal-rotation',
+        name: 'Internal Rotation',
+        muscleGroups: const ['Shoulders'],
+        primaryMuscles: const ['subscapularis'],
+      );
+      await saveMovement(
+        id: 'external-rotation',
+        name: 'Cable External Rotation',
+        muscleGroups: const ['Shoulders'],
+        primaryMuscles: const ['infraspinatus'],
+      );
+
+      await saveLog(movementId: 'internal-rotation', weight: 10, reps: 12, timestamp: now);
+      await saveLog(movementId: 'external-rotation', weight: 10, reps: 12, timestamp: now);
+
+      final result = await repository.getSetCountsByMuscleLast7Days();
+
+      expect(result['Shoulders'], {'Rotator Cuff': 2});
     });
   });
 }

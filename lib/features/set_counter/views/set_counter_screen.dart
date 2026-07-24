@@ -4,6 +4,7 @@ import '../../../core/di/service_locator.dart';
 import '../viewmodels/set_counter_bloc.dart';
 import '../viewmodels/set_counter_event.dart';
 import '../viewmodels/set_counter_state.dart';
+import 'muscle_group_detail_screen.dart';
 
 class SetCounterScreen extends StatelessWidget {
   const SetCounterScreen({super.key});
@@ -50,6 +51,7 @@ class SetCounterScreen extends StatelessWidget {
               );
             } else if (state is SetCounterLoaded) {
               final counts = state.setCounts;
+              final muscleCounts = state.muscleCounts;
               return ListView(
                 padding: const EdgeInsets.all(16.0),
                 children: [
@@ -62,7 +64,12 @@ class SetCounterScreen extends StatelessWidget {
                     childAspectRatio: 1.1,
                     children: [
                       for (final group in _primaryMuscleGroups)
-                        _buildMuscleGroupCard(group, counts[group] ?? 0),
+                        _buildMuscleGroupCard(
+                          context,
+                          group,
+                          counts[group] ?? 0,
+                          muscleCounts[group] ?? const {},
+                        ),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -85,45 +92,63 @@ class SetCounterScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMuscleGroupCard(String groupName, int setCount) {
+  Widget _buildMuscleGroupCard(
+    BuildContext context,
+    String groupName,
+    int setCount,
+    Map<String, int> muscleCounts,
+  ) {
     return Card(
       color: const Color(0xFF18181B),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              groupName.toUpperCase(),
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Color(0xFFA1A1AA),
-                fontSize: 12,
-                fontWeight: FontWeight.w800,
-                letterSpacing: 1.5,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => MuscleGroupDetailScreen(
+                groupName: groupName,
+                muscleCounts: muscleCounts,
               ),
             ),
-            const SizedBox(height: 4),
-            Text(
-              '$setCount',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Color(0xFFFAFAFA),
-                fontSize: 36,
-                fontWeight: FontWeight.w900,
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                groupName.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Color(0xFFA1A1AA),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.5,
+                ),
               ),
-            ),
-            Text(
-              setCount == 1 ? 'SET IN LAST 7 DAYS' : 'SETS IN LAST 7 DAYS',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Color(0xFFA1A1AA),
-                fontSize: 10,
+              const SizedBox(height: 4),
+              Text(
+                '$setCount',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Color(0xFFFAFAFA),
+                  fontSize: 36,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
-            ),
-          ],
+              Text(
+                setCount == 1 ? 'SET IN LAST 7 DAYS' : 'SETS IN LAST 7 DAYS',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Color(0xFFA1A1AA),
+                  fontSize: 10,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
