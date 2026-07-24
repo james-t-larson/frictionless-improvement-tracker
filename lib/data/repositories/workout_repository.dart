@@ -37,18 +37,33 @@ class WorkoutRepository {
     await _db.insert('logs', log.toMap());
   }
 
-  Future<WorkoutLog?> getLastPerformance(String movementId) async {
+  /// Returns the most recent log for [movementId]. When [variations] is
+  /// given, prefers the most recent log that used that exact combination of
+  /// variations (e.g. "Deadlift" + romanian shouldn't autofill with a plain
+  /// Deadlift's weight), falling back to the movement's overall most recent
+  /// log if no exact match exists.
+  Future<WorkoutLog?> getLastPerformance(String movementId, {List<String>? variations}) async {
     final List<Map<String, dynamic>> maps = await _db.rawQuery('''
-      SELECT * FROM logs 
+      SELECT * FROM logs
       WHERE json_extract(data, '\$.movementId') = ?
       ORDER BY json_extract(data, '\$.timestamp') DESC
-      LIMIT 1
     ''', [movementId]);
 
-    if (maps.isNotEmpty) {
-      return WorkoutLog.fromMap(maps.first);
+    if (maps.isEmpty) return null;
+
+    final logs = maps.map((m) => WorkoutLog.fromMap(m)).toList();
+
+    if (variations != null) {
+      final target = Set<String>.from(variations);
+      for (final log in logs) {
+        final logVariations = Set<String>.from(log.variations);
+        if (logVariations.length == target.length && logVariations.containsAll(target)) {
+          return log;
+        }
+      }
     }
-    return null;
+
+    return logs.first;
   }
 
   /// Returns all distinct muscle groups from workouts logged today.

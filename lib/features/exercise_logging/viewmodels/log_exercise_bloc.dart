@@ -93,8 +93,8 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
       painFelt: event.log.painFelt,
       currentStep: ExerciseLogStep.details, // Go straight to metrics
     ));
-    
-    _fetchLastPerformance(movement.id!, emit);
+
+    await _fetchLastPerformance(movement.id!, emit, variations: event.log.variations);
   }
 
   Future<void> _onInitializeWithPreviousLog(
@@ -116,7 +116,7 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     ));
 
     if (event.movement.id != null) {
-      _fetchLastPerformance(event.movement.id!, emit);
+      await _fetchLastPerformance(event.movement.id!, emit, variations: event.selectedVariations);
     }
   }
 
@@ -232,8 +232,11 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
         selectedVariations: preselected,
       ),
     );
-    if (event.movement.id != null) {
-      _fetchLastPerformance(event.movement.id!, emit);
+    // Only fetch now if we're landing on the metrics slide directly (no variation
+    // step to go through first). Otherwise, AdvanceFromVariations fetches once the
+    // variation selection is finalized, so the hint/autofill match the exact combo.
+    if (event.movement.id != null && nextStep == ExerciseLogStep.details) {
+      await _fetchLastPerformance(event.movement.id!, emit, variations: preselected);
     }
   }
 
@@ -241,14 +244,20 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
 
   Future<void> _fetchLastPerformance(
     String movementId,
-    Emitter<LogExerciseState> emit,
-  ) async {
-    final last = await _workoutRepository.getLastPerformance(movementId);
+    Emitter<LogExerciseState> emit, {
+    List<String> variations = const [],
+  }) async {
+    final last = await _workoutRepository.getLastPerformance(movementId, variations: variations);
     if (last != null) {
+      // Autofill the weight with what was last lifted for this exact movement +
+      // variation combo, but only for a fresh log entry — never clobber a value
+      // the user already typed, or the weight being edited on an existing log.
+      final shouldAutofillWeight = state.editingLogId == null && state.weight == 0;
       emit(
         state.copyWith(
           lastPerformanceHint:
               "Last time: ${last.weight.toStringAsFixed(1)} lbs x ${last.reps} reps",
+          weight: shouldAutofillWeight ? last.weight : null,
         ),
       );
     } else {
@@ -301,11 +310,16 @@ class LogExerciseBloc extends Bloc<LogExerciseEvent, LogExerciseState> {
     return available.toList();
   }
 
-  void _onAdvanceFromVariations(
+  Future<void> _onAdvanceFromVariations(
     AdvanceFromVariations event,
     Emitter<LogExerciseState> emit,
-  ) {
+  ) async {
     emit(state.copyWith(currentStep: ExerciseLogStep.details));
+
+    final movementId = state.selectedMovement?.id;
+    if (movementId != null) {
+      await _fetchLastPerformance(movementId, emit, variations: state.selectedVariations);
+    }
   }
 
   void _onUpdateMetrics(UpdateMetrics event, Emitter<LogExerciseState> emit) {

@@ -12,6 +12,8 @@ class MetricsAndFeedbackSlide extends StatefulWidget {
 }
 
 class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
+  static const double _weightStep = 5;
+
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _repsController = TextEditingController();
   final FocusNode _weightFocusNode = FocusNode();
@@ -78,6 +80,18 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
     }
   }
 
+  void _adjustWeight(double delta) {
+    _debounceTimer?.cancel();
+    final current = double.tryParse(_weightController.text) ?? 0.0;
+    final next = (current + delta).clamp(0.0, double.infinity);
+    final text = next.toStringAsFixed(1);
+    _weightController.value = TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(offset: text.length),
+    );
+    _update();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<LogExerciseBloc, LogExerciseState>(
@@ -133,6 +147,8 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
                   focusNode: _weightFocusNode,
                   keyboardType: const TextInputType.numberWithOptions(decimal: true),
                   onChanged: _onWeightChanged,
+                  onDecrement: () => _adjustWeight(-_weightStep),
+                  onIncrement: () => _adjustWeight(_weightStep),
                 ),
               ),
               const SizedBox(width: 24),
@@ -218,12 +234,16 @@ class _MetricsAndFeedbackSlideState extends State<MetricsAndFeedbackSlide> {
   }
 }
 
+const double _stepButtonSize = 22;
+
 class _MetricInput extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final FocusNode? focusNode;
   final TextInputType keyboardType;
   final Function(String) onChanged;
+  final VoidCallback? onDecrement;
+  final VoidCallback? onIncrement;
 
   const _MetricInput({
     required this.label,
@@ -231,27 +251,144 @@ class _MetricInput extends StatelessWidget {
     this.focusNode,
     this.keyboardType = const TextInputType.numberWithOptions(decimal: true),
     required this.onChanged,
+    this.onDecrement,
+    this.onIncrement,
   });
 
   @override
   Widget build(BuildContext context) {
+    final hasSteppers = onDecrement != null || onIncrement != null;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label, style: const TextStyle(color: Color(0xFFA1A1AA), fontSize: 12, fontWeight: FontWeight.bold)),
-        TextField(
-          controller: controller,
-          focusNode: focusNode,
-          keyboardType: keyboardType,
-          onChanged: onChanged,
-          textAlign: TextAlign.center,
-          style: GoogleFonts.robotoMono(fontSize: 32, fontWeight: FontWeight.bold, color: const Color(0xFFFAFAFA)),
-          decoration: const InputDecoration(
-            border: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFF52525B))),
-            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFFFAFAFA))),
+        if (hasSteppers)
+          _SteppedMetricField(
+            controller: controller,
+            focusNode: focusNode,
+            keyboardType: keyboardType,
+            onChanged: onChanged,
+            onDecrement: onDecrement,
+            onIncrement: onIncrement,
+          )
+        else
+          TextField(
+            controller: controller,
+            focusNode: focusNode,
+            keyboardType: keyboardType,
+            onChanged: onChanged,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.robotoMono(fontSize: 32, fontWeight: FontWeight.bold, color: const Color(0xFFFAFAFA)),
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFF52525B))),
+              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFFFAFAFA))),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+/// The weight field's input + step buttons, laid out as Row siblings (not a
+/// Stack overlay) so the buttons can never visually overlap the digits —
+/// each has its own non-overlapping slice of the width, and the text field's
+/// portion simply clips/scrolls like any input if a value gets too wide.
+/// The underline is drawn manually across the whole row so it reads as one
+/// input the same size as the reps field, since the TextField itself is
+/// borderless here.
+class _SteppedMetricField extends StatelessWidget {
+  final TextEditingController controller;
+  final FocusNode? focusNode;
+  final TextInputType keyboardType;
+  final Function(String) onChanged;
+  final VoidCallback? onDecrement;
+  final VoidCallback? onIncrement;
+
+  const _SteppedMetricField({
+    required this.controller,
+    this.focusNode,
+    required this.keyboardType,
+    required this.onChanged,
+    this.onDecrement,
+    this.onIncrement,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final row = Row(
+      children: [
+        if (onDecrement != null) _StepButton(icon: Icons.remove_rounded, onTap: onDecrement!),
+        if (onDecrement != null) const SizedBox(width: 8),
+        Expanded(
+          child: TextField(
+            controller: controller,
+            focusNode: focusNode,
+            keyboardType: keyboardType,
+            onChanged: onChanged,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.robotoMono(fontSize: 32, fontWeight: FontWeight.bold, color: const Color(0xFFFAFAFA)),
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              isCollapsed: true,
+              contentPadding: EdgeInsets.symmetric(vertical: 8),
+            ),
           ),
         ),
+        if (onIncrement != null) const SizedBox(width: 8),
+        if (onIncrement != null) _StepButton(icon: Icons.add_rounded, onTap: onIncrement!),
       ],
+    );
+
+    final node = focusNode;
+    if (node == null) {
+      return _underlined(row, focused: false);
+    }
+    return AnimatedBuilder(
+      animation: node,
+      builder: (context, _) => _underlined(row, focused: node.hasFocus),
+    );
+  }
+
+  Widget _underlined(Widget child, {required bool focused}) {
+    // foregroundDecoration (not decoration) so the border paints over the box
+    // without reserving extra layout space for its stroke width — otherwise
+    // this field ends up 1px taller than the reps field's UnderlineInputBorder,
+    // which is drawn within the input decorator's existing bounds.
+    return Container(
+      key: const ValueKey('steppedMetricFieldBox'),
+      foregroundDecoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: focused ? const Color(0xFFFAFAFA) : const Color(0xFF52525B)),
+        ),
+      ),
+      child: child,
+    );
+  }
+}
+
+class _StepButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _StepButton({required this.icon, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: const Color(0xFF27272A),
+      shape: const CircleBorder(),
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onTap,
+        child: SizedBox(
+          width: _stepButtonSize,
+          height: _stepButtonSize,
+          child: Icon(icon, color: const Color(0xFFFAFAFA), size: 12),
+        ),
+      ),
     );
   }
 }
