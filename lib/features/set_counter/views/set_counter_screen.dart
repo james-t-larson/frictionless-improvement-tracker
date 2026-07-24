@@ -14,7 +14,6 @@ class SetCounterScreen extends StatelessWidget {
     'Back',
     'Shoulders',
     'Arms',
-    'Biceps',
     'Legs',
     'Core',
   ];
@@ -55,6 +54,17 @@ class SetCounterScreen extends StatelessWidget {
               return ListView(
                 padding: const EdgeInsets.all(16.0),
                 children: [
+                  const Text(
+                    'SETS IN THE LAST 7 DAYS',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xFFA1A1AA),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   GridView.count(
                     crossAxisCount: 2,
                     shrinkWrap: true,
@@ -137,14 +147,6 @@ class SetCounterScreen extends StatelessWidget {
                   color: Color(0xFFFAFAFA),
                   fontSize: 36,
                   fontWeight: FontWeight.w900,
-                ),
-              ),
-              Text(
-                setCount == 1 ? 'SET IN LAST 7 DAYS' : 'SETS IN LAST 7 DAYS',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Color(0xFFA1A1AA),
-                  fontSize: 10,
                 ),
               ),
             ],

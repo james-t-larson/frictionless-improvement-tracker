@@ -1,7 +1,7 @@
 const Map<String, dynamic> curl = {
   "pk": "2b9085c4-ad46-466b-acc9-f863a93dbaa9",
   "name": "Curl",
-  "muscleGroups": ["Biceps", "Arms"],
+  "muscleGroups": ["Arms"],
   "primaryMuscles": ["biceps brachii"],
   "secondaryMuscles": ["wrist flexors"],
   "variations": {
