@@ -90,6 +90,33 @@ class WorkoutRepository {
     return todaysGroups;
   }
 
+  /// Returns the number of sets logged in the last 7 days (a rolling window,
+  /// not the calendar week), grouped by each movement's primary muscle group
+  /// (the first entry in its muscleGroups list).
+  Future<Map<String, int>> getSetCountsByPrimaryMuscleGroupLast7Days() async {
+    final cutoffMs = DateTime.now()
+        .subtract(const Duration(days: 7))
+        .millisecondsSinceEpoch;
+
+    final rows = await _db.rawQuery('''
+      SELECT json_extract(m.data, '\$.muscleGroups') as groups
+      FROM logs l
+      JOIN movements m ON json_extract(l.data, '\$.movementId') = m.id
+      WHERE json_extract(l.data, '\$.timestamp') >= ?
+    ''', [cutoffMs]);
+
+    final Map<String, int> counts = {};
+    for (var row in rows) {
+      final groupsStr = row['groups'] as String?;
+      if (groupsStr == null) continue;
+      final List<dynamic> parsed = jsonDecode(groupsStr);
+      if (parsed.isEmpty) continue;
+      final primary = parsed.first.toString();
+      counts[primary] = (counts[primary] ?? 0) + 1;
+    }
+    return counts;
+  }
+
   Future<void> deleteWorkoutLog(int id) async {
     await _db.delete(
       'logs',

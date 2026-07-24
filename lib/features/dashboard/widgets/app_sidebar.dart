@@ -5,6 +5,7 @@ import '../../../core/widgets/app_toast.dart';
 import '../viewmodels/data_management_bloc.dart';
 import '../viewmodels/dashboard_bloc.dart';
 import '../../one_rep_max/views/one_rep_max_screen.dart';
+import '../../set_counter/views/set_counter_screen.dart';
 
 class AppSidebar extends StatelessWidget {
   const AppSidebar({super.key});
@@ -49,6 +50,18 @@ class AppSidebar extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const OneRepMaxScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                        _SidebarActionTile(
+                          icon: Icons.format_list_numbered_rounded,
+                          label: 'Set Counter',
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SetCounterScreen(),
                               ),
                             );
                           },
