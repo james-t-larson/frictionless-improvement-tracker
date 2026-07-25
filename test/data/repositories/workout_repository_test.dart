@@ -173,5 +173,36 @@ void main() {
 
       expect(result['Shoulders'], {'Rotator Cuff': 2});
     });
+
+    test('assigns each primary muscle to its own anatomical group, even when it differs from the movement\'s tag', () async {
+      await saveMovement(
+        id: 'bench-press',
+        name: 'Bench Press',
+        muscleGroups: const ['Chest'],
+        primaryMuscles: const ['pectoralis major', 'anterior deltoid'],
+      );
+
+      await saveLog(movementId: 'bench-press', weight: 135, reps: 8, timestamp: now);
+
+      final result = await repository.getSetCountsByMuscleLast7Days();
+
+      expect(result['Chest'], {'Chest': 1});
+      expect(result['Shoulders'], {'Front Delts': 1});
+    });
+
+    test('falls back to the movement\'s tagged group for an unmapped muscle', () async {
+      await saveMovement(
+        id: 'neck-curl',
+        name: 'Neck Curl',
+        muscleGroups: const ['Core'],
+        primaryMuscles: const ['sternocleidomastoid'],
+      );
+
+      await saveLog(movementId: 'neck-curl', weight: 10, reps: 12, timestamp: now);
+
+      final result = await repository.getSetCountsByMuscleLast7Days();
+
+      expect(result['Core'], {'Sternocleidomastoid': 1});
+    });
   });
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 import '../models/movement.dart';
 import '../models/workout_log.dart';
+import '../../core/utils/muscle_anatomy.dart';
 import '../../core/utils/muscle_display_names.dart';
 import '../../core/utils/one_rep_max_calculator.dart';
 
@@ -119,10 +120,14 @@ class WorkoutRepository {
   }
 
   /// Returns the number of sets logged in the last 7 days (a rolling window,
-  /// not the calendar week), grouped by each movement's primary muscle group
-  /// (the first entry in its muscleGroups list) and then by individual
-  /// primary muscle within that group (e.g. "Front Delts", "Rear Delts"
-  /// under "Shoulders"). A set can count toward multiple muscles when the
+  /// not the calendar week), grouped by individual primary muscle (e.g.
+  /// "Front Delts", "Rear Delts") and then by that muscle's own anatomical
+  /// muscle group (e.g. "Shoulders"). A muscle's group is looked up
+  /// independently of the movement's own muscleGroups tag, since a movement
+  /// tagged "Chest" (like Bench Press) can still have a primary muscle,
+  /// like the anterior deltoid, that belongs under "Shoulders". Falls back
+  /// to the movement's first tagged group for any muscle without a known
+  /// mapping. A set can count toward multiple muscles/groups when the
   /// movement lists more than one primary muscle.
   Future<Map<String, Map<String, int>>> getSetCountsByMuscleLast7Days() async {
     final cutoffMs = DateTime.now()
@@ -139,18 +144,26 @@ class WorkoutRepository {
 
     final Map<String, Map<String, int>> counts = {};
     for (var row in rows) {
-      final groupsStr = row['groups'] as String?;
       final musclesStr = row['muscles'] as String?;
-      if (groupsStr == null || musclesStr == null) continue;
+      if (musclesStr == null) continue;
 
-      final List<dynamic> groups = jsonDecode(groupsStr);
       final List<dynamic> muscles = jsonDecode(musclesStr);
-      if (groups.isEmpty || muscles.isEmpty) continue;
+      if (muscles.isEmpty) continue;
 
-      final primaryGroup = groups.first.toString();
-      final groupCounts = counts.putIfAbsent(primaryGroup, () => {});
+      String? fallbackGroup;
+      final groupsStr = row['groups'] as String?;
+      if (groupsStr != null) {
+        final List<dynamic> groups = jsonDecode(groupsStr);
+        if (groups.isNotEmpty) fallbackGroup = groups.first.toString();
+      }
+
       for (final muscle in muscles) {
-        final label = muscleDisplayName(muscle.toString());
+        final muscleName = muscle.toString();
+        final group = muscleGroupFor(muscleName) ?? fallbackGroup;
+        if (group == null) continue;
+
+        final groupCounts = counts.putIfAbsent(group, () => {});
+        final label = muscleDisplayName(muscleName);
         groupCounts[label] = (groupCounts[label] ?? 0) + 1;
       }
     }
