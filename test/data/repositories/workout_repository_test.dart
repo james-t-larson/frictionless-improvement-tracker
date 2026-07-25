@@ -88,12 +88,12 @@ void main() {
       expect(result?.weight, 100);
     });
 
-    test('falls back to the movement\'s overall last performance when no log matches the variation combo', () async {
+    test('returns null when no log matches the exact variation combo', () async {
       await saveLog(movementId: 'deadlift', weight: 225, reps: 5, timestamp: 1, variations: const []);
 
       final result = await repository.getLastPerformance('deadlift', variations: const ['romanian']);
 
-      expect(result?.weight, 225);
+      expect(result, isNull);
     });
 
     test('does not match a superset or subset of the requested variations', () async {

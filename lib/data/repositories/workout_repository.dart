@@ -63,6 +63,7 @@ class WorkoutRepository {
           return log;
         }
       }
+      return null;
     }
 
     return logs.first;
